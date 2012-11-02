@@ -1,0 +1,68 @@
+# ******************************************************************************
+ # *  Design:
+ # *        NetFlow_Simple_10G_Bram
+ # *  
+ # *  NetFPGA-10G http://www.netfpga.org
+ # *
+ # *  File:
+ # *        netflow_export_v2_1_0.mpd
+ # *
+ # *  Pcore:
+ # *        netflow_export
+ # *
+ # *  Authors:
+ # *        Marco Forconesi, Gustavo Sutter, Sergio Lopez-Buedo
+ # *
+ # *  Description:
+ # *          Microprocessor Peripheral Definition file for EDK
+# ******************************************************************************
+
+BEGIN netflow_export
+
+## Peripheral Options
+OPTION IPTYPE = PERIPHERAL
+OPTION IMP_NETLIST = TRUE
+OPTION HDL = VHDL
+OPTION IP_GROUP = MICROBLAZE:USER
+OPTION ARCH_SUPPORT_MAP = (others=DEVELOPMENT)
+
+## Bus Interfaces
+BUS_INTERFACE BUS = M_AXIS_10GMAC, BUS_STD=AXIS, BUS_TYPE = INITIATOR
+BUS_INTERFACE BUS = S_AXIS_EXP_RECORDS, BUS_STD = AXIS, BUS_TYPE = TARGET
+
+## Parameters
+PARAMETER C_S_AXIS_EXP_RECORDS_PROTOCOL = GENERIC, DT = string, TYPE = NON_HDL, ASSIGNMENT = CONSTANT, BUS = S_AXIS_EXP_RECORDS
+PARAMETER C_S_AXIS_EXP_RECORDS_DATA_WIDTH = 64, DT = INTEGER, RANGE = (8,32,64,128,256), BUS = S_AXIS_EXP_RECORDS, ASSIGNMENT = CONSTANT
+PARAMETER C_M_AXIS_10GMAC_PROTOCOL = GENERIC, DT = string, TYPE = NON_HDL, ASSIGNMENT = CONSTANT, BUS = M_AXIS_10GMAC
+PARAMETER C_M_AXIS_TDATA_WIDTH = 64, DT = INTEGER, RANGE = (8,32,64,256), BUS = M_AXIS_10GMAC, ASSIGNMENT = CONSTANT
+
+PARAMETER ENCODING_TIMEOUT_IN_SECS = 60, DT = INTEGER, DESC = MAX TIME BETWEEN NETFLOW PACKETS (SECONDS)
+PARAMETER ACLK_FREQ = 200000000, DT = INTEGER, DESC = AXI_CLK_FREQ (Hz), ASSIGNMENT = CONSTANT
+
+PARAMETER DEST_MAC_ADDR = 0xA1A2A3A4A5A6, DESC = Destination MAC Address, DT = std_logic_vector(47 downto 0)
+PARAMETER SRC_MAC_ADDR = 0xB1B2B3B4B5B6, DESC = Source MAC Address, DT = std_logic_vector(47 downto 0)
+PARAMETER SRC_IP_ADDR = 0xC1C2C3C4, DESC = Source IPv4 (hexadecimal), DT = std_logic_vector(31 downto 0)
+PARAMETER DEST_IP_ADDR = 0xD1D2D3D4, DESC = Destination IPv4 (hexadecimal), DT = std_logic_vector(31 downto 0)
+PARAMETER SRC_UDP_PORT = 0x270C, DESC = Source UDP Port, DT = std_logic_vector(15 downto 0)
+PARAMETER DEST_UDP_PORT = 0x270C, DESC = Destination UDP Port, DT = std_logic_vector(15 downto 0)
+
+## Peripheral ports
+PORT ACLK = "", DIR=I, SIGIS=CLK, BUS = M_AXIS_10GMAC:S_AXIS_EXP_RECORDS
+PORT ARESETN = "", DIR = I, SIGIS = RST
+
+
+## AXI4-Stream Interface. 10GMAC Master Interface
+PORT M_AXIS_TDATA = TDATA, DIR = O, VEC = [C_M_AXIS_TDATA_WIDTH-1:0], BUS = M_AXIS_10GMAC, ENDIAN = LITTLE
+PORT M_AXIS_TSTRB = TSTRB, DIR = O, VEC = [(C_M_AXIS_TDATA_WIDTH/8)-1:0], BUS = M_AXIS_10GMAC, ENDIAN = LITTLE
+PORT M_AXIS_TVALID = TVALID, DIR = O, BUS = M_AXIS_10GMAC
+PORT M_AXIS_TREADY = TREADY, DIR = I, BUS = M_AXIS_10GMAC
+PORT M_AXIS_TLAST = TLAST, DIR = O, BUS = M_AXIS_10GMAC
+
+## AXI4-Stream Slave Interface.
+PORT S_AXIS_EXP_RECORDS_TDATA = TDATA, DIR = I, VEC = [C_S_AXIS_EXP_RECORDS_DATA_WIDTH-1:0], BUS = S_AXIS_EXP_RECORDS, ENDIAN = LITTLE
+PORT S_AXIS_EXP_RECORDS_TSTRB = TSTRB, DIR = I, VEC = [(C_S_AXIS_EXP_RECORDS_DATA_WIDTH/8)-1:0], BUS = S_AXIS_EXP_RECORDS, ENDIAN = LITTLE
+PORT S_AXIS_EXP_RECORDS_TVALID = TVALID, DIR = I, BUS = S_AXIS_EXP_RECORDS
+PORT S_AXIS_EXP_RECORDS_TREADY = TREADY, DIR = O, BUS = S_AXIS_EXP_RECORDS
+PORT S_AXIS_EXP_RECORDS_TLAST = TLAST, DIR = I, BUS = S_AXIS_EXP_RECORDS
+
+END
