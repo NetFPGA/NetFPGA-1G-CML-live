@@ -42,5 +42,8 @@ all:
 	gcc -march=core2 -o stats stats.c
 	gcc -march=core2 -o rdaxi rdaxi.c
 	gcc -march=core2 -o wraxi wraxi.c
+	javac Encap_Configuration.java
 clean:
 	rm stats rdaxi wraxi
+	rm Encap_Configuration.class
+	rm Main*
