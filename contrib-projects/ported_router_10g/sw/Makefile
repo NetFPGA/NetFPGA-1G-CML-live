@@ -6,10 +6,10 @@
 #        Makefile
 #
 #  Project:
-#        ported_switch_10g
+#        
 #
 #  Author:
-#        Muhammad Shahbaz, Gianni Anitchi
+#        Muhammad Shahbaz
 #
 #  Description:
 #        make all : Make BRAM initialized bitfile to bitfiles/
@@ -39,16 +39,12 @@
 #
 #
 
-SYSTEM = system
-HW = hw
-SW = sw
+SW = .
 
 all:
-	$(MAKE) -C $(HW) exporttosdk
-	$(MAKE) -C $(SW)
-	mkdir -p bitfiles
-	cp $(SW)/result/download.bit bitfiles/
+	$(MAKE) -C $(SW)/host/
+	$(MAKE) -C $(SW)/embedded/
 
 clean:
-	$(MAKE) -C $(HW) clean
-	$(MAKE) -C $(SW) clean
+	$(MAKE) -C $(SW)/host/ clean
+	$(MAKE) -C $(SW)/embedded/ clean
