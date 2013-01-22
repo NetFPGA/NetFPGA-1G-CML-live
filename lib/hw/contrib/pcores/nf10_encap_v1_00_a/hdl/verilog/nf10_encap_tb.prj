@@ -1,0 +1,6 @@
+verilog work "encap_header_lookup.v"
+verilog work "fallthrough_small_fifo_v2.v"
+verilog work "nf10_encap.v"
+verilog work "small_fifo_v3.v"
+verilog work "nf10_encap_tb.v"
+

@@ -1,0 +1,7 @@
+make -C hw exporttosdk
+make[1]: Entering directory `/home/gengyl08/workSpace/NetFPGA-10G-live/contrib-projects/encap_decap/hw'
+psf2Edward -inp system.xmp -exit_on_error -edwver 1.2 -xml ../sw/embedded/SDK_Workspace/hw/system.xml 
+Release 13.4 - psf2Edward EDK_O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+make[1]: *** [../sw/embedded/SDK_Workspace/hw/system.xml] Interrupt
+make: *** [all] Interrupt

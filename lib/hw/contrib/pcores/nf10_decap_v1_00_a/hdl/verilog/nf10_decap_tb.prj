@@ -1,0 +1,6 @@
+verilog work "decap_decision_maker.v"
+verilog work "fallthrough_small_fifo_v2.v"
+verilog work "nf10_decap.v"
+verilog work "small_fifo_v3.v"
+verilog work "nf10_decap_tb.v"
+

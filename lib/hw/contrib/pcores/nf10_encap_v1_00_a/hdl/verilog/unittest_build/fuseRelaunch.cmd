@@ -1,0 +1,1 @@
+-incremental -prj "../nf10_encap_tb.prj" -o "nf10_encap_tb.exe" "testbench" 
