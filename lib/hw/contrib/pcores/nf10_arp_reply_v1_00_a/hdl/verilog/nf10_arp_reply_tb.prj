@@ -1,0 +1,6 @@
+verilog work "mac_addr_lookup.v"
+verilog work "fallthrough_small_fifo_v2.v"
+verilog work "nf10_arp_reply.v"
+verilog work "small_fifo_v3.v"
+verilog work "nf10_arp_reply_tb.v"
+
