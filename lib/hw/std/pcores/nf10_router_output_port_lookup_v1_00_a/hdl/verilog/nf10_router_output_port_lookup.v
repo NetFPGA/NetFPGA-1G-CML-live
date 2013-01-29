@@ -42,7 +42,7 @@
 `uselib lib=unisims_ver
 `uselib lib=proc_common_v3_00_a
 
-module nf10_switch_output_port_lookup
+module nf10_router_output_port_lookup
 #(
   parameter C_FAMILY              = "virtex5",
   parameter C_S_AXI_DATA_WIDTH    = 32,          
@@ -52,7 +52,7 @@ module nf10_switch_output_port_lookup
   parameter C_BAR0_BASEADDR       = 32'hFFFFFFFF,
   parameter C_BAR0_HIGHADDR       = 32'h00000000,
   parameter C_BAR1_BASEADDR       = 32'hFFFFFFFF,
-  parameter C_BAR1_HIGHADDR       = 32'h00000000
+  parameter C_BAR1_HIGHADDR       = 32'h00000000,
   parameter C_S_AXI_ACLK_FREQ_HZ  = 100,
   parameter C_M_AXIS_DATA_WIDTH	  = 256,
   parameter C_S_AXIS_DATA_WIDTH	  = 256,
@@ -120,6 +120,9 @@ module nf10_switch_output_port_lookup
   localparam ARP_LUT_DEPTH_BITS= log2(ARP_LUT_DEPTH);
   localparam FILTER_DEPTH      = 16;
   localparam FILTER_DEPTH_BITS = log2(FILTER_DEPTH);
+  localparam MAX_DEPTH_BITS    = (LPM_LUT_DEPTH_BITS >= ARP_LUT_DEPTH_BITS && LPM_LUT_DEPTH_BITS >= FILTER_DEPTH_BITS) ? LPM_LUT_DEPTH_BITS :
+                                 (ARP_LUT_DEPTH_BITS >= FILTER_DEPTH_BITS)                                             ? ARP_LUT_DEPTH_BITS :
+                                                                                                                         FILTER_DEPTH_BITS; 
 
   // -- Signals
 
@@ -295,11 +298,11 @@ module nf10_switch_output_port_lookup
   
   // -- Register assignments
   
-  assign rst_cntrs = rw_regs[32*0];
-  assign mac_0     = rw_regs[32*1:+47]; // verify syntax
-  assign mac_1     = rw_regs[32*3:+47]; 
-  assign mac_2     = rw_regs[32*5:+47];
-  assign mac_3     = rw_regs[32*7:+47];
+  assign rst_cntrs = rw_regs[C_S_AXI_DATA_WIDTH*0];
+  assign mac_0     = rw_regs[47+C_S_AXI_DATA_WIDTH*1:C_S_AXI_DATA_WIDTH*1];
+  assign mac_1     = rw_regs[47+C_S_AXI_DATA_WIDTH*3:C_S_AXI_DATA_WIDTH*3]; 
+  assign mac_2     = rw_regs[47+C_S_AXI_DATA_WIDTH*5:C_S_AXI_DATA_WIDTH*5];
+  assign mac_3     = rw_regs[47+C_S_AXI_DATA_WIDTH*7:C_S_AXI_DATA_WIDTH*7];
 
   assign ro_regs = {pkt_sent_from_cpu_cntr, 
                     pkt_sent_to_cpu_options_ver_cntr, 
@@ -324,7 +327,7 @@ module nf10_switch_output_port_lookup
    .Bus2IP_Clk     ( Bus2IP_Clk        ),
    .Bus2IP_Resetn  ( Bus2IP_Resetn     ), 
    .Bus2IP_Addr    ( Bus2IP_Addr       ),
-   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:4] == 0)), // CS[0] = BAR1
+   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:MAX_DEPTH_BITS] == 0)), // CS[0] = BAR1
    .Bus2IP_RNW     ( Bus2IP_RNW        ),
    .Bus2IP_Data    ( Bus2IP_Data       ),
    .Bus2IP_BE      ( Bus2IP_BE         ),
@@ -361,7 +364,7 @@ module nf10_switch_output_port_lookup
    .Bus2IP_Clk     ( Bus2IP_Clk        ),
    .Bus2IP_Resetn  ( Bus2IP_Resetn     ), 
    .Bus2IP_Addr    ( Bus2IP_Addr       ),
-   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:4] == 1)), // CS[0] = BAR1
+   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:MAX_DEPTH_BITS] == 1)), // CS[0] = BAR1
    .Bus2IP_RNW     ( Bus2IP_RNW        ),
    .Bus2IP_Data    ( Bus2IP_Data       ),
    .Bus2IP_BE      ( Bus2IP_BE         ),
@@ -382,6 +385,7 @@ module nf10_switch_output_port_lookup
                       arp_wr_ip} )  
   );
 
+
   // IPIF DEST_IP_FILTER TABLE REGS
   ipif_table_regs 
   #(
@@ -394,7 +398,7 @@ module nf10_switch_output_port_lookup
    .Bus2IP_Clk     ( Bus2IP_Clk        ),
    .Bus2IP_Resetn  ( Bus2IP_Resetn     ), 
    .Bus2IP_Addr    ( Bus2IP_Addr       ),
-   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:4] == 2)), // CS[0] = BAR1
+   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:MAX_DEPTH_BITS] == 2)), // CS[0] = BAR1
    .Bus2IP_RNW     ( Bus2IP_RNW        ),
    .Bus2IP_Data    ( Bus2IP_Data       ),
    .Bus2IP_BE      ( Bus2IP_BE         ),
@@ -536,7 +540,7 @@ module nf10_switch_output_port_lookup
 	  if (pkt_sent_to_cpu_dest_ip_hit) pkt_sent_to_cpu_dest_ip_hit_cntr  <= pkt_sent_to_cpu_dest_ip_hit_cntr + 1;
 	  if (pkt_forwarded)               pkt_forwarded_cntr  <= pkt_forwarded_cntr + 1;
 	  if (pkt_dropped_checksum)        pkt_dropped_checksum_cntr  <= pkt_dropped_checksum_cntr + 1;
-	  if (pkt_sent_to_cpu_non_ip)      pkt_sent_to_cpu_non_ip_cntr  <= pkt_sent_to_cpu_non_ip_cn + 1;
+	  if (pkt_sent_to_cpu_non_ip)      pkt_sent_to_cpu_non_ip_cntr  <= pkt_sent_to_cpu_non_ip_cntr + 1;
 	  if (pkt_sent_to_cpu_arp_miss)    pkt_sent_to_cpu_arp_miss_cntr  <= pkt_sent_to_cpu_arp_miss_cntr + 1;
 	  if (pkt_sent_to_cpu_lpm_miss)    pkt_sent_to_cpu_lpm_miss_cntr  <= pkt_sent_to_cpu_lpm_miss_cntr + 1;
 	  if (pkt_dropped_wrong_dst_mac)   pkt_dropped_wrong_dst_mac_cntr  <= pkt_dropped_wrong_dst_mac_cntr + 1;
