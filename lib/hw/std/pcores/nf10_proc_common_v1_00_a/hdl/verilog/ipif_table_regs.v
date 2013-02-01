@@ -165,10 +165,8 @@
 		   end
 		 end
 		 DONE: begin		   
-		   if (~Bus2IP_CS) begin
-		     IP2Bus_WrAck <= 1'b0;
-	         state <= WAIT_FOR_REQ;
-		   end
+		   IP2Bus_WrAck <= 1'b0;
+	           state <= WAIT_FOR_REQ;
 		 end
 		 default: begin
 		   state <= WAIT_FOR_REQ;
