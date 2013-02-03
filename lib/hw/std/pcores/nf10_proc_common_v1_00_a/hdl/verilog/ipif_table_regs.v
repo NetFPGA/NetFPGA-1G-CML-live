@@ -159,14 +159,14 @@
 		   if (tbl_wr_ack) tbl_wr_req <= 1'b0;
 		   else if (tbl_rd_ack) tbl_rd_req <= 1'b0;
 		   
-		   IP2Bus_WrAck <= 1'b1;
-		   state <= DONE;
+		   if (tbl_wr_ack | tbl_rd_ack) begin
+		      IP2Bus_WrAck <= 1'b1;
+		      state <= DONE;
+		   end
 		 end
 		 DONE: begin		   
-		   if (~Bus2IP_CS) begin
-		     IP2Bus_WrAck <= 1'b0;
-	         state <= WAIT_FOR_REQ;
-		   end
+		   IP2Bus_WrAck <= 1'b0;
+	           state <= WAIT_FOR_REQ;
 		 end
 		 default: begin
 		   state <= WAIT_FOR_REQ;
