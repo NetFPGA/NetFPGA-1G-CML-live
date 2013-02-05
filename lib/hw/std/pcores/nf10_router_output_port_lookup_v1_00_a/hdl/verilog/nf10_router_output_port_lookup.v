@@ -49,10 +49,10 @@ module nf10_router_output_port_lookup
   parameter C_S_AXI_ADDR_WIDTH    = 32,          
   parameter C_USE_WSTRB           = 0,
   parameter C_DPHASE_TIMEOUT      = 0,
-  parameter C_BAR0_BASEADDR       = 32'hFFFFFFFF,
-  parameter C_BAR0_HIGHADDR       = 32'h00000000,
-  parameter C_BAR1_BASEADDR       = 32'hFFFFFFFF,
-  parameter C_BAR1_HIGHADDR       = 32'h00000000,
+  parameter C_BAR0_BASEADDR       = 32'h76800000,
+  parameter C_BAR0_HIGHADDR       = 32'h7680FFFF,
+  parameter C_BAR1_BASEADDR       = 32'h74800000,
+  parameter C_BAR1_HIGHADDR       = 32'h7480FFFF,
   parameter C_S_AXI_ACLK_FREQ_HZ  = 100,
   parameter C_M_AXIS_DATA_WIDTH	  = 256,
   parameter C_S_AXIS_DATA_WIDTH	  = 256,
@@ -114,16 +114,20 @@ module nf10_router_output_port_lookup
 
   localparam NUM_QUEUES        = 8;
   localparam NUM_QUEUES_WIDTH  = log2(NUM_QUEUES);
-  localparam LPM_LUT_DEPTH     = 16;
-  localparam LPM_LUT_DEPTH_BITS= log2(LPM_LUT_DEPTH);
-  localparam ARP_LUT_DEPTH     = 16;
-  localparam ARP_LUT_DEPTH_BITS= log2(ARP_LUT_DEPTH);
-  localparam FILTER_DEPTH      = 16;
-  localparam FILTER_DEPTH_BITS = log2(FILTER_DEPTH);
-  localparam MAX_DEPTH_BITS    = (LPM_LUT_DEPTH_BITS >= ARP_LUT_DEPTH_BITS && LPM_LUT_DEPTH_BITS >= FILTER_DEPTH_BITS) ? LPM_LUT_DEPTH_BITS :
-                                 (ARP_LUT_DEPTH_BITS >= FILTER_DEPTH_BITS)                                             ? ARP_LUT_DEPTH_BITS :
-                                                                                                                         FILTER_DEPTH_BITS; 
-
+  localparam LPM_LUT_ROWS      = 16;
+  localparam LPM_LUT_ROWS_BITS = log2(LPM_LUT_ROWS);
+  localparam LPM_LUT_COLS      = 4;
+  localparam ARP_LUT_ROWS      = 16;
+  localparam ARP_LUT_ROWS_BITS = log2(ARP_LUT_ROWS);
+  localparam ARP_LUT_COLS      = 3;
+  localparam FILTER_ROWS       = 16;
+  localparam FILTER_ROWS_BITS  = log2(FILTER_ROWS);
+  localparam FILTER_COLS       = 1;
+  
+  localparam TBL_COUNT         = 3 /* LPM, ARP and FILTER */;
+  localparam MAX_TBL_ROWS      = ((LPM_LUT_COLS >= ARP_LUT_COLS && LPM_LUT_COLS >= FILTER_COLS) ? LPM_LUT_COLS : 
+                                  (ARP_LUT_COLS >= FILTER_COLS)                                 ? ARP_LUT_COLS : FILTER_COLS);
+  
   // -- Signals
 
   wire                                            Bus2IP_Clk;
@@ -170,14 +174,14 @@ module nf10_router_output_port_lookup
   wire                                            pkt_dropped_wrong_dst_mac;
   reg      [C_S_AXI_DATA_WIDTH-1 : 0]             pkt_dropped_wrong_dst_mac_cntr;
 
-  wire [LPM_LUT_DEPTH_BITS-1:0]                   lpm_rd_addr;
+  wire [LPM_LUT_ROWS_BITS-1:0]                   lpm_rd_addr;
   wire                                            lpm_rd_req;
   wire [31:0]                                     lpm_rd_ip;
   wire [31:0]                                     lpm_rd_mask;
   wire [NUM_QUEUES-1:0]                           lpm_rd_oq;
   wire [31:0]                                     lpm_rd_next_hop_ip;
   wire                                            lpm_rd_ack;
-  wire [LPM_LUT_DEPTH_BITS-1:0]                   lpm_wr_addr;
+  wire [LPM_LUT_ROWS_BITS-1:0]                   lpm_wr_addr;
   wire                                            lpm_wr_req;
   wire [NUM_QUEUES-1:0]                           lpm_wr_oq;
   wire [31:0]                                     lpm_wr_next_hop_ip;
@@ -185,22 +189,22 @@ module nf10_router_output_port_lookup
   wire [31:0]                                     lpm_wr_mask;
   wire                                            lpm_wr_ack;
 
-  wire [ARP_LUT_DEPTH_BITS-1:0]                   arp_rd_addr;
+  wire [ARP_LUT_ROWS_BITS-1:0]                   arp_rd_addr;
   wire                                            arp_rd_req;
   wire  [47:0]                                    arp_rd_mac;
   wire  [31:0]                                    arp_rd_ip;
   wire                                            arp_rd_ack;
-  wire [ARP_LUT_DEPTH_BITS-1:0]                   arp_wr_addr;
+  wire [ARP_LUT_ROWS_BITS-1:0]                   arp_wr_addr;
   wire                                            arp_wr_req;
   wire [47:0]                                     arp_wr_mac;
   wire [31:0]                                     arp_wr_ip;
   wire                                            arp_wr_ack;
 
-  wire [FILTER_DEPTH_BITS-1:0]                    dest_ip_filter_rd_addr;
+  wire [FILTER_ROWS_BITS-1:0]                    dest_ip_filter_rd_addr;
   wire                                            dest_ip_filter_rd_req;
   wire [31:0]                                     dest_ip_filter_rd_ip;
   wire                                            dest_ip_filter_rd_ack;
-  wire [FILTER_DEPTH_BITS-1:0]                    dest_ip_filter_wr_addr;
+  wire [FILTER_ROWS_BITS-1:0]                    dest_ip_filter_wr_addr;
   wire                                            dest_ip_filter_wr_req;
   wire [31:0]                                     dest_ip_filter_wr_ip;
   wire                                            dest_ip_filter_wr_ack;
@@ -320,14 +324,14 @@ module nf10_router_output_port_lookup
   #(
      .C_S_AXI_DATA_WIDTH (C_S_AXI_DATA_WIDTH),         
      .C_S_AXI_ADDR_WIDTH (C_S_AXI_ADDR_WIDTH),  
-     .TBL_NUM_COLS       (4),
-     .TBL_NUM_ROWS       (LPM_LUT_DEPTH)
+     .TBL_NUM_COLS       (LPM_LUT_COLS),
+     .TBL_NUM_ROWS       (LPM_LUT_ROWS)
   ) ipif_ip_lpm_table_regs_inst
   (   
    .Bus2IP_Clk     ( Bus2IP_Clk        ),
    .Bus2IP_Resetn  ( Bus2IP_Resetn     ), 
-   .Bus2IP_Addr    ( Bus2IP_Addr       ),
-   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:MAX_DEPTH_BITS] == 0)), // CS[0] = BAR1
+   .Bus2IP_Addr    ( Bus2IP_Addr       ),                           
+   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[log2(TBL_COUNT)+log2(2+MAX_TBL_ROWS)+2-1:log2(2+MAX_TBL_ROWS)+2] == 0)), // CS[0] = BAR1
    .Bus2IP_RNW     ( Bus2IP_RNW        ),
    .Bus2IP_Data    ( Bus2IP_Data       ),
    .Bus2IP_BE      ( Bus2IP_BE         ),
@@ -357,14 +361,14 @@ module nf10_router_output_port_lookup
   #(
      .C_S_AXI_DATA_WIDTH (C_S_AXI_DATA_WIDTH),         
      .C_S_AXI_ADDR_WIDTH (C_S_AXI_ADDR_WIDTH),  
-     .TBL_NUM_COLS       (3),
-     .TBL_NUM_ROWS       (ARP_LUT_DEPTH)
+     .TBL_NUM_COLS       (ARP_LUT_COLS),
+     .TBL_NUM_ROWS       (ARP_LUT_ROWS)
   ) ipif_ip_arp_table_regs_inst
   (   
    .Bus2IP_Clk     ( Bus2IP_Clk        ),
    .Bus2IP_Resetn  ( Bus2IP_Resetn     ), 
    .Bus2IP_Addr    ( Bus2IP_Addr       ),
-   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:MAX_DEPTH_BITS] == 1)), // CS[0] = BAR1
+   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[log2(TBL_COUNT)+log2(2+MAX_TBL_ROWS)+2-1:log2(2+MAX_TBL_ROWS)+2] == 1)), // CS[0] = BAR1
    .Bus2IP_RNW     ( Bus2IP_RNW        ),
    .Bus2IP_Data    ( Bus2IP_Data       ),
    .Bus2IP_BE      ( Bus2IP_BE         ),
@@ -391,14 +395,14 @@ module nf10_router_output_port_lookup
   #(
      .C_S_AXI_DATA_WIDTH (C_S_AXI_DATA_WIDTH),         
      .C_S_AXI_ADDR_WIDTH (C_S_AXI_ADDR_WIDTH),  
-     .TBL_NUM_COLS       (1),
-     .TBL_NUM_ROWS       (FILTER_DEPTH)
+     .TBL_NUM_COLS       (FILTER_COLS),
+     .TBL_NUM_ROWS       (FILTER_ROWS)
   ) ipif_dest_ip_filter_table_regs_inst
   (   
    .Bus2IP_Clk     ( Bus2IP_Clk        ),
    .Bus2IP_Resetn  ( Bus2IP_Resetn     ), 
    .Bus2IP_Addr    ( Bus2IP_Addr       ),
-   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:MAX_DEPTH_BITS] == 2)), // CS[0] = BAR1
+   .Bus2IP_CS      ( Bus2IP_CS[0] & (Bus2IP_Addr[log2(TBL_COUNT)+log2(2+MAX_TBL_ROWS)+2-1:log2(2+MAX_TBL_ROWS)+2] == 2)), // CS[0] = BAR1
    .Bus2IP_RNW     ( Bus2IP_RNW        ),
    .Bus2IP_Data    ( Bus2IP_Data       ),
    .Bus2IP_BE      ( Bus2IP_BE         ),
@@ -425,9 +429,9 @@ module nf10_router_output_port_lookup
     .C_M_AXIS_TUSER_WIDTH (C_M_AXIS_TUSER_WIDTH),
     .C_S_AXIS_TUSER_WIDTH (C_S_AXIS_TUSER_WIDTH),
     .NUM_QUEUES           (NUM_QUEUES),
-    .LPM_LUT_DEPTH        (LPM_LUT_DEPTH),
-    .ARP_LUT_DEPTH        (ARP_LUT_DEPTH),
-    .FILTER_DEPTH         (FILTER_DEPTH)
+    .LPM_LUT_DEPTH        (LPM_LUT_ROWS),
+    .ARP_LUT_DEPTH        (ARP_LUT_ROWS),
+    .FILTER_DEPTH         (FILTER_ROWS)
    ) output_port_lookup
   (
     // Global Ports
