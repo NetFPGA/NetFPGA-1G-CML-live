@@ -68,7 +68,7 @@ module ip_checksum_ttl
    always @(*) begin
       checksum_next = checksum;
       if(word_IP_DST_HI) begin
-         checksum_next = tdata[111:96]+tdata[127:112]+tdata[143:128]+tdata[159:144]+tdata[175:160]+tdata[191:176]+tdata[207:192]+tdata[223:208]+tdata[239:224]+tdata[255:240];
+         checksum_next = tdata[127:112]+tdata[143:128]+tdata[159:144]+tdata[175:160]+tdata[191:176]+tdata[207:192]+tdata[223:208]+tdata[239:224]+tdata[255:240];
       end
       if(word_IP_DST_LO) begin
          checksum_next = checksum + tdata[15:0];
@@ -96,7 +96,7 @@ module ip_checksum_ttl
 	 checksum <= checksum_next;
          /* make sure the version is correct and there are no options */
          if(word_IP_DST_HI) begin
-            hdr_has_options <= (tdata[127:120]!=8'h45);
+            hdr_has_options <= (tdata[119:112]!=8'h45);
 	    ttl_new <= (tdata[183:176]==8'h0) ? 8'h0 : tdata[183:176] - 1'b1;
 	    ttl_good <= (tdata[183:176] > 8'h1);
             adjusted_checksum <= {1'h0, tdata[207:192]} + 17'h0001; // adjust for the decrement in TTL (Little Endian)
