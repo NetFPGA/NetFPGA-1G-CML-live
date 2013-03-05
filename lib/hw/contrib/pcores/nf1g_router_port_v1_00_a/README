@@ -1,0 +1,257 @@
+Router port CAM installation
+
+01. Xilinx Application
+Router port design requires two different XILINX TCAM modules. Obtain ‘xapp1151’ application from XILINX website. The tested CAM version is v1_1. As of the time of writing this document, the following link has the design files and its document of xapp1151.
+http://www.xilinx.com/support/documentation/anmeminterfacestorelement_cam.htm
+ Please note that xilinx ISE must be installed to generate the core. Tested ISE version is 13.3.
+
+02. Tool installation
+
+On a directory you prefer, run:
+tar xfvz xapp1151_cam_v1_1.tar.gz
+
+03. First CAM module generation
+
+cd xapp1151_cam_v1_1/implement
+xilperl CustomizeWrapper.pl 
+
+ You need to specify several parameters. To choose those options, see follows:
+
+***************************************************************
+CAM Reference Design Customizer v1.1
+***************************************************************
+
+***************************************************************
+Please input the following parameters for the CAM:
+***************************************************************
+
+Enter the FPGA base architecture to target
+Valid options are virtex4, virtex5, virtex6, virtex6l, spartan3, spartan3e, spartan3a, spartan3adsp, aspartan3, aspartan3e, spartan6:
+virtex5
+
+Input the CAM data width.  Valid values are 1-512:
+32
+
+Input the CAM depth.  Valid values are 16-4096:
+32
+
+Enter the CAM memory type to implement
+(Choose SRL-based if you need a Ternary or Enhanced Ternary mode CAM)
+0 = SRL-based, 1 = BRAM-based: 0
+
+Choose the Ternary Mode setting.
+0 = Ternary Mode Off, 1 = Standard Ternary Mode, 2 = Enhanced Ternary Mode: 1
+
+Will the CAM be write-able (WE pin)? (If no, CAM will be read-only) (y/n): y
+
+Use a MIF file to initialize the memory contents? (y/n): n
+
+Choose what type of encoding the MATCH_ADDR port will have.
+0 = Binary Encoded, 1 = Single Match Unencoded (one-hot), 2 = Multi-match Unencoded: 1
+
+For Binary Encoded or Single Match Unencoded MATCH_ADDR, output lowest address match or highest address match?
+0 = Lowest, 1 = Highest: 0
+
+Please select the optional features to be implemented:
+Simultaneous Read/Write (y/n): y
+
+Please select from the following optional input ports:
+Enable (EN) (y/n): n
+
+Please select from the following optional output ports:
+Multiple Match Flag (MULTIPLE_MATCH) (y/n): n
+Single Match Flag (SINGLE_MATCH) (y/n): n
+Read Warning Flag (READ_WARNING) (y/n): n
+
+
+After the selections the parameters should be as follows:
+
+VHDL parameters were generated as follows:
+===============================================
+C_FAMILY                  : string  := virtex5;
+C_MEM_TYPE                : integer := 0;
+C_WIDTH                   : integer := 32;
+C_DEPTH                   : integer := 32;
+C_ADDR_TYPE               : integer := 1;
+C_MATCH_RESOLUTION_TYPE   : integer := 0;
+C_TERNARY_MODE            : integer := 1;
+C_HAS_WE                  : integer := 1;
+C_MEM_INIT                : integer := 0;
+C_HAS_CMP_DIN             : integer := 1;
+C_REG_OUTPUTS             : integer := 0;
+C_HAS_EN                  : integer := 0;
+C_HAS_MULTIPLE_MATCH      : integer := 0;
+C_HAS_SINGLE_MATCH        : integer := 0;
+C_HAS_READ_WARNING        : integer := 0;
+
+===============================================
+
+Then in the same directory, edit vhdl_xst.scr so that parameters are as follows:
+
+-ifmt VHDL
+-work_lib cam
+-p  xc5vtx240t-ff1759-2
+-write_timing_constraints No
+-ifn vhdl_xst.prj
+-iobuf NO
+-max_fanout 100
+-ofn ./results/srl_cam_unencoded_32x32.ngc
+-ofmt NGC
+-bufg 1
+-bus_delimiter ()
+-hierarchy_separator /
+-case Maintain
+-opt_mode Speed
+-opt_level 1
+-loop_iteration_limit 5000
+-use_new_parser yes
+
+Then run:
+xilperl RunXST.pl
+
+04. Verilog file for simulation/implementation
+
+ After finishing above, run follows to create a verilog file for simulations:
+cd results
+netgen -sim -ofmt verilog srl_cam_unencoded_32x32.ngc
+
+ Edit the created srl_cam_unencoded_32x32.v file.
+
+(1) Change the module name to ‘srl_cam_unencoded_32x32’ from ‘cam_wrapper’.
+
+(2) Just after the port declaration, write a sentence:
+// synthesis translate_off
+
+(3) And before endmodule of ‘cam_wrapper’, write;
+// synthesis translate_on
+Please note the file has two modules therefore two ‘endmodule’. Make sure to insert the line for the first module; cam_wrapper (now the module name is ‘srl_cam_unencoded_32x32’).
+
+05. File copy
+
+Copy srl_cam_unencoded_32x32.ngc in netlist directory of Router port pcore:
+cp srl_cam_unencoded_32x32.ngc $(NF10_ROOT_DIRECTORY)/lib/hw/contrib/pcores/nf1g_router_port_v1_00_a/netlist
+Copy srl_cam_unencoded_32x32.v in verilog directory of Router pcore:
+cp srl_cam_unencoded_32x32.v $(NF10_ROOT_DIRECTORY)/lib/hw/contrib/pcores/nf1g_router_port_v1_00_a/hdl/verilog
+
+06. Second CAM module generation.
+xilperl CustomizeWrapper.pl
+
+You need to specify several parameters. To choose those options, see follows:
+
+***************************************************************
+CAM Reference Design Customizer v1.1
+***************************************************************
+
+***************************************************************
+Please input the following parameters for the CAM:
+***************************************************************
+ 
+Enter the FPGA base architecture to target
+Valid options are virtex4, virtex5, virtex6, virtex6l, spartan3, spartan3e, spartan3a, spartan3adsp, aspartan3, aspartan3e, spartan6:
+virtex5
+
+Input the CAM data width.  Valid values are 1-512:
+32
+
+Input the CAM depth.  Valid values are 16-4096:
+32
+
+Enter the CAM memory type to implement
+(Choose SRL-based if you need a Ternary or Enhanced Ternary mode CAM)
+0 = SRL-based, 1 = BRAM-based: 1
+
+NOTE: BRAM-based CAMs do not support Ternary Modes.
+Setting C_TERNARY_MODE = 0 ...
+
+Will the CAM be write-able (WE pin)? (If no, CAM will be read-only) (y/n): y
+
+Use a MIF file to initialize the memory contents? (y/n): n
+
+Choose what type of encoding the MATCH_ADDR port will have.
+0 = Binary Encoded, 1 = Single Match Unencoded (one-hot), 2 = Multi-match Unencoded: 1
+
+For Binary Encoded or Single Match Unencoded MATCH_ADDR, output lowest address match or highest address match?
+0 = Lowest, 1 = Highest: 0
+
+Please select the optional features to be implemented:
+Simultaneous Read/Write (y/n): y
+Register Outputs (y/n): n
+
+Please select from the following optional input ports:
+Enable (EN) (y/n): n
+
+Please select from the following optional output ports:
+Multiple Match Flag (MULTIPLE_MATCH) (y/n): n
+Single Match Flag (SINGLE_MATCH) (y/n): n
+Read Warning Flag (READ_WARNING) (y/n): n
+
+
+After the selections the parameters should be as follows:
+
+VHDL parameters were generated as follows: 
+===============================================
+C_FAMILY                  : string  := virtex5;
+C_MEM_TYPE                : integer := 1;
+C_WIDTH                   : integer := 32;
+C_DEPTH                   : integer := 32;
+C_ADDR_TYPE               : integer := 1;
+C_MATCH_RESOLUTION_TYPE   : integer := 0;
+C_TERNARY_MODE            : integer := 0;
+C_HAS_WE                  : integer := 1;
+C_MEM_INIT                : integer := 0;
+C_HAS_CMP_DIN             : integer := 1;
+C_REG_OUTPUTS             : integer := 0;
+C_HAS_EN                  : integer := 0;
+C_HAS_MULTIPLE_MATCH      : integer := 0;
+C_HAS_SINGLE_MATCH        : integer := 0;
+C_HAS_READ_WARNING        : integer := 0;
+
+===============================================
+
+Then in the same directory, edit vhdl_xst.scr so that parameters are as follows:
+
+-ifmt VHDL
+-work_lib cam
+-p  xc5vtx240t-ff1759-2
+-write_timing_constraints No
+-ifn vhdl_xst.prj
+-iobuf NO
+-max_fanout 100
+-ofn ./results/bram_cam_unencoded_32x32.ngc
+-ofmt NGC
+-bufg 1
+-bus_delimiter ()
+-hierarchy_separator /
+-case Maintain
+-opt_mode Speed
+-opt_level 1
+-loop_iteration_limit 5000
+-use_new_parser yes
+
+Then run:
+xilperl RunXST.pl
+
+07. Verilog file for simulation/implementation
+
+ After finishing above, run follows to create a verilog file for simulations:
+cd results
+netgen -sim -ofmt verilog bram_cam_unencoded_32x32.ngc
+
+ Edit the created bram_cam_unencoded_32x32.v file.
+
+(1) Change the module name to ‘bram_cam_unencoded_32x32’ from ‘cam_wrapper’.
+
+(2) Just after the port declaration, write a sentence:
+// synthesis translate_off
+
+(3) And before endmodule of ‘cam_wrapper’, write;
+// synthesis translate_on
+Please note the file has two modules therefore two ‘endmodule’. Make sure to insert the line for the first module; cam_wrapper (now the module name is ‘bram_cam_unencoded_32x32’).
+
+08. File copy
+
+Copy bram_cam_unencoded_32x32.ngc in netlist directory of Router port pcore:
+cp bram_cam_unencoded_32x32.ngc $(NF10_ROOT_DIRECTORY)/lib/hw/contrib/pcores/nf1g_router_port_v1_00_a/netlist
+Copy bram_cam_unencoded_32x32.v in verilog directory of Router pcore:
+cp bram_cam_unencoded_32x32.v $(NF10_ROOT_DIRECTORY)/lib/hw/contrib/pcores/nf1g_router_port_v1_00_a/hdl/verilog
+
