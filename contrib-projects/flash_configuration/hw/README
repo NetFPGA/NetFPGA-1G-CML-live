@@ -3,23 +3,16 @@
 #  NetFPGA-10G http://www.netfpga.org
 #
 #  File:
-#        Makefile
+#        README
 #
 #  Project:
-#        flash
+#        configuration
 #
 #  Author:
 #        Muhammad Shahbaz
 #
-#  Description:
-#        make all : Make BRAM initialized bitfile to bitfiles/
-#
-#        For more information about how Xilinx EDK works, please visit
-#        http://www.xilinx.com/support/documentation/dt_edk.htm
-#
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
+#        Copyright (C) 2010, 2011 University of Cambridge
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -42,16 +35,16 @@
 #        ("CTSRD"), as part of the DARPA CRASH research programme.
 #
 
-SYSTEM = system
-HW = hw
-SW = sw/host/nf10_configure
+"How to build the hardware?" You may ask. To rebuilt the project from
+source, follow the simple 2 steps.
 
-all:
-	$(MAKE) -C $(HW) init_bram exporttosdk
-	$(MAKE) -C $(SW)
-	mkdir -p bitfiles
-	cp $(HW)/implementation/download.bit bitfiles/
+1. Open system.xmp using Xilinx Platform Studio
+2. Click Hardware - Generate bitstream
 
-clean:
-	$(MAKE) -C $(HW) clean
-	$(MAKE) -C $(SW) clean
+That's it!
+
+The bitfile locates in implementation/. You need to
+export it to your Xilinx SDK project in order to download the Microblaze
+program to BRAM.
+
+For SDK instructions , please checkout /sw/embedded directory

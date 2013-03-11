@@ -6,7 +6,7 @@
 #        Makefile
 #
 #  Project:
-#        flash
+#        flash_configuration
 #
 #  Author:
 #        Muhammad Shahbaz
@@ -21,8 +21,7 @@
 #        See inline comments for usage
 #
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
+#        Copyright (C) 2010, 2011 University of Cambridge
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -80,9 +79,11 @@ AXISIM_MHS = $(patsubst %.mhs, %_axisim.mhs, $(MHSFILE))
 AXISIM_CMD = $(patsubst %_system, %_system_axisim, $(SIM_CMD))
 
 
-NF10_NGC_FILES := implementation/axi_interconnect_0_wrapper.ngc
+NF10_NGC_FILES := implementation/nf10_oped_0_wrapper.ngc \
+				  implementation/axi_interconnect_0_wrapper.ngc
 
-NF10_SCR_FILES := nf10/axi_interconnect_0_wrapper_xst.scr
+NF10_SCR_FILES := nf10/nf10_oped_0_wrapper_xst.scr \
+				  nf10/axi_interconnect_0_wrapper_xst.scr
 
 #################################################################
 # PHONY TARGETS
@@ -192,8 +193,8 @@ regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
 
 simclean:
-	rm -rf simulation
-	rm -rf *[0-9]_{stim,expected,log}.axi $(AXISIM_MHS)
+	rm -rf simulation/behavioral
+	rm -rf *[0-9]_{stim,log}.axi $(AXISIM_MHS)
 	rm -f simgen.log
 	rm -f __xps/ise/_xmsgs/simgen.xmsgs
 
@@ -324,22 +325,13 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	@echo "*********************************************"
 	@echo "Creating AXI simulation models..."
 	@echo "*********************************************"
-	nf10_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS)
+	nf10_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS) -c nf10_oped=core_clk
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
 sim: axi_model
-	./make_pkts.py
-	cp nf10/system_axisim_tb.v simulation/behavioral
-	cd simulation/behavioral && $(AXISIM_FUSE)
-	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf10/noninteractive_sim.tcl
-	nf10_sim_reconcile_axi_logs.py
-
-simgui: axi_model
-	./make_pkts.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
-	nf10_sim_reconcile_axi_logs.py
 
 system_incl.make:
 	@echo exit|xps -nw system.xmp

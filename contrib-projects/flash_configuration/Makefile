@@ -3,23 +3,22 @@
 #  NetFPGA-10G http://www.netfpga.org
 #
 #  File:
-#        axi_interconnect_0_wrapper_xst.scr
+#        Makefile
 #
 #  Project:
-#        nic
-#
-#  Module:
-#        axi_interconnect.scr
+#        configuration
 #
 #  Author:
-#        Mario Flajslik
+#        Muhammad Shahbaz
 #
 #  Description:
-#        scr file to walkaround axi_interconnect - Virtex-5 issue
+#        make all : Make BRAM initialized bitfile to bitfiles/
+#
+#        For more information about how Xilinx EDK works, please visit
+#        http://www.xilinx.com/support/documentation/dt_edk.htm
 #
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
+#        Copyright (C) 2010, 2011 University of Cambridge
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -37,17 +36,21 @@
 #        License along with the NetFPGA source package.  If not, see
 #        http://www.gnu.org/licenses/.
 #
+#        This file was developed by SRI International and the University of
+#        Cambridge Computer Laboratory under DARPA/AFRL contract (FA8750-10-C-0237)
+#        ("CTSRD"), as part of the DARPA CRASH research programme.
 #
 
-run
--opt_mode speed
--netlist_hierarchy as_optimized
--opt_level 1
--p virtex6
--top axi_interconnect_0_wrapper
--ifmt MIXED
--ifn axi_interconnect_0_wrapper_xst.prj
--ofn ../implementation/axi_interconnect_0_wrapper.ngc
--hierarchy_separator /
--iobuf NO
--sd {../implementation/axi_interconnect_0_wrapper}
+SYSTEM = system
+HW = hw
+SW = sw/host/nf10_configure
+
+all:
+	$(MAKE) -C $(HW) init_bram exporttosdk
+	$(MAKE) -C $(SW)
+	mkdir -p bitfiles
+	cp $(HW)/implementation/download.bit bitfiles/
+
+clean:
+	$(MAKE) -C $(HW) clean
+	$(MAKE) -C $(SW) clean

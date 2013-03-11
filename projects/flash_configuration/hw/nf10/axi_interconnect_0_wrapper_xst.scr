@@ -6,19 +6,20 @@
 #        axi_interconnect_0_wrapper_xst.scr
 #
 #  Project:
-#        configuration
+#        nic
 #
 #  Module:
 #        axi_interconnect.scr
 #
 #  Author:
-#        Muhammad Shahbaz
+#        Mario Flajslik
 #
 #  Description:
 #        scr file to walkaround axi_interconnect - Virtex-5 issue
 #
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 University of Cambridge
+#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+#                                 Junior University
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.

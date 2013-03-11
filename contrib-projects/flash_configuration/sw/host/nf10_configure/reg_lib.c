@@ -39,44 +39,36 @@
  */
 
 #include "reg_lib.h"
+#include "nf10_reg_lib.h"
 #include <fcntl.h>
-#include <sys/ioctl.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-
-#define IOCTL_CMD_READ_STAT (SIOCDEVPRIVATE+0)
-#define IOCTL_CMD_WRITE_REG (SIOCDEVPRIVATE+1)
-#define IOCTL_CMD_READ_REG (SIOCDEVPRIVATE+2)
+#include <netlink/netlink.h>
 
 inline uint32_t reg_rd(int dev, uint64_t addr)
 {
-    if(ioctl(dev, IOCTL_CMD_READ_REG, &addr) < 0){
-        perror("ioctl failed");
-        return 0;
-    }
-    return addr & 0xffffffff;
+    uint32_t val;  
+    int err = nf10_reg_rd(addr, &val);
+    
+    if(err)
+    {
+       printf("ERROR: %s\n", nl_geterror(err));
+       abort();
+    } 
+
+    return val;
 }
 
 inline int reg_wr(int dev, uint64_t addr, uint32_t val)
 {
-    addr = (addr << 32) + val;
-    if(ioctl(dev, IOCTL_CMD_WRITE_REG, addr) < 0){
-        perror("ioctl failed");
-        return 0;
-    }   
-    return -1;
-}
-
-/* 
-// Code for opening nf10 device
-int dev_open()
-{
-    int dev = open("/dev/nf10", O_RDWR);
-    if(dev < 0){
-        perror("/dev/nf10");
-        return 0;
+    int err = nf10_reg_wr(addr, val);
+    
+    if(err)
+    {
+       printf("ERROR: %s\n", nl_geterror(err));
+       abort();
     }
-    return dev;
+
+    return 0; 
 }
-*/

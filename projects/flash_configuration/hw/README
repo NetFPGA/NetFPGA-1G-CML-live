@@ -6,13 +6,14 @@
 #        README
 #
 #  Project:
-#        configuration
+#        flash_configuration
 #
 #  Author:
 #        Muhammad Shahbaz
 #
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 University of Cambridge
+#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+#                                 Junior University
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -47,4 +48,7 @@ The bitfile locates in implementation/. You need to
 export it to your Xilinx SDK project in order to download the Microblaze
 program to BRAM.
 
-For SDK instructions , please checkout /sw/embedded directory
+For SDK instructions , please checkout /sw/embedded directory.
+
+For simulation, just run "make sim". Please follow Xilinx iSim
+documentation for more details.

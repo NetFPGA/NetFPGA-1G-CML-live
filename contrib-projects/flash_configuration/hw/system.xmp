@@ -23,7 +23,7 @@ SimModel: BEHAVIORAL
 ExternalMemSim: 0
 UserMakeFile: Makefile
 UcfFile: data/nf10.ucf
-EnableParTimingError: 0
+EnableParTimingError: 1
 ShowLicenseDialog: 1
 Processor: microblaze_0
 ElfImp: 
