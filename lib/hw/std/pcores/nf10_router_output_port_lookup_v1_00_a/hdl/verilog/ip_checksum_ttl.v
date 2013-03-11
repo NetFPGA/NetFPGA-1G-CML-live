@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ///////////////////////////////////////////////////////////////////////////////
 // $Id: ip_checksum_ttl.v 5240 2009-03-14 01:50:42Z grg $
 //
@@ -8,6 +9,50 @@
 //              Check if the TTL is valid, and generate the new TTL.
 //
 ///////////////////////////////////////////////////////////////////////////////
+=======
+/*******************************************************************************
+ * 
+ *  NetFPGA-10G http://www.netfpga.org
+ *
+ *  File:
+ *        ip_checksum_ttl.v
+ *
+ *  Library:
+ *        std/pcores/nf10_router_output_port_lookup_v1_00_a
+ *
+ *  Module:
+ *        ip_checksum_ttl
+ *
+ *  Author:
+ *        grg, Gianni Antichi
+ *
+ *  Description:
+ *        
+ *
+ *  Copyright notice:
+ *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+ *                                 Junior University
+ *
+ *  Licence:
+ *        This file is part of the NetFPGA 10G development base package.
+ *
+ *        This file is free code: you can redistribute it and/or modify it under
+ *        the terms of the GNU Lesser General Public License version 2.1 as
+ *        published by the Free Software Foundation.
+ *
+ *        This package is distributed in the hope that it will be useful, but
+ *        WITHOUT ANY WARRANTY; without even the implied warranty of
+ *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *        Lesser General Public License for more details.
+ *
+ *        You should have received a copy of the GNU Lesser General Public
+ *        License along with the NetFPGA source package.  If not, see
+ *        http://www.gnu.org/licenses/.
+ *
+ */
+
+
+>>>>>>> origin/master
 `timescale 1ns/100ps
 module ip_checksum_ttl
   #(parameter C_S_AXIS_DATA_WIDTH=256)
@@ -45,6 +90,12 @@ module ip_checksum_ttl
    reg         add_carry;
    reg	       add_carry_d1;
 
+<<<<<<< HEAD
+=======
+   reg [19:0]  cksm_sum_0, cksm_sum_1, cksm_sum_0_next, cksm_sum_1_next, cksm_sum_2, cksm_sum_2_next, cksm_sum_3, cksm_sum_3_next;
+   wire [19:0] cksm_temp,cksm_temp2;
+
+>>>>>>> origin/master
    //------------------------- Modules-------------------------------
 
    fallthrough_small_fifo #(.WIDTH(27), .MAX_DEPTH_BITS(2))
@@ -64,6 +115,7 @@ module ip_checksum_ttl
    //------------------------- Logic -------------------------------
    assign ip_checksum_vld = !empty;
 
+<<<<<<< HEAD
 
    always @(*) begin
       checksum_next = checksum;
@@ -72,6 +124,25 @@ module ip_checksum_ttl
       end
       if(word_IP_DST_LO) begin
          checksum_next = checksum + tdata[15:0];
+=======
+   assign cksm_temp = cksm_sum_0 + cksm_sum_1;// + cksm_sum_2;
+   assign cksm_temp2 = cksm_sum_2 + cksm_sum_3;
+
+   always @(*) begin
+      checksum_next = checksum;
+      cksm_sum_0_next = cksm_sum_0;
+      cksm_sum_1_next = cksm_sum_1;
+      cksm_sum_2_next = cksm_sum_2;
+      cksm_sum_3_next = cksm_sum_3;
+      if(word_IP_DST_HI) begin
+	 cksm_sum_0_next = tdata[127:112]+tdata[143:128]+tdata[159:144];
+	 cksm_sum_1_next = tdata[175:160]+tdata[191:176];
+	 cksm_sum_2_next = tdata[207:192]+tdata[223:208];
+	 cksm_sum_3_next = tdata[239:224]+tdata[255:240];
+      end
+      if(word_IP_DST_LO) begin
+         checksum_next = cksm_temp + cksm_temp2 + tdata[15:0];
+>>>>>>> origin/master
       end
       if(add_carry) begin
 	 checksum_next = checksum[19:16] + checksum[15:0];
@@ -91,9 +162,24 @@ module ip_checksum_ttl
 	 checksum <= 20'h0;
          add_carry <= 0;
 	 add_carry_d1 <= 0;
+<<<<<<< HEAD
       end
       else begin
 	 checksum <= checksum_next;
+=======
+
+         cksm_sum_0 <= 0;
+         cksm_sum_1 <= 0;
+         cksm_sum_2 <= 0;
+         cksm_sum_3 <= 0;
+      end
+      else begin
+	 checksum <= checksum_next;
+         cksm_sum_0 <= cksm_sum_0_next;
+         cksm_sum_1 <= cksm_sum_1_next;
+         cksm_sum_2 <= cksm_sum_2_next;
+         cksm_sum_3 <= cksm_sum_3_next;
+>>>>>>> origin/master
          /* make sure the version is correct and there are no options */
          if(word_IP_DST_HI) begin
             hdr_has_options <= (tdata[119:112]!=8'h45);

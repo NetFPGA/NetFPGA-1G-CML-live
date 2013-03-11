@@ -467,7 +467,11 @@ module output_port_lookup
          .out_tlast 	                (m_axis_tlast),
          .out_tdata                     (m_axis_tdata),
          .out_tuser                     (m_axis_tuser),     // new checksum assuming decremented TTL
+<<<<<<< HEAD
          .out_tready                    (s_axis_tready),
+=======
+         .out_tready                    (m_axis_tready),
+>>>>>>> origin/master
 	 .out_tstrb			(m_axis_tstrb),
 
          // --- interface to registers
