@@ -41,7 +41,7 @@
 
 SYSTEM = system
 HW = hw
-SW = sw/embedded/
+SW = sw
 
 all:
 	$(MAKE) -C $(HW) exporttosdk

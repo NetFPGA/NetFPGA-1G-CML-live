@@ -1,0 +1,2 @@
+/home/gengyl08/workSpace/NetFPGA-10G-live/contrib-projects/nic/sw/host/driver/nf10.ko
+/home/gengyl08/workSpace/NetFPGA-10G-live/contrib-projects/nic/sw/host/driver/nf10driver.o /home/gengyl08/workSpace/NetFPGA-10G-live/contrib-projects/nic/sw/host/driver/nf10iface.o /home/gengyl08/workSpace/NetFPGA-10G-live/contrib-projects/nic/sw/host/driver/nf10fops.o /home/gengyl08/workSpace/NetFPGA-10G-live/contrib-projects/nic/sw/host/driver/nf10priv.o
