@@ -33,6 +33,9 @@
  *        License along with the NetFPGA source package.  If not, see
  *        http://www.gnu.org/licenses/.
  *
+ *        This file was developed by SRI International and the University of
+ *        Cambridge Computer Laboratory under DARPA/AFRL contract (FA8750-10-C-0237)
+ *        ("CTSRD"), as part of the DARPA CRASH research programme.
  */
 
 #ifndef _REG_LIB_H_
