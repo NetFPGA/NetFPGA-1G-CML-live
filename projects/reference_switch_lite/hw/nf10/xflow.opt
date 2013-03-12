@@ -6,10 +6,10 @@
 #        xflow.opt
 #
 #  Project:
-#        reference_nic
+#        reference_switch_lite
 #
 #  Author:
-#        James Hongyi Zeng
+#        Muhammad Shahbaz
 #
 #  Description:
 #        Xflow option file that utilizes multi-core CPU
