@@ -40,6 +40,7 @@
  */
 
 
+
   module preprocess_control
     #(parameter C_S_AXIS_DATA_WIDTH=256
       )
@@ -96,7 +97,10 @@
         WORD_2: begin
            if(valid) begin
               word_IP_DST_LO = 1;
-              state_next = WAIT_EOP;
+	      if(tlast)
+		state_next = WORD_1;
+	      else
+              	state_next = WAIT_EOP;
            end
         end
 

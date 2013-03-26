@@ -39,7 +39,6 @@
  *
  */
 
-
   module eth_parser
     #(parameter C_S_AXIS_DATA_WIDTH=256,
       parameter NUM_QUEUES = 8,
@@ -124,7 +123,9 @@
 
    //------------------------ Logic ----------------------------------
    assign eth_parser_info_vld = !empty;
-   assign broadcast_bit = dst_MAC[40];
+   //assign broadcast_bit = dst_MAC[40];
+   assign broadcast_bit = dst_MAC[7];
+
 
    always @(*) begin
       mac_sel = mac_0;

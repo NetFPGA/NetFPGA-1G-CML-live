@@ -39,7 +39,6 @@
  *
  */
 
-
 `timescale 1ns/100ps
 module ip_checksum_ttl
   #(parameter C_S_AXIS_DATA_WIDTH=256)

@@ -39,7 +39,6 @@
  *
  */
 
-
   module dest_ip_filter
     #(parameter C_S_AXIS_DATA_WIDTH=256,
       parameter LUT_DEPTH = 16,
