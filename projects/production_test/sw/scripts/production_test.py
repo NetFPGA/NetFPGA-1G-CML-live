@@ -20,6 +20,9 @@ from datetime import datetime
 # Production Test Version.
 VERSION		= "1.0"
 
+# tty definition
+SERIALTTY	= "/dev/ttyS0"
+
 # If an output file is specified, then write the report to the file instead of stdout.
 if len(sys.argv) == 2:
 	# hehe
@@ -36,12 +39,19 @@ which_minicom_status, which_minicom_output = commands.getstatusoutput("which min
 if not os.WIFEXITED(which_minicom_status) or not os.WEXITSTATUS(which_minicom_status) == 0:
 	print "ERROR: UART test requires minicom to be installed"
 	print "Skipping UART test..."
-elif not os.path.exists("/dev/ttyUSB0"):
-	print "ERROR: Expecting UART on /dev/ttyUSB0"
+elif not os.path.exists(SERIALTTY):
+	print "ERROR: Expecting UART on " + SERIALTTY
 	print "Skipping UART test..."
 else: # OK fine, run the UART test.
 	# Minicom needs its configuration file to be in /etc/.
-	os.system("cp ../config/minirc.prod_test_cfg /etc/")
+
+		# if a minicom config exists, remote it (back it up)
+	if os.path.exists("/etc/minirc.prod_test_cfg"):
+		os.system("mv -f /etc/minirc.prod_test_cfg /etc/minirc.prod_test_cfg.bak")
+
+	# edit in new TTY name into config for minicom
+	os.system("sed s:TTY_NAME_HERE:" + SERIALTTY + ": <../config/minirc.prod_test_cfg  >/tmp/minirc.prod_test_cfg")
+	os.system("cp -f /tmp/minirc.prod_test_cfg /etc/minirc.prod_test_cfg")
 	# Get rid of previous output for good measure.
 	os.system("rm -f ../output/minicom/minicom_output.txt")
 	commands.getoutput("runscript minicom.script | minicom prod_test_cfg -C ../output/minicom/minicom_output.txt")
