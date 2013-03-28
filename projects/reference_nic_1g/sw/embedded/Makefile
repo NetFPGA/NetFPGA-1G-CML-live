@@ -6,10 +6,10 @@
 #        Makefile
 #
 #  Project:
-#        nic
+#        reference_nic_1g
 #
 #  Author:
-#        Mario Flajslik
+#        James Hongyi Zeng
 #
 #  Description:
 #        make all : Make BRAM initialized bitfile to result/
