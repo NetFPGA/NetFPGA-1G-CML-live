@@ -43,6 +43,5 @@ lib nf10_switch_output_port_lookup_v1_10_a fallthrough_small_fifo_v2.v verilog
 lib nf10_switch_output_port_lookup_v1_10_a mac_cam_lut.v verilog
 lib nf10_switch_output_port_lookup_v1_10_a ethernet_parser.v verilog
 lib nf10_switch_output_port_lookup_v1_10_a cam.v verilog
-lib nf10_switch_output_port_lookup_v1_10_a register_manager.v verilog
 lib nf10_switch_output_port_lookup_v1_10_a output_port_lookup.v verilog
 lib nf10_switch_output_port_lookup_v1_10_a nf10_switch_output_port_lookup.v verilog
