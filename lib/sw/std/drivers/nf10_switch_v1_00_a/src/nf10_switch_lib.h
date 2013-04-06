@@ -45,8 +45,9 @@ enum {
 };
 
 enum {
-	LUT_HIT_REG = 0x00,
-	LUT_MISS_REG = 0x04,
+	RST_CNTRS = 0x00,
+	LUT_HIT_REG = 0x04,
+	LUT_MISS_REG = 0x08,
 };
 
 /*************************************************************

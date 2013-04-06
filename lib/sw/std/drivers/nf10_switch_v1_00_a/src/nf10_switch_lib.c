@@ -50,6 +50,8 @@ void run(int dev)
 	printf("--- Switch Status ---\r\n\n");
 	printf("LUT Hit = %d\r\n", reg_rd(dev, BAR_BASE_ADDRESS + LUT_HIT_REG));
 	printf("LUT Miss = %d\r\n\n", reg_rd(dev, BAR_BASE_ADDRESS + LUT_MISS_REG));
-	
+
+	reg_wr(dev, BAR_BASE_ADDRESS + RST_CNTRS, 1);
+	reg_wr(dev, BAR_BASE_ADDRESS + RST_CNTRS, 0);
 }
 
