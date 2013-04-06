@@ -1,44 +1,9 @@
-/*******************************************************************************
- *
- *  NetFPGA-10G http://www.netfpga.org
- *
- *  File:
- *        pcie_rx_wr.v
- *
- *  Library:
- *        hw/contrib/pcores/dma_v1_00_a
- *
- *  Module:
- *        dma
- *
- *  Author:
- *        Mario Flajslik
- *
- *  Description:
- *        PCIe write request handling module. Incoming write packets are
- *        processed and the data is written to the correct memory location.
- *
- *  Copyright notice:
- *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
- *                                 Junior University
- *
- *  Licence:
- *        This file is part of the NetFPGA 10G development base package.
- *
- *        This file is free code: you can redistribute it and/or modify it under
- *        the terms of the GNU Lesser General Public License version 2.1 as
- *        published by the Free Software Foundation.
- *
- *        This package is distributed in the hope that it will be useful, but
- *        WITHOUT ANY WARRANTY; without even the implied warranty of
- *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *        Lesser General Public License for more details.
- *
- *        You should have received a copy of the GNU Lesser General Public
- *        License along with the NetFPGA source package.  If not, see
- *        http://www.gnu.org/licenses/.
- *
- */
+//-------------------------------------------------------------
+// PCIe receive module
+//
+// February 2012
+// Mario Flajslik (mariof@stanford.edu)
+//-------------------------------------------------------------
 
 `include "dma_defs.vh"
 
@@ -251,7 +216,7 @@ module pcie_rx_wr
                  end
 
                  // store operation state
-                 if(trn_rd_reg[34])
+                 if(trn_rd_reg[2])
                    op_nxt = OP_WR_ODD;
                  else
                    op_nxt = OP_WR_EVEN;
