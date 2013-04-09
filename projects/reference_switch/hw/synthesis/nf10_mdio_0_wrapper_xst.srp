@@ -1,0 +1,814 @@
+Release 13.4 - xst O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "nf10_mdio_0_wrapper_xst.prj"
+Verilog Include Directory          : {"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch/hw/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/contrib/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxBFMinterface/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/" }
+
+---- Target Parameters
+Target Device                      : xc5vtx240tff1759-2
+Output File Name                   : "../implementation/nf10_mdio_0_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : nf10_mdio_0_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/family_support.vhd" in Library proc_common_v3_00_a.
+Package <family_support> compiled.
+Package body <family_support> compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/proc_common_pkg.vhd" in Library proc_common_v3_00_a.
+Package <proc_common_pkg> compiled.
+Package body <proc_common_pkg> compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/inferred_lut4.vhd" in Library proc_common_v3_00_a.
+Entity <inferred_lut4> compiled.
+Entity <inferred_lut4> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/muxf_struct_f.vhd" in Library proc_common_v3_00_a.
+Entity <muxf_struct> compiled.
+Entity <muxf_struct> (Architecture <imp>) compiled.
+Entity <muxf_struct_f> compiled.
+Entity <muxf_struct_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pf_counter_bit.vhd" in Library proc_common_v3_00_a.
+Entity <pf_counter_bit> compiled.
+Entity <pf_counter_bit> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" in Library proc_common_v3_00_a.
+Entity <cntr_incr_decr_addn_f> compiled.
+Entity <cntr_incr_decr_addn_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/dynshreg_f.vhd" in Library proc_common_v3_00_a.
+Entity <dynshreg_f> compiled.
+Entity <dynshreg_f> (Architecture <behavioral>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pf_adder_bit.vhd" in Library proc_common_v3_00_a.
+Entity <pf_adder_bit> compiled.
+Entity <pf_adder_bit> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pf_counter.vhd" in Library proc_common_v3_00_a.
+Entity <pf_counter> compiled.
+Entity <pf_counter> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pf_occ_counter.vhd" in Library proc_common_v3_00_a.
+Entity <pf_occ_counter> compiled.
+Entity <pf_occ_counter> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/counter_bit.vhd" in Library proc_common_v3_00_a.
+Entity <counter_bit> compiled.
+Entity <counter_bit> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/or_muxcy_f.vhd" in Library proc_common_v3_00_a.
+Entity <or_muxcy_f> compiled.
+Entity <or_muxcy_f> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/srl_fifo_rbu_f.vhd" in Library proc_common_v3_00_a.
+Entity <srl_fifo_rbu_f> compiled.
+Entity <srl_fifo_rbu_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/family.vhd" in Library proc_common_v3_00_a.
+Package <family> compiled.
+Package body <family> compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pf_occ_counter_top.vhd" in Library proc_common_v3_00_a.
+Entity <pf_occ_counter_top> compiled.
+Entity <pf_occ_counter_top> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pf_counter_top.vhd" in Library proc_common_v3_00_a.
+Entity <pf_counter_top> compiled.
+Entity <pf_counter_top> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pf_adder.vhd" in Library proc_common_v3_00_a.
+Entity <pf_adder> compiled.
+Entity <pf_adder> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/or_muxcy.vhd" in Library proc_common_v3_00_a.
+Entity <or_muxcy> compiled.
+Entity <or_muxcy> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/counter.vhd" in Library proc_common_v3_00_a.
+Entity <Counter> compiled.
+Entity <Counter> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/coregen_comp_defs.vhd" in Library proc_common_v3_00_a.
+Package <coregen_comp_defs> compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/common_types_pkg.vhd" in Library proc_common_v3_00_a.
+Package <Common_Types> compiled.
+Package body <Common_Types> compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/conv_funs_pkg.vhd" in Library proc_common_v3_00_a.
+Package <conv_funs_pkg> compiled.
+Package body <conv_funs_pkg> compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/ipif_pkg.vhd" in Library proc_common_v3_00_a.
+Package <ipif_pkg> compiled.
+Package body <ipif_pkg> compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/async_fifo_fg.vhd" in Library proc_common_v3_00_a.
+Entity <async_fifo_fg> compiled.
+Entity <async_fifo_fg> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/sync_fifo_fg.vhd" in Library proc_common_v3_00_a.
+Entity <sync_fifo_fg> compiled.
+Entity <sync_fifo_fg> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/basic_sfifo_fg.vhd" in Library proc_common_v3_00_a.
+Entity <basic_sfifo_fg> compiled.
+Entity <basic_sfifo_fg> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/blk_mem_gen_wrapper.vhd" in Library proc_common_v3_00_a.
+Entity <blk_mem_gen_wrapper> compiled.
+Entity <blk_mem_gen_wrapper> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/addsub.vhd" in Library proc_common_v3_00_a.
+Entity <addsub> compiled.
+Entity <addsub> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/direct_path_cntr.vhd" in Library proc_common_v3_00_a.
+Entity <direct_path_cntr> compiled.
+Entity <direct_path_cntr> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/direct_path_cntr_ai.vhd" in Library proc_common_v3_00_a.
+Entity <direct_path_cntr_ai> compiled.
+Entity <direct_path_cntr_ai> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/down_counter.vhd" in Library proc_common_v3_00_a.
+Entity <down_counter> compiled.
+Entity <down_counter> (Architecture <simulation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/eval_timer.vhd" in Library proc_common_v3_00_a.
+Entity <eval_timer> compiled.
+Entity <eval_timer> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/ipif_steer.vhd" in Library proc_common_v3_00_a.
+Entity <IPIF_Steer> compiled.
+Entity <IPIF_Steer> (Architecture <IMP>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/ipif_steer128.vhd" in Library proc_common_v3_00_a.
+Entity <ipif_steer128> compiled.
+Entity <ipif_steer128> (Architecture <IMP>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/ipif_mirror128.vhd" in Library proc_common_v3_00_a.
+Entity <ipif_mirror128> compiled.
+Entity <ipif_mirror128> (Architecture <IMP>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/ld_arith_reg.vhd" in Library proc_common_v3_00_a.
+Entity <ld_arith_reg> compiled.
+Entity <ld_arith_reg> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/ld_arith_reg2.vhd" in Library proc_common_v3_00_a.
+Entity <ld_arith_reg2> compiled.
+Entity <ld_arith_reg2> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/mux_onehot.vhd" in Library proc_common_v3_00_a.
+Entity <mux_onehot> compiled.
+Entity <mux_onehot> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/or_bits.vhd" in Library proc_common_v3_00_a.
+Entity <or_bits> compiled.
+Entity <or_bits> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/or_gate.vhd" in Library proc_common_v3_00_a.
+Entity <or_gate> compiled.
+Entity <or_gate> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/or_gate128.vhd" in Library proc_common_v3_00_a.
+Entity <or_gate128> compiled.
+Entity <or_gate128> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pf_dpram_select.vhd" in Library proc_common_v3_00_a.
+Entity <pf_dpram_select> compiled.
+Entity <pf_dpram_select> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pselect.vhd" in Library proc_common_v3_00_a.
+Entity <pselect> compiled.
+Entity <pselect> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pselect_mask.vhd" in Library proc_common_v3_00_a.
+Entity <pselect_mask> compiled.
+Entity <pselect_mask> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/srl16_fifo.vhd" in Library proc_common_v3_00_a.
+Entity <srl16_fifo> compiled.
+Entity <srl16_fifo> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/srl_fifo.vhd" in Library proc_common_v3_00_a.
+Entity <SRL_FIFO> compiled.
+Entity <SRL_FIFO> (Architecture <IMP>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/srl_fifo2.vhd" in Library proc_common_v3_00_a.
+Entity <srl_fifo2> compiled.
+Entity <srl_fifo2> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/srl_fifo3.vhd" in Library proc_common_v3_00_a.
+Entity <srl_fifo3> compiled.
+Entity <srl_fifo3> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/srl_fifo_rbu.vhd" in Library proc_common_v3_00_a.
+Entity <srl_fifo_rbu> compiled.
+Entity <srl_fifo_rbu> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/valid_be.vhd" in Library proc_common_v3_00_a.
+Entity <valid_be> compiled.
+Entity <valid_be> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/or_with_enable_f.vhd" in Library proc_common_v3_00_a.
+Entity <or_with_enable_f> compiled.
+Entity <or_with_enable_f> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/dynshreg_i_f.vhd" in Library proc_common_v3_00_a.
+Entity <dynshreg_i_f> compiled.
+Entity <dynshreg_i_f> (Architecture <behavioral>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/mux_onehot_f.vhd" in Library proc_common_v3_00_a.
+Entity <mux_onehot_f> compiled.
+Entity <mux_onehot_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/srl_fifo_f.vhd" in Library proc_common_v3_00_a.
+Entity <srl_fifo_f> compiled.
+Entity <srl_fifo_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/compare_vectors_f.vhd" in Library proc_common_v3_00_a.
+Entity <compare_vectors_f> compiled.
+Entity <compare_vectors_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/pselect_f.vhd" in Library proc_common_v3_00_a.
+Entity <pselect_f> compiled.
+Entity <pselect_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/counter_f.vhd" in Library proc_common_v3_00_a.
+Entity <counter_f> compiled.
+Entity <counter_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/or_gate_f.vhd" in Library proc_common_v3_00_a.
+Entity <or_gate_f> compiled.
+Entity <or_gate_f> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_common_v3_00_a/hdl/vhdl/soft_reset.vhd" in Library proc_common_v3_00_a.
+Entity <soft_reset> compiled.
+Entity <soft_reset> (Architecture <implementation>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/mdio_if.vhd" in Library nf10_mdio_v1_00_a.
+Entity <mdio_if> compiled.
+Entity <mdio_if> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/mdio_ipif.vhd" in Library nf10_mdio_v1_00_a.
+Entity <mdio_ipif> compiled.
+Entity <mdio_ipif> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/axi_interface.vhd" in Library nf10_mdio_v1_00_a.
+Entity <axi_interface> compiled.
+Entity <axi_interface> (Architecture <rtl>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/nf10_mdio.vhd" in Library nf10_mdio_v1_00_a.
+Entity <nf10_mdio> compiled.
+Entity <nf10_mdio> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch/hw/hdl/nf10_mdio_0_wrapper.vhd" in Library work.
+Entity <nf10_mdio_0_wrapper> compiled.
+Entity <nf10_mdio_0_wrapper> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <nf10_mdio_0_wrapper> in library <work> (architecture <STRUCTURE>).
+
+Analyzing hierarchy for entity <nf10_mdio> in library <nf10_mdio_v1_00_a> (architecture <imp>) with generics.
+	C_BASEADDR = "01111010000000000000000000000000"
+	C_DUPLEX = 1
+	C_FAMILY = "virtex5"
+	C_HIGHADDR = "01111010000000001111111111111111"
+	C_INCLUDE_GLOBAL_BUFFERS = 0
+	C_INCLUDE_INTERNAL_LOOPBACK = 0
+	C_INCLUDE_MDIO = 1
+	C_RX_PING_PONG = 0
+	C_S_AXI_ACLK_PERIOD_PS = 10000
+	C_S_AXI_ADDR_WIDTH = 32
+	C_S_AXI_DATA_WIDTH = 32
+	C_S_AXI_ID_WIDTH = 2
+	C_S_AXI_PROTOCOL = "AXI4"
+	C_TX_PING_PONG = 0
+
+Analyzing hierarchy for entity <mdio_ipif> in library <nf10_mdio_v1_00_a> (architecture <imp>) with generics.
+	C_BASEADDR = "01111010000000000000000000000000"
+	C_DUPLEX = 1
+	C_FAMILY = "virtex5"
+	C_HIGHADDR = "01111010000000001111111111111111"
+	C_INCLUDE_MDIO = 1
+	C_RX_PING_PONG = 0
+	C_S_AXI_ACLK_PERIOD_PS = 10000
+	C_S_AXI_ADDR_WIDTH = 32
+	C_S_AXI_DATA_WIDTH = 32
+	C_TX_PING_PONG = 0
+	NODE_MAC = "000000000000000001011110000000001111101011001110"
+
+Analyzing hierarchy for entity <axi_interface> in library <nf10_mdio_v1_00_a> (architecture <rtl>) with generics.
+	C_FAMILY = "virtex5"
+	C_S_AXI_ADDR_WIDTH = 32
+	C_S_AXI_DATA_WIDTH = 32
+	C_S_AXI_ID_WIDTH = 2
+	C_S_AXI_PROTOCOL = "AXI4"
+WARNING:Xst:795 - "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/axi_interface.vhd" line 185: Size of operands are different : result is <false>.
+
+Analyzing hierarchy for entity <mdio_if> in library <nf10_mdio_v1_00_a> (architecture <imp>).
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <nf10_mdio_0_wrapper> in library <work> (Architecture <STRUCTURE>).
+    Set property "MAX_FANOUT = 10000" for signal <S_AXI_ACLK> in unit <nf10_mdio>.
+    Set property "MAX_FANOUT = 10000" for signal <S_AXI_ARESETN> in unit <nf10_mdio>.
+Entity <nf10_mdio_0_wrapper> analyzed. Unit <nf10_mdio_0_wrapper> generated.
+
+Analyzing generic Entity <nf10_mdio> in library <nf10_mdio_v1_00_a> (Architecture <imp>).
+	C_BASEADDR = "01111010000000000000000000000000"
+	C_DUPLEX = 1
+	C_FAMILY = "virtex5"
+	C_HIGHADDR = "01111010000000001111111111111111"
+	C_INCLUDE_GLOBAL_BUFFERS = 0
+	C_INCLUDE_INTERNAL_LOOPBACK = 0
+	C_INCLUDE_MDIO = 1
+	C_RX_PING_PONG = 0
+	C_S_AXI_ACLK_PERIOD_PS = 10000
+	C_S_AXI_ADDR_WIDTH = 32
+	C_S_AXI_DATA_WIDTH = 32
+	C_S_AXI_ID_WIDTH = 2
+	C_S_AXI_PROTOCOL = "AXI4"
+	C_TX_PING_PONG = 0
+Entity <nf10_mdio> analyzed. Unit <nf10_mdio> generated.
+
+Analyzing generic Entity <mdio_ipif> in library <nf10_mdio_v1_00_a> (Architecture <imp>).
+	C_BASEADDR = "01111010000000000000000000000000"
+	C_DUPLEX = 1
+	C_FAMILY = "virtex5"
+	C_HIGHADDR = "01111010000000001111111111111111"
+	C_INCLUDE_MDIO = 1
+	C_RX_PING_PONG = 0
+	C_S_AXI_ACLK_PERIOD_PS = 10000
+	C_S_AXI_ADDR_WIDTH = 32
+	C_S_AXI_DATA_WIDTH = 32
+	C_TX_PING_PONG = 0
+	NODE_MAC = "000000000000000001011110000000001111101011001110"
+INFO:Xst:2679 - Register <mdio_data_out<31>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<30>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<29>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<28>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<27>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<26>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<25>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<24>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<23>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<22>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<21>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<20>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<19>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<18>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<17>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <mdio_data_out<16>> in unit <mdio_ipif> has a constant value of 0 during circuit operation. The register is replaced by logic.
+Entity <mdio_ipif> analyzed. Unit <mdio_ipif> generated.
+
+Analyzing Entity <mdio_if> in library <nf10_mdio_v1_00_a> (Architecture <imp>).
+Entity <mdio_if> analyzed. Unit <mdio_if> generated.
+
+Analyzing generic Entity <axi_interface> in library <nf10_mdio_v1_00_a> (Architecture <rtl>).
+	C_FAMILY = "virtex5"
+	C_S_AXI_ADDR_WIDTH = 32
+	C_S_AXI_DATA_WIDTH = 32
+	C_S_AXI_ID_WIDTH = 2
+	C_S_AXI_PROTOCOL = "AXI4"
+WARNING:Xst:795 - "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/axi_interface.vhd" line 586: Size of operands are different : result is <false>.
+Entity <axi_interface> analyzed. Unit <axi_interface> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <axi_interface>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/axi_interface.vhd".
+WARNING:Xst:647 - Input <S_AXI_AWSIZE> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <IP2Bus_Error> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_AWCACHE> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_AWBURST> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_ARCACHE> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_ARBURST> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_ARSIZE> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_AWLEN> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <rd_last> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 1-bit register for signal <S_AXI_RVALID>.
+    Found 32-bit register for signal <S_AXI_RDATA>.
+    Found 1-bit register for signal <S_AXI_RLAST>.
+    Found 1-bit register for signal <arready_i>.
+    Found 1-bit register for signal <awready_i>.
+    Found 32-bit register for signal <bus2ip_addr_i>.
+    Found 32-bit adder for signal <bus2ip_addr_i$addsub0000>.
+    Found 1-bit register for signal <bvalid>.
+    Found 8-bit down counter for signal <read_burst_cntr>.
+    Found 8-bit register for signal <read_burst_length>.
+    Found 1-bit register for signal <read_req>.
+    Found 1-bit register for signal <read_req_d1>.
+    Found 2-bit register for signal <rid>.
+    Found 1-bit register for signal <rvalid>.
+    Found 2-bit register for signal <wid>.
+    Found 1-bit register for signal <write_req>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred  85 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+Unit <axi_interface> synthesized.
+
+
+Synthesizing Unit <mdio_if>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/mdio_if.vhd".
+    Found finite state machine <FSM_0> for signal <mdio_state>.
+    -----------------------------------------------------------------------
+    | States             | 13                                             |
+    | Transitions        | 21                                             |
+    | Inputs             | 4                                              |
+    | Outputs            | 13                                             |
+    | Clock              | Clk                       (rising_edge)        |
+    | Clock enable       | mdc_rising                (positive)           |
+    | Reset              | Rst                       (positive)           |
+    | Reset type         | synchronous                                    |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 16-bit register for signal <MDIO_RD_DATA>.
+    Found 1-bit register for signal <PHY_MDIO_O>.
+    Found 1-bit register for signal <PHY_MDIO_T>.
+    Found 6-bit down counter for signal <clk_cnt>.
+    Found 5-bit register for signal <ld_cnt_data_reg>.
+    Found 1-bit register for signal <ld_cnt_en_reg>.
+    Found 1-bit register for signal <mdio_clk_reg>.
+    Found 1-bit register for signal <mdio_en_reg>.
+    Found 1-bit register for signal <mdio_idle>.
+    Found 1-bit register for signal <mdio_in_reg1>.
+    Found 1-bit register for signal <mdio_in_reg2>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   1 Counter(s).
+	inferred  29 D-type flip-flop(s).
+Unit <mdio_if> synthesized.
+
+
+Synthesizing Unit <mdio_ipif>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/mdio_ipif.vhd".
+WARNING:Xst:647 - Input <Bus2IP_Data<31:16>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Bus2IP_Addr<12:11>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Bus2IP_Addr<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Bus2IP_BE> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <reg_access_d1> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 6-bit down counter for signal <clk_cnt>.
+    Found 1-bit register for signal <mdio_clause_i>.
+    Found 1-bit register for signal <mdio_clk_i>.
+    Found 16-bit register for signal <mdio_data_out<15:0>>.
+    Found 1-bit register for signal <mdio_en_i>.
+    Found 2-bit register for signal <mdio_op_i>.
+    Found 5-bit register for signal <mdio_phy_addr>.
+    Found 5-bit register for signal <mdio_reg_addr>.
+    Found 1-bit register for signal <mdio_req_i>.
+    Found 16-bit register for signal <mdio_wr_data_reg>.
+    Found 1-bit register for signal <reg_access>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred  49 D-type flip-flop(s).
+Unit <mdio_ipif> synthesized.
+
+
+Synthesizing Unit <nf10_mdio>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_mdio_v1_00_a/hdl/vhdl/nf10_mdio.vhd".
+WARNING:Xst:1780 - Signal <temp_Bus2IP_Addr> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <bus2ip_addr<31:13>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+Unit <nf10_mdio> synthesized.
+
+
+Synthesizing Unit <nf10_mdio_0_wrapper>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch/hw/hdl/nf10_mdio_0_wrapper.vhd".
+Unit <nf10_mdio_0_wrapper> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 1
+ 32-bit adder                                          : 1
+# Counters                                             : 3
+ 6-bit down counter                                    : 2
+ 8-bit down counter                                    : 1
+# Registers                                            : 64
+ 1-bit register                                        : 54
+ 16-bit register                                       : 1
+ 2-bit register                                        : 3
+ 32-bit register                                       : 2
+ 5-bit register                                        : 3
+ 8-bit register                                        : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <nf10_mdio_0/MDIO/MDIO_GEN.MDIO_IF_I/mdio_state/FSM> on signal <mdio_state[1:13]> with one-hot encoding.
+---------------------------
+ State    | Encoding
+---------------------------
+ idle     | 0000000000001
+ preamble | 0000000000010
+ st1      | 0000000000100
+ st2      | 0000000001000
+ op1      | 0000000010000
+ op2      | 0000000100000
+ ta1      | 0000100000000
+ ta2      | 0001000000000
+ phy_addr | 0000001000000
+ reg_addr | 0000010000000
+ write    | 0010000000000
+ read     | 0100000000000
+ done     | 1000000000000
+---------------------------
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 1
+# Adders/Subtractors                                   : 1
+ 32-bit adder                                          : 1
+# Counters                                             : 3
+ 6-bit down counter                                    : 2
+ 8-bit down counter                                    : 1
+# Registers                                            : 163
+ Flip-Flops                                            : 163
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:2261 - The FF/Latch <ld_cnt_data_reg_0> in Unit <mdio_if> is equivalent to the following 2 FFs/Latches, which will be removed : <ld_cnt_data_reg_1> <ld_cnt_data_reg_3> 
+
+Optimizing unit <nf10_mdio_0_wrapper> ...
+
+Optimizing unit <axi_interface> ...
+
+Optimizing unit <mdio_if> ...
+
+Optimizing unit <mdio_ipif> ...
+WARNING:Xst:1293 - FF/Latch <clk_cnt_5> has a constant value of 0 in block <mdio_ipif>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <clk_cnt_5> has a constant value of 0 in block <mdio_ipif>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_31> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_30> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_29> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_28> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_27> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_26> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_25> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_24> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_23> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_22> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_21> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_20> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_19> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_18> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_17> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <nf10_mdio_0/I_AXI_NATIVE_IPIF/S_AXI_RDATA_16> (without init value) has a constant value of 0 in block <nf10_mdio_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_31> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_30> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_29> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_28> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_27> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_26> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_25> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_24> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_23> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_22> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_21> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_20> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_19> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_18> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_17> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_16> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_15> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_14> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_13> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_12> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_11> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_1> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+WARNING:Xst:2677 - Node <nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_0> of sequential type is unconnected in block <nf10_mdio_0_wrapper>.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 154
+ Flip-Flops                                            : 154
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/nf10_mdio_0_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 198
+
+Cell Usage :
+# BELS                             : 227
+#      GND                         : 1
+#      INV                         : 4
+#      LUT1                        : 8
+#      LUT2                        : 13
+#      LUT3                        : 32
+#      LUT4                        : 19
+#      LUT5                        : 32
+#      LUT6                        : 81
+#      MUXCY                       : 15
+#      MUXF7                       : 4
+#      VCC                         : 1
+#      XORCY                       : 17
+# FlipFlops/Latches                : 154
+#      FD                          : 1
+#      FDR                         : 22
+#      FDRE                        : 119
+#      FDRS                        : 3
+#      FDRSE                       : 3
+#      FDS                         : 3
+#      FDSE                        : 3
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 5vtx240tff1759-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             154  out of  149760     0%  
+ Number of Slice LUTs:                  189  out of  149760     0%  
+    Number used as Logic:               189  out of  149760     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    251
+   Number with an unused Flip Flop:      97  out of    251    38%  
+   Number with an unused LUT:            62  out of    251    24%  
+   Number of fully used LUT-FF pairs:    92  out of    251    36%  
+   Number of unique control sets:        38
+
+IO Utilization: 
+ Number of IOs:                         198
+ Number of bonded IOBs:                   0  out of    680     0%  
+
+Specific Feature Utilization:
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                                | Load  |
+-----------------------------------+------------------------------------------------------+-------+
+S_AXI_ACLK                         | NONE(nf10_mdio_0/I_AXI_NATIVE_IPIF/read_burst_cntr_7)| 154   |
+-----------------------------------+------------------------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 3.176ns (Maximum Frequency: 314.820MHz)
+   Minimum input arrival time before clock: 2.538ns
+   Maximum output required time after clock: 1.006ns
+   Maximum combinational path delay: 0.000ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'S_AXI_ACLK'
+  Clock period: 3.176ns (frequency: 314.820MHz)
+  Total number of paths / destination ports: 2034 / 224
+-------------------------------------------------------------------------
+Delay:               3.176ns (Levels of Logic = 9)
+  Source:            nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_2 (FF)
+  Destination:       nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7 (FF)
+  Source Clock:      S_AXI_ACLK rising
+  Destination Clock: S_AXI_ACLK rising
+
+  Data Path: nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_2 to nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             41   0.396   0.395  nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_2 (nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_2)
+     INV:I->O              1   0.212   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_lut<2>_INV_0 (nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_lut<2>)
+     MUXCY:S->O            1   0.305   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<2> (nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<2>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<3> (nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<3>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<4> (nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<4>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<5> (nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<5>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<6> (nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_cy<6>)
+     XORCY:CI->O           1   0.300   0.819  nf10_mdio_0/I_AXI_NATIVE_IPIF/Madd_bus2ip_addr_i_addsub0000_xor<7> (nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_addsub0000<7>)
+     LUT6:I1->O            1   0.086   0.487  nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7_rstpot_G (N83)
+     LUT3:I1->O            1   0.086   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7_rstpot1 (nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7_rstpot)
+     FDR:D                    -0.022          nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7
+    ----------------------------------------
+    Total                      3.176ns (1.476ns logic, 1.700ns route)
+                                       (46.5% logic, 53.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'S_AXI_ACLK'
+  Total number of paths / destination ports: 537 / 323
+-------------------------------------------------------------------------
+Offset:              2.538ns (Levels of Logic = 5)
+  Source:            S_AXI_ARVALID (PAD)
+  Destination:       nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7 (FF)
+  Destination Clock: S_AXI_ACLK rising
+
+  Data Path: S_AXI_ARVALID to nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT6:I0->O            1   0.086   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/rd_burst_SW3_G (N73)
+     MUXF7:I1->O           1   0.214   0.600  nf10_mdio_0/I_AXI_NATIVE_IPIF/rd_burst_SW3 (N25)
+     LUT6:I3->O            1   0.086   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_not00011_G (N81)
+     MUXF7:I1->O           9   0.214   0.637  nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_not00011 (nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_not0001)
+     LUT3:I0->O            1   0.086   0.000  nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7_rstpot1 (nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7_rstpot)
+     FDR:D                    -0.022          nf10_mdio_0/I_AXI_NATIVE_IPIF/bus2ip_addr_i_7
+    ----------------------------------------
+    Total                      2.538ns (1.301ns logic, 1.237ns route)
+                                       (51.3% logic, 48.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'S_AXI_ACLK'
+  Total number of paths / destination ports: 30 / 29
+-------------------------------------------------------------------------
+Offset:              1.006ns (Levels of Logic = 1)
+  Source:            nf10_mdio_0/MDIO/mdio_clk_i (FF)
+  Destination:       PHY_MDC (PAD)
+  Source Clock:      S_AXI_ACLK rising
+
+  Data Path: nf10_mdio_0/MDIO/mdio_clk_i to PHY_MDC
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             9   0.396   0.524  nf10_mdio_0/MDIO/mdio_clk_i (nf10_mdio_0/MDIO/mdio_clk_i)
+     LUT2:I0->O            0   0.086   0.000  nf10_mdio_0/MDIO/MDIO_GEN.MDIO_IF_I/PHY_MDC1 (PHY_MDC)
+    ----------------------------------------
+    Total                      1.006ns (0.482ns logic, 0.524ns route)
+                                       (47.9% logic, 52.1% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Delay:               0.000ns (Levels of Logic = 0)
+  Source:            S_AXI_ARESETN (PAD)
+  Destination:       PHY_rst_n (PAD)
+
+  Data Path: S_AXI_ARESETN to PHY_rst_n
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    ----------------------------------------
+    Total                      0.000ns (0.000ns logic, 0.000ns route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 9.00 secs
+Total CPU time to Xst completion: 8.29 secs
+ 
+--> 
+
+
+Total memory usage is 694792 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   59 (   0 filtered)
+Number of infos    :   19 (   0 filtered)
+

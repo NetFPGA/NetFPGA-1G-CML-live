@@ -1,0 +1,354 @@
+Release 13.4 par O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+shahbaz-lvm.fedora::  Mon Mar 11 11:18:57 2013
+
+par -mt 4 -w -ol high system_map.ncd system.ncd system.pcf 
+
+
+Constraints file: system.pcf.
+Loading device for application Rf_Device from file '5vtx240t.nph' in environment /media/Xilinx13.4/ISE_DS/ISE/.
+   "system" is an NCD, version 3.2, device xc5vtx240t, package ff1759, speed -2
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+INFO:Security:56 - Part 'xc5vtx240t' is not a WebPack part.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue
+to function, but you no longer qualify for Xilinx software updates or new releases.
+
+----------------------------------------------------------------------
+
+Initializing temperature to 85.000 Celsius. (default - Range: 0.000 to 85.000 Celsius)
+Initializing voltage to 0.950 Volts. (default - Range: 0.950 to 1.050 Volts)
+
+
+Device speed data version:  "PRODUCTION 1.73 2012-01-07".
+
+
+
+Device Utilization Summary:
+
+   Number of BUFDSs                          5 out of 24     20%
+   Number of BUFGs                          16 out of 32     50%
+   Number of FIFO36_72_EXPs                  8 out of 324     2%
+   Number of GTX_DUALs                      12 out of 24     50%
+      Number of LOCed GTX_DUALs             12 out of 12    100%
+
+   Number of ILOGICs                         3 out of 1280    1%
+   Number of External IOBs                   8 out of 680     1%
+      Number of LOCed IOBs                   7 out of 8      87%
+
+   Number of External IPADs                 58 out of 826     7%
+      Number of LOCed IPADs                 10 out of 58     17%
+
+   Number of OLOGICs                         3 out of 1280    1%
+   Number of External OPADs                 47 out of 96     48%
+      Number of LOCed OPADs                  0 out of 47      0%
+
+   Number of PCIEs                           1 out of 1     100%
+   Number of PLL_ADVs                        2 out of 6      33%
+   Number of RAMB18X2s                      12 out of 324     3%
+      Number of LOCed RAMB18X2s              1 out of 12      8%
+
+   Number of RAMB18X2SDPs                   84 out of 324    25%
+      Number of LOCed RAMB18X2SDPs           1 out of 84      1%
+
+   Number of RAMB36SDP_EXPs                  3 out of 324     1%
+      Number of LOCed RAMB36SDP_EXPs         3 out of 3     100%
+
+   Number of RAMB36_EXPs                    24 out of 324     7%
+      Number of LOCed RAMB36_EXPs           20 out of 24     83%
+
+   Number of RAMBFIFO18_36s                 16 out of 324     4%
+   Number of Slices                      18602 out of 37440  49%
+   Number of Slice Registers             45367 out of 149760 30%
+      Number used as Flip Flops          45362
+      Number used as Latches                 1
+      Number used as LatchThrus              4
+
+   Number of Slice LUTS                  38682 out of 149760 25%
+   Number of Slice LUT-Flip Flop pairs   57408 out of 149760 38%
+
+
+Overall effort level (-ol):   High 
+Router effort level (-rl):    High 
+
+PAR will use up to 4 processors
+INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please
+   consult the Xilinx Command Line Tools User Guide for information on generating a TSI report.
+WARNING:Par:288 - The signal microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<30> has no load.  PAR will not
+   attempt to route this signal.
+WARNING:Par:288 - The signal microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<31> has no load.  PAR will not
+   attempt to route this signal.
+Starting Multi-threaded Router
+
+
+Phase  1  : 259195 unrouted;      REAL time: 1 mins 41 secs 
+
+Phase  2  : 227200 unrouted;      REAL time: 1 mins 48 secs 
+
+Phase  3  : 103417 unrouted;      REAL time: 4 mins 1 secs 
+
+Phase  4  : 103450 unrouted; (Setup:0, Hold:164439, Component Switching Limit:0)     REAL time: 4 mins 31 secs 
+
+Updating file: system.ncd with current fully routed design.
+
+Phase  5  : 0 unrouted; (Setup:0, Hold:160904, Component Switching Limit:0)     REAL time: 6 mins 1 secs 
+
+Phase  6  : 0 unrouted; (Setup:0, Hold:160904, Component Switching Limit:0)     REAL time: 6 mins 1 secs 
+
+Phase  7  : 0 unrouted; (Setup:0, Hold:160904, Component Switching Limit:0)     REAL time: 6 mins 1 secs 
+
+Phase  8  : 0 unrouted; (Setup:0, Hold:160904, Component Switching Limit:0)     REAL time: 6 mins 1 secs 
+
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 6 mins 59 secs 
+
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 7 mins 30 secs 
+Total REAL time to Router completion: 7 mins 30 secs 
+Total CPU time to Router completion (all processors): 9 mins 27 secs 
+
+Generating "PAR" statistics.
+
+**************************
+Generating Clock Report
+**************************
+
++---------------------+--------------+------+------+------------+-------------+
+|        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
++---------------------+--------------+------+------+------------+-------------+
+|         control_clk | BUFGCTRL_X0Y2| No   | 1239 |  1.139     |  2.595      |
++---------------------+--------------+------+------+------------+-------------+
+|            core_clk | BUFGCTRL_X0Y1| No   | 5902 |  1.018     |  2.450      |
++---------------------+--------------+------+------+------------+-------------+
+|nf10_10g_interface_0 |              |      |      |            |             |
+|/nf10_10g_interface_ |              |      |      |            |             |
+|0/xaui_block/rocketi |              |      |      |            |             |
+|o_wrapper_i/tile1_rx |              |      |      |            |             |
+|           recclk0_i |BUFGCTRL_X0Y24| No   |  205 |  0.493     |  2.119      |
++---------------------+--------------+------+------+------------+-------------+
+|nf10_10g_interface_3 |              |      |      |            |             |
+|/nf10_10g_interface_ |              |      |      |            |             |
+|3/xaui_block/rocketi |              |      |      |            |             |
+|o_wrapper_i/tile1_rx |              |      |      |            |             |
+|           recclk0_i |BUFGCTRL_X0Y30| No   |  200 |  0.227     |  2.616      |
++---------------------+--------------+------+------+------------+-------------+
+|nf10_10g_interface_2 |              |      |      |            |             |
+|/nf10_10g_interface_ |              |      |      |            |             |
+|2/xaui_block/rocketi |              |      |      |            |             |
+|o_wrapper_i/tile1_rx |              |      |      |            |             |
+|           recclk0_i |BUFGCTRL_X0Y28| No   |  206 |  0.328     |  2.516      |
++---------------------+--------------+------+------+------------+-------------+
+|nf10_10g_interface_1 |              |      |      |            |             |
+|/nf10_10g_interface_ |              |      |      |            |             |
+|1/xaui_block/rocketi |              |      |      |            |             |
+|o_wrapper_i/tile1_rx |              |      |      |            |             |
+|           recclk0_i |BUFGCTRL_X0Y26| No   |  204 |  0.409     |  2.270      |
++---------------------+--------------+------+------+------------+-------------+
+|dma_0/dma_0/ep/pcie_ |              |      |      |            |             |
+|        ep0/user_clk |BUFGCTRL_X0Y20| No   | 3540 |  0.922     |  2.359      |
++---------------------+--------------+------+------+------------+-------------+
+|nf10_10g_interface_3 |              |      |      |            |             |
+|/nf10_10g_interface_ |              |      |      |            |             |
+|            3/clk156 |BUFGCTRL_X0Y31| No   | 1157 |  0.801     |  2.620      |
++---------------------+--------------+------+------+------------+-------------+
+|nf10_10g_interface_2 |              |      |      |            |             |
+|/nf10_10g_interface_ |              |      |      |            |             |
+|            2/clk156 |BUFGCTRL_X0Y29| No   | 1178 |  0.932     |  2.518      |
++---------------------+--------------+------+------+------------+-------------+
+|nf10_10g_interface_1 |              |      |      |            |             |
+|/nf10_10g_interface_ |              |      |      |            |             |
+|            1/clk156 |BUFGCTRL_X0Y27| No   | 1168 |  0.944     |  2.537      |
++---------------------+--------------+------+------+------------+-------------+
+|nf10_10g_interface_0 |              |      |      |            |             |
+|/nf10_10g_interface_ |              |      |      |            |             |
+|            0/clk156 |BUFGCTRL_X0Y25| No   | 1147 |  0.990     |  2.418      |
++---------------------+--------------+------+------+------------+-------------+
+|dma_0/dma_0/ep/pcie_ |              |      |      |            |             |
+|        ep0/core_clk |BUFGCTRL_X0Y23| No   |  193 |  0.574     |  2.261      |
++---------------------+--------------+------+------+------------+-------------+
+|dma_0/dma_0/ep/pcie_ |              |      |      |            |             |
+|ep0/pcie_blk/txsync_ |              |      |      |            |             |
+|                 clk |BUFGCTRL_X0Y22| No   |   65 |  0.523     |  2.263      |
++---------------------+--------------+------+------+------------+-------------+
+|dma_0/dma_0/ep/pcie_ |              |      |      |            |             |
+| ep0/REFCLK_OUT_bufg | BUFGCTRL_X0Y0| No   |    7 |  0.091     |  1.553      |
++---------------------+--------------+------+------+------------+-------------+
+|dma_0/dma_0/ep/pcie_ |              |      |      |            |             |
+|ep0/pcie_blk/gt_usrc |              |      |      |            |             |
+|                  lk |BUFGCTRL_X0Y21| No   |   16 |  0.385     |  2.261      |
++---------------------+--------------+------+------+------------+-------------+
+|dma_0/dma_0/ep/pcie_ |              |      |      |            |             |
+|ep0/pcie_blk/SIO/.pc |              |      |      |            |             |
+|ie_gt_wrapper_i/icdr |              |      |      |            |             |
+|            reset<0> |         Local|      |    1 |  0.000     |  0.508      |
++---------------------+--------------+------+------+------------+-------------+
+
+* Net Skew is the difference between the minimum and maximum routing
+only delays for the net. Note this is different from Clock Skew which
+is reported in TRCE timing report. Clock Skew is the difference between
+the minimum and maximum path delays which includes logic delays.
+
+* The fanout is the number of component pins not the individual BEL loads,
+for example SLICE loads not FF loads.
+
+Timing Score: 0 (Setup: 0, Hold: 0, Component Switching Limit: 0)
+
+INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more 
+   information, see the TSI report.  Please consult the Xilinx Command Line 
+   Tools User Guide for information on generating a TSI report.
+Number of Timing Constraints that were not applied: 1
+
+Asterisk (*) preceding a constraint indicates it was not met.
+   This may be due to a setup or hold violation.
+
+----------------------------------------------------------------------------------------------------------
+  Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
+                                            |             |    Slack   | Achievable | Errors |    Score   
+----------------------------------------------------------------------------------------------------------
+  TS_dma_0_dma_0_ep_pcie_ep0_pcie_blk_clock | SETUP       |     0.041ns|     7.959ns|       0|           0
+  ing_i_clkout1 = PERIOD TIMEGRP         "d | HOLD        |     0.036ns|            |       0|           0
+  ma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_ | MINPERIOD   |     0.000ns|     8.000ns|       0|           0
+  i_clkout1" TS_MGTCLK * 1.25         HIGH  |             |            |            |        |            
+  50%                                       |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_dma_0_dma_0_ep_pcie_ep0_pcie_blk_clock | SETUP       |     0.032ns|     3.968ns|       0|           0
+  ing_i_clkout0 = PERIOD TIMEGRP         "d | HOLD        |     0.066ns|            |       0|           0
+  ma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_ | MINPERIOD   |     0.000ns|     4.000ns|       0|           0
+  i_clkout0" TS_MGTCLK * 2.5         HIGH 5 |             |            |            |        |            
+  0%                                        |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_clock_generator_0_clock_generator_0_SI | SETUP       |     0.029ns|     6.221ns|       0|           0
+  G_PLL0_CLKOUT1 = PERIOD TIMEGRP         " | HOLD        |     0.130ns|            |       0|           0
+  clock_generator_0_clock_generator_0_SIG_P |             |            |            |        |            
+  LL0_CLKOUT1" TS_sys_clk_pin         * 1.6 |             |            |            |        |            
+   HIGH 50%                                 |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_clk156_top = PERIOD TIMEGRP "clk156_to | SETUP       |     0.092ns|     6.308ns|       0|           0
+  p" 156.25 MHz HIGH 50%                    | HOLD        |     0.121ns|            |       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_clk156_rec = PERIOD TIMEGRP "clk156_re | SETUP       |     0.161ns|     6.239ns|       0|           0
+  c" 156.25 MHz HIGH 50%                    | HOLD        |     0.147ns|            |       0|           0
+----------------------------------------------------------------------------------------------------------
+  Pin to Pin Skew Constraint                | MAXDELAY    |     0.229ns|     0.530ns|       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_clock_generator_0_clock_generator_0_SI | SETUP       |     0.871ns|     9.129ns|       0|           0
+  G_PLL0_CLKOUT0 = PERIOD TIMEGRP         " | HOLD        |     0.112ns|            |       0|           0
+  clock_generator_0_clock_generator_0_SIG_P |             |            |            |        |            
+  LL0_CLKOUT0" TS_sys_clk_pin         HIGH  |             |            |            |        |            
+  50%                                       |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_dma_0_dma_0_ep_pcie_ep0_pcie_blk_clock | SETUP       |     1.859ns|     6.141ns|       0|           0
+  ing_i_txsync_clkout = PERIOD TIMEGRP      | HOLD        |     0.307ns|            |       0|           0
+      "dma_0_dma_0_ep_pcie_ep0_pcie_blk_clo |             |            |            |        |            
+  cking_i_txsync_clkout" TS_MGTCLK          |             |            |            |        |            
+  * 1.25 HIGH 50%                           |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_MGTCLK = PERIOD TIMEGRP "MGTCLK" 100 M | SETUP       |     6.562ns|     3.438ns|       0|           0
+  Hz HIGH 50%                               | HOLD        |     0.575ns|            |       0|           0
+                                            | MINLOWPULSE |     6.000ns|     4.000ns|       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_ | MINLOWPULSE |     6.000ns|     4.000ns|       0|           0
+  pin" 100 MHz HIGH 50%                     |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_dma_0_dma_0_ep_pcie_ep0_pcie_blk_clock | SETUP       |     5.936ns|     2.064ns|       0|           0
+  ing_i_clkout2 = PERIOD TIMEGRP         "d | HOLD        |     0.836ns|            |       0|           0
+  ma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_ |             |            |            |        |            
+  i_clkout2" TS_MGTCLK * 1.25         HIGH  |             |            |            |        |            
+  50%                                       |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_mac3_xgmac_ifg_false_paths_thru_ | SETUP       |         N/A|     5.865ns|     N/A|           0
+  1_path" TIG                               |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_mac2_xgmac_ifg_false_paths_thru_ | SETUP       |         N/A|     5.441ns|     N/A|           0
+  1_path" TIG                               |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_mac1_xgmac_ifg_false_paths_thru_ | SETUP       |         N/A|     5.895ns|     N/A|           0
+  1_path" TIG                               |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_mac0_xgmac_ifg_false_paths_thru_ | SETUP       |         N/A|     5.880ns|     N/A|           0
+  1_path" TIG                               |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_CLK_TIG_5_path" TIG              | MAXDELAY    |         N/A|     2.737ns|     N/A|           0
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_CLK_TIG_4_path" TIG              | MAXDELAY    |         N/A|     3.086ns|     N/A|           0
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_CLK_TIG_3_path" TIG              | SETUP       |         N/A|     9.910ns|     N/A|           0
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_CLK_TIG_2_path" TIG              | SETUP       |         N/A|    -0.755ns|     N/A|           0
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_CLK_TIG_1_path" TIG              | SETUP       |         N/A|    10.144ns|     N/A|           0
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_CLK_TIG_0_path" TIG              | MAXDELAY    |         N/A|     5.094ns|     N/A|           0
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_TIG_microblaze_0_ilmb_POR_FF_I_p | SETUP       |         N/A|     1.697ns|     N/A|           0
+  ath" TIG                                  |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PATH "TS_TIG_microblaze_0_dlmb_POR_FF_I_p | SETUP       |         N/A|     1.339ns|     N/A|           0
+  ath" TIG                                  |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Review Timing Report for more details on the following derived constraints.
+To create a Timing Report, run "trce -v 12 -fastpaths -o design_timing_report design.ncd design.pcf"
+or "Run Timing Analysis" from Timing Analyzer (timingan).
+Derived Constraints for TS_sys_clk_pin
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_sys_clk_pin                 |     10.000ns|      4.000ns|      9.954ns|            0|            0|            0|      2507567|
+| TS_clock_generator_0_clock_gen|     10.000ns|      9.129ns|          N/A|            0|            0|       189643|            0|
+| erator_0_SIG_PLL0_CLKOUT0     |             |             |             |             |             |             |             |
+| TS_clock_generator_0_clock_gen|      6.250ns|      6.221ns|          N/A|            0|            0|      2317924|            0|
+| erator_0_SIG_PLL0_CLKOUT1     |             |             |             |             |             |             |             |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+Derived Constraints for TS_MGTCLK
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_MGTCLK                      |     10.000ns|      4.000ns|     10.000ns|            0|            0|          298|       181641|
+| TS_dma_0_dma_0_ep_pcie_ep0_pci|      4.000ns|      4.000ns|          N/A|            0|            0|        11558|            0|
+| e_blk_clocking_i_clkout0      |             |             |             |             |             |             |             |
+| TS_dma_0_dma_0_ep_pcie_ep0_pci|      8.000ns|      8.000ns|          N/A|            0|            0|       169309|            0|
+| e_blk_clocking_i_clkout1      |             |             |             |             |             |             |             |
+| TS_dma_0_dma_0_ep_pcie_ep0_pci|      8.000ns|      2.064ns|          N/A|            0|            0|           28|            0|
+| e_blk_clocking_i_clkout2      |             |             |             |             |             |             |             |
+| TS_dma_0_dma_0_ep_pcie_ep0_pci|      8.000ns|      6.141ns|          N/A|            0|            0|          746|            0|
+| e_blk_clocking_i_txsync_clkout|             |             |             |             |             |             |             |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+All constraints were met.
+INFO:Timing:2761 - N/A entries in the Constraints List may indicate that the 
+   constraint is not analyzed due to the following: No paths covered by this 
+   constraint; Other constraints intersect with this constraint; or This 
+   constraint was disabled by a Path Tracing Control. Please run the Timespec 
+   Interaction Report (TSI) via command line (trce tsi) or Timing Analyzer GUI.
+
+
+Generating Pad Report.
+
+All signals are completely routed.
+
+WARNING:Par:283 - There are 2 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+
+Total REAL time to PAR completion: 8 mins 36 secs 
+Total CPU time to PAR completion (all processors): 10 mins 33 secs 
+
+Peak Memory Usage:  2373 MB
+
+Placer: Placement generated during map.
+Routing: Completed - No errors found.
+Timing: Completed - No errors found.
+
+Number of error messages: 0
+Number of warning messages: 4
+Number of info messages: 1
+
+Writing design to file system.ncd
+
+
+
+PAR done!

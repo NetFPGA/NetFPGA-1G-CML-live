@@ -1,0 +1,602 @@
+Release 13.4 - xst O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "nf10_bram_output_queues_0_wrapper_xst.prj"
+Verilog Include Directory          : {"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/contrib/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxBFMinterface/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/" }
+
+---- Target Parameters
+Target Device                      : xc5vtx240tff1759-2
+Output File Name                   : "../implementation/nf10_bram_output_queues_0_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : nf10_bram_output_queues_0_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_bram_output_queues_v1_00_a/hdl/verilog/nf10_bram_output_queues.v" in library nf10_bram_output_queues_v1_00_a
+Compiling verilog file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_bram_output_queues_v1_00_a/hdl/verilog/small_fifo_v3.v" in library nf10_bram_output_queues_v1_00_a
+Module <nf10_bram_output_queues> compiled
+Compiling verilog file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_bram_output_queues_v1_00_a/hdl/verilog/fallthrough_small_fifo_v2.v" in library nf10_bram_output_queues_v1_00_a
+Module <small_fifo> compiled
+Module <fallthrough_small_fifo> compiled
+Compiling verilog file "../hdl/nf10_bram_output_queues_0_wrapper.v" in library work
+Module <nf10_bram_output_queues_0_wrapper> compiled
+No errors in compilation
+Analysis of file <"nf10_bram_output_queues_0_wrapper_xst.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <nf10_bram_output_queues_0_wrapper> in library <work>.
+
+Analyzing hierarchy for module <nf10_bram_output_queues> in library <nf10_bram_output_queues_v1_00_a> with parameters.
+	BUFFER_SIZE = "00000000000000000001000000000000"
+	BUFFER_SIZE_WIDTH = "00000000000000000000000000000111"
+	BUFFER_THRESHOLD = "00000000000000000000000001001110"
+	C_M_AXIS_DATA_WIDTH = "00000000000000000000000100000000"
+	C_M_AXIS_TUSER_WIDTH = "00000000000000000000000010000000"
+	C_S_AXIS_DATA_WIDTH = "00000000000000000000000100000000"
+	C_S_AXIS_TUSER_WIDTH = "00000000000000000000000010000000"
+	DROP = "00000000000000000000000000000010"
+	DST_POS = "00000000000000000000000000011000"
+	IDLE = "00000000000000000000000000000000"
+	MAX_PACKET_SIZE = "00000000000000000000011001000000"
+	NUM_METADATA_STATES = "00000000000000000000000000000010"
+	NUM_QUEUES = "00000000000000000000000000000101"
+	NUM_QUEUES_WIDTH = "00000000000000000000000000000011"
+	NUM_STATES = "00000000000000000000000000000011"
+	WAIT_EOP = "00000000000000000000000000000001"
+	WAIT_HEADER = "00000000000000000000000000000000"
+	WR_PKT = "00000000000000000000000000000001"
+
+Analyzing hierarchy for module <fallthrough_small_fifo> in library <nf10_bram_output_queues_v1_00_a> with parameters.
+	MAX_DEPTH_BITS = "00000000000000000000000000000111"
+	PROG_FULL_THRESHOLD = "00000000000000000000000001001110"
+	WIDTH = "00000000000000000000000100100001"
+
+Analyzing hierarchy for module <fallthrough_small_fifo> in library <nf10_bram_output_queues_v1_00_a> with parameters.
+	MAX_DEPTH_BITS = "00000000000000000000000000000010"
+	PROG_FULL_THRESHOLD = "00000000000000000000000000000011"
+	WIDTH = "00000000000000000000000010000000"
+
+Analyzing hierarchy for module <small_fifo> in library <nf10_bram_output_queues_v1_00_a> with parameters.
+	MAX_DEPTH = "00000000000000000000000010000000"
+	MAX_DEPTH_BITS = "00000000000000000000000000000111"
+	PROG_FULL_THRESHOLD = "00000000000000000000000001001110"
+	WIDTH = "00000000000000000000000100100001"
+
+Analyzing hierarchy for module <small_fifo> in library <nf10_bram_output_queues_v1_00_a> with parameters.
+	MAX_DEPTH = "00000000000000000000000000000100"
+	MAX_DEPTH_BITS = "00000000000000000000000000000010"
+	PROG_FULL_THRESHOLD = "00000000000000000000000000000011"
+	WIDTH = "00000000000000000000000010000000"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <nf10_bram_output_queues_0_wrapper>.
+Module <nf10_bram_output_queues_0_wrapper> is correct for synthesis.
+ 
+Analyzing module <nf10_bram_output_queues> in library <nf10_bram_output_queues_v1_00_a>.
+	BUFFER_SIZE = 32'sb00000000000000000001000000000000
+	BUFFER_SIZE_WIDTH = 32'sb00000000000000000000000000000111
+	BUFFER_THRESHOLD = 32'sb00000000000000000000000001001110
+	C_M_AXIS_DATA_WIDTH = 32'sb00000000000000000000000100000000
+	C_M_AXIS_TUSER_WIDTH = 32'sb00000000000000000000000010000000
+	C_S_AXIS_DATA_WIDTH = 32'sb00000000000000000000000100000000
+	C_S_AXIS_TUSER_WIDTH = 32'sb00000000000000000000000010000000
+	DROP = 32'sb00000000000000000000000000000010
+	DST_POS = 32'sb00000000000000000000000000011000
+	IDLE = 32'sb00000000000000000000000000000000
+	MAX_PACKET_SIZE = 32'sb00000000000000000000011001000000
+	NUM_METADATA_STATES = 32'sb00000000000000000000000000000010
+	NUM_QUEUES = 32'sb00000000000000000000000000000101
+	NUM_QUEUES_WIDTH = 32'sb00000000000000000000000000000011
+	NUM_STATES = 32'sb00000000000000000000000000000011
+	WAIT_EOP = 32'sb00000000000000000000000000000001
+	WAIT_HEADER = 32'sb00000000000000000000000000000000
+	WR_PKT = 32'sb00000000000000000000000000000001
+Module <nf10_bram_output_queues> is correct for synthesis.
+ 
+Analyzing module <fallthrough_small_fifo.1> in library <nf10_bram_output_queues_v1_00_a>.
+	MAX_DEPTH_BITS = 32'sb00000000000000000000000000000111
+	PROG_FULL_THRESHOLD = 32'sb00000000000000000000000001001110
+	WIDTH = 32'sb00000000000000000000000100100001
+Module <fallthrough_small_fifo.1> is correct for synthesis.
+ 
+Analyzing module <small_fifo.1> in library <nf10_bram_output_queues_v1_00_a>.
+	MAX_DEPTH = 32'sb00000000000000000000000010000000
+	MAX_DEPTH_BITS = 32'sb00000000000000000000000000000111
+	PROG_FULL_THRESHOLD = 32'sb00000000000000000000000001001110
+	WIDTH = 32'sb00000000000000000000000100100001
+Module <small_fifo.1> is correct for synthesis.
+ 
+Analyzing module <fallthrough_small_fifo.2> in library <nf10_bram_output_queues_v1_00_a>.
+	MAX_DEPTH_BITS = 32'sb00000000000000000000000000000010
+	PROG_FULL_THRESHOLD = 32'sb00000000000000000000000000000011
+	WIDTH = 32'sb00000000000000000000000010000000
+Module <fallthrough_small_fifo.2> is correct for synthesis.
+ 
+Analyzing module <small_fifo.2> in library <nf10_bram_output_queues_v1_00_a>.
+	MAX_DEPTH = 32'sb00000000000000000000000000000100
+	MAX_DEPTH_BITS = 32'sb00000000000000000000000000000010
+	PROG_FULL_THRESHOLD = 32'sb00000000000000000000000000000011
+	WIDTH = 32'sb00000000000000000000000010000000
+Module <small_fifo.2> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <small_fifo_1>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_bram_output_queues_v1_00_a/hdl/verilog/small_fifo_v3.v".
+    Found 128x289-bit dual-port RAM <Mram_queue> for signal <queue>.
+    Found 8-bit comparator greatequal for signal <nearly_full>.
+    Found 8-bit comparator greatequal for signal <prog_full>.
+    Found 289-bit register for signal <dout>.
+    Found 8-bit updown counter for signal <depth>.
+    Found 7-bit up counter for signal <rd_ptr>.
+    Found 7-bit up counter for signal <wr_ptr>.
+    Summary:
+	inferred   1 RAM(s).
+	inferred   3 Counter(s).
+	inferred 289 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+Unit <small_fifo_1> synthesized.
+
+
+Synthesizing Unit <small_fifo_2>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_bram_output_queues_v1_00_a/hdl/verilog/small_fifo_v3.v".
+    Found 4x128-bit dual-port RAM <Mram_queue> for signal <queue>.
+    Found 3-bit comparator greatequal for signal <nearly_full>.
+    Found 3-bit comparator greatequal for signal <prog_full>.
+    Found 128-bit register for signal <dout>.
+    Found 3-bit updown counter for signal <depth>.
+    Found 2-bit up counter for signal <rd_ptr>.
+    Found 2-bit up counter for signal <wr_ptr>.
+    Summary:
+	inferred   1 RAM(s).
+	inferred   3 Counter(s).
+	inferred 128 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+Unit <small_fifo_2> synthesized.
+
+
+Synthesizing Unit <fallthrough_small_fifo_1>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_bram_output_queues_v1_00_a/hdl/verilog/fallthrough_small_fifo_v2.v".
+    Found 1-bit register for signal <empty>.
+    Summary:
+	inferred   1 D-type flip-flop(s).
+Unit <fallthrough_small_fifo_1> synthesized.
+
+
+Synthesizing Unit <fallthrough_small_fifo_2>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_bram_output_queues_v1_00_a/hdl/verilog/fallthrough_small_fifo_v2.v".
+    Found 1-bit register for signal <empty>.
+    Summary:
+	inferred   1 D-type flip-flop(s).
+Unit <fallthrough_small_fifo_2> synthesized.
+
+
+Synthesizing Unit <nf10_bram_output_queues>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_bram_output_queues_v1_00_a/hdl/verilog/nf10_bram_output_queues.v".
+WARNING:Xst:646 - Signal <metadata_empty> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 49                                             |
+    | Inputs             | 17                                             |
+    | Outputs            | 3                                              |
+    | Clock              | axi_aclk                  (rising_edge)        |
+    | Reset              | axi_resetn                (negative)           |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 000                                            |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 5-bit register for signal <cur_queue>.
+    Found 1-bit register for signal <first_word>.
+    Found 5-bit register for signal <metadata_nearly_full>.
+    Found 10-bit register for signal <metadata_state>.
+    Found 5-bit register for signal <nearly_full>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred  26 D-type flip-flop(s).
+Unit <nf10_bram_output_queues> synthesized.
+
+
+Synthesizing Unit <nf10_bram_output_queues_0_wrapper>.
+    Related source file is "../hdl/nf10_bram_output_queues_0_wrapper.v".
+Unit <nf10_bram_output_queues_0_wrapper> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 10
+ 128x289-bit dual-port RAM                             : 5
+ 4x128-bit dual-port RAM                               : 5
+# Counters                                             : 30
+ 2-bit up counter                                      : 10
+ 3-bit updown counter                                  : 5
+ 7-bit up counter                                      : 10
+ 8-bit updown counter                                  : 5
+# Registers                                            : 29
+ 1-bit register                                        : 11
+ 128-bit register                                      : 5
+ 2-bit register                                        : 5
+ 289-bit register                                      : 5
+ 5-bit register                                        : 3
+# Comparators                                          : 20
+ 3-bit comparator greatequal                           : 10
+ 8-bit comparator greatequal                           : 10
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <nf10_bram_output_queues_0/state/FSM> on signal <state[1:2]> with gray encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 00
+ 001   | 01
+ 010   | 11
+-------------------
+
+Synthesizing (advanced) Unit <small_fifo_1>.
+INFO:Xst:3226 - The RAM <Mram_queue> will be implemented as a BLOCK RAM, absorbing the following register(s): <dout>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 128-word x 289-bit                  |          |
+    |     mode           | read-first                          |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <wr_en>         | high     |
+    |     addrA          | connected to signal <wr_ptr>        |          |
+    |     diA            | connected to signal <din>           |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 128-word x 289-bit                  |          |
+    |     mode           | write-first                         |          |
+    |     clkB           | connected to signal <clk>           | rise     |
+    |     enB            | connected to signal <rd_en>         | high     |
+    |     addrB          | connected to signal <rd_ptr>        |          |
+    |     doB            | connected to signal <dout>          |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <small_fifo_1> synthesized (advanced).
+
+Synthesizing (advanced) Unit <small_fifo_2>.
+INFO:Xst:3231 - The small RAM <Mram_queue> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 128-bit                    |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <wr_en>         | high     |
+    |     addrA          | connected to signal <wr_ptr>        |          |
+    |     diA            | connected to signal <din>           |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 4-word x 128-bit                    |          |
+    |     addrB          | connected to signal <rd_ptr>        |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <small_fifo_2> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 1
+# RAMs                                                 : 10
+ 128x289-bit dual-port block RAM                       : 5
+ 4x128-bit dual-port distributed RAM                   : 5
+# Counters                                             : 30
+ 2-bit up counter                                      : 10
+ 3-bit updown counter                                  : 5
+ 7-bit up counter                                      : 10
+ 8-bit updown counter                                  : 5
+# Registers                                            : 676
+ Flip-Flops                                            : 676
+# Comparators                                          : 20
+ 3-bit comparator greatequal                           : 10
+ 8-bit comparator greatequal                           : 10
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch <metadata_state_2_1> (without init value) has a constant value of 0 in block <nf10_bram_output_queues>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <metadata_state_0_1> (without init value) has a constant value of 0 in block <nf10_bram_output_queues>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <metadata_state_1_1> (without init value) has a constant value of 0 in block <nf10_bram_output_queues>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <metadata_state_3_1> (without init value) has a constant value of 0 in block <nf10_bram_output_queues>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <metadata_state_4_1> (without init value) has a constant value of 0 in block <nf10_bram_output_queues>. This FF/Latch will be trimmed during the optimization process.
+
+Optimizing unit <nf10_bram_output_queues_0_wrapper> ...
+
+Optimizing unit <small_fifo_1> ...
+
+Optimizing unit <small_fifo_2> ...
+
+Optimizing unit <nf10_bram_output_queues> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 818
+ Flip-Flops                                            : 818
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/nf10_bram_output_queues_0_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 2516
+
+Cell Usage :
+# BELS                             : 398
+#      GND                         : 1
+#      INV                         : 26
+#      LUT2                        : 35
+#      LUT3                        : 49
+#      LUT4                        : 33
+#      LUT5                        : 40
+#      LUT6                        : 136
+#      MUXCY                       : 35
+#      MUXF7                       : 2
+#      VCC                         : 1
+#      XORCY                       : 40
+# FlipFlops/Latches                : 818
+#      FDE                         : 640
+#      FDR                         : 18
+#      FDRE                        : 140
+#      FDS                         : 20
+# RAMS                             : 160
+#      RAM32M                      : 105
+#      RAM32X1D                    : 10
+#      RAMB18                      : 5
+#      RAMB18SDP                   : 40
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 5vtx240tff1759-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             818  out of  149760     0%  
+ Number of Slice LUTs:                  759  out of  149760     0%  
+    Number used as Logic:               319  out of  149760     0%  
+    Number used as Memory:              440  out of  39360     1%  
+       Number used as RAM:              440
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   1264
+   Number with an unused Flip Flop:     446  out of   1264    35%  
+   Number with an unused LUT:           505  out of   1264    39%  
+   Number of fully used LUT-FF pairs:   313  out of   1264    24%  
+   Number of unique control sets:        46
+
+IO Utilization: 
+ Number of IOs:                        2516
+ Number of bonded IOBs:                   0  out of    680     0%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:               23  out of    324     7%  
+    Number using Block RAM only:         23
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+---------------------------------------------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                                                     | Load  |
+-----------------------------------+---------------------------------------------------------------------------+-------+
+axi_aclk                           | NONE(nf10_bram_output_queues_0/output_queues[4].metadata_fifo/fifo/dout_0)| 978   |
+-----------------------------------+---------------------------------------------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 2.654ns (Maximum Frequency: 376.790MHz)
+   Minimum input arrival time before clock: 1.954ns
+   Maximum output required time after clock: 1.892ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'axi_aclk'
+  Clock period: 2.654ns (frequency: 376.790MHz)
+  Total number of paths / destination ports: 12742 / 2818
+-------------------------------------------------------------------------
+Delay:               2.654ns (Levels of Logic = 10)
+  Source:            nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_4 (FF)
+  Destination:       nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_7 (FF)
+  Source Clock:      axi_aclk rising
+  Destination Clock: axi_aclk rising
+
+  Data Path: nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_4 to nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             8   0.396   0.933  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_4 (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_4)
+     LUT6:I0->O            1   0.086   0.412  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_lut<0>_SW0 (N147)
+     LUT6:I5->O            1   0.086   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_lut<0> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_lut<0>)
+     MUXCY:S->O            1   0.305   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<0> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<0>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<1> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<1>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<2> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<2>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<3> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<3>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<4> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<4>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<5> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<5>)
+     MUXCY:CI->O           0   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<6> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<6>)
+     XORCY:CI->O           1   0.300   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_xor<7> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Result<7>)
+     FDRE:D                   -0.022          nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_7
+    ----------------------------------------
+    Total                      2.654ns (1.309ns logic, 1.345ns route)
+                                       (49.3% logic, 50.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'axi_aclk'
+  Total number of paths / destination ports: 4050 / 3441
+-------------------------------------------------------------------------
+Offset:              1.954ns (Levels of Logic = 10)
+  Source:            m_axis_tready_4 (PAD)
+  Destination:       nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_7 (FF)
+  Destination Clock: axi_aclk rising
+
+  Data Path: m_axis_tready_4 to nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT4:I0->O            1   0.086   0.662  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo_rd_en1_SW14 (N133)
+     LUT6:I2->O            1   0.086   0.286  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_and0000_inv2 (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_and0000_inv)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<0> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<0>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<1> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<1>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<2> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<2>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<3> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<3>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<4> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<4>)
+     MUXCY:CI->O           1   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<5> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<5>)
+     MUXCY:CI->O           0   0.023   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<6> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_cy<6>)
+     XORCY:CI->O           1   0.300   0.000  nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Mcount_depth_xor<7> (nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/Result<7>)
+     FDRE:D                   -0.022          nf10_bram_output_queues_0/output_queues[4].output_fifo/fifo/depth_7
+    ----------------------------------------
+    Total                      1.954ns (1.007ns logic, 0.947ns route)
+                                       (51.5% logic, 48.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'axi_aclk'
+  Total number of paths / destination ports: 651 / 651
+-------------------------------------------------------------------------
+Offset:              1.892ns (Levels of Logic = 0)
+  Source:            nf10_bram_output_queues_0/output_queues[0].output_fifo/fifo/Mram_queue9 (RAM)
+  Destination:       m_axis_tlast_0 (PAD)
+  Source Clock:      axi_aclk rising
+
+  Data Path: nf10_bram_output_queues_0/output_queues[0].output_fifo/fifo/Mram_queue9 to m_axis_tlast_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB18:CLKB->DOB0     1   1.892   0.000  nf10_bram_output_queues_0/output_queues[0].output_fifo/fifo/Mram_queue9 (m_axis_tlast_0)
+    ----------------------------------------
+    Total                      1.892ns (1.892ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 29.00 secs
+Total CPU time to Xst completion: 27.18 secs
+ 
+--> 
+
+
+Total memory usage is 672840 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    6 (   0 filtered)
+Number of infos    :    3 (   0 filtered)
+

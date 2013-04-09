@@ -1,0 +1,333 @@
+Release 13.4 - xst O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "microblaze_0_dlmb_wrapper_xst.prj"
+Verilog Include Directory          : {"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configuration/hw/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/contrib/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxBFMinterface/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/" }
+
+---- Target Parameters
+Target Device                      : xc5vtx240tff1759-2
+Output File Name                   : "../implementation/microblaze_0_dlmb_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : microblaze_0_dlmb_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_v10_v1_00_a/hdl/vhdl/lmb_v10.vhd" in Library lmb_v10_v1_00_a.
+Entity <lmb_v10> compiled.
+Entity <lmb_v10> (Architecture <IMP>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configuration/hw/hdl/microblaze_0_dlmb_wrapper.vhd" in Library work.
+Entity <microblaze_0_dlmb_wrapper> compiled.
+Entity <microblaze_0_dlmb_wrapper> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <microblaze_0_dlmb_wrapper> in library <work> (architecture <STRUCTURE>).
+
+Analyzing hierarchy for entity <lmb_v10> in library <lmb_v10_v1_00_a> (architecture <IMP>) with generics.
+	C_EXT_RESET_HIGH = 1
+	C_LMB_AWIDTH = 32
+	C_LMB_DWIDTH = 32
+	C_LMB_NUM_SLAVES = 1
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <microblaze_0_dlmb_wrapper> in library <work> (Architecture <STRUCTURE>).
+Entity <microblaze_0_dlmb_wrapper> analyzed. Unit <microblaze_0_dlmb_wrapper> generated.
+
+Analyzing generic Entity <lmb_v10> in library <lmb_v10_v1_00_a> (Architecture <IMP>).
+	C_EXT_RESET_HIGH = 1
+	C_LMB_AWIDTH = 32
+	C_LMB_DWIDTH = 32
+	C_LMB_NUM_SLAVES = 1
+WARNING:Xst:2211 - "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_v10_v1_00_a/hdl/vhdl/lmb_v10.vhd" line 145: Instantiating black box module <SRL16>.
+    Set user-defined property "INIT =  FFFF" for instance <POR_SRL_I> in unit <lmb_v10>.
+WARNING:Xst:2211 - "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_v10_v1_00_a/hdl/vhdl/lmb_v10.vhd" line 159: Instantiating black box module <FDS>.
+Entity <lmb_v10> analyzed. Unit <lmb_v10> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <lmb_v10>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_v10_v1_00_a/hdl/vhdl/lmb_v10.vhd".
+Unit <lmb_v10> synthesized.
+
+
+Synthesizing Unit <microblaze_0_dlmb_wrapper>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configuration/hw/hdl/microblaze_0_dlmb_wrapper.vhd".
+Unit <microblaze_0_dlmb_wrapper> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 1
+ Flip-Flops                                            : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <microblaze_0_dlmb_wrapper> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 1
+ Flip-Flops                                            : 1
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/microblaze_0_dlmb_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 211
+
+Cell Usage :
+# BELS                             : 2
+#      GND                         : 1
+#      VCC                         : 1
+# FlipFlops/Latches                : 1
+#      FDS                         : 1
+# Shift Registers                  : 1
+#      SRL16                       : 1
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 5vtx240tff1759-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:               1  out of  149760     0%  
+ Number of Slice LUTs:                    1  out of  149760     0%  
+    Number used as Memory:                1  out of  39360     0%  
+       Number used as SRL:                1
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:      2
+   Number with an unused Flip Flop:       1  out of      2    50%  
+   Number with an unused LUT:             1  out of      2    50%  
+   Number of fully used LUT-FF pairs:     0  out of      2     0%  
+   Number of unique control sets:         1
+
+IO Utilization: 
+ Number of IOs:                         211
+ Number of bonded IOBs:                   0  out of    680     0%  
+
+Specific Feature Utilization:
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+---------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)           | Load  |
+-----------------------------------+---------------------------------+-------+
+LMB_Clk                            | NONE(microblaze_0_dlmb/POR_FF_I)| 2     |
+-----------------------------------+---------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 1.552ns (Maximum Frequency: 644.330MHz)
+   Minimum input arrival time before clock: 0.468ns
+   Maximum output required time after clock: 0.396ns
+   Maximum combinational path delay: 0.000ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'LMB_Clk'
+  Clock period: 1.552ns (frequency: 644.330MHz)
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Delay:               1.552ns (Levels of Logic = 0)
+  Source:            microblaze_0_dlmb/POR_SRL_I (FF)
+  Destination:       microblaze_0_dlmb/POR_FF_I (FF)
+  Source Clock:      LMB_Clk rising
+  Destination Clock: LMB_Clk rising
+
+  Data Path: microblaze_0_dlmb/POR_SRL_I to microblaze_0_dlmb/POR_FF_I
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     SRL16:CLK->Q          1   1.552   0.000  microblaze_0_dlmb/POR_SRL_I (microblaze_0_dlmb/srl_time_out)
+     FDS:D                    -0.022          microblaze_0_dlmb/POR_FF_I
+    ----------------------------------------
+    Total                      1.552ns (1.552ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'LMB_Clk'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              0.468ns (Levels of Logic = 0)
+  Source:            SYS_Rst (PAD)
+  Destination:       microblaze_0_dlmb/POR_FF_I (FF)
+  Destination Clock: LMB_Clk rising
+
+  Data Path: SYS_Rst to microblaze_0_dlmb/POR_FF_I
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDS:S                     0.468          microblaze_0_dlmb/POR_FF_I
+    ----------------------------------------
+    Total                      0.468ns (0.468ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'LMB_Clk'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              0.396ns (Levels of Logic = 0)
+  Source:            microblaze_0_dlmb/POR_FF_I (FF)
+  Destination:       LMB_Rst (PAD)
+  Source Clock:      LMB_Clk rising
+
+  Data Path: microblaze_0_dlmb/POR_FF_I to LMB_Rst
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDS:C->Q              0   0.396   0.000  microblaze_0_dlmb/POR_FF_I (LMB_Rst)
+    ----------------------------------------
+    Total                      0.396ns (0.396ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 104 / 104
+-------------------------------------------------------------------------
+Delay:               0.000ns (Levels of Logic = 0)
+  Source:            M_AddrStrobe (PAD)
+  Destination:       LMB_AddrStrobe (PAD)
+
+  Data Path: M_AddrStrobe to LMB_AddrStrobe
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    ----------------------------------------
+    Total                      0.000ns (0.000ns logic, 0.000ns route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 7.29 secs
+ 
+--> 
+
+
+Total memory usage is 670364 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    2 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

@@ -1,0 +1,32 @@
+// BMM LOC annotation file.
+//
+// Release 13.4 - (null) O.87xd, build 2.7 Nov 11, 2011
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Processor 'microblaze_0', ID 100, memory map.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+ADDRESS_MAP microblaze_0 MICROBLAZE-LE 100
+
+
+    ///////////////////////////////////////////////////////////////////////////////
+    //
+    // Processor 'microblaze_0' address space 'microblaze_0_bram_block_combined' 0x00000000:0x00003FFF (16 KBytes).
+    //
+    ///////////////////////////////////////////////////////////////////////////////
+
+    ADDRESS_SPACE microblaze_0_bram_block_combined RAMB32 [0x00000000:0x00003FFF]
+        BUS_BLOCK
+            microblaze_0_bram_block/microblaze_0_bram_block/ramb36_0 RAMB32 [31:24] [0:4095] INPUT = microblaze_0_bram_block_combined_0.mem PLACED = X3Y3;
+            microblaze_0_bram_block/microblaze_0_bram_block/ramb36_1 RAMB32 [23:16] [0:4095] INPUT = microblaze_0_bram_block_combined_1.mem PLACED = X4Y4;
+            microblaze_0_bram_block/microblaze_0_bram_block/ramb36_2 RAMB32 [15:8] [0:4095] INPUT = microblaze_0_bram_block_combined_2.mem PLACED = X4Y7;
+            microblaze_0_bram_block/microblaze_0_bram_block/ramb36_3 RAMB32 [7:0] [0:4095] INPUT = microblaze_0_bram_block_combined_3.mem PLACED = X3Y6;
+        END_BUS_BLOCK;
+    END_ADDRESS_SPACE;
+
+END_ADDRESS_MAP;
+

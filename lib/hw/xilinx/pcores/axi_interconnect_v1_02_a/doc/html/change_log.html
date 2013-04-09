@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>Change log for AXI Interconnect, v1.01.a</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.2  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20101207;17083500">
+	<STYLE TYPE="text/css">
+	<!--
+		P.level1heading { color: #000000; font-weight: bold }
+		P.level2heading { font-weight: bold }
+		H3.ctl { font-family: "Mangal" }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H3 CLASS="western">Xilinx Processor IP Library</H3>
+<H1>Change log for AXI Interconnect</H1>
+<HR>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=0>
+	<TR>
+		<TD BGCOLOR="#cccccc">
+			<P CLASS="level1heading">Changes in v1.02.a, introduced in 13.1</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<P CLASS="level2heading"><FONT FACE="Arial"><FONT SIZE=2>Note:
+			Unless specified, limitations and resolved issues affect all
+			previous versions.</FONT></FONT></P>
+			<P CLASS="level2heading">13.1 - Changes in VHDL/Verilog/Netlist
+			sources (.vhd, .v, .ngc, .edn)</P>
+			<HR>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<PRE STYLE="margin-bottom: 0.2in"><FONT FACE="Arial">New Features:</FONT></PRE>
+			<UL>
+				<LI><P STYLE="margin-bottom: 0in">Initial release of v1.02.</P>
+				<LI><P STYLE="margin-bottom: 0in">Compared to v1.01 (in EDK
+				12.4):</P>
+				<UL>
+					<LI><P STYLE="margin-bottom: 0in">New &ldquo;Shared Access&rdquo;
+					mode of Interconnect Architecture (parameter
+					C_INTERCONNECT_CONNECTIVITY_MODE = 0) to minimize resource
+					utilization.</P>
+					<LI><P STYLE="margin-bottom: 0in">Supports data-widths up to
+					1024 bits. (Width of WDATA and RDATA interface signals set
+					according to widest SI or MI slot.)</P>
+					<LI><P STYLE="margin-bottom: 0in">New C_S_AXI_SINGLE_THREAD
+					parameter to limit transaction acceptance to one outstanding ID
+					thread at a time, per SI-slot; reduces thread control logic,
+					especially for systems with wide ID signals.</P>
+				</UL>
+			</UL>
+			<P STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<PRE STYLE="margin-bottom: 0.2in"><FONT FACE="Arial">Resolved issues:</FONT></PRE>
+			<UL>
+				<LI><P STYLE="margin-bottom: 0in">Synchronous clock conversions
+				(integer-ratio clock frequency relationships) are implemented
+				using purely synchronous logic modules. Asynchronous FIFO
+				elements are only used when C_S/M_AXI_IS_ACLK_ASYNC is set.</P>
+				<LI><P STYLE="margin-bottom: 0in">[&lt;CR578844&gt;] Eliminated
+				multiple warnings from ngdbuild pertaining to timing paths inside
+				asynchronous Coregen FIFO modules used by clock converters in the
+				interconnect.</P>
+			</UL>
+			<P STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<PRE STYLE="margin-bottom: 0.2in"><FONT FACE="Arial">Known Issues / Limitations:</FONT></PRE>
+			<UL>
+				<LI><P STYLE="margin-bottom: 0in">Setting parameter
+				C_S_AXI_IS_INTERCONNECT = 1 is not yet supported. XPS tools do
+				not automatically set this parameter when Interconnect instances
+				are cascaded hierarchically (through axi2axi_connector). As a
+				result, downstream Interconnect instances implement full
+				(redundant) thread control logic. Setting the inferred parameter
+				C_INTERCONNECT_S_AXI_WRITE_ACCEPTANCE and
+				C_INTERCONNECT_S_AXI_READ_ACCEPTANCE to 1 can help reduce the
+				associated logic overhead when there are multiple connected
+				masters that access a lower bandwidth hierarchical interconnect.</P>
+				<LI><P STYLE="margin-bottom: 0in">The diagnostic control
+				interface (S_AXI_CTRL) is not yet implemented. The parameter
+				C_USE_CTRL_PORT is therefore forced to 0.</P>
+			</UL>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<P CLASS="level2heading">13.1 - Changes in tool interface files
+			(.mpd)</P>
+			<HR>
+		</TD>
+	</TR>
+	<TR>
+		<TD></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P CLASS="level2heading">13.1 - Changes in tool interface files
+			(.pao)</P>
+			<HR>
+		</TD>
+	</TR>
+	<TR>
+		<TD></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P CLASS="level2heading">13.1 - Changes in Tcl script files
+			associated with core (.tcl)</P>
+			<HR>
+		</TD>
+	</TR>
+	<TR>
+		<TD></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P CLASS="level2heading">13.1 - Changes in IP Configuration GUI
+			(.ui)</P>
+			<HR>
+		</TD>
+	</TR>
+	<TR>
+		<TD></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P CLASS="level2heading">13.1 - Changes in documentation
+			associated with core</P>
+			<HR>
+		</TD>
+	</TR>
+	<TR>
+		<TD></TD>
+	</TR>
+</TABLE>
+<P>Copyright &copy; 1995-2010 Xilinx, Inc. All rights reserved. 
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,1003 @@
+Release 13.4 - xst O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "microblaze_0_bram_block_wrapper_xst.prj"
+Verilog Include Directory          : {"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/contrib/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxBFMinterface/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/" }
+
+---- Target Parameters
+Target Device                      : xc5vtx240tff1759-2
+Output File Name                   : "../implementation/microblaze_0_bram_block_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : microblaze_0_bram_block_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/hdl/elaborate/microblaze_0_bram_block_elaborate_v1_00_a/hdl/verilog/microblaze_0_bram_block_elaborate.v" in library microblaze_0_bram_block_elaborate_v1_00_a
+Module <microblaze_0_bram_block_elaborate> compiled
+Compiling verilog file "../hdl/microblaze_0_bram_block_wrapper.v" in library work
+Module <microblaze_0_bram_block_wrapper> compiled
+No errors in compilation
+Analysis of file <"microblaze_0_bram_block_wrapper_xst.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <microblaze_0_bram_block_wrapper> in library <work>.
+
+Analyzing hierarchy for module <microblaze_0_bram_block_elaborate> in library <microblaze_0_bram_block_elaborate_v1_00_a> with parameters.
+	C_FAMILY = "virtex5"
+	C_MEMSIZE = "00000000000000000100000000000000"
+	C_NUM_WE = "00000000000000000000000000000100"
+	C_PORT_AWIDTH = "00000000000000000000000000100000"
+	C_PORT_DWIDTH = "00000000000000000000000000100000"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <microblaze_0_bram_block_wrapper>.
+Module <microblaze_0_bram_block_wrapper> is correct for synthesis.
+ 
+    Set user-defined property "KEEP_HIERARCHY =  yes" for unit <microblaze_0_bram_block_wrapper>.
+Analyzing module <microblaze_0_bram_block_elaborate> in library <microblaze_0_bram_block_elaborate_v1_00_a>.
+	C_FAMILY = "virtex5"
+	C_MEMSIZE = 32'b00000000000000000100000000000000
+	C_NUM_WE = 32'sb00000000000000000000000000000100
+	C_PORT_AWIDTH = 32'sb00000000000000000000000000100000
+	C_PORT_DWIDTH = 32'sb00000000000000000000000000100000
+Module <microblaze_0_bram_block_elaborate> is correct for synthesis.
+ 
+    Set user-defined property "BMM_INFO =   " for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "DOA_REG =  0" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "DOB_REG =  0" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_00 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_00 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_10 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_11 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_12 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_13 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_14 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_15 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_16 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_17 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_18 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_19 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_20 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_21 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_22 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_23 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_24 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_25 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_26 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_27 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_28 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_29 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_30 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_31 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_32 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_33 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_34 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_35 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_36 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_37 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_38 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_39 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_40 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_41 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_42 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_43 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_44 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_45 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_46 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_47 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_48 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_49 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_50 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_51 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_52 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_53 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_54 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_55 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_56 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_57 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_58 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_59 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_60 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_61 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_62 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_63 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_64 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_65 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_66 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_67 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_68 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_69 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_70 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_71 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_72 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_73 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_74 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_75 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_76 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_77 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_78 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_79 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_A =  000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_B =  000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_FILE =  microblaze_0_bram_block_combined_0.mem" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "RAM_EXTENSION_A =  NONE" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "RAM_EXTENSION_B =  NONE" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "READ_WIDTH_A =  9" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "READ_WIDTH_B =  9" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SIM_COLLISION_CHECK =  ALL" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SIM_MODE =  SAFE" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SRVAL_A =  000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SRVAL_B =  000000000" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_MODE_A =  WRITE_FIRST" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_MODE_B =  WRITE_FIRST" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_WIDTH_A =  9" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_WIDTH_B =  9" for instance <ramb36_0> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "BMM_INFO =   " for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "DOA_REG =  0" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "DOB_REG =  0" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_00 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_00 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_10 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_11 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_12 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_13 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_14 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_15 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_16 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_17 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_18 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_19 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_20 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_21 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_22 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_23 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_24 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_25 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_26 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_27 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_28 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_29 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_30 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_31 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_32 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_33 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_34 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_35 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_36 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_37 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_38 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_39 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_40 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_41 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_42 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_43 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_44 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_45 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_46 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_47 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_48 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_49 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_50 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_51 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_52 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_53 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_54 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_55 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_56 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_57 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_58 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_59 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_60 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_61 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_62 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_63 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_64 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_65 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_66 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_67 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_68 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_69 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_70 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_71 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_72 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_73 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_74 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_75 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_76 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_77 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_78 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_79 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_A =  000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_B =  000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_FILE =  microblaze_0_bram_block_combined_1.mem" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "RAM_EXTENSION_A =  NONE" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "RAM_EXTENSION_B =  NONE" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "READ_WIDTH_A =  9" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "READ_WIDTH_B =  9" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SIM_COLLISION_CHECK =  ALL" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SIM_MODE =  SAFE" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SRVAL_A =  000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SRVAL_B =  000000000" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_MODE_A =  WRITE_FIRST" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_MODE_B =  WRITE_FIRST" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_WIDTH_A =  9" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_WIDTH_B =  9" for instance <ramb36_1> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "BMM_INFO =   " for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "DOA_REG =  0" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "DOB_REG =  0" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_00 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_00 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_10 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_11 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_12 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_13 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_14 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_15 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_16 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_17 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_18 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_19 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_20 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_21 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_22 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_23 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_24 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_25 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_26 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_27 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_28 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_29 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_30 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_31 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_32 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_33 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_34 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_35 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_36 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_37 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_38 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_39 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_40 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_41 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_42 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_43 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_44 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_45 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_46 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_47 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_48 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_49 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_50 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_51 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_52 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_53 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_54 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_55 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_56 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_57 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_58 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_59 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_60 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_61 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_62 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_63 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_64 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_65 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_66 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_67 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_68 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_69 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_70 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_71 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_72 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_73 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_74 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_75 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_76 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_77 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_78 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_79 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_A =  000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_B =  000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_FILE =  microblaze_0_bram_block_combined_2.mem" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "RAM_EXTENSION_A =  NONE" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "RAM_EXTENSION_B =  NONE" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "READ_WIDTH_A =  9" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "READ_WIDTH_B =  9" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SIM_COLLISION_CHECK =  ALL" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SIM_MODE =  SAFE" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SRVAL_A =  000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SRVAL_B =  000000000" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_MODE_A =  WRITE_FIRST" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_MODE_B =  WRITE_FIRST" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_WIDTH_A =  9" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_WIDTH_B =  9" for instance <ramb36_2> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "BMM_INFO =   " for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "DOA_REG =  0" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "DOB_REG =  0" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_00 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INITP_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_00 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_10 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_11 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_12 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_13 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_14 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_15 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_16 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_17 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_18 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_19 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_1F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_20 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_21 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_22 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_23 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_24 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_25 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_26 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_27 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_28 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_29 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_2F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_30 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_31 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_32 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_33 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_34 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_35 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_36 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_37 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_38 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_39 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_3F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_40 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_41 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_42 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_43 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_44 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_45 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_46 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_47 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_48 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_49 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_4F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_50 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_51 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_52 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_53 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_54 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_55 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_56 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_57 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_58 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_59 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_5F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_60 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_61 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_62 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_63 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_64 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_65 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_66 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_67 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_68 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_69 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_6F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_70 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_71 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_72 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_73 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_74 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_75 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_76 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_77 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_78 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_79 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_7F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_A =  000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_B =  000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "INIT_FILE =  microblaze_0_bram_block_combined_3.mem" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "RAM_EXTENSION_A =  NONE" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "RAM_EXTENSION_B =  NONE" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "READ_WIDTH_A =  9" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "READ_WIDTH_B =  9" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SIM_COLLISION_CHECK =  ALL" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SIM_MODE =  SAFE" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SRVAL_A =  000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "SRVAL_B =  000000000" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_MODE_A =  WRITE_FIRST" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_MODE_B =  WRITE_FIRST" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_WIDTH_A =  9" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "WRITE_WIDTH_B =  9" for instance <ramb36_3> in unit <microblaze_0_bram_block_elaborate>.
+    Set user-defined property "KEEP_HIERARCHY =  yes" for unit <microblaze_0_bram_block_elaborate>.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <microblaze_0_bram_block_elaborate>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/hdl/elaborate/microblaze_0_bram_block_elaborate_v1_00_a/hdl/verilog/microblaze_0_bram_block_elaborate.v".
+WARNING:Xst:647 - Input <BRAM_Addr_A<0:17>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <BRAM_Addr_A<30:31>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <BRAM_Addr_B<0:17>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <BRAM_Addr_B<30:31>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <pgassign6<31:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign34<31:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign30<31:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign3> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign26<31:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign22<31:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign2> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign18<31:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign14<31:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign10<31:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <pgassign1<0>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+Unit <microblaze_0_bram_block_elaborate> synthesized.
+
+
+Synthesizing Unit <microblaze_0_bram_block_wrapper>.
+    Related source file is "../hdl/microblaze_0_bram_block_wrapper.v".
+Unit <microblaze_0_bram_block_wrapper> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:1901 - Instance ramb36_0 in unit microblaze_0_bram_block_elaborate of type RAMB36 has been replaced by RAMB36_EXP
+INFO:Xst:1901 - Instance ramb36_1 in unit microblaze_0_bram_block_elaborate of type RAMB36 has been replaced by RAMB36_EXP
+INFO:Xst:1901 - Instance ramb36_2 in unit microblaze_0_bram_block_elaborate of type RAMB36 has been replaced by RAMB36_EXP
+INFO:Xst:1901 - Instance ramb36_3 in unit microblaze_0_bram_block_elaborate of type RAMB36 has been replaced by RAMB36_EXP
+
+Optimizing unit <microblaze_0_bram_block_wrapper> ...
+
+Optimizing unit <microblaze_0_bram_block_elaborate> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/microblaze_0_bram_block_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 206
+
+Cell Usage :
+# BELS                             : 2
+#      GND                         : 1
+#      VCC                         : 1
+# RAMS                             : 4
+#      RAMB36_EXP                  : 4
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 5vtx240tff1759-2 
+
+
+Slice Logic Utilization: 
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:      0
+   Number with an unused Flip Flop:       0  out of      0         
+   Number with an unused LUT:             0  out of      0         
+   Number of fully used LUT-FF pairs:     0  out of      0         
+   Number of unique control sets:         0
+
+IO Utilization: 
+ Number of IOs:                         206
+ Number of bonded IOBs:                   0  out of    680     0%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:                4  out of    324     1%  
+    Number using Block RAM only:          4
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+---------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                 | Load  |
+-----------------------------------+---------------------------------------+-------+
+BRAM_Clk_A                         | NONE(microblaze_0_bram_block/ramb36_0)| 4     |
+BRAM_Clk_B                         | NONE(microblaze_0_bram_block/ramb36_0)| 4     |
+-----------------------------------+---------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+------------------------------------------------------------------------+---------------------------------------+-------+
+Control Signal                                                          | Buffer(FF name)                       | Load  |
+------------------------------------------------------------------------+---------------------------------------+-------+
+microblaze_0_bram_block/pgassign12<0>(microblaze_0_bram_block/XST_GND:G)| NONE(microblaze_0_bram_block/ramb36_0)| 32    |
+------------------------------------------------------------------------+---------------------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: No path found
+   Minimum input arrival time before clock: 0.509ns
+   Maximum output required time after clock: 1.920ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'BRAM_Clk_A'
+  Total number of paths / destination ports: 168 / 168
+-------------------------------------------------------------------------
+Offset:              0.509ns (Levels of Logic = 1)
+  Source:            BRAM_WEN_A<0> (PAD)
+  Destination:       microblaze_0_bram_block/ramb36_0 (RAM)
+  Destination Clock: BRAM_Clk_A rising
+
+  Data Path: BRAM_WEN_A<0> to microblaze_0_bram_block/ramb36_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     begin scope: 'microblaze_0_bram_block'
+     RAMB36_EXP:WEAU0          0.509          ramb36_0
+    ----------------------------------------
+    Total                      0.509ns (0.509ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'BRAM_Clk_B'
+  Total number of paths / destination ports: 168 / 168
+-------------------------------------------------------------------------
+Offset:              0.509ns (Levels of Logic = 1)
+  Source:            BRAM_WEN_B<0> (PAD)
+  Destination:       microblaze_0_bram_block/ramb36_0 (RAM)
+  Destination Clock: BRAM_Clk_B rising
+
+  Data Path: BRAM_WEN_B<0> to microblaze_0_bram_block/ramb36_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     begin scope: 'microblaze_0_bram_block'
+     RAMB36_EXP:WEBU0          0.509          ramb36_0
+    ----------------------------------------
+    Total                      0.509ns (0.509ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'BRAM_Clk_B'
+  Total number of paths / destination ports: 32 / 32
+-------------------------------------------------------------------------
+Offset:              1.920ns (Levels of Logic = 1)
+  Source:            microblaze_0_bram_block/ramb36_0 (RAM)
+  Destination:       BRAM_Din_B<1> (PAD)
+  Source Clock:      BRAM_Clk_B rising
+
+  Data Path: microblaze_0_bram_block/ramb36_0 to BRAM_Din_B<1>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB36_EXP:REGCLKBL->DOB6    0   1.920   0.000  ramb36_0 (BRAM_Din_B<1>)
+     end scope: 'microblaze_0_bram_block'
+    ----------------------------------------
+    Total                      1.920ns (1.920ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'BRAM_Clk_A'
+  Total number of paths / destination ports: 32 / 32
+-------------------------------------------------------------------------
+Offset:              1.920ns (Levels of Logic = 1)
+  Source:            microblaze_0_bram_block/ramb36_0 (RAM)
+  Destination:       BRAM_Din_A<1> (PAD)
+  Source Clock:      BRAM_Clk_A rising
+
+  Data Path: microblaze_0_bram_block/ramb36_0 to BRAM_Din_A<1>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB36_EXP:REGCLKAL->DOA6    0   1.920   0.000  ramb36_0 (BRAM_Din_A<1>)
+     end scope: 'microblaze_0_bram_block'
+    ----------------------------------------
+    Total                      1.920ns (1.920ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 11.00 secs
+Total CPU time to Xst completion: 9.62 secs
+ 
+--> 
+
+
+Total memory usage is 666764 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   15 (   0 filtered)
+Number of infos    :    5 (   0 filtered)
+

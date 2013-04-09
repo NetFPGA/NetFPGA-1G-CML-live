@@ -1,0 +1,25 @@
+#!/bin/csh -f
+###########################################
+# Script file to run the flow 
+# 
+###########################################
+#
+# Command line for ngdbuild
+#
+ngdbuild -p xc5vtx240tff1759-2 -nt timestamp -bm system.bmm "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/implementation/system.ngc" -uc system.ucf system.ngd 
+
+#
+# Command line for map
+#
+map -mt 4 -o system_map.ncd -w -pr b -ol high -timing -t 42 -detail system.ngd system.pcf 
+
+#
+# Command line for par
+#
+par -mt 4 -w -ol high system_map.ncd system.ncd system.pcf 
+
+#
+# Command line for post_par_trce
+#
+trce -e 3 -xml system.twx system.ncd system.pcf 
+

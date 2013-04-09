@@ -1,0 +1,346 @@
+Release 13.4 - xst O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "microblaze_0_d_bram_ctrl_wrapper_xst.prj"
+Verilog Include Directory          : {"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/contrib/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/" "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxBFMinterface/pcores/" "/media/Xilinx13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/" }
+
+---- Target Parameters
+Target Device                      : xc5vtx240tff1759-2
+Output File Name                   : "../implementation/microblaze_0_d_bram_ctrl_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : microblaze_0_d_bram_ctrl_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_bram_if_cntlr_v2_10_b/hdl/vhdl/pselect_mask.vhd" in Library lmb_bram_if_cntlr_v2_10_b.
+Entity <pselect_mask> compiled.
+Entity <pselect_mask> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_bram_if_cntlr_v2_10_b/hdl/vhdl/lmb_bram_if_cntlr.vhd" in Library lmb_bram_if_cntlr_v2_10_b.
+Entity <lmb_bram_if_cntlr> compiled.
+Entity <lmb_bram_if_cntlr> (Architecture <imp>) compiled.
+Compiling vhdl file "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/hdl/microblaze_0_d_bram_ctrl_wrapper.vhd" in Library work.
+Entity <microblaze_0_d_bram_ctrl_wrapper> compiled.
+Entity <microblaze_0_d_bram_ctrl_wrapper> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <microblaze_0_d_bram_ctrl_wrapper> in library <work> (architecture <STRUCTURE>).
+
+Analyzing hierarchy for entity <lmb_bram_if_cntlr> in library <lmb_bram_if_cntlr_v2_10_b> (architecture <imp>) with generics.
+	C_BASEADDR = "00000000000000000000000000000000"
+	C_HIGHADDR = "00000000000000000011111111111111"
+	C_LMB_AWIDTH = 32
+	C_LMB_DWIDTH = 32
+	C_MASK = "01000000000000000000000000000000"
+
+Analyzing hierarchy for entity <pselect_mask> in library <lmb_bram_if_cntlr_v2_10_b> (architecture <imp>) with generics.
+	C_AW = 32
+	C_BAR = "00000000000000000000000000000000"
+	C_MASK = "01000000000000000000000000000000"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <microblaze_0_d_bram_ctrl_wrapper> in library <work> (Architecture <STRUCTURE>).
+Entity <microblaze_0_d_bram_ctrl_wrapper> analyzed. Unit <microblaze_0_d_bram_ctrl_wrapper> generated.
+
+Analyzing generic Entity <lmb_bram_if_cntlr> in library <lmb_bram_if_cntlr_v2_10_b> (Architecture <imp>).
+	C_BASEADDR = "00000000000000000000000000000000"
+	C_HIGHADDR = "00000000000000000011111111111111"
+	C_LMB_AWIDTH = 32
+	C_LMB_DWIDTH = 32
+	C_MASK = "01000000000000000000000000000000"
+Entity <lmb_bram_if_cntlr> analyzed. Unit <lmb_bram_if_cntlr> generated.
+
+Analyzing generic Entity <pselect_mask> in library <lmb_bram_if_cntlr_v2_10_b> (Architecture <imp>).
+	C_AW = 32
+	C_BAR = "00000000000000000000000000000000"
+	C_MASK = "01000000000000000000000000000000"
+Entity <pselect_mask> analyzed. Unit <pselect_mask> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <pselect_mask>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_bram_if_cntlr_v2_10_b/hdl/vhdl/pselect_mask.vhd".
+WARNING:Xst:647 - Input <A<0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <A<2:31>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+Unit <pselect_mask> synthesized.
+
+
+Synthesizing Unit <lmb_bram_if_cntlr>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_bram_if_cntlr_v2_10_b/hdl/vhdl/lmb_bram_if_cntlr.vhd".
+WARNING:Xst:647 - Input <LMB_ReadStrobe> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1780 - Signal <lmb_select_1> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+    Found 1-bit register for signal <lmb_addrstrobe_i>.
+    Found 1-bit register for signal <Sl_Ready_i>.
+    Summary:
+	inferred   2 D-type flip-flop(s).
+Unit <lmb_bram_if_cntlr> synthesized.
+
+
+Synthesizing Unit <microblaze_0_d_bram_ctrl_wrapper>.
+    Related source file is "/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/hdl/microblaze_0_d_bram_ctrl_wrapper.vhd".
+Unit <microblaze_0_d_bram_ctrl_wrapper> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 2
+ 1-bit register                                        : 2
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 2
+ Flip-Flops                                            : 2
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <microblaze_0_d_bram_ctrl_wrapper> ...
+
+Optimizing unit <lmb_bram_if_cntlr> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 2
+ Flip-Flops                                            : 2
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/microblaze_0_d_bram_ctrl_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 209
+
+Cell Usage :
+# BELS                             : 7
+#      GND                         : 1
+#      INV                         : 1
+#      LUT2                        : 1
+#      LUT3                        : 4
+# FlipFlops/Latches                : 2
+#      FDR                         : 2
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 5vtx240tff1759-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:               2  out of  149760     0%  
+ Number of Slice LUTs:                    6  out of  149760     0%  
+    Number used as Logic:                 6  out of  149760     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:      8
+   Number with an unused Flip Flop:       6  out of      8    75%  
+   Number with an unused LUT:             2  out of      8    25%  
+   Number of fully used LUT-FF pairs:     0  out of      8     0%  
+   Number of unique control sets:         1
+
+IO Utilization: 
+ Number of IOs:                         209
+ Number of bonded IOBs:                   0  out of    680     0%  
+
+Specific Feature Utilization:
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                    | Load  |
+-----------------------------------+------------------------------------------+-------+
+BRAM_Clk_A                         | NONE(microblaze_0_d_bram_ctrl/Sl_Ready_i)| 2     |
+-----------------------------------+------------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: No path found
+   Minimum input arrival time before clock: 0.498ns
+   Maximum output required time after clock: 0.969ns
+   Maximum combinational path delay: 0.400ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'BRAM_Clk_A'
+  Total number of paths / destination ports: 4 / 4
+-------------------------------------------------------------------------
+Offset:              0.498ns (Levels of Logic = 1)
+  Source:            LMB_ABus<1> (PAD)
+  Destination:       microblaze_0_d_bram_ctrl/Sl_Ready_i (FF)
+  Destination Clock: BRAM_Clk_A rising
+
+  Data Path: LMB_ABus<1> to microblaze_0_d_bram_ctrl/Sl_Ready_i
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     INV:I->O              1   0.212   0.286  microblaze_0_d_bram_ctrl/pselect_mask_lmb/CS_cmp_eq00001_INV_0 (microblaze_0_d_bram_ctrl/lmb_select)
+     FDR:D                    -0.022          microblaze_0_d_bram_ctrl/Sl_Ready_i
+    ----------------------------------------
+    Total                      0.498ns (0.212ns logic, 0.286ns route)
+                                       (42.6% logic, 57.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'BRAM_Clk_A'
+  Total number of paths / destination ports: 2 / 1
+-------------------------------------------------------------------------
+Offset:              0.969ns (Levels of Logic = 1)
+  Source:            microblaze_0_d_bram_ctrl/Sl_Ready_i (FF)
+  Destination:       Sl_Ready (PAD)
+  Source Clock:      BRAM_Clk_A rising
+
+  Data Path: microblaze_0_d_bram_ctrl/Sl_Ready_i to Sl_Ready
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              1   0.396   0.487  microblaze_0_d_bram_ctrl/Sl_Ready_i (microblaze_0_d_bram_ctrl/Sl_Ready_i)
+     LUT2:I0->O            0   0.086   0.000  microblaze_0_d_bram_ctrl/Sl_Ready1 (Sl_Ready)
+    ----------------------------------------
+    Total                      0.969ns (0.482ns logic, 0.487ns route)
+                                       (49.8% logic, 50.2% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 110 / 102
+-------------------------------------------------------------------------
+Delay:               0.400ns (Levels of Logic = 1)
+  Source:            LMB_BE<0> (PAD)
+  Destination:       BRAM_WEN_A<0> (PAD)
+
+  Data Path: LMB_BE<0> to BRAM_WEN_A<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT3:I0->O            0   0.086   0.000  microblaze_0_d_bram_ctrl/lmb_we_0_and00001 (BRAM_WEN_A<0>)
+    ----------------------------------------
+    Total                      0.400ns (0.400ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 6.86 secs
+ 
+--> 
+
+
+Total memory usage is 639052 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    4 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="EDK" num="0" delta="new" ><arg fmt="%s" index="1">INFO:Security:71 - If a license for part &apos;xc5vtx240t&apos; is available, it will be possible to use &apos;SDK_TDP&apos; instead of &apos;SDK&apos;.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+</arg>
+</msg>
+
+</messages>
+
