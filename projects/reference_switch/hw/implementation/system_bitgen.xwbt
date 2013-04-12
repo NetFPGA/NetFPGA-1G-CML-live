@@ -1,0 +1,7 @@
+INFILE=/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch/hw/implementation/system.ncd
+OUTFILE=/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch/hw/implementation/system.bit
+FAMILY=Virtex5
+PART=xc5vtx240t-2ff1759
+WORKINGDIR=/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch/hw/implementation
+LICENSE=ISE
+USER_INFO=207476159_174149303_207295247_327

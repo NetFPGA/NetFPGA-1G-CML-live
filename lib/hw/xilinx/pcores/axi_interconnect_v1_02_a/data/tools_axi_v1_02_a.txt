@@ -1,0 +1,80 @@
+# -- (c) Copyright 2010 - 2011 Xilinx, Inc. All rights reserved.
+# --
+# -- This file contains confidential and proprietary information
+# -- of Xilinx, Inc. and is protected under U.S. and 
+# -- international copyright and other intellectual property
+# -- laws.
+# --
+# -- DISCLAIMER
+# -- This disclaimer is not a license and does not grant any
+# -- rights to the materials distributed herewith. Except as
+# -- otherwise provided in a valid license issued to you by
+# -- Xilinx, and to the maximum extent permitted by applicable
+# -- law: (1) THESE MATERIALS ARE MADE AVAILABLE "AS IS" AND
+# -- WITH ALL FAULTS, AND XILINX HEREBY DISCLAIMS ALL WARRANTIES
+# -- AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
+# -- BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-
+# -- INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE; and
+# -- (2) Xilinx shall not be liable (whether in contract or tort,
+# -- including negligence, or under any other theory of
+# -- liability) for any loss or damage of any kind or nature
+# -- related to, arising under or in connection with these
+# -- materials, including for any direct, or any indirect,
+# -- special, incidental, or consequential loss or damage
+# -- (including loss of data, profits, goodwill, or any type of
+# -- loss or damage suffered as a result of any action brought
+# -- by a third party) even if such damage or loss was
+# -- reasonably foreseeable or Xilinx had been advised of the
+# -- possibility of the same.
+# --
+# -- CRITICAL APPLICATIONS
+# -- Xilinx products are not designed or intended to be fail-
+# -- safe, or for use in any application requiring fail-safe
+# -- performance, such as life-support or safety devices or
+# -- systems, Class III medical devices, nuclear facilities,
+# -- applications related to the deployment of airbags, or any
+# -- other applications that could lead to death, personal
+# -- injury, or severe property or environmental damage
+# -- (individually and collectively, "Critical
+# -- Applications"). Customer assumes the sole risk and
+# -- liability of any use of Xilinx products in Critical
+# -- Applications, subject only to applicable laws and
+# -- regulations governing limitations on product liability.
+# --
+# -- THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
+# -- PART OF THIS FILE AT ALL TIMES.
+# --
+
+BEGIN tools_axi
+
+PARAMETER C_SBIF_MASTERS = none, DT = string, TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Masters that can talk to this slave", LONG_DESC = "The '&' separated list of master interfaces that can access this slave"
+PARAMETER C_SBIF_IS_ACLK_ASYNC = 0, DT = integer, RANGE = (0, 1), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL_UPDATE, DESC = "Is ACLK Asynchronous to Interconnect_ACLK", LONG_DESC = "Is ACLK asynchronous with respect to the interconnect's ACLK. Please refer to the online help on how this parameter is computed"
+PARAMETER C_SBIF_ACLK_RATIO = 1, DT = integer, RANGE = (1 : 2147483647), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = UPDATE, DESC = "ACLK Frequency Ratio", LONG_DESC = "In relation to C_INTERCONNECT_ACLK_RATIO on the interconnect, indicates the ratio of the ACLK frequency of this bus interface to the frequency of INTERCONNECT_ACLK. Automatically set to the ACLK frequency in Hz."
+PARAMETER C_SBIF_SECURE = 0, DT = integer, RANGE = (0,1), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Require TrustZone Secure on all accesses", LONG_DESC = "All accesses to slave required to be secure"
+PARAMETER C_SBIF_AW_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on AW channel", LONG_DESC = "Insert register slice on AW channel"
+PARAMETER C_SBIF_AR_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on AR channel", LONG_DESC = "Insert register slice on AR channel"
+PARAMETER C_SBIF_W_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on W channel", LONG_DESC = "Insert register slice on W channel"
+PARAMETER C_SBIF_R_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on R channel", LONG_DESC = "Insert register slice on R channel"
+PARAMETER C_SBIF_B_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on B channel", LONG_DESC = "Insert register slice on B channel"
+PARAMETER C_SBIF_WRITE_FIFO_DEPTH = 0, DT = integer, RANGE = (0, 32, 512), VALUES = ( 0 = 0 (None), 32 = 32 (SRL), 512 = 512 (BRAM)), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Write Data FIFO Depth", LONG_DESC = "Depth of bus interface write data FIFO"
+PARAMETER C_SBIF_READ_FIFO_DEPTH = 0, DT = integer, RANGE = (0, 32, 512), VALUES = ( 0 = 0 (None), 32 = 32 (SRL), 512 = 512 (BRAM)), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL, DESC = "Read Data FIFO Depth", LONG_DESC = "Depth of bus interface read data FIFO"
+PARAMETER C_SBIF_WRITE_ACCEPTANCE = 1, DT = integer, RANGE = (1, 2, 4, 8, 16, 32), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL_UPDATE, DESC = "Write Transaction Acceptance Limit", LONG_DESC = "Maximum number of active write transactions that the bus interface can accept. This parameter is ignored when the IP is connected to an interconnect in SASD mode."
+PARAMETER C_SBIF_READ_ACCEPTANCE = 1, DT = integer, RANGE = (1, 2, 4, 8, 16, 32), TYPE = NON_MPD, ASSOCIATION = SLAVE, ASSIGNMENT = OPTIONAL_UPDATE, DESC = "Read Transaction Acceptance Limit", LONG_DESC = "Maximum number of active read transactions that the bus interface can accept. This parameter is ignored when the IP is connected to an interconnect in SASD mode."
+
+
+PARAMETER C_MBIF_BASE_ID = 0x00, DT = std_logic_vector, TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL_UPDATE, DESC = "Unique Master ID", LONG_DESC = "The unique master ID of the master interface. Please refer to the online help on how this parameter is computed"
+PARAMETER C_MBIF_IS_ACLK_ASYNC = 0, DT = integer, RANGE = (0, 1), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL_UPDATE, DESC = "Is ACLK Asynchronous to Interconnect_ACLK", LONG_DESC = "Is ACLK asynchronous with respect to the interconnect's ACLK. Please refer to the online help on how this parameter is computed"
+PARAMETER C_MBIF_ACLK_RATIO = 1, DT = integer, RANGE = (1 : 2147483647), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = UPDATE, DESC = "ACLK Frequency Ratio", LONG_DESC = "In relation to C_INTERCONNECT_ACLK_RATIO on the interconnect, indicates the ratio of the ACLK frequency of this bus interface to the frequency of INTERCONNECT_ACLK. Automatically set to the ACLK frequency in Hz."
+PARAMETER C_MBIF_ARB_PRIORITY = 0, DT = integer, RANGE = (0:15), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Arbitration Priority", LONG_DESC = "Arbitration priority. Higher values indicate higher priority. Round-robin arbitration is used among all masters with priority value 0"
+PARAMETER C_MBIF_AW_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on AW channel", LONG_DESC = "Insert register slice on AW channel"
+PARAMETER C_MBIF_AR_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on AR channel", LONG_DESC = "Insert register slice on AR channel"
+PARAMETER C_MBIF_W_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on W channel", LONG_DESC = "Insert register slice on W channel"
+PARAMETER C_MBIF_R_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on R channel", LONG_DESC = "Insert register slice on R channel"
+PARAMETER C_MBIF_B_REGISTER = 0, DT = integer, RANGE = (0:8), VALUES = ( 0 = BYPASS, 8 = AUTOMATIC, 1 = FULLY_REGISTERED, 7 = LIGHT_WEIGHT), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Use register slice on B channel", LONG_DESC = "Insert register slice on B channel"
+PARAMETER C_MBIF_WRITE_FIFO_DEPTH = 0, DT = integer, RANGE = (0, 32, 512), VALUES = ( 0 = 0 (None), 32 = 32 (SRL), 512 = 512 (BRAM)), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Write Data FIFO Depth", LONG_DESC = "Depth of bus interface write data FIFO"
+PARAMETER C_MBIF_READ_FIFO_DEPTH = 0, DT = integer, RANGE = (0, 32, 512), VALUES = ( 0 = 0 (None), 32 = 32 (SRL), 512 = 512 (BRAM)), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Read Data FIFI Depth", LONG_DESC = "Depth of bus interface read data FIFO"
+PARAMETER C_MBIF_WRITE_ISSUING = 1, DT = integer, RANGE = (1, 2, 4, 8, 16, 32), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL_UPDATE, DESC = "Write Transaction Issuance Limit", LONG_DESC = "Maximum number of active write transactions that the bus interface can generate. This parameter is ignored when the IP is connected to an interconnect in SASD mode."
+PARAMETER C_MBIF_READ_ISSUING = 1, DT = integer, RANGE = (1, 2, 4, 8, 16, 32), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL_UPDATE, DESC = "Read Transaction Issuance Limit", LONG_DESC = "Maximum number of active read transactions that the bus interface can generate. This parameter is ignored when the IP is connected to an interconnect in SASD mode."
+PARAMETER C_MBIF_SINGLE_THREAD = 0, DT = integer, RANGE = (0, 1), TYPE = NON_MPD, ASSOCIATION = MASTER, ASSIGNMENT = OPTIONAL, DESC = "Accept only one ID thread at a time", LONG_DESC = "Transaction requests are withheld from AW/AR channel arbitration as long as there are any outstanding transactions from the same master with a different ID value."
+
+END

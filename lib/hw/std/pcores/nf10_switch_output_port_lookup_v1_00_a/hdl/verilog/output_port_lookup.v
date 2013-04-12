@@ -102,13 +102,18 @@ module output_port_lookup
    wire [NUM_OUTPUT_QUEUES-1:0]    dst_ports;
    
    wire                            lookup_done;
-   reg				               send_packet;
+   reg				   send_packet;
    
    wire [C_S_AXIS_TUSER_WIDTH-1:0] tuser_fifo;
 
    wire                            in_fifo_rd_en;
    wire                            in_fifo_nearly_full;
    wire                            in_fifo_empty;
+
+   wire [NUM_OUTPUT_QUEUES-1:0]    dst_ports_latched;
+   reg                             dst_port_rd;
+   wire                            dst_port_fifo_nearly_full;
+   wire                            dst_port_fifo_empty;
    
    reg  [NUM_STATES-1:0]           state, state_next;
    
@@ -168,6 +173,20 @@ module output_port_lookup
       .clk          (axi_aclk),
       .reset        (~axi_resetn));
 
+   fallthrough_small_fifo #(.WIDTH(NUM_OUTPUT_QUEUES), .MAX_DEPTH_BITS(2))
+      dst_port_fifo
+        (.din (dst_ports),     // Data in
+         .wr_en (lookup_done),             // Write enable
+         .rd_en (dst_port_rd),       // Read the next word
+         .dout (dst_ports_latched),
+         .full (),
+         .prog_full (),
+         .nearly_full (dst_port_fifo_nearly_full),
+         .empty (dst_port_fifo_empty),
+         .reset (~axi_resetn),
+         .clk (axi_aclk)
+         );
+
    /*********************************************************************
     * Wait until the ethernet header has been decoded and the output
     * port is found, then write the module header and move the packet
@@ -176,16 +195,18 @@ module output_port_lookup
    always @(*) begin
       m_axis_tuser = tuser_fifo;
       state_next   = state;
+      dst_port_rd = 0;
       send_packet  = 1;
 
       case(state)
         WAIT_STATE: begin
 	       send_packet = 0;
         
-     	   if(lookup_done) begin
+     	   if(!dst_port_fifo_empty) begin
 	          state_next = SEND_STATE;
-		      send_packet = 1;
-           	  m_axis_tuser[DST_PORT_POS+7:DST_PORT_POS] = dst_ports;
+		  send_packet = 1;
+                  dst_port_rd = 1;
+           	  m_axis_tuser[DST_PORT_POS+7:DST_PORT_POS] = dst_ports_latched;
 	       end	
 	    end
 

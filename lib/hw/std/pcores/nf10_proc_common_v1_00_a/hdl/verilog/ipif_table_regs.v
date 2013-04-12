@@ -85,9 +85,11 @@
    endfunction
    
    // -- internal parameters
-   localparam addr_width = log2(TBL_NUM_ROWS+2);
+   localparam addr_width = log2(TBL_NUM_COLS+2);
    localparam addr_width_lsb = log2(C_S_AXI_ADDR_WIDTH/8);
    localparam addr_width_msb = addr_width+addr_width_lsb;
+
+   localparam tbl_num_rows_in_bits = log2(TBL_NUM_ROWS);
    
    // Address Mapping
    //         COLUMNS [N]
@@ -105,14 +107,17 @@
    
    reg  [1 : 0]                    state;
    
-   wire [C_S_AXI_DATA_WIDTH-1 : 0] tbl_cells_rd_port [0 : TBL_NUM_COLS-1];
+   reg [C_S_AXI_DATA_WIDTH-1 : 0] tbl_cells_rd_port [0 : TBL_NUM_COLS-1];
    reg  [C_S_AXI_DATA_WIDTH-1 : 0] tbl_cells_wr_port [0 : TBL_NUM_COLS-1];
    
    generate
 	 // Unpacking Read/Write port
 	 for (i=0; i<TBL_NUM_COLS; i=i+1) begin : CELL
 	   assign tbl_wr_data[C_S_AXI_DATA_WIDTH*(i+1)-1 : C_S_AXI_DATA_WIDTH*i] = tbl_cells_wr_port[i];
-	   assign tbl_cells_rd_port[i] = tbl_rd_data[C_S_AXI_DATA_WIDTH*(i+1)-1 : C_S_AXI_DATA_WIDTH*i];
+           
+	   always @ (posedge Bus2IP_Clk) begin
+              if (tbl_rd_ack) tbl_cells_rd_port[i] <= tbl_rd_data[C_S_AXI_DATA_WIDTH*(i+1)-1 : C_S_AXI_DATA_WIDTH*i];
+           end
 	 end
    endgenerate
  
@@ -125,13 +130,13 @@
      if (~Bus2IP_Resetn) begin
 	   for (j=0; j<TBL_NUM_COLS; j=j+1) 
 	     tbl_cells_wr_port[j] <= {C_S_AXI_DATA_WIDTH{1'b0}};
-	   tbl_wr_addr <= {addr_width{1'b0}};
+	   tbl_wr_addr <= {tbl_num_rows_in_bits{1'b0}};
 	   tbl_wr_req <= 1'b0;
-	   tbl_rd_addr <= {addr_width{1'b0}};
+	   tbl_rd_addr <= {tbl_num_rows_in_bits{1'b0}};
 	   tbl_rd_req <= 1'b0;
-	   
+
 	   IP2Bus_WrAck <= 1'b0;
-	   
+
 	   state <= WAIT_FOR_REQ;
 	 end
 	 else begin
@@ -144,12 +149,12 @@
 			   state <= DONE;
 		     end
 		     else if (Bus2IP_Addr[addr_width_msb-1:addr_width_lsb] == TBL_WR_ADDR) begin
-		       tbl_wr_addr <= Bus2IP_Data[addr_width-1:0];
+		       tbl_wr_addr <= Bus2IP_Data[tbl_num_rows_in_bits-1:0];
 		       tbl_wr_req <= 1'b1;
 			   state <= PROCESS_REQ;
 		     end
 		     else if (Bus2IP_Addr[addr_width_msb-1:addr_width_lsb] == TBL_RD_ADDR) begin
-		       tbl_rd_addr <= Bus2IP_Data[addr_width-1:0];
+		       tbl_rd_addr <= Bus2IP_Data[tbl_num_rows_in_bits-1:0];
 		       tbl_rd_req <= 1'b1;
 			   state <= PROCESS_REQ;
 		     end
@@ -158,9 +163,11 @@
 		 PROCESS_REQ: begin
 		   if (tbl_wr_ack) tbl_wr_req <= 1'b0;
 		   else if (tbl_rd_ack) tbl_rd_req <= 1'b0;
-		   
-		   IP2Bus_WrAck <= 1'b1;
-		   state <= DONE;
+
+                   if (tbl_wr_ack | tbl_rd_ack) begin
+		      IP2Bus_WrAck <= 1'b1;
+		      state <= DONE;
+                   end
 		 end
 		 DONE: begin		   
 		   if (~Bus2IP_CS) begin
@@ -183,7 +190,7 @@
 	 end
 	 else begin
 	   IP2Bus_RdAck <= 1'b0;
-	   
+
 	   if (Bus2IP_CS & Bus2IP_RNW) begin
 	     if (Bus2IP_Addr[addr_width_msb-1:addr_width_lsb] < TBL_NUM_COLS) begin
 	       IP2Bus_Data <= tbl_cells_rd_port[Bus2IP_Addr[addr_width_msb-1:addr_width_lsb]];

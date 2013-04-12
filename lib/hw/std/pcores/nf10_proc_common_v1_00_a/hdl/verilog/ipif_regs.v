@@ -43,9 +43,9 @@
  #(
    parameter C_S_AXI_DATA_WIDTH = 32,          
    parameter C_S_AXI_ADDR_WIDTH = 32,   
-   parameter NUM_WO_REGS = 1, // Number of registers written by software and read by hardware only
-   parameter NUM_RW_REGS = 1, // Number of registers written by software and read by both hardware and software
-   parameter NUM_RO_REGS = 1  // Number of registers written by hardware and read by software only
+   parameter NUM_WO_REGS = 0, // Number of registers written by software and read by hardware only
+   parameter NUM_RW_REGS = 0, // Number of registers written by software and read by both hardware and software
+   parameter NUM_RO_REGS = 0  // Number of registers written by hardware and read by software only
    // Address Mapping
    //  ------  = base_address
    // |  WO  |         
@@ -70,9 +70,9 @@
    output                                              IP2Bus_Error,
    
    // -- Register ports
-   output    [NUM_WO_REGS*C_S_AXI_DATA_WIDTH-1 : 0]    wo_regs,
-   output    [NUM_RW_REGS*C_S_AXI_DATA_WIDTH-1 : 0]    rw_regs,
-   input     [NUM_RO_REGS*C_S_AXI_DATA_WIDTH-1 : 0]    ro_regs
+   output    [NUM_WO_REGS*C_S_AXI_DATA_WIDTH : 0]    wo_regs,
+   output    [NUM_RW_REGS*C_S_AXI_DATA_WIDTH : 0]    rw_regs,
+   input     [NUM_RO_REGS*C_S_AXI_DATA_WIDTH : 0]    ro_regs
  );
 
     function integer log2;

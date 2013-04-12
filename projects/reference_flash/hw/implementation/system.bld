@@ -1,0 +1,164 @@
+Release 13.4 ngdbuild O.87xd (lin64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+Command Line: /media/Xilinx13.4/ISE_DS/ISE/bin/lin64/unwrapped/ngdbuild -p
+xc5vtx240tff1759-2 -nt timestamp -bm system.bmm
+/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configurat
+ion/hw/implementation/system.ngc -uc system.ucf system.ngd
+
+Reading NGO file
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/system.ngc" ...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/axi_interconnect_0_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/microblaze_0_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/microblaze_0_ilmb_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/microblaze_0_dlmb_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/microblaze_0_i_bram_ctrl_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/microblaze_0_d_bram_ctrl_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/microblaze_0_bram_block_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/reset_0_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/rs232_uart_1_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/clock_generator_0_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/dma_0_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/axi_emc_0_wrapper.ngc"...
+Loading design module
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/axi_cfg_fpga_0_wrapper.ngc"...
+Applying constraints in
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/microblaze_0_ilmb_wrapper.ncf" to module
+"microblaze_0_ilmb"...
+Checking Constraint Associations...
+Applying constraints in
+"/home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/flash_configura
+tion/hw/implementation/microblaze_0_dlmb_wrapper.ncf" to module
+"microblaze_0_dlmb"...
+Checking Constraint Associations...
+Gathering constraint information from source properties...
+Done.
+
+Annotating constraints to design from ucf file "system.ucf" ...
+Resolving constraint associations...
+Checking Constraint Associations...
+INFO:ConstraintSystem:178 - TNM 'sys_clk_pin', used in period specification
+   'TS_sys_clk_pin', was traced into PLL_ADV instance
+   clock_generator_0/PLL0_INST/Using_PLL_ADV.PLL_ADV_inst. The following new TNM
+   groups and period specifications were generated at the PLL_ADV output(s): 
+   CLKOUT0: <TIMESPEC TS_clock_generator_0_clock_generator_0_SIG_PLL0_CLKOUT0 =
+   PERIOD "clock_generator_0_clock_generator_0_SIG_PLL0_CLKOUT0" TS_sys_clk_pin
+   HIGH 50%>
+
+INFO:ConstraintSystem:178 - TNM 'sys_clk_pin', used in period specification
+   'TS_sys_clk_pin', was traced into PLL_ADV instance
+   clock_generator_0/PLL0_INST/Using_PLL_ADV.PLL_ADV_inst. The following new TNM
+   groups and period specifications were generated at the PLL_ADV output(s): 
+   CLKOUT1: <TIMESPEC TS_clock_generator_0_clock_generator_0_SIG_PLL0_CLKOUT1 =
+   PERIOD "clock_generator_0_clock_generator_0_SIG_PLL0_CLKOUT1" TS_sys_clk_pin
+   * 1.6 HIGH 50%>
+
+INFO:ConstraintSystem:178 - TNM 'MGTCLK', used in period specification
+   'TS_MGTCLK', was traced into PLL_ADV instance
+   dma_0/ep/pcie_ep0/pcie_blk/clocking_i/use_pll.pll_adv_i. The following new
+   TNM groups and period specifications were generated at the PLL_ADV output(s):
+    
+   CLKOUT0: <TIMESPEC TS_dma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_i_clkout0 =
+   PERIOD "dma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_i_clkout0" TS_MGTCLK * 2.5
+   HIGH 50%>
+
+INFO:ConstraintSystem:178 - TNM 'MGTCLK', used in period specification
+   'TS_MGTCLK', was traced into PLL_ADV instance
+   dma_0/ep/pcie_ep0/pcie_blk/clocking_i/use_pll.pll_adv_i. The following new
+   TNM groups and period specifications were generated at the PLL_ADV output(s):
+    
+   CLKOUT1: <TIMESPEC TS_dma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_i_clkout1 =
+   PERIOD "dma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_i_clkout1" TS_MGTCLK * 1.25
+   HIGH 50%>
+
+INFO:ConstraintSystem:178 - TNM 'MGTCLK', used in period specification
+   'TS_MGTCLK', was traced into PLL_ADV instance
+   dma_0/ep/pcie_ep0/pcie_blk/clocking_i/use_pll.pll_adv_i. The following new
+   TNM groups and period specifications were generated at the PLL_ADV output(s):
+    
+   CLKOUT2: <TIMESPEC TS_dma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_i_clkout2 =
+   PERIOD "dma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_i_clkout2" TS_MGTCLK * 1.25
+   HIGH 50%>
+
+INFO:ConstraintSystem:178 - TNM 'MGTCLK', used in period specification
+   'TS_MGTCLK', was traced into PLL_ADV instance
+   dma_0/ep/pcie_ep0/pcie_blk/clocking_i/use_pll.pll_adv_i. The following new
+   TNM groups and period specifications were generated at the PLL_ADV output(s):
+    
+   CLKOUT3: <TIMESPEC
+   TS_dma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_i_txsync_clkout = PERIOD
+   "dma_0_dma_0_ep_pcie_ep0_pcie_blk_clocking_i_txsync_clkout" TS_MGTCLK * 1.25
+   HIGH 50%>
+
+Done...
+
+Processing BMM file "system.bmm" ...
+
+Checking expanded design ...
+WARNING:NgdBuild:443 - SFF primitive
+   'microblaze_0/microblaze_0/Performance.Decode_I/Using_FPGA.Gen_Bits[27].MEM_E
+   X_Result_Inst' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'microblaze_0/microblaze_0/Performance.Decode_I/Using_FPGA.Gen_Bits[28].MEM_E
+   X_Result_Inst' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'microblaze_0/microblaze_0/Performance.Decode_I/Using_FPGA.Gen_Bits[29].MEM_E
+   X_Result_Inst' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'microblaze_0/microblaze_0/Performance.Decode_I/Using_FPGA.Gen_Bits[30].MEM_E
+   X_Result_Inst' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'microblaze_0/microblaze_0/Performance.Decode_I/Using_FPGA.Gen_Bits[31].MEM_E
+   X_Result_Inst' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'axi_emc_0/axi_emc_0/EMC_CTRL_I/MEM_STEER_I/ASYNC_MEM_RDACK_GEN.AALIGN_PIPE_G
+   EN[1].AALIGN_PIPE' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'axi_emc_0/axi_emc_0/EMC_CTRL_I/MEM_STATE_MACHINE_I/READ_COMPLETE_PIPE_GEN[6]
+   .READ_COMPLETE_PIPE' has unconnected output pin
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   7
+
+Total memory usage is 757028 kilobytes
+
+Writing NGD file "system.ngd" ...
+Total REAL time to NGDBUILD completion:  37 sec
+Total CPU time to NGDBUILD completion:   37 sec
+
+Writing NGDBUILD log file "system.bld"...

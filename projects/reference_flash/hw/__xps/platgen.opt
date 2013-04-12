@@ -1,0 +1,2 @@
+ -p xc5vtx240tff1759-2 -lang verilog$(PROJECT_SEARCHPATHOPT) $(GLOBAL_SEARCHPATHOPT) -msg __xps/ise/xmsgprops.lst
+

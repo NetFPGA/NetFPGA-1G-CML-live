@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+###############################################################################
+## DISCLAIMER OF LIABILITY
+##
+## This file contains proprietary and confidential information of
+## Xilinx, Inc. ("Xilinx"), that is distributed under a license
+## from Xilinx, and may be used, copied and/or disclosed only
+## pursuant to the terms of a valid license agreement with Xilinx.
+##
+## XILINX IS PROVIDING THIS DESIGN, CODE, OR INFORMATION
+## ("MATERIALS") "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+## EXPRESSED, IMPLIED, OR STATUTORY, INCLUDING WITHOUT
+## LIMITATION, ANY WARRANTY WITH RESPECT TO NONINFRINGEMENT,
+## MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE. Xilinx
+## does not warrant that functions included in the Materials will
+## meet the requirements of Licensee, or that the operation of the
+## Materials will be uninterrupted or error-free, or that defects
+## in the Materials will be corrected. Furthermore, Xilinx does
+## not warrant or make any representations regarding use, or the
+## results of the use, of the Materials in terms of correctness,
+## accuracy, reliability or otherwise.
+##
+## Xilinx products are not designed or intended to be fail-safe,
+## or for use in any application requiring fail-safe performance,
+## such as life-support or safety devices or systems, Class III
+## medical devices, nuclear facilities, applications related to
+## the deployment of airbags, or any other applications that could
+## lead to death, personal injury or severe property or
+## environmental damage (individually and collectively, "critical
+## applications"). Customer assumes the sole risk and liability
+## of any use of Xilinx products in critical applications,
+## subject only to applicable laws and regulations governing
+## limitations on product liability.
+##
+## Copyright 2010 Xilinx, Inc.
+## All rights reserved.
+##
+## This disclaimer and copyright notice must be retained as part
+## of this file at all times.
+##
+###############################################################################
+-->
+
+<!DOCTYPE doc SYSTEM "../../ipdialog.dtd" [
+	<!ENTITY C_FAMILY '
+	<widget id="C_FAMILY">
+		<key>C_FAMILY</key>
+		<label>Family Supported </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_INCLUDE_NEGEDGE_IOREGS '
+	<widget id="C_INCLUDE_NEGEDGE_IOREGS">
+		<key>C_INCLUDE_NEGEDGE_IOREGS</key>
+		<label>Include negative edge IO registers </label>
+		<tip></tip>
+	</widget>
+	'>	
+	<!ENTITY C_S_AXI_MEM0_BASEADDR '
+	<widget id="C_S_AXI_MEM0_BASEADDR">
+		<key>C_S_AXI_MEM0_BASEADDR</key>
+		<label>Base Address of Bank 0 </label>
+		<tip></tip>
+	</widget>
+	'>	
+	<!ENTITY C_NUM_BANKS_MEM '
+	<widget id="C_NUM_BANKS_MEM">
+		<key>C_NUM_BANKS_MEM</key>
+		<label>Number of Banks </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_EN_REG '
+	<widget id="C_S_AXI_EN_REG">
+		<key>C_S_AXI_EN_REG</key>
+		<label>AXI Register Interface Enable </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_REG_ADDR_WIDTH '
+	<widget id="C_S_AXI_REG_ADDR_WIDTH">
+		<key>C_S_AXI_REG_ADDR_WIDTH</key>
+		<label>AXI Register Interface Addresses Width </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_REG_DATA_WIDTH '
+	<widget id="C_S_AXI_REG_DATA_WIDTH">
+		<key>C_S_AXI_REG_DATA_WIDTH</key>
+		<label>AXI Register Interface Data Width </label>
+		<tip></tip>
+	</widget>
+	'>	
+	<!ENTITY C_S_AXI_MEM_DATA_WIDTH '
+	<widget id="C_S_AXI_MEM_DATA_WIDTH">
+		<key>C_S_AXI_MEM_DATA_WIDTH</key>
+		<label>AXI Memory Interface Data Width </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_MEM_ID_WIDTH '
+	<widget id="C_S_AXI_MEM_ID_WIDTH">
+		<key>C_S_AXI_MEM_ID_WIDTH</key>
+		<label>AXI Memory Interface ID Width </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_MEM_ADDR_WIDTH '
+	<widget id="C_S_AXI_MEM_ADDR_WIDTH">
+		<key>C_S_AXI_MEM_ADDR_WIDTH</key>
+		<label>AXI Memory Interface Addresses Width </label>
+		<tip></tip>
+	</widget>
+	'>	
+	<!ENTITY C_S_AXI_MEM0_HIGHADDR '
+	<widget id="C_S_AXI_MEM0_HIGHADDR">
+		<key>C_S_AXI_MEM0_HIGHADDR</key>
+		<label>High Address of Bank 0 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_MEM1_BASEADDR '
+	<widget id="C_S_AXI_MEM1_BASEADDR">
+		<key>C_S_AXI_MEM1_BASEADDR</key> 
+		<label>Base Address of Bank 1 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_MEM1_HIGHADDR '
+	<widget id="C_S_AXI_MEM1_HIGHADDR">
+		<key>C_S_AXI_MEM1_HIGHADDR</key>
+		<label>High Address of Bank 1 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_MEM2_BASEADDR '
+	<widget id="C_S_AXI_MEM2_BASEADDR">
+		<key>C_S_AXI_MEM2_BASEADDR</key>
+		<label>Base Address of Bank 2 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_MEM2_HIGHADDR '
+	<widget id="C_S_AXI_MEM2_HIGHADDR">
+		<key>C_S_AXI_MEM2_HIGHADDR</key>
+		<label>High Address of Bank 2 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_MEM3_BASEADDR '
+	<widget id="C_S_AXI_MEM3_BASEADDR">
+		<key>C_S_AXI_MEM3_BASEADDR</key>
+		<label>Base Address of Bank 3 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_MEM3_HIGHADDR '
+	<widget id="C_S_AXI_MEM3_HIGHADDR">
+		<key>C_S_AXI_MEM3_HIGHADDR</key>
+		<label>High Address of Bank 3 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_REG_BASEADDR '
+	<widget id="C_S_AXI_REG_BASEADDR">
+		<key>C_S_AXI_REG_BASEADDR</key>
+		<label>Base Address of Register </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_S_AXI_REG_HIGHADDR '
+	<widget id="C_S_AXI_REG_HIGHADDR">
+		<key>C_S_AXI_REG_HIGHADDR</key>
+		<label>High Address of Register </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_MEM0_WIDTH '
+	<widget id="C_MEM0_WIDTH">
+		<key>C_MEM0_WIDTH</key>
+		<label>Data Bus Width of Bank 0 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_MEM1_WIDTH '
+	<widget id="C_MEM1_WIDTH">
+		<key>C_MEM1_WIDTH</key>
+		<label>Data Bus Width of Bank 1 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_MEM2_WIDTH '
+	<widget id="C_MEM2_WIDTH">
+		<key>C_MEM2_WIDTH</key>
+		<label>Data Bus Width of Bank 2 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_MEM3_WIDTH '
+	<widget id="C_MEM3_WIDTH">
+		<key>C_MEM3_WIDTH</key>
+		<label>Data Bus Width of Bank 3 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_MAX_MEM_WIDTH '
+	<widget id="C_MAX_MEM_WIDTH">
+		<key>C_MAX_MEM_WIDTH</key>
+		<label>Maximum data bus width of all memory banks</label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_INCLUDE_DATAWIDTH_MATCHING_0 '
+	<widget id="C_INCLUDE_DATAWIDTH_MATCHING_0">
+		<key>C_INCLUDE_DATAWIDTH_MATCHING_0</key>
+		<label><![CDATA[Execute Multiple Memory Accesses To Match Bank 0 Data Bus Width To AXI Data Bus Width]]></label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_INCLUDE_DATAWIDTH_MATCHING_1 '
+	<widget id="C_INCLUDE_DATAWIDTH_MATCHING_1">
+		<key>C_INCLUDE_DATAWIDTH_MATCHING_1</key>
+		<label><![CDATA[ Execute Multiple Memory Accesses To Match Bank 1 Data Bus Width To AXI Data Bus Width ]]></label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_INCLUDE_DATAWIDTH_MATCHING_2 '
+	<widget id="C_INCLUDE_DATAWIDTH_MATCHING_2">
+		<key>C_INCLUDE_DATAWIDTH_MATCHING_2</key>
+		<label><![CDATA[ Execute Multiple Memory Accesses To Match Bank 2 Data Bus Width To AXI Data Bus Width ]]></label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_INCLUDE_DATAWIDTH_MATCHING_3 '
+	<widget id="C_INCLUDE_DATAWIDTH_MATCHING_3">
+		<key>C_INCLUDE_DATAWIDTH_MATCHING_3</key>
+		<label><![CDATA[ Execute Multiple Memory Accesses To Match Bank 3 Data Bus Width To AXI Data Bus Width ]]></label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_MEM0_TYPE '
+	<widget id="C_MEM0_TYPE">
+		<key>C_MEM0_TYPE</key>
+		<label>Memory type for Bank 0 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_SYNCH_PIPEDELAY_0 '
+	<widget id="C_SYNCH_PIPEDELAY_0">
+		<key>C_SYNCH_PIPEDELAY_0</key>
+		<label>Pipeline Latency of Bank 0 </label>
+		<tip>Valid if Bank 0 is Synchronous</tip>
+	</widget>
+	'>
+	<!ENTITY C_PARITY_TYPE_MEM_0 '
+	<widget id="C_PARITY_TYPE_MEM_0">
+		<key>C_PARITY_TYPE_MEM_0</key>
+		<label>Type of parity of Bank 0 </label>
+		<tip>Valid if Bank 0 is SRAM</tip>
+	</widget>
+	'>	
+	<!ENTITY C_TCEDV_PS_MEM_0 '
+	<widget id="C_TCEDV_PS_MEM_0">
+		<key>C_TCEDV_PS_MEM_0</key>
+		<label>TCEDV of Bank 0 </label>
+		<tip>Chip Enable to Data Valid Time of Bank 0 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TAVDV_PS_MEM_0 '
+	<widget id="C_TAVDV_PS_MEM_0">
+		<key>C_TAVDV_PS_MEM_0</key>
+		<label>TAVDV of Bank 0 </label>
+		<tip>Address Valid to Data Valid Time of Bank 0 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TPACC_PS_FLASH_0 '
+	<widget id="C_TPACC_PS_FLASH_0">
+		<key>C_TPACC_PS_FLASH_0</key>
+		<label>TPACC of Bank 0 </label>
+		<tip>Page mdoe read Time of Bank 0 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>	
+	<!ENTITY C_THZCE_PS_MEM_0 '
+	<widget id="C_THZCE_PS_MEM_0">
+		<key>C_THZCE_PS_MEM_0</key>
+		<label>THZCE of Bank 0 </label>
+		<tip>CE Disable to Data Bus HIGH Z Time of Bank 0 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_THZOE_PS_MEM_0 '
+	<widget id="C_THZOE_PS_MEM_0">
+		<key>C_THZOE_PS_MEM_0</key>
+		<label>THZOE of Bank 0 </label>
+		<tip>OE Disable to Data Bus HIGH Z  Time of Bank 0 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWC_PS_MEM_0 '
+	<widget id="C_TWC_PS_MEM_0">
+		<key>C_TWC_PS_MEM_0</key>
+		<label>TWC of Bank 0 </label>
+		<tip>Write Cycle Time of Bank 0 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWP_PS_MEM_0 '
+	<widget id="C_TWP_PS_MEM_0">
+		<key>C_TWP_PS_MEM_0</key>
+		<label>TWP of Bank 0 </label>
+		<tip>Min Pulse Width of Write Enable for Bank 0 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWPH_PS_MEM_0 '
+	<widget id="C_TWPH_PS_MEM_0">
+		<key>C_TWPH_PS_MEM_0</key>
+		<label>TWPH of Bank 0 </label>
+		<tip>Min Pulse HIGH Width of Write Enable for Bank 0 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TLZWE_PS_MEM_0 '
+	<widget id="C_TLZWE_PS_MEM_0">
+		<key>C_TLZWE_PS_MEM_0</key>
+		<label>TLZWE of Bank 0 </label>
+		<tip>WE Disable to Data Bus LOW Z  Time of Bank 0</tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_MEM1_TYPE '
+	<widget id="C_MEM1_TYPE">
+		<key>C_MEM1_TYPE</key>
+		<label>Memory type for Bank 1 </label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_SYNCH_PIPEDELAY_1 '
+	<widget id="C_SYNCH_PIPEDELAY_1">
+		<key>C_SYNCH_PIPEDELAY_1</key>
+		<label>Pipeline Latency of Bank 1 </label>
+		<tip>Valid if Bank 1 is Synchronous</tip>
+	</widget>
+	'>
+	<!ENTITY C_PARITY_TYPE_MEM_1 '
+	<widget id="C_PARITY_TYPE_MEM_1">
+		<key>C_PARITY_TYPE_MEM_1</key>
+		<label>Type of parity of Bank 1 </label>
+		<tip>Valid if Bank 1 is SRAM</tip>
+	</widget>
+	'>	
+	<!ENTITY C_TCEDV_PS_MEM_1 '
+	<widget id="C_TCEDV_PS_MEM_1">
+		<key>C_TCEDV_PS_MEM_1</key>
+		<label>TCEDV of Bank 1 </label>
+		<tip>Chip Enable to Data Valid Time of Bank 1 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TAVDV_PS_MEM_1 '
+	<widget id="C_TAVDV_PS_MEM_1">
+		<key>C_TAVDV_PS_MEM_1</key>
+		<label>TAVDV of Bank 1 </label>
+		<tip>Address Valid to Data Valid Time of Bank 1 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TPACC_PS_FLASH_1 '
+	<widget id="C_TPACC_PS_FLASH_1">
+		<key>C_TPACC_PS_FLASH_1</key>
+		<label>TPACC of Bank 1 </label>
+		<tip>Page mdoe read Time of Bank 1 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>		
+	<!ENTITY C_THZCE_PS_MEM_1 '
+	<widget id="C_THZCE_PS_MEM_1">
+		<key>C_THZCE_PS_MEM_1</key>
+		<label>THZCE of Bank 1 </label>
+		<tip>CE Disable to Data Bus HIGH Z Time of Bank 1 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_THZOE_PS_MEM_1 '
+	<widget id="C_THZOE_PS_MEM_1">
+		<key>C_THZOE_PS_MEM_1</key>
+		<label>THZOE of Bank 1 </label>
+		<tip>OE Disable to Data Bus HIGH Z  Time of Bank 1 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWC_PS_MEM_1 '
+	<widget id="C_TWC_PS_MEM_1">
+		<key>C_TWC_PS_MEM_1</key>
+		<label>TWC of Bank 1 </label>
+		<tip>Write Cycle Time of Bank 1 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWP_PS_MEM_1 '
+	<widget id="C_TWP_PS_MEM_1">
+		<key>C_TWP_PS_MEM_1</key>
+		<label>TWP of Bank 1 </label>
+		<tip>Min Pulse Width of Write Enable for Bank 1 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWPH_PS_MEM_1 '
+	<widget id="C_TWPH_PS_MEM_1">
+		<key>C_TWPH_PS_MEM_1</key>
+		<label>TWPH of Bank 1 </label>
+		<tip>Min Pulse HIGH Width of Write Enable for Bank 1</tip>
+		<unit>ps</unit>
+	</widget>
+	'>	
+	<!ENTITY C_TLZWE_PS_MEM_1 '
+	<widget id="C_TLZWE_PS_MEM_1">
+		<key>C_TLZWE_PS_MEM_1</key>
+		<label>TLZWE of Bank 1 </label>
+		<tip>WE Disable to Data Bus LOW Z  Time of Bank 1</tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_MEM2_TYPE '
+	<widget id="C_MEM2_TYPE">
+		<key>C_MEM2_TYPE</key>
+		<label>Memory type for Bank 2</label>
+		<tip></tip>
+	</widget>
+	'>
+	<!ENTITY C_SYNCH_PIPEDELAY_2 '
+	<widget id="C_SYNCH_PIPEDELAY_2">
+		<key>C_SYNCH_PIPEDELAY_2</key>
+		<label>Pipeline Latency of Bank 2 </label>
+		<tip>Valid if Bank 2 is Synchronous</tip>
+	</widget>
+	'>
+	<!ENTITY C_PARITY_TYPE_MEM_2 '
+	<widget id="C_PARITY_TYPE_MEM_2">
+		<key>C_PARITY_TYPE_MEM_2</key>
+		<label>Type of parity of Bank 2 </label>
+		<tip>Valid if Bank 2 is SRAM</tip>
+	</widget>
+	'>
+	<!ENTITY C_TCEDV_PS_MEM_2 '
+	<widget id="C_TCEDV_PS_MEM_2">
+		<key>C_TCEDV_PS_MEM_2</key>
+		<label>TCEDV of Bank 2 </label>
+		<tip>Chip Enable to Data Valid Time of Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TAVDV_PS_MEM_2 '
+	<widget id="C_TAVDV_PS_MEM_2">
+		<key>C_TAVDV_PS_MEM_2</key>
+		<label>TAVDV of Bank 2 </label>
+		<tip>Address Valid to Data Valid Time of Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TPACC_PS_FLASH_2 '
+	<widget id="C_TPACC_PS_FLASH_2">
+		<key>C_TPACC_PS_FLASH_2</key>
+		<label>TPACC of Bank 2 </label>
+		<tip>Page mdoe read Time of Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>		
+	<!ENTITY C_THZCE_PS_MEM_2 '
+	<widget id="C_THZCE_PS_MEM_2">
+		<key>C_THZCE_PS_MEM_2</key>
+		<label>THZCE of Bank 2 </label>
+		<tip>CE Disable to Data Bus HIGH Z Time of Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_THZOE_PS_MEM_2 '
+	<widget id="C_THZOE_PS_MEM_2">
+		<key>C_THZOE_PS_MEM_2</key>
+		<label>THZOE of Bank 2 </label>
+		<tip>OE Disable to Data Bus HIGH Z  Time of Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWC_PS_MEM_2 '
+	<widget id="C_TWC_PS_MEM_2">
+		<key>C_TWC_PS_MEM_2</key>
+		<label>TWC of Bank 2 </label>
+		<tip>Write Cycle Time of Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWP_PS_MEM_2 '
+	<widget id="C_TWP_PS_MEM_2">
+		<key>C_TWP_PS_MEM_2</key>
+		<label>TWP of Bank 2 </label>
+		<tip>Min Pulse Width of Write Enable for Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWPH_PS_MEM_2 '
+	<widget id="C_TWPH_PS_MEM_2">
+		<key>C_TWPH_PS_MEM_2</key>
+		<label>TWPH of Bank 2 </label>
+		<tip>Min Pulse HIGH Width of Write Enable for Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>	
+	<!ENTITY C_TLZWE_PS_MEM_2 '
+	<widget id="C_TLZWE_PS_MEM_2">
+		<key>C_TLZWE_PS_MEM_2</key>
+		<label>TLZWE of Bank 2 </label>
+		<tip>WE Disable to Data Bus LOW Z  Time of Bank 2 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_MEM3_TYPE '
+	<widget id="C_MEM3_TYPE">
+		<key>C_MEM3_TYPE</key>
+		<label>Memory type for Bank 3 </label>
+		<tip>Memory Type for Bank 3</tip>
+	</widget>
+	'>
+	<!ENTITY C_SYNCH_PIPEDELAY_3 '
+	<widget id="C_SYNCH_PIPEDELAY_3">
+		<key>C_SYNCH_PIPEDELAY_3</key>
+		<label>Pipeline Latency of Bank 3 </label>
+		<tip>Valid if Bank 3 is Synchronous</tip>
+	</widget>
+	'>
+	<!ENTITY C_PARITY_TYPE_MEM_3 '
+	<widget id="C_PARITY_TYPE_MEM_3">
+		<key>C_PARITY_TYPE_MEM_3</key>
+		<label>Type of parity of Bank 3 </label>
+		<tip>Valid if Bank 3 is SRAM</tip>
+	</widget>
+	'>
+	<!ENTITY C_TCEDV_PS_MEM_3 '
+	<widget id="C_TCEDV_PS_MEM_3">
+		<key>C_TCEDV_PS_MEM_3</key>
+		<label>TCEDV of Bank 3 </label>
+		<tip>Chip Enable to Data Valid Time of Bank 3 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TAVDV_PS_MEM_3 '
+	<widget id="C_TAVDV_PS_MEM_3">
+		<key>C_TAVDV_PS_MEM_3</key>
+		<label>TAVDV of Bank 3 </label>
+		<tip>Address Valid to Data Valid Time of Bank 3 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TPACC_PS_FLASH_3 '
+	<widget id="C_TPACC_PS_FLASH_3">
+		<key>C_TPACC_PS_FLASH_3</key>
+		<label>TPACC of Bank 3 </label>
+		<tip>Page mdoe read Time of Bank 3 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>		
+	<!ENTITY C_THZCE_PS_MEM_3 '
+	<widget id="C_THZCE_PS_MEM_3">
+		<key>C_THZCE_PS_MEM_3</key>
+		<label>THZCE of Bank 3 </label>
+		<tip>CE Disable to Data Bus HIGH Z Time of Bank 3 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_THZOE_PS_MEM_3 '
+	<widget id="C_THZOE_PS_MEM_3">
+		<key>C_THZOE_PS_MEM_3</key>
+		<label>THZOE of Bank 3 </label>
+		<tip>OE Disable to Data Bus HIGH Z  Time of Bank 3 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWC_PS_MEM_3 '
+	<widget id="C_TWC_PS_MEM_3">
+		<key>C_TWC_PS_MEM_3</key>
+		<label>TWC of Bank 3 </label>
+		<tip>Write Cycle Time of Bank 3 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWP_PS_MEM_3 '
+	<widget id="C_TWP_PS_MEM_3">
+		<key>C_TWP_PS_MEM_3</key>
+		<label>TWP of Bank 3 </label>
+		<tip>Min Pulse Width of Write Enable for Bank 3 </tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_TWPH_PS_MEM_3 '
+	<widget id="C_TWPH_PS_MEM_3">
+		<key>C_TWPH_PS_MEM_3</key>
+		<label>TWPH of Bank 3 </label>
+		<tip>Min Pulse HIGH Width of Write Enable for Bank 3</tip>
+		<unit>ps</unit>
+	</widget>
+	'>	
+	<!ENTITY C_TLZWE_PS_MEM_3 '
+	<widget id="C_TLZWE_PS_MEM_3">
+		<key>C_TLZWE_PS_MEM_3</key>
+		<label>TLZWE of Bank 3 </label>
+		<tip>WE Disable to Data Bus LOW Z  Time of Bank 3</tip>
+		<unit>ps</unit>
+	</widget>
+	'>
+	<!ENTITY C_AXI_CLK_PERIOD_PS '
+	<widget id="C_AXI_CLK_PERIOD_PS">
+		<key>C_AXI_CLK_PERIOD_PS</key>
+		<label>axi clock period to calculate wait state pulse 	widths </label>
+		<tip></tip>
+	</widget>
+	'>
+    <!ENTITY C_S_AXI_MEM_PROTOCOL '
+	<widget id="C_S_AXI_MEM_PROTOCOL">
+		<key>C_S_AXI_MEM_PROTOCOL</key>
+		<label>AXI4 Memory Interface protocol</label>
+		<tip></tip>
+    </widget>
+	'>
+     <!ENTITY C_S_AXI_REG_PROTOCOL '
+		<widget id="C_S_AXI_REG_PROTOCOL">
+		<key>C_S_AXI_REG_PROTOCOL</key>
+		<label>AXI4 Register Interface protocol</label>
+		<tip></tip>
+        </widget>
+	'>	
+
+]>
+
+<doc>
+	<view id="User">
+		<display>User</display>
+		<group id="Common">
+			<display>Common</display>
+			<item>&C_NUM_BANKS_MEM;</item>
+			<item>&C_INCLUDE_NEGEDGE_IOREGS;</item>
+			<item>&C_S_AXI_EN_REG;</item>
+			<item>&C_MAX_MEM_WIDTH;</item>
+		</group>
+		<group id="bank_0">
+			<display>Bank_0</display>
+			<item>&C_MEM0_WIDTH;</item>
+			<item>&C_INCLUDE_DATAWIDTH_MATCHING_0;</item>
+			<item>&C_MEM0_TYPE;</item>
+			<item>&C_SYNCH_PIPEDELAY_0;</item>
+			<item>&C_PARITY_TYPE_MEM_0;</item>
+			<item>&C_TCEDV_PS_MEM_0;</item>
+			<item>&C_TAVDV_PS_MEM_0;</item>
+			<item>&C_TPACC_PS_FLASH_0;</item>
+			<item>&C_THZCE_PS_MEM_0;</item>
+			<item>&C_THZOE_PS_MEM_0;</item>
+			<item>&C_TWC_PS_MEM_0;</item>
+			<item>&C_TWP_PS_MEM_0;</item>
+			<item>&C_TWPH_PS_MEM_0;</item>			
+			<item>&C_TLZWE_PS_MEM_0;</item>
+		</group>
+		<group id="bank_1">
+			<display>Bank_1</display>
+			<item>&C_MEM1_WIDTH;</item>
+			<item>&C_INCLUDE_DATAWIDTH_MATCHING_1;</item>
+			<item>&C_MEM1_TYPE;</item>
+			<item>&C_SYNCH_PIPEDELAY_1;</item>
+			<item>&C_PARITY_TYPE_MEM_1;</item>
+			<item>&C_TCEDV_PS_MEM_1;</item>
+			<item>&C_TAVDV_PS_MEM_1;</item>
+			<item>&C_TPACC_PS_FLASH_1;</item>			
+			<item>&C_THZCE_PS_MEM_1;</item>
+			<item>&C_THZOE_PS_MEM_1;</item>
+			<item>&C_TWC_PS_MEM_1;</item>
+			<item>&C_TWP_PS_MEM_1;</item>
+			<item>&C_TWPH_PS_MEM_1;</item>			
+			<item>&C_TLZWE_PS_MEM_1;</item>
+		</group>
+		<group id="bank_2">
+			<display>Bank_2</display>
+			<item>&C_MEM2_WIDTH;</item>
+			<item>&C_INCLUDE_DATAWIDTH_MATCHING_2;</item>
+			<item>&C_MEM2_TYPE;</item>
+			<item>&C_SYNCH_PIPEDELAY_2;</item>
+			<item>&C_PARITY_TYPE_MEM_2;</item>
+			<item>&C_TCEDV_PS_MEM_2;</item>
+			<item>&C_TAVDV_PS_MEM_2;</item>
+			<item>&C_TPACC_PS_FLASH_2;</item>			
+			<item>&C_THZCE_PS_MEM_2;</item>
+			<item>&C_THZOE_PS_MEM_2;</item>
+			<item>&C_TWC_PS_MEM_2;</item>
+			<item>&C_TWP_PS_MEM_2;</item>
+			<item>&C_TWPH_PS_MEM_2;</item>			
+			<item>&C_TLZWE_PS_MEM_2;</item>
+		</group>
+		<group id="bank_3">
+			<display>Bank_3</display>
+			<item>&C_MEM3_WIDTH;</item>
+			<item>&C_INCLUDE_DATAWIDTH_MATCHING_3;</item>
+			<item>&C_MEM3_TYPE;</item>
+			<item>&C_SYNCH_PIPEDELAY_3;</item>
+			<item>&C_PARITY_TYPE_MEM_3;</item>
+			<item>&C_TCEDV_PS_MEM_3;</item>
+			<item>&C_TAVDV_PS_MEM_3;</item>
+			<item>&C_TPACC_PS_FLASH_3;</item>
+			<item>&C_THZCE_PS_MEM_3;</item>
+			<item>&C_THZOE_PS_MEM_3;</item>
+			<item>&C_TWC_PS_MEM_3;</item>
+			<item>&C_TWP_PS_MEM_3;</item>
+			<item>&C_TWPH_PS_MEM_3;</item>
+			<item>&C_TLZWE_PS_MEM_3;</item>
+		</group>
+		<group id="Memory_Address">
+			<display>Memory Addresses Interface</display>
+			<item>&C_S_AXI_MEM_PROTOCOL;</item>			
+			<item>&C_S_AXI_MEM_DATA_WIDTH;</item>
+			<item>&C_S_AXI_MEM_ADDR_WIDTH;</item>
+			<item>&C_S_AXI_MEM_ID_WIDTH;</item>			
+			<item>&C_S_AXI_MEM0_BASEADDR;</item>
+			<item>&C_S_AXI_MEM0_HIGHADDR;</item>
+			<item>&C_S_AXI_MEM1_BASEADDR;</item>
+			<item>&C_S_AXI_MEM1_HIGHADDR;</item>
+			<item>&C_S_AXI_MEM2_BASEADDR;</item>
+			<item>&C_S_AXI_MEM2_HIGHADDR;</item>
+			<item>&C_S_AXI_MEM3_BASEADDR;</item>
+			<item>&C_S_AXI_MEM3_HIGHADDR;</item>
+		</group>
+		<group id="Register_Address">
+			<display>Register Addresses</display>
+			<item>&C_S_AXI_REG_BASEADDR;</item>
+			<item>&C_S_AXI_REG_HIGHADDR;</item>
+			<item>&C_S_AXI_REG_DATA_WIDTH;</item>
+			<item>&C_S_AXI_REG_ADDR_WIDTH;</item>
+            <item>&C_S_AXI_REG_PROTOCOL;</item>
+		</group>		
+		
+		<group id="Hidden">
+			<display>Hidden</display>
+			<item>&C_FAMILY;</item>
+			<item>&C_AXI_CLK_PERIOD_PS;</item>
+		</group>
+	</view>	
+</doc>

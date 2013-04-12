@@ -1,0 +1,14 @@
+MO rs232_uart_1_wrapper NULL ../hdl/system.v vlg7F/rs232__uart__1__wrapper.bin 1362993980
+MO clock_generator_0_wrapper NULL ../hdl/system.v vlg7D/clock__generator__0__wrapper.bin 1362993980
+MO reset_0_wrapper NULL ../hdl/system.v vlg76/reset__0__wrapper.bin 1362993980
+MO microblaze_0_ilmb_wrapper NULL ../hdl/system.v vlg1E/microblaze__0__ilmb__wrapper.bin 1362993980
+MO axi_interconnect_0_wrapper NULL ../hdl/system.v vlg7C/axi__interconnect__0__wrapper.bin 1362993980
+MO axi_cfg_fpga_0_wrapper NULL ../hdl/system.v vlg35/axi__cfg__fpga__0__wrapper.bin 1362993980
+MO system NULL ../hdl/system.v vlg19/system.bin 1362993980
+MO microblaze_0_i_bram_ctrl_wrapper NULL ../hdl/system.v vlg24/microblaze__0__i__bram__ctrl__wrapper.bin 1362993980
+MO dma_0_wrapper NULL ../hdl/system.v vlg19/dma__0__wrapper.bin 1362993980
+MO microblaze_0_d_bram_ctrl_wrapper NULL ../hdl/system.v vlg67/microblaze__0__d__bram__ctrl__wrapper.bin 1362993980
+MO microblaze_0_bram_block_wrapper NULL ../hdl/system.v vlg72/microblaze__0__bram__block__wrapper.bin 1362993980
+MO axi_emc_0_wrapper NULL ../hdl/system.v vlg71/axi__emc__0__wrapper.bin 1362993980
+MO microblaze_0_wrapper NULL ../hdl/system.v vlg0F/microblaze__0__wrapper.bin 1362993980
+MO microblaze_0_dlmb_wrapper NULL ../hdl/system.v vlg4D/microblaze__0__dlmb__wrapper.bin 1362993980

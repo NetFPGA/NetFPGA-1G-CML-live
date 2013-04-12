@@ -1,5 +1,5 @@
 # Machine-generated file - use "minicom -s" to change parameters.
-pr port             /dev/ttyUSB0
+pr port             TTY_NAME_HERE
 pu baudrate         9600
 pu minit            
 pu mreset           
