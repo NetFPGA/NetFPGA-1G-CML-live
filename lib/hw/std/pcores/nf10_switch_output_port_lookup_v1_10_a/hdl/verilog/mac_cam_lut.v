@@ -168,8 +168,8 @@ module mac_cam_lut
 
    /* if we get a miss then set the dst port to the default ports
     * without the source */
-   assign dst_ports = (lut_miss) ? (DEFAULT_MISS_OUTPUT_PORTS & ~src_port)
-                                           : (rd_oq & ~src_port);
+   assign dst_ports = (lut_miss) ? (DEFAULT_MISS_OUTPUT_PORTS & ~src_port_latched)
+                                           : (rd_oq & ~src_port_latched);
 
 
  
