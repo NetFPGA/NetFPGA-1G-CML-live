@@ -41,7 +41,7 @@
 
   module dest_ip_filter
     #(parameter C_S_AXIS_DATA_WIDTH=256,
-      parameter LUT_DEPTH = 16,
+      parameter LUT_DEPTH = 32,
       parameter LUT_DEPTH_BITS = log2(LUT_DEPTH)
       )
    (// --- Interface to the previous stage

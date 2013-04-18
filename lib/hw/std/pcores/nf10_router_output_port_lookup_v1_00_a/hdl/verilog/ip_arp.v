@@ -9,7 +9,7 @@
 
   module ip_arp
     #(parameter NUM_QUEUES = 8,
-      parameter LUT_DEPTH = 16,
+      parameter LUT_DEPTH = 32,
       parameter LUT_DEPTH_BITS = log2(LUT_DEPTH)
       )
    (// --- Interface to ip_arp

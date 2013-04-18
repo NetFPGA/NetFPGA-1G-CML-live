@@ -48,11 +48,11 @@ module output_port_lookup
     parameter C_S_AXIS_TUSER_WIDTH=128,
     parameter NUM_QUEUES=8,
     parameter NUM_QUEUES_WIDTH = log2(NUM_QUEUES),
-    parameter LPM_LUT_DEPTH = 16,
+    parameter LPM_LUT_DEPTH = 32,
     parameter LPM_LUT_DEPTH_BITS = log2(LPM_LUT_DEPTH),
-    parameter ARP_LUT_DEPTH = 16,
+    parameter ARP_LUT_DEPTH = 32,
     parameter ARP_LUT_DEPTH_BITS = log2(ARP_LUT_DEPTH),
-    parameter FILTER_DEPTH = 16,
+    parameter FILTER_DEPTH = 32,
     parameter FILTER_DEPTH_BITS = log2(FILTER_DEPTH)
 )
 (

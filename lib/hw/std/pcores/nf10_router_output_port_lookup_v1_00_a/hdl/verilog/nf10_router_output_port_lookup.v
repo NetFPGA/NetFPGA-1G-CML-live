@@ -114,13 +114,13 @@ module nf10_router_output_port_lookup
 
   localparam NUM_QUEUES        = 8;
   localparam NUM_QUEUES_WIDTH  = log2(NUM_QUEUES);
-  localparam LPM_LUT_ROWS      = 16;
+  localparam LPM_LUT_ROWS      = 32;
   localparam LPM_LUT_ROWS_BITS = log2(LPM_LUT_ROWS);
   localparam LPM_LUT_COLS      = 4;
-  localparam ARP_LUT_ROWS      = 16;
+  localparam ARP_LUT_ROWS      = 32;
   localparam ARP_LUT_ROWS_BITS = log2(ARP_LUT_ROWS);
   localparam ARP_LUT_COLS      = 3;
-  localparam FILTER_ROWS       = 16;
+  localparam FILTER_ROWS       = 32;
   localparam FILTER_ROWS_BITS  = log2(FILTER_ROWS);
   localparam FILTER_COLS       = 1;
   
