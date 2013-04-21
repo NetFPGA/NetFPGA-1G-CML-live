@@ -1,3 +1,0 @@
-vhdl lmb_bram_if_cntlr_v2_10_b /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_bram_if_cntlr_v2_10_b/hdl/vhdl/pselect_mask.vhd
-vhdl lmb_bram_if_cntlr_v2_10_b /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/lmb_bram_if_cntlr_v2_10_b/hdl/vhdl/lmb_bram_if_cntlr.vhd
-vhdl work ../hdl/microblaze_0_d_bram_ctrl_wrapper.vhd

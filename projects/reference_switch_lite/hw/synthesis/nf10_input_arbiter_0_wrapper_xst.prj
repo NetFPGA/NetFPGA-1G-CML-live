@@ -1,4 +1,0 @@
-verilog nf10_input_arbiter_v1_00_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_input_arbiter_v1_00_a/hdl/verilog/nf10_input_arbiter.v
-verilog nf10_input_arbiter_v1_00_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_input_arbiter_v1_00_a/hdl/verilog/small_fifo_v3.v
-verilog nf10_input_arbiter_v1_00_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/std/pcores/nf10_input_arbiter_v1_00_a/hdl/verilog/fallthrough_small_fifo_v2.v
-verilog work ../hdl/nf10_input_arbiter_0_wrapper.v
