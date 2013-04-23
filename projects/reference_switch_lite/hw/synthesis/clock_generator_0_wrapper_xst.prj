@@ -1,5 +1,0 @@
-vhdl clock_generator_v4_01_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/clock_generator_v4_01_a/hdl/vhdl/dcm_module.vhd
-vhdl clock_generator_v4_01_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/clock_generator_v4_01_a/hdl/vhdl/pll_module.vhd
-vhdl clock_generator_v4_01_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/clock_generator_v4_01_a/hdl/vhdl/mmcm_module.vhd
-VHDL clock_generator_0_v4_01_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/projects/reference_switch_lite/hw/hdl/elaborate/clock_generator_0_v4_01_a/hdl/vhdl/clock_generator.vhd
-vhdl work ../hdl/clock_generator_0_wrapper.vhd

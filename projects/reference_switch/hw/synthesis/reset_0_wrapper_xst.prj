@@ -1,5 +1,0 @@
-vhdl proc_sys_reset_v3_00_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_sys_reset_v3_00_a/hdl/vhdl/upcnt_n.vhd
-vhdl proc_sys_reset_v3_00_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_sys_reset_v3_00_a/hdl/vhdl/lpf.vhd
-vhdl proc_sys_reset_v3_00_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_sys_reset_v3_00_a/hdl/vhdl/sequence.vhd
-vhdl proc_sys_reset_v3_00_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/proc_sys_reset_v3_00_a/hdl/vhdl/proc_sys_reset.vhd
-vhdl work ../hdl/reset_0_wrapper.vhd

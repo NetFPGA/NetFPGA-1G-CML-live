@@ -1,2 +1,0 @@
-VHDL diff_input_buf_v1_00_a /home/mshahbaz/Personal/repo/mshahbaz/NetFPGA-10G-live/lib/hw/xilinx/pcores/diff_input_buf_v1_00_a/hdl/vhdl/diff_input_buf.vhd
-vhdl work ../hdl/diff_input_buf_0_wrapper.vhd
