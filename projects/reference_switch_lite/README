@@ -6,7 +6,7 @@
 #        README
 #
 #  Project:
-#        reference_switch
+#        reference_switch_lite
 #
 #  Author:
 #        Gianni Anitchi, Muhammad Shahbaz
@@ -40,8 +40,5 @@ software).
 To build the project, simply use "make". The result bitfile is
 under bitfiles/
 
-For more information about this project, please visit
-
-http://netfpga10g.pbworks.com/Projects
-
-and select the correspondent project.
+More details regarding the project can be found in the following link
+https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Learning-Switch-(Lite)
