@@ -40,6 +40,9 @@ software).
 To build the project, please follow the Switch CAM installation first and then do a "make". 
 The resulting bitfile is under bitfiles/
 
+More details regarding the project can be found in the following link
+https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Learning-CAM-Switch
+
 ************************
 Switch CAM installation
 ************************

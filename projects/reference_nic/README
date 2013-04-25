@@ -6,7 +6,7 @@
 #        README
 #
 #  Project:
-#        nic
+#        reference_nic
 #
 #  Author:
 #        Mario Flajslik
@@ -40,8 +40,6 @@ software).
 To build the project, simply use "make". The result bitfile is
 under bitfiles/
 
-For more information about this project, please visit
+More details regarding the project can be found in the following link
+https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Reference-NIC
 
-https://github.com/NetFPGA/NetFPGA-10G-live/wiki/Projects
-
-and select the correspondent project.
