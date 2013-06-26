@@ -1,0 +1,82 @@
+SDK_Workspace/hello_world_0/src/helloworld.c:44:20: error: xwdttb.h: No such file or directory
+SDK_Workspace/hello_world_0/src/helloworld.c:45:23: error: xemaclite.h: No such file or directory
+SDK_Workspace/hello_world_0/src/helloworld.c:46:25: error: xemaclite_l.h: No such file or directory
+In file included from SDK_Workspace/hello_world_0/src/helloworld.c:56:
+SDK_Workspace/hello_world_0/src/helloworld.h:70: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘regs0’
+SDK_Workspace/hello_world_0/src/helloworld.h:82: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘regs1’
+SDK_Workspace/hello_world_0/src/helloworld.h:88: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘twinax_edc’
+SDK_Workspace/hello_world_0/src/helloworld.h:738: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.h:739: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.h:741: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.h:742: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.h:744: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.h:745: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.h:746: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.c:62: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘Client0’
+SDK_Workspace/hello_world_0/src/helloworld.c:63: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘Client1’
+SDK_Workspace/hello_world_0/src/helloworld.c:65: error: expected ‘)’ before ‘client_baseaddr’
+SDK_Workspace/hello_world_0/src/helloworld.c:69: error: expected ‘)’ before ‘client_baseaddr’
+SDK_Workspace/hello_world_0/src/helloworld.c:92: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘testclient_getTxBuffer’
+SDK_Workspace/hello_world_0/src/helloworld.c:96: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘testclient_getTxLength’
+SDK_Workspace/hello_world_0/src/helloworld.c:117: error: expected ‘)’ before ‘client_baseaddr’
+SDK_Workspace/hello_world_0/src/helloworld.c:121: error: expected ‘)’ before ‘client_baseaddr’
+SDK_Workspace/hello_world_0/src/helloworld.c:144: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘testclient_getRxBuffer’
+SDK_Workspace/hello_world_0/src/helloworld.c:148: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘testclient_getRxLength’
+SDK_Workspace/hello_world_0/src/helloworld.c:169: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘EmacLiteInstance’
+SDK_Workspace/hello_world_0/src/helloworld.c: In function ‘main’:
+SDK_Workspace/hello_world_0/src/helloworld.c:174: error: ‘XEmacLite’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:174: error: (Each undeclared identifier is reported only once
+SDK_Workspace/hello_world_0/src/helloworld.c:174: error: for each function it appears in.)
+SDK_Workspace/hello_world_0/src/helloworld.c:174: error: ‘EmacLiteInstPtr’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:174: error: ‘EmacLiteInstance’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:175: error: ‘XEmacLite_Config’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:175: error: ‘ConfigPtr’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:177: warning: implicit declaration of function ‘XEmacLite_LookupConfig’
+SDK_Workspace/hello_world_0/src/helloworld.c:177: error: ‘XPAR_EMACLITE_0_DEVICE_ID’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:178: warning: implicit declaration of function ‘XEmacLite_CfgInitialize’
+SDK_Workspace/hello_world_0/src/helloworld.c:181: warning: implicit declaration of function ‘Xil_Out32’
+SDK_Workspace/hello_world_0/src/helloworld.c:181: error: ‘XPAR_NF10_AXIS_MEMCACHED_CLIENT_0_BASEADDR’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:182: error: ‘XPAR_NF10_AXIS_MEMCACHED_CLIENT_1_BASEADDR’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:210: warning: implicit declaration of function ‘inbyte’
+SDK_Workspace/hello_world_0/src/helloworld.c:219: warning: implicit declaration of function ‘ael2005_read’
+SDK_Workspace/hello_world_0/src/helloworld.c:225: warning: implicit declaration of function ‘ael2005_i2c_read’
+SDK_Workspace/hello_world_0/src/helloworld.c:246: warning: implicit declaration of function ‘test_initialize’
+SDK_Workspace/hello_world_0/src/helloworld.c:273: warning: implicit declaration of function ‘test_status’
+SDK_Workspace/hello_world_0/src/helloworld.c:274: warning: implicit declaration of function ‘Xil_In32’
+SDK_Workspace/hello_world_0/src/helloworld.c:303: error: ‘u32’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:303: error: expected ‘;’ before ‘length’
+SDK_Workspace/hello_world_0/src/helloworld.c:304: error: expected ‘;’ before ‘i’
+SDK_Workspace/hello_world_0/src/helloworld.c:305: error: ‘i’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:305: error: ‘length’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:306: error: ‘u8’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:306: error: expected ‘;’ before ‘v’
+SDK_Workspace/hello_world_0/src/helloworld.c:307: error: ‘v’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:312: error: expected ‘;’ before ‘length’
+SDK_Workspace/hello_world_0/src/helloworld.c:313: error: expected ‘;’ before ‘byte0’
+SDK_Workspace/hello_world_0/src/helloworld.c:314: error: expected ‘;’ before ‘byte1’
+SDK_Workspace/hello_world_0/src/helloworld.c:315: error: ‘byte0’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:315: error: ‘byte1’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:316: error: expected ‘;’ before ‘data’
+SDK_Workspace/hello_world_0/src/helloworld.c:317: warning: implicit declaration of function ‘testclient_setTxBuffer’
+SDK_Workspace/hello_world_0/src/helloworld.c:317: error: ‘Client0’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:317: error: ‘data’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:322: warning: implicit declaration of function ‘testclient_setTxLength’
+SDK_Workspace/hello_world_0/src/helloworld.c:185: warning: unused variable ‘t’
+SDK_Workspace/hello_world_0/src/helloworld.c: At top level:
+SDK_Workspace/hello_world_0/src/helloworld.c:333: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.c:340: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.c:348: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.c:362: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.c: In function ‘ael2005_sleep’:
+SDK_Workspace/hello_world_0/src/helloworld.c:380: warning: implicit declaration of function ‘XWdtTb_ReadReg’
+SDK_Workspace/hello_world_0/src/helloworld.c:380: error: ‘XPAR_AXI_TIMEBASE_WDT_0_BASEADDR’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:380: error: ‘XWT_TBR_OFFSET’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:385: error: ‘XST_SUCCESS’ undeclared (first use in this function)
+SDK_Workspace/hello_world_0/src/helloworld.c:386: warning: control reaches end of non-void function
+SDK_Workspace/hello_world_0/src/helloworld.c: At top level:
+SDK_Workspace/hello_world_0/src/helloworld.c:388: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.c:423: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.c:430: error: expected ‘)’ before ‘*’ token
+SDK_Workspace/hello_world_0/src/helloworld.c:464: fatal error: opening dependency file result/helloworld.d: No such file or directory
+compilation terminated.
+make: *** [result/helloworld.o] Error 1
