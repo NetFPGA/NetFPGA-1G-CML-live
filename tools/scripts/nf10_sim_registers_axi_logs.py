@@ -5,17 +5,13 @@
 #  NetFPGA-10G http://www.netfpga.org
 #
 #  File:
-#        nf10_sim_reconcile_axi_logs.py
+#        nf10_sim_registers_axi_logs.py
 #
 #  Author:
-#        David J. Miller
+#        Georgina Kalogeridou
 #
-#  Description:
-#        Reconciles *_log.axi with *_expected.axi.
-#
-#  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
+# Copyright notice:
+#        Copyright (C) 2013 University of Cambridge
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
