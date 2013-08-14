@@ -1,0 +1,9 @@
+setMode -bs
+setCable -port auto
+Identify -inferir 
+identifyMPM 
+assignFile -p 1 -file "BITFILE_NAME_HERE"
+assignFile -p 2 -file "CPLDFILE_NAME_HERE"
+Program -p 1 
+Program -p 2 -e -v
+quit
