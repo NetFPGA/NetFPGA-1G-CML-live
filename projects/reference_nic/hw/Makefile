@@ -11,6 +11,9 @@
 #  Author:
 #        Sam D'Amico
 #
+#			Modified by Jong Han 06/05/2013
+#			Added Parital synthesis and PCIe programming option.
+#
 #  Description:
 #        This file is based on the standard Xilinx XPS Makefile
 #        Please note that the software flow is deprecated by Xilinx.
@@ -75,11 +78,19 @@ PATH      := $(PATH):$(dir $(firstword $(MAKEFILE_LIST)))/../../../tools/scripts
 # Create AXI-SIM version of MHSFILE and SIM_CMD
 AXISIM_MHS = $(patsubst %.mhs, %_axisim.mhs, $(MHSFILE))
 AXISIM_CMD = $(patsubst %_system, %_system_axisim, $(SIM_CMD))
+AXISIM_EXE = ./isim_system_axisim
 
 
 NF10_NGC_FILES := implementation/axi_interconnect_0_wrapper.ngc
 
 NF10_SCR_FILES := nf10/axi_interconnect_0_wrapper_xst.scr
+
+# Programming PCIE
+NF10_PROGPCIE = pciecopy exporttosdk
+
+# Default Packet length for make_pkts.py
+PKTLEN = 10
+PKTNO = 2 
 
 #################################################################
 # PHONY TARGETS
@@ -118,8 +129,56 @@ all:
 bits: $(SYSTEM_BIT)
 
 ace: $(SYSTEM_ACE)
+#################################################################
+# PCIE PROGRAMMING IMPLEMENTAION
+#################################################################
+progpcie: $(NF10_PROGPCIE)
+	cp -f ./data/nf10.ucf.org ./data/nf10.ucf
+	rm -f ./data/nf10.ucf.org
+	cp -f ./system.mhs.org ./system.mhs
+	rm -f ./system.mhs.org
+	
+pciecopy: 
+	if [ ! -e ./data/nf10.ucf.org ]; then cp -f ./data/nf10.ucf ./data/nf10.ucf.org; \
+	else cp -f ./data/nf10.ucf.org ./data/nf10.ucf; fi
+	if [ ! -e ./system.mhs.org ]; then cp -f ./system.mhs ./system.mhs.org; \
+	else cp -f ./system.mhs.org ./system.mhs; fi
+	cat ./nf10/nf10.ucf.pcie >> ./data/nf10.ucf
+	cat ./nf10/system.mhs.pcie >> ./system.mhs
+#################################################################
 
-exporttosdk: $(SYSTEM_HW_HANDOFF_DEP)
+
+#################################################################
+# Identification information added. 
+##################################################################
+identifier:
+	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/date_time_id.v
+	echo \`define PARA_NETFPGA_DATE	32\'h`date +%d%m%y` > date_time_id.v
+	echo \`define PARA_NETFPGA_TIME	32\'h`date +%H%M` >> date_time_id.v
+	echo \`define PARA_NETFPGA_ID		32\'ha >> date_time_id.v
+	mv -f date_time_id.v ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+
+#################################################################
+# PARTIAL SYNTHESIS. This must be run after make for completing 
+# implementation.
+#################################################################
+partial:
+	@if [ "$(MODULE)" = "nf10_10g_interface" ]; then \
+	for num in 0 1 2 3; do cd ./synthesis; xst -ifn $(MODULE)_$${num}_wrapper_xst.scr; cd ./../; \
+	cd ./implementation/$(MODULE)_$${num}_wrapper; ngcbuild -p xc5vtx240tff1759-2 -intstyle silent -i -sd .. $(MODULE)_$${num}_wrapper.ngc ../$(MODULE)_$${num}_wrapper; cd ../../; done; cd ../../; \
+	else \
+	cd ./synthesis; xst -ifn $(MODULE)_wrapper_xst.scr; cd ./../; \
+	cd ./implementation/$(MODULE)_wrapper; ngcbuild -p xc5vtx240tff1759-2 -intstyle silent -i -sd .. $(MODULE)_wrapper.ngc ../$(MODULE)_wrapper; cd ../../; \
+	fi
+
+$(MODULE):
+	xflow -wd implementation -p xc5vtx240tff1759-2 -implement xflow.opt system.ngc 
+	@cp -f nf10/bitgen.ut implementation/bitgen.ut
+	cd implementation ; bitgen -w -f bitgen.ut $(SYSTEM) ; cd ..
+	cd ../sw/embedded ; data2mem -bm SDK_Workspace/hw/system_bd.bmm -bt SDK_Workspace/hw/system.bit -bd result/hello_world_0.elf tag microblaze_0 -o b result/download.bit
+#################################################################
+
+exporttosdk: identifier $(SYSTEM_HW_HANDOFF_DEP)
 	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
 	@mkdir -p $(SDK_EXPORT_DIR)/../libs
 	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
@@ -128,7 +187,7 @@ exporttosdk: $(SYSTEM_HW_HANDOFF_DEP)
 	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
 	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
 	@rm -rf $(SDK_EXPORT_DIR)/../libs
-	
+
 netlist: $(POSTSYN_NETLIST)
 
 download: $(DOWNLOAD_BIT) dummy
@@ -327,16 +386,85 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 sim: axi_model
 	./make_pkts.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf10/noninteractive_sim.tcl
 	nf10_sim_reconcile_axi_logs.py
 
+###### AXI SIMULATION TX, RX, and TXRX Paths #######
+
 simgui: axi_model
 	./make_pkts.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
 	nf10_sim_reconcile_axi_logs.py
+
+
+simtx: checkpktlen axi_model
+	./make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > nf10_10g_interface_0_stim.axi
+	@echo "" > nf10_10g_interface_1_stim.axi
+	@echo "" > nf10_10g_interface_2_stim.axi
+	@echo "" > nf10_10g_interface_3_stim.axi
+	cp nf10/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
+
+simtxgui: checkpktlen axi_model
+	./make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > nf10_10g_interface_0_stim.axi
+	@echo "" > nf10_10g_interface_1_stim.axi
+	@echo "" > nf10_10g_interface_2_stim.axi
+	@echo "" > nf10_10g_interface_3_stim.axi
+	cp nf10/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
+
+simrx: checkpktlen axi_model
+	./make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > dma_0_stim.axi
+	cp nf10/system_axisim_rx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
+
+simrxgui: checkpktlen axi_model
+	./make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > dma_0_stim.axi
+	cp nf10/system_axisim_rx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
+
+simtxrx: checkpktlen axi_model
+	./make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > nf10_10g_interface_0_stim.axi
+	@echo "" > nf10_10g_interface_1_stim.axi
+	@echo "" > nf10_10g_interface_2_stim.axi
+	@echo "" > nf10_10g_interface_3_stim.axi
+	cp nf10/system_axisim_txrx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
+
+simtxrxgui: checkpktlen axi_model
+	./make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > nf10_10g_interface_0_stim.axi
+	@echo "" > nf10_10g_interface_1_stim.axi
+	@echo "" > nf10_10g_interface_2_stim.axi
+	@echo "" > nf10_10g_interface_3_stim.axi
+	cp nf10/system_axisim_txrx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
+
+checkpktlen: 
+	@if [ "$(PKTLEN)" = "" ]; then echo "Please follow command line './make simrxgui PKTLEN=10 PKTLNO=2'"; fi
+	@echo "Run with default packet payload length and no! $(PKTLETN) $(PKTNO)"
 
 system_incl.make:
 	@echo exit|xps -nw system.xmp
