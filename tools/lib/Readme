@@ -1,0 +1,8 @@
+
+The files inside the lib are used for HW tests
+The shared library created here is accessed by the
+run.py in the tests for
+
+a. Writing a value into the register.
+b. Reading a value from the register.
+c. Checking the value of the register against an expected value.

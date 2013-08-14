@@ -9,7 +9,7 @@
 
   module ip_arp
     #(parameter NUM_QUEUES = 8,
-      parameter LUT_DEPTH = 16,
+      parameter LUT_DEPTH = 32,
       parameter LUT_DEPTH_BITS = log2(LUT_DEPTH)
       )
    (// --- Interface to ip_arp
@@ -18,6 +18,7 @@
     input                              lpm_vld,
     input                              lpm_hit,
 
+    output			       arp_done,
     // --- interface to process block
     output     [47:0]                  next_hop_mac,
     output     [NUM_QUEUES-1:0]        output_port,
@@ -154,6 +155,7 @@
 
    //------------------------- Logic --------------------------------
    assign arp_mac_vld = !empty;
+   assign arp_done = lookup_ack;
    always @(posedge clk) begin
       if(reset) begin
          output_port_latched <= 0;

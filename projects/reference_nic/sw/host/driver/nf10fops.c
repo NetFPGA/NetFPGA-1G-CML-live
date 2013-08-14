@@ -118,22 +118,24 @@ long nf10fops_ioctl (struct file *f, unsigned int cmd, unsigned long arg){
                 }
             }
         }
+	if(axi_wr_cnt <= 64){
+          // write reg
+          *(((uint64_t*)card->cfg_addr) + 128) = (uint64_t)arg;
+	}
         spin_unlock_irqrestore(&axi_lock, flags);
         if(axi_wr_cnt > 64){
             printk(KERN_ERR "nf10: AXI write buffer full\n");
             return -EFAULT;
         }
 
-        // write reg
-        *(((uint64_t*)card->cfg_addr) + 128) = (uint64_t)arg;
         
         break;
     case NF10_IOCTL_CMD_READ_REG:
         if(copy_from_user(&addr, (uint64_t*)arg, 8)) printk(KERN_ERR "nf10: ioctl copy_from_user fail\n");
+	spin_lock_irqsave(&axi_lock, flags);
         *(((uint64_t*)card->cfg_addr) + 129) = (addr << 32);
         val = *(((uint64_t*)card->cfg_addr) + 129);
         if(copy_to_user((uint64_t*)arg, &val, 8))  printk(KERN_ERR "nf10: ioctl copy_to_user fail\n");        
-        spin_lock_irqsave(&axi_lock, flags);
         axi_wr_cnt = 0;
         spin_unlock_irqrestore(&axi_lock, flags);
         break;

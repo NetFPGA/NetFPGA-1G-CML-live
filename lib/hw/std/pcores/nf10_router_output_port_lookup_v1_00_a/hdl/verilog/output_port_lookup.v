@@ -48,11 +48,11 @@ module output_port_lookup
     parameter C_S_AXIS_TUSER_WIDTH=128,
     parameter NUM_QUEUES=8,
     parameter NUM_QUEUES_WIDTH = log2(NUM_QUEUES),
-    parameter LPM_LUT_DEPTH = 16,
+    parameter LPM_LUT_DEPTH = 32,
     parameter LPM_LUT_DEPTH_BITS = log2(LPM_LUT_DEPTH),
-    parameter ARP_LUT_DEPTH = 16,
+    parameter ARP_LUT_DEPTH = 32,
     parameter ARP_LUT_DEPTH_BITS = log2(ARP_LUT_DEPTH),
-    parameter FILTER_DEPTH = 16,
+    parameter FILTER_DEPTH = 32,
     parameter FILTER_DEPTH_BITS = log2(FILTER_DEPTH)
 )
 (
@@ -146,13 +146,6 @@ module output_port_lookup
 
    //--------------------- Internal Parameter-------------------------
 
-  // localparam LPM_LUT_DEPTH = 16;
-  // localparam LPM_LUT_DEPTH_BITS = log2(LPM_LUT_DEPTH);
-  // localparam ARP_LUT_DEPTH = 16;
-  // localparam ARP_LUT_DEPTH_BITS = log2(ARP_LUT_DEPTH);
-  // localparam FILTER_DEPTH = 16;
-  // localparam FILTER_DEPTH_BITS = log2(FILTER_DEPTH);
-  // localparam NUM_QUEUES_WIDTH = log2(NUM_QUEUES);
 
    //---------------------- Wires and regs----------------------------
 
@@ -177,17 +170,18 @@ module output_port_lookup
    wire					in_fifo_tlast;
 
    wire                        in_fifo_nearly_full;
-
+   wire			       arp_done;
+   wire			       dest_fifo_nearly_full;
   
    //----------------------- Modules ---------------------------------
 
-   assign s_axis_tready = !in_fifo_nearly_full;
+   assign s_axis_tready = !in_fifo_nearly_full & !dest_fifo_nearly_full;
 
    //------------------------- Modules-------------------------------
 
    /* The size of this fifo has to be large enough to fit the previous modules' headers
     * and the ethernet header */
-   fallthrough_small_fifo #(.WIDTH(C_M_AXIS_DATA_WIDTH+C_M_AXIS_TUSER_WIDTH+C_M_AXIS_DATA_WIDTH/8+1), .MAX_DEPTH_BITS(4))
+   fallthrough_small_fifo #(.WIDTH(C_M_AXIS_DATA_WIDTH+C_M_AXIS_TUSER_WIDTH+C_M_AXIS_DATA_WIDTH/8+1), .MAX_DEPTH_BITS(3))
       input_fifo
         (.din ({s_axis_tlast, s_axis_tuser, s_axis_tstrb, s_axis_tdata}),     // Data in
          .wr_en (s_axis_tvalid & ~in_fifo_nearly_full),               // Write enable
@@ -262,6 +256,8 @@ module output_port_lookup
          .lpm_vld              (lpm_vld),
          .lpm_hit              (lpm_hit),
 
+         .arp_done	       (arp_done),
+         .dest_fifo_nearly_full(dest_fifo_nearly_full),
          // --- Interface to preprocess block
          .word_IP_DST_HI       (word_IP_DST_HI),
          .word_IP_DST_LO       (word_IP_DST_LO),
@@ -300,6 +296,7 @@ module output_port_lookup
          .lpm_vld           (lpm_vld),
          .lpm_hit           (lpm_hit),
 
+         .arp_done	    (arp_done),
          // --- interface to process block
          .next_hop_mac      (next_hop_mac),
          .output_port       (output_port),
@@ -466,12 +463,8 @@ module output_port_lookup
          .out_tvalid                    (m_axis_tvalid),
          .out_tlast 	                (m_axis_tlast),
          .out_tdata                     (m_axis_tdata),
-         .out_tuser                     (m_axis_tuser),     // new checksum assuming decremented TTL
-<<<<<<< HEAD
-         .out_tready                    (s_axis_tready),
-=======
+         .out_tuser                     (m_axis_tuser),
          .out_tready                    (m_axis_tready),
->>>>>>> origin/master
 	 .out_tstrb			(m_axis_tstrb),
 
          // --- interface to registers

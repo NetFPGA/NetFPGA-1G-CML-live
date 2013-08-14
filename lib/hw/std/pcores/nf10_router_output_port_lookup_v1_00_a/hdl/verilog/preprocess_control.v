@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-///////////////////////////////////////////////////////////////////////////////
-// $Id: preprocess_control.v 1887 2007-06-19 21:33:32Z grg $
-//
-// Module: preprocess_control.v
-// Project: NF2.1
-// Description: asserts the appropriate signals for parsing the headers
-//
-///////////////////////////////////////////////////////////////////////////////
-=======
 /*******************************************************************************
  * 
  *  NetFPGA-10G http://www.netfpga.org
@@ -49,7 +39,7 @@
  *
  */
 
->>>>>>> origin/master
+
 
   module preprocess_control
     #(parameter C_S_AXIS_DATA_WIDTH=256
@@ -107,7 +97,10 @@
         WORD_2: begin
            if(valid) begin
               word_IP_DST_LO = 1;
-              state_next = WAIT_EOP;
+	      if(tlast)
+		state_next = WORD_1;
+	      else
+              	state_next = WAIT_EOP;
            end
         end
 

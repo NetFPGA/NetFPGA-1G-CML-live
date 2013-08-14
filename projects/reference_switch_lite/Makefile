@@ -10,6 +10,7 @@
 #
 #  Author:
 #        Muahammad Shahbaz, Gianni Anitchi
+#        Jong Hun Han
 #
 #  Description:
 #        make all : Make BRAM initialized bitfile to bitfiles/
@@ -52,3 +53,9 @@ all:
 clean:
 	$(MAKE) -C $(HW) clean
 	$(MAKE) -C $(SW) clean
+
+partial:
+	$(MAKE) -C $(HW) partial $(MODULE)
+	$(MAKE) -C $(SW) bitfilegen
+	mkdir -p bitfiles
+	cp $(SW)/result/download.bit bitfiles/

@@ -1,17 +1,48 @@
-///////////////////////////////////////////////////////////////////////////////
-// $Id: ip_lpm.v 5089 2009-02-23 02:14:38Z grg $
-//
-// Module: ip_lpm.v
-// Project: NF2.1
-// Description: Finds the longest prefix match of the incoming IP address
-//              gives the ip of the next hop and the output port
-//
-///////////////////////////////////////////////////////////////////////////////
+/*******************************************************************************
+ * 
+ *  NetFPGA-10G http://www.netfpga.org
+ *
+ *  File:
+ *        eth_parser.v
+ *
+ *  Library:
+ *        std/pcores/nf10_router_output_port_lookup_v1_00_a
+ *
+ *  Module:
+ *        ip_lpm
+ *
+ *  Author:
+ *        grg, Gianni Antichi
+ *
+ *  Description:
+ *        
+ *
+ *  Copyright notice:
+ *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+ *                                 Junior University
+ *
+ *  Licence:
+ *        This file is part of the NetFPGA 10G development base package.
+ *
+ *        This file is free code: you can redistribute it and/or modify it under
+ *        the terms of the GNU Lesser General Public License version 2.1 as
+ *        published by the Free Software Foundation.
+ *
+ *        This package is distributed in the hope that it will be useful, but
+ *        WITHOUT ANY WARRANTY; without even the implied warranty of
+ *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *        Lesser General Public License for more details.
+ *
+ *        You should have received a copy of the GNU Lesser General Public
+ *        License along with the NetFPGA source package.  If not, see
+ *        http://www.gnu.org/licenses/.
+ *
+ */
 
   module ip_lpm
     #(parameter C_S_AXIS_DATA_WIDTH=256,
       parameter NUM_QUEUES = 8,
-      parameter LUT_DEPTH = 16,
+      parameter LUT_DEPTH = 32,
       parameter LUT_DEPTH_BITS = log2(LUT_DEPTH)
       )
    (// --- Interface to the previous stage
@@ -22,6 +53,9 @@
     output reg [NUM_QUEUES-1:0]        lpm_output_port,
     output reg                         lpm_vld,
     output reg                         lpm_hit,
+
+    input			       arp_done,
+    output			       dest_fifo_nearly_full,
 
     // --- Interface to preprocess block
     input                              word_IP_DST_HI,
@@ -62,6 +96,10 @@
       end
    endfunction // log2
 
+
+   localparam				 WAIT = 1;
+   localparam				 PROCESS = 2;
+
    //---------------------- Wires and regs----------------------------
 
    wire                                  cam_busy;
@@ -79,6 +117,12 @@
    reg [31:0]                            dst_ip;
    wire [31:0]                           lpm_rd_mask_inverted;
 
+   reg					 rd_dest;
+   reg 					 dst_ip_ready;
+   wire [31:0]				 dst_ip_fifo;
+   wire					 dest_fifo_empty;
+  
+   reg [1:0]				 state,state_next;
    //------------------------- Modules-------------------------------
    assign                                lpm_rd_mask = ~lpm_rd_mask_inverted;
 
@@ -106,8 +150,8 @@
        .DEFAULT_DATA       (1)
       ) cam_lut_sm
        (// --- Interface for lookups
-        .lookup_req          (dst_ip_vld),
-        .lookup_cmp_data     (dst_ip),
+        .lookup_req          (dst_ip_ready),
+        .lookup_cmp_data     (dst_ip_fifo),
         .lookup_cmp_dmask    (32'h0),
         .lookup_ack          (lpm_vld_result),
         .lookup_hit          (lpm_hit_result),
@@ -147,6 +191,54 @@
 
    //------------------------- Logic --------------------------------
 
+
+   fallthrough_small_fifo #(.WIDTH(32), .MAX_DEPTH_BITS  (2))
+      dest_fifo
+        (.din           (dst_ip), // Data in
+         .wr_en         (dst_ip_vld),             // Write enable
+         .rd_en         (rd_dest),       // Read the next word
+         .dout          (dst_ip_fifo),
+         .full          (),
+         .nearly_full   (dest_fifo_nearly_full),
+         .prog_full     (),
+         .empty         (dest_fifo_empty),
+         .reset         (reset),
+         .clk           (clk)
+         );
+
+
+    always @(*) begin
+	rd_dest = 0;
+	dst_ip_ready = 0;
+	state_next = state;
+
+	case(state)
+
+		WAIT: begin
+			if(!dest_fifo_empty) begin
+				rd_dest = 1;
+				dst_ip_ready = 1;
+				state_next = PROCESS;
+			end
+		end
+	
+		PROCESS: begin
+			if(arp_done)
+				state_next = WAIT;
+		end
+	endcase
+     end		
+
+
+   always @(posedge clk) begin
+	if(reset)
+		state <= WAIT;
+	else
+		state <= state_next;
+   end
+
+
+
    /*****************************************************************
     * find the dst IP address and do the lookup
     *****************************************************************/
@@ -157,10 +249,12 @@
       end
       else begin
          if(word_IP_DST_HI) begin
-            dst_ip[15:0] <= tdata[255:240];
+            //dst_ip[15:0] <= tdata[255:240];
+            dst_ip[31:16] <= tdata[15:0];
          end
          if(word_IP_DST_LO) begin
-            dst_ip[31:16]  <= tdata[15:0];
+            //dst_ip[31:16]  <= tdata[15:0];
+            dst_ip[15:0]  <= tdata[255:240];
             dst_ip_vld <= 1;
          end
          else begin
@@ -174,7 +268,7 @@
     *****************************************************************/
    always @(posedge clk) begin
       lpm_output_port <= lookup_port_result;
-      next_hop_ip     <= (next_hop_ip_result == 0) ? dst_ip : next_hop_ip_result;
+      next_hop_ip     <= (next_hop_ip_result == 0) ? dst_ip_fifo : next_hop_ip_result;
       lpm_hit         <= lpm_hit_result;
 
       if(reset) begin

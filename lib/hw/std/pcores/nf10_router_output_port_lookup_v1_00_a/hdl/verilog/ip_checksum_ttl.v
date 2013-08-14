@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-///////////////////////////////////////////////////////////////////////////////
-// $Id: ip_checksum_ttl.v 5240 2009-03-14 01:50:42Z grg $
-//
-// Module: ip_checksum_ttl.v
-// Project: NF2.1 reference router
-// Description: Check the IP checksum over the IP header, and
-//              generate a new one assuming that the TTL gets decremented.
-//              Check if the TTL is valid, and generate the new TTL.
-//
-///////////////////////////////////////////////////////////////////////////////
-=======
 /*******************************************************************************
  * 
  *  NetFPGA-10G http://www.netfpga.org
@@ -51,8 +39,6 @@
  *
  */
 
-
->>>>>>> origin/master
 `timescale 1ns/100ps
 module ip_checksum_ttl
   #(parameter C_S_AXIS_DATA_WIDTH=256)
@@ -83,6 +69,7 @@ module ip_checksum_ttl
    reg [19:0]  checksum, checksum_next;
    reg [16:0]  adjusted_checksum;
    reg         checksum_done;
+   reg	       info_ready;
    wire        empty;
    reg  [7:0]  ttl_new;
    reg         ttl_good;
@@ -90,20 +77,31 @@ module ip_checksum_ttl
    reg         add_carry;
    reg	       add_carry_d1;
 
-<<<<<<< HEAD
-=======
    reg [19:0]  cksm_sum_0, cksm_sum_1, cksm_sum_0_next, cksm_sum_1_next, cksm_sum_2, cksm_sum_2_next, cksm_sum_3, cksm_sum_3_next;
    wire [19:0] cksm_temp,cksm_temp2;
 
->>>>>>> origin/master
    //------------------------- Modules-------------------------------
 
-   fallthrough_small_fifo #(.WIDTH(27), .MAX_DEPTH_BITS(2))
-      arp_fifo
-        (.din ({&checksum[15:0], adjusted_checksum[15:0], ttl_good, ttl_new, hdr_has_options}), // {IP good, new checksum}
+   fallthrough_small_fifo #(.WIDTH(26), .MAX_DEPTH_BITS(2))
+      info_fifo
+        (.din ({adjusted_checksum[15:0], ttl_good, ttl_new, hdr_has_options}), // {IP good, new checksum}
+         .wr_en (info_ready),             // Write enable
+         .rd_en (rd_checksum),               // Read the next word
+         .dout ({ip_new_checksum, ip_ttl_is_good, ip_new_ttl, ip_hdr_has_options}),
+         .full (),
+         .nearly_full (),
+         .prog_full (),
+         .empty (),
+         .reset (reset),
+         .clk (clk)
+         );
+
+   fallthrough_small_fifo #(.WIDTH(1), .MAX_DEPTH_BITS(2))
+      cksm_fifo
+        (.din (&checksum[15:0]),
          .wr_en (checksum_done),             // Write enable
          .rd_en (rd_checksum),               // Read the next word
-         .dout ({ip_checksum_is_good, ip_new_checksum, ip_ttl_is_good, ip_new_ttl, ip_hdr_has_options}),
+         .dout (ip_checksum_is_good),
          .full (),
          .nearly_full (),
          .prog_full (),
@@ -112,19 +110,10 @@ module ip_checksum_ttl
          .clk (clk)
          );
 
+
    //------------------------- Logic -------------------------------
    assign ip_checksum_vld = !empty;
 
-<<<<<<< HEAD
-
-   always @(*) begin
-      checksum_next = checksum;
-      if(word_IP_DST_HI) begin
-         checksum_next = tdata[127:112]+tdata[143:128]+tdata[159:144]+tdata[175:160]+tdata[191:176]+tdata[207:192]+tdata[223:208]+tdata[239:224]+tdata[255:240];
-      end
-      if(word_IP_DST_LO) begin
-         checksum_next = checksum + tdata[15:0];
-=======
    assign cksm_temp = cksm_sum_0 + cksm_sum_1;// + cksm_sum_2;
    assign cksm_temp2 = cksm_sum_2 + cksm_sum_3;
 
@@ -135,14 +124,13 @@ module ip_checksum_ttl
       cksm_sum_2_next = cksm_sum_2;
       cksm_sum_3_next = cksm_sum_3;
       if(word_IP_DST_HI) begin
-	 cksm_sum_0_next = tdata[127:112]+tdata[143:128]+tdata[159:144];
-	 cksm_sum_1_next = tdata[175:160]+tdata[191:176];
-	 cksm_sum_2_next = tdata[207:192]+tdata[223:208];
-	 cksm_sum_3_next = tdata[239:224]+tdata[255:240];
+	 cksm_sum_0_next = tdata[143:128]+tdata[127:112]+tdata[111:96];
+	 cksm_sum_1_next = tdata[95:80]+tdata[79:64];
+	 cksm_sum_2_next = tdata[63:48]+tdata[47:32];
+	 cksm_sum_3_next = tdata[31:16]+tdata[15:0];
       end
       if(word_IP_DST_LO) begin
-         checksum_next = cksm_temp + cksm_temp2 + tdata[15:0];
->>>>>>> origin/master
+         checksum_next = cksm_temp + cksm_temp2 + tdata[255:240];
       end
       if(add_carry) begin
 	 checksum_next = checksum[19:16] + checksum[15:0];
@@ -159,14 +147,10 @@ module ip_checksum_ttl
          ttl_new <= 0;
          ttl_good <= 0;
          hdr_has_options <= 0;
+         info_ready <= 0;
 	 checksum <= 20'h0;
          add_carry <= 0;
 	 add_carry_d1 <= 0;
-<<<<<<< HEAD
-      end
-      else begin
-	 checksum <= checksum_next;
-=======
 
          cksm_sum_0 <= 0;
          cksm_sum_1 <= 0;
@@ -179,20 +163,21 @@ module ip_checksum_ttl
          cksm_sum_1 <= cksm_sum_1_next;
          cksm_sum_2 <= cksm_sum_2_next;
          cksm_sum_3 <= cksm_sum_3_next;
->>>>>>> origin/master
          /* make sure the version is correct and there are no options */
          if(word_IP_DST_HI) begin
-            hdr_has_options <= (tdata[119:112]!=8'h45);
-	    ttl_new <= (tdata[183:176]==8'h0) ? 8'h0 : tdata[183:176] - 1'b1;
-	    ttl_good <= (tdata[183:176] > 8'h1);
-            adjusted_checksum <= {1'h0, tdata[207:192]} + 17'h0001; // adjust for the decrement in TTL (Little Endian)
+	    hdr_has_options <= (tdata[143:136]!=8'h45);
+            ttl_new <= (tdata[79:72]==8'h0) ? 8'h0 : tdata[79:72] - 1'b1;
+            ttl_good <= (tdata[79:72] > 8'h1);
+            adjusted_checksum <= {1'h0, tdata[63:48]} + 17'h0100; // adjust for the decrement in TTL (BIG Endian)
          end
 
          if(word_IP_DST_LO) begin
             adjusted_checksum <= {1'h0, adjusted_checksum[15:0]} + adjusted_checksum[16];
+            info_ready <= 1;
             add_carry <= 1;
          end
          else begin
+            info_ready <= 0;
             add_carry <= 0;
          end
 

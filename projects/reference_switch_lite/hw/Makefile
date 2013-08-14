@@ -10,6 +10,7 @@
 #
 #  Author:
 #        Gianni Anitchi, Muhammad Shahbaz
+#        Jong Hun Han
 #
 #  Description:
 #        This file is based on the standard Xilinx XPS Makefile
@@ -81,6 +82,9 @@ NF10_NGC_FILES := implementation/axi_interconnect_0_wrapper.ngc
 
 NF10_SCR_FILES := nf10/axi_interconnect_0_wrapper_xst.scr
 
+# Programming PCIE
+NF10_PROGPCIE = pciecopy exporttosdk
+
 #################################################################
 # PHONY TARGETS
 #################################################################
@@ -119,7 +123,57 @@ bits: $(SYSTEM_BIT)
 
 ace: $(SYSTEM_ACE)
 
-exporttosdk: $(SYSTEM_HW_HANDOFF_DEP)
+#################################################################
+# PCIE PROGRAMMING IMPLEMENTAION
+#################################################################
+progpcie: $(NF10_PROGPCIE)
+	cp -f ./data/nf10.ucf.org ./data/nf10.ucf
+	rm -f ./data/nf10.ucf.org
+	cp -f ./system.mhs.org ./system.mhs
+	rm -f ./system.mhs.org
+	
+pciecopy: 
+	if [ ! -e ./data/nf10.ucf.org ]; then cp -f ./data/nf10.ucf ./data/nf10.ucf.org; \
+	else cp -f ./data/nf10.ucf.org ./data/nf10.ucf; fi
+	if [ ! -e ./system.mhs.org ]; then cp -f ./system.mhs ./system.mhs.org; \
+	else cp -f ./system.mhs.org ./system.mhs; fi
+	cat ./nf10/nf10.ucf.pcie >> ./data/nf10.ucf
+	cat ./nf10/system.mhs.pcie >> ./system.mhs
+#################################################################
+
+
+#################################################################
+# Identification information added. 
+##################################################################
+identifier:
+	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/date_time_id.v
+	echo \`define PARA_NETFPGA_DATE	32\'h`date +%d%m%y` > date_time_id.v
+	echo \`define PARA_NETFPGA_TIME	32\'h`date +%H%M` >> date_time_id.v
+	echo \`define PARA_NETFPGA_ID		32\'hd >> date_time_id.v
+	mv -f date_time_id.v ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+
+#
+#################################################################
+# PARTIAL SYNTHESIS. This must be run after make for completing 
+# implementation.
+#################################################################
+partial:
+	@if [ "$(MODULE)" = "nf10_10g_interface" ]; then \
+	for num in 0 1 2 3; do cd ./synthesis; xst -ifn $(MODULE)_$${num}_wrapper_xst.scr; cd ./../; \
+	cd ./implementation/$(MODULE)_$${num}_wrapper; ngcbuild -p xc5vtx240tff1759-2 -intstyle silent -i -sd .. $(MODULE)_$${num}_wrapper.ngc ../$(MODULE)_$${num}_wrapper; cd ../../; done; cd ../../; \
+	else \
+	cd ./synthesis; xst -ifn $(MODULE)_wrapper_xst.scr; cd ./../; \
+	cd ./implementation/$(MODULE)_wrapper; ngcbuild -p xc5vtx240tff1759-2 -intstyle silent -i -sd .. $(MODULE)_wrapper.ngc ../$(MODULE)_wrapper; cd ../../; \
+	fi
+
+$(MODULE):
+	xflow -wd implementation -p xc5vtx240tff1759-2 -implement xflow.opt system.ngc 
+	@cp -f nf10/bitgen.ut implementation/bitgen.ut
+	cd implementation ; bitgen -w -f bitgen.ut $(SYSTEM) ; cd ..
+	cd ../sw/embedded ; data2mem -bm SDK_Workspace/hw/system_bd.bmm -bt SDK_Workspace/hw/system.bit -bd result/hello_world_0.elf tag microblaze_0 -o b result/download.bit
+#################################################################
+
+exporttosdk: identifier $(SYSTEM_HW_HANDOFF_DEP)
 	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
 	@mkdir -p $(SDK_EXPORT_DIR)/../libs
 	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
@@ -323,16 +377,29 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	nf10_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS) 
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
-sim: axi_model
+xparam:  
+	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
+	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
+	@mkdir -p $(SDK_EXPORT_DIR)/../libs
+	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
+	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
+	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
+	@rm -rf $(SDK_EXPORT_DIR)/../libs
+
+sim: axi_model xparam
 	./make_pkts.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf10/noninteractive_sim.tcl
 	nf10_sim_reconcile_axi_logs.py
 
-simgui: axi_model
+simgui: axi_model xparam
 	./make_pkts.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
+	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
 	nf10_sim_reconcile_axi_logs.py

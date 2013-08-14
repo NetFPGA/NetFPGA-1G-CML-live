@@ -33,7 +33,7 @@ Input the CAM data width.  Valid values are 1-512:
 32
 
 Input the CAM depth.  Valid values are 16-4096:
-16
+32
 
 Enter the CAM memory type to implement
 (Choose SRL-based if you need a Ternary or Enhanced Ternary mode CAM)
@@ -154,7 +154,7 @@ Input the CAM data width.  Valid values are 1-512:
 32
 
 Input the CAM depth.  Valid values are 16-4096:
-16
+32
 
 Enter the CAM memory type to implement
 (Choose SRL-based if you need a Ternary or Enhanced Ternary mode CAM)

@@ -10,6 +10,7 @@
 #
 #  Author:
 #        Mario Flajslik
+#        Jong Hun Han
 #
 #  Description:
 #        make : Make example applications to read stats and read/write AXI
@@ -42,5 +43,7 @@ all:
 	gcc -march=core2 -o stats stats.c
 	gcc -march=core2 -o rdaxi rdaxi.c
 	gcc -march=core2 -o wraxi wraxi.c
+	gcc -march=core2 -o netfpga10g_ver netfpga10g_ver.c
+
 clean:
-	rm stats rdaxi wraxi
+	rm stats rdaxi wraxi netfpga10g_ver
