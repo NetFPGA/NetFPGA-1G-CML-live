@@ -15,6 +15,9 @@
  *        Muhammad Shahbaz
  *
  *  Description:
+ *       5/June/2013 Jong 
+ *			Added IP2Bus_WrAck signal. This signal is required when trying to write
+ *			a register value to read only registers.
  *        
  *
  *  Copyright notice:
@@ -137,6 +140,10 @@
 	     reg_file_wr_port[Bus2IP_Addr[addr_width_msb-1:addr_width_lsb]] <= Bus2IP_Data;
 		 IP2Bus_WrAck <= 1'b1;
 	   end
+		//Bus waits Ack signal even a value is written to a read-only register. 
+		else if (Bus2IP_CS && !Bus2IP_RNW && Bus2IP_Addr[addr_width_msb-1:addr_width_lsb] >= (NUM_WO_REGS+NUM_RW_REGS)) begin
+			IP2Bus_WrAck	<= 1'b1;
+		end
 	 end
    end
    
