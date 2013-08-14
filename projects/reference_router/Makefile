@@ -59,4 +59,4 @@ partial:
 	$(MAKE) -C $(SW) bitfilegen
 	mkdir -p bitfiles
 	cp $(SW)/result/download.bit bitfiles/
-
+	
