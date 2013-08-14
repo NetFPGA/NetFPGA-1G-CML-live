@@ -1,0 +1,19 @@
+create_project system ./system -part xc5vtx240tff1759-2 -force
+
+set_property design_mode GateLvl [current_fileset]
+
+add_files -norecurse {./hw/implementation/system.ngc./hw/implementation/axi_cfg_fpga_0_wrapper.ngc./hw/implementation/axi_emc_0_wrapper.ngc./hw/implementation/axi_interconnect_0_wrapper.ngc./hw/implementation/axi_timebase_wdt_0_wrapper.ngc./hw/implementation/clock_generator_0_wrapper.ngc./hw/implementation/diff_input_buf_0_wrapper.ngc./hw/implementation/diff_input_buf_1_wrapper.ngc./hw/implementation/diff_input_buf_2_wrapper.ngc./hw/implementation/diff_input_buf_3_wrapper.ngc./hw/implementation/dma_0_wrapper.ngc./hw/implementation/microblaze_0_bram_block_wrapper.ngc./hw/implementation/microblaze_0_d_bram_ctrl_wrapper.ngc./hw/implementation/microblaze_0_dlmb_wrapper.ngc./hw/implementation/microblaze_0_i_bram_ctrl_wrapper.ngc./hw/implementation/microblaze_0_ilmb_wrapper.ngc./hw/implementation/microblaze_0_wrapper.ngc./hw/implementation/nf10_10g_interface_0_wrapper.ngc./hw/implementation/nf10_10g_interface_0_wrapper/xaui.ngc./hw/implementation/nf10_10g_interface_0_wrapper/xgmac.ngc./hw/implementation/nf10_10g_interface_1_wrapper.ngc./hw/implementation/nf10_10g_interface_2_wrapper.ngc./hw/implementation/nf10_10g_interface_3_wrapper.ngc./hw/implementation/nf10_axi_sim_transactor_0_wrapper.ngc./hw/implementation/nf10_bram_output_queues_0_wrapper.ngc./hw/implementation/nf10_input_arbiter_0_wrapper.ngc./hw/implementation/nf10_mdio_0_wrapper.ngc./hw/implementation/nf10_nic_output_port_lookup_0_wrapper.ngc./hw/implementation/reset_0_wrapper.ngc./hw/implementation/rs232_uart_1_wrapper.ngc./hw/implementation/dma_0_wrapper/dma_engine.edf} 
+
+import_files -force -norecurse
+
+import_files -fileset constrs_1 -force -norecurse {./hw/implementation/microblaze_0_ilmb_wrapper.ncf ./hw/implementation/microblaze_0_dlmb_wrapper.ncf ./hw/implementation/microblaze_0_wrapper.ncf ./hw/implementation/system.ucf}
+
+set_property target_constrs_file ./hw/implementation/system.ucf [current_fileset -constrset]
+
+open_netlist_design -name netlist_1
+
+launch_runs impl_1
+
+wait_on_run impl_1
+
+exit

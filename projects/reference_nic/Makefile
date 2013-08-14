@@ -11,6 +11,9 @@
 #  Author:
 #        Mario Flajslik
 #
+#			Modified by Jong Hun Han 06/05/2013
+#			Added Parital synthesis and PCIe programming option.
+#
 #  Description:
 #        make all : Make BRAM initialized bitfile to bitfiles/
 #
@@ -52,3 +55,9 @@ all:
 clean:
 	$(MAKE) -C $(HW) clean
 	$(MAKE) -C $(SW) clean
+
+partial:
+	$(MAKE) -C $(HW) partial $(MODULE)
+	$(MAKE) -C $(SW) bitfilegen
+	mkdir -p bitfiles
+	cp $(SW)/result/download.bit bitfiles/
