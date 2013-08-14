@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-///////////////////////////////////////////////////////////////////////////////
-// $Id: eth_parser.v 5240 2009-03-14 01:50:42Z grg $
-//
-// Module: eth_parser.v
-// Project: NF2.1
-// Description: decides if the MAC dstof the ingress pkt is us, and if it's an
-//              ARP or IP packet. Assume that NUM_QUEUES < MIN_PKT_SIZE-2
-//
-///////////////////////////////////////////////////////////////////////////////
-=======
 /*******************************************************************************
  * 
  *  NetFPGA-10G http://www.netfpga.org
@@ -50,8 +39,6 @@
  *
  */
 
->>>>>>> origin/master
-
   module eth_parser
     #(parameter C_S_AXIS_DATA_WIDTH=256,
       parameter NUM_QUEUES = 8,
@@ -59,7 +46,7 @@
       )
    (// --- Interface to the previous stage
     input  [C_S_AXIS_DATA_WIDTH-1:0]   tdata,
-
+   
     // --- Interface to process block
     output                             is_arp_pkt,
     output                             is_ip_pkt,
@@ -95,11 +82,13 @@
    endfunction // log2
 
    //------------------ Internal Parameter ---------------------------
-   localparam                           ETH_ARP = 16'h0608; // byte order = Little Endian
-   localparam                           ETH_IP = 16'h0008;  // byte order = Little Endian
+   localparam				ETH_ARP = 16'h0806; // byte order = Big Endian
+   localparam				ETH_IP = 16'h0800; // byte order = Big Endian
 
-   localparam                           IDLE = 0;
-   localparam                           DO_SEARCH = 1;
+
+   localparam                           IDLE = 1;
+   localparam                           DO_SEARCH = 2;
+   localparam				FLUSH_ENTRY = 4;
 
    //---------------------- Wires/Regs -------------------------------
    reg [47:0]                          dst_MAC;
@@ -108,12 +97,17 @@
 
    reg                                 search_req;
 
-   reg                                 state, state_next;
+   reg [2:0]                           state, state_next;
    reg [log2(NUM_QUEUES/2):0]          mac_count, mac_count_next;
    reg                                 wr_en;
    reg                                 port_found;
 
    wire                                broadcast_bit;
+
+   wire [47:0]			       dst_MAC_fifo;
+   wire [15:0]			       ethertype_fifo;
+   reg				       rd_parser;
+   wire				       parser_fifo_empty;
 
    //----------------------- Modules ---------------------------------
    fallthrough_small_fifo #(.WIDTH(4+NUM_QUEUES_WIDTH), .MAX_DEPTH_BITS(2))
@@ -134,9 +128,27 @@
          .clk (clk)
          );
 
+
+  fallthrough_small_fifo #(.WIDTH(48+16), .MAX_DEPTH_BITS  (2))
+      parser
+        (.din           ({dst_MAC,ethertype}), // Data in
+         .wr_en         (search_req),             // Write enable
+         .rd_en         (rd_parser),       // Read the next word
+         .dout          ({dst_MAC_fifo, ethertype_fifo}),
+         .full          (),
+         .nearly_full   (parser_fifo_nearly_full),
+         .prog_full     (),
+         .empty         (parser_fifo_empty),
+         .reset         (reset),
+         .clk           (clk)
+         );
+
+
    //------------------------ Logic ----------------------------------
    assign eth_parser_info_vld = !empty;
-   assign broadcast_bit = dst_MAC[40];
+   assign broadcast_bit = dst_MAC_fifo[40]; // BIG endian
+   //assign broadcast_bit = dst_MAC[7];
+
 
    always @(*) begin
       mac_sel = mac_0;
@@ -160,8 +172,10 @@
       end
       else begin
 	 if(word_IP_DST_HI) begin
-	    dst_MAC <= tdata[47:0];
-	    ethertype <= tdata[111:96];
+	    //dst_MAC <= tdata[47:0];
+	    //ethertype <= tdata[111:96];
+	    dst_MAC <= tdata[255:208]; // BIG endian
+	    ethertype <= tdata[159:144]; // BIG endian
 	    search_req <= 1;
 	 end
          else begin
@@ -181,11 +195,12 @@
       mac_count_next = mac_count;
       wr_en = 0;
       port_found = 0;
+      rd_parser = 0;
 
       case(state)
 
         IDLE: begin
-           if(search_req) begin
+           if(!parser_fifo_empty) begin
               state_next = DO_SEARCH;
               mac_count_next = NUM_QUEUES/2;
            end
@@ -193,16 +208,21 @@
 
         DO_SEARCH: begin
            mac_count_next = mac_count-1;
-           if(mac_sel==dst_MAC || broadcast_bit) begin
+           if(mac_sel==dst_MAC_fifo || broadcast_bit) begin
               wr_en = 1;
-              state_next = IDLE;
+              state_next = FLUSH_ENTRY;
               port_found = 1;
            end
            else if(mac_count == 0) begin
-              state_next = IDLE;
+              state_next = FLUSH_ENTRY;
               wr_en = 1;
            end
         end
+
+	FLUSH_ENTRY: begin
+		rd_parser = 1;
+		state_next = IDLE;
+	end
 
       endcase // case(state)
 
@@ -219,15 +239,6 @@
          mac_count <= mac_count_next;
       end
    end
-
-   // synthesis translate_off
-   always @(posedge clk) begin
-      if(state==DO_SEARCH && word_IP_DST_HI) begin
-         $display("%t %m ERROR: Latched new address before the last search was done!", $time);
-         $stop;
-      end
-   end
-   // synthesis translate_on
 
 endmodule // eth_parser
 

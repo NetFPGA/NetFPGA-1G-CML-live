@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-///////////////////////////////////////////////////////////////////////////////
-// $Id: dest_ip_filter.v 5240 2009-03-14 01:50:42Z grg $
-//
-// Module: dest_ip_filter.v
-// Project: NF2.1
-// Description: matches the ip destination to on in a list and indicates hits
-//
-///////////////////////////////////////////////////////////////////////////////
-=======
 /*******************************************************************************
  *
  *  NetFPGA-10G http://www.netfpga.org
@@ -49,11 +39,9 @@
  *
  */
 
->>>>>>> origin/master
-
   module dest_ip_filter
     #(parameter C_S_AXIS_DATA_WIDTH=256,
-      parameter LUT_DEPTH = 16,
+      parameter LUT_DEPTH = 32,
       parameter LUT_DEPTH_BITS = log2(LUT_DEPTH)
       )
    (// --- Interface to the previous stage
@@ -97,6 +85,11 @@
       end
    endfunction // log2
 
+   localparam                            WAIT = 1;
+   localparam                            PROCESS = 2;
+
+
+
    //---------------------- Wires and regs----------------------------
 
    wire                                  cam_busy;
@@ -109,6 +102,15 @@
 
    reg                                   dst_ip_vld;
    reg [31:0]                            dst_ip;
+
+   reg                                   rd_dest;
+   reg                                   dst_ip_ready;
+   wire [31:0]                           dst_ip_fifo;
+   wire                                  dest_fifo_empty;
+
+   reg [1:0]                             state,state_next;
+
+
 
    //------------------------- Modules-------------------------------
 
@@ -134,8 +136,8 @@
        .DEFAULT_DATA(0)
       ) cam_lut_sm
        (// --- Interface for lookups
-        .lookup_req          (dst_ip_vld),
-        .lookup_cmp_data     (dst_ip),
+        .lookup_req          (dst_ip_ready),
+        .lookup_cmp_data     (dst_ip_fifo),
         .lookup_cmp_dmask    (32'h0),
         .lookup_ack          (lookup_ack),
         .lookup_hit          (lookup_hit),
@@ -187,9 +189,56 @@
          .clk           (clk)
          );
 
+
+  fallthrough_small_fifo #(.WIDTH(32), .MAX_DEPTH_BITS  (2))
+      dest_fifo2
+        (.din           (dst_ip), // Data in
+         .wr_en         (dst_ip_vld),             // Write enable
+         .rd_en         (rd_dest),       // Read the next word
+         .dout          (dst_ip_fifo),
+         .full          (),
+         .nearly_full   (filter_fifo_nearly_full),
+         .prog_full     (),
+         .empty         (dest_fifo_empty),
+         .reset         (reset),
+         .clk           (clk)
+         );
+
    //------------------------- Logic --------------------------------
 
    assign dest_ip_filter_vld = !empty;
+
+
+    always @(*) begin
+        rd_dest = 0;
+        dst_ip_ready = 0;
+        state_next = state;
+
+        case(state)
+
+                WAIT: begin
+                        if(!dest_fifo_empty) begin
+                                rd_dest = 1;
+                                dst_ip_ready = 1;
+                                state_next = PROCESS;
+                        end
+                end
+
+                PROCESS: begin
+                        if(lookup_ack)
+                                state_next = WAIT;
+                end
+        endcase
+     end
+
+
+   always @(posedge clk) begin
+        if(reset)
+                state <= WAIT;
+        else
+                state <= state_next;
+   end
+
 
    /*****************************************************************
     * find the dst IP address and do the lookup
@@ -201,11 +250,13 @@
       end
       else begin
          if(word_IP_DST_HI) begin
-            dst_ip[15:0] <= tdata[255:240];
+         //   dst_ip[15:0] <= tdata[255:240];
+            dst_ip[31:16] <= tdata[15:0];
             dst_ip_vld <= 0;
          end
          if(word_IP_DST_LO) begin
-            dst_ip[31:16]  <= tdata[15:0];
+            //dst_ip[31:16]  <= tdata[15:0];
+            dst_ip[15:0]  <= tdata[255:240];
             dst_ip_vld <= 1;
          end
          else begin

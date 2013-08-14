@@ -11,7 +11,7 @@
   module unencoded_cam_lut_sm
     #(parameter CMP_WIDTH  = 32,
       parameter DATA_WIDTH = 3,
-      parameter LUT_DEPTH  = 16,
+      parameter LUT_DEPTH  = 32,
       parameter LUT_DEPTH_BITS = log2(LUT_DEPTH),
       parameter DEFAULT_DATA = 0,                       // DATA to return on a miss
       parameter RESET_DATA = {DATA_WIDTH{1'b0}},        // value of data on reset

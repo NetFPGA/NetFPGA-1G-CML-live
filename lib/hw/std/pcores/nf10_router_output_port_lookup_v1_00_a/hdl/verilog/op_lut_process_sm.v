@@ -1,15 +1,45 @@
-///////////////////////////////////////////////////////////////////////////////
-// vim:set shiftwidth=3 softtabstop=3 expandtab:
-// $Id: op_lut_process_sm.v 3000 2007-11-21 09:09:56Z jnaous $
-//
-// Module: op_lut_process_sm.v
-// Project: NF2.1 reference router
-// Description: Take the information from the preprocess blocks, write a new
-//              module header for the output port, write the packet with the
-//              information from the preprocess.
-//
-//
-///////////////////////////////////////////////////////////////////////////////
+ /*******************************************************************************
+  * 
+  *  NetFPGA-10G http://www.netfpga.org
+  *
+  *  File:
+  *        op_lut_process_sm.v
+  *
+  *  Library:
+  *        std/pcores/nf10_router_output_port_lookup_v1_00_a
+  *
+  *  Module:
+  *        op_lut_process_sm
+  *
+  *  Author:
+  *        grg, Gianni Antichi
+  *
+  *  Description:
+  *        
+  *
+  *  Copyright notice:
+  *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+  *                                 Junior University
+  *
+  *  Licence:
+  *        This file is part of the NetFPGA 10G development base package.
+  *
+  *        This file is free code: you can redistribute it and/or modify it under
+  *        the terms of the GNU Lesser General Public License version 2.1 as
+  *        published by the Free Software Foundation.
+  *
+  *        This package is distributed in the hope that it will be useful, but
+  *        WITHOUT ANY WARRANTY; without even the implied warranty of
+  *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  *        Lesser General Public License for more details.
+  *
+  *        You should have received a copy of the GNU Lesser General Public
+  *        License along with the NetFPGA source package.  If not, see
+  *        http://www.gnu.org/licenses/.
+  *
+  */
+
+
 `timescale 1ns/100ps
 module op_lut_process_sm
   #(parameter C_S_AXIS_DATA_WIDTH=256,
@@ -148,12 +178,12 @@ module op_lut_process_sm
 
    /* Modify the packet's hdrs and change tuser */
    always @(*) begin
-      out_tvalid_next		    = in_fifo_vld; 
       out_tlast_next                = in_fifo_tlast;
       out_tdata_next		    = in_fifo_tdata;
       out_tuser_next		    = in_fifo_tuser;
       out_tstrb_next		    = in_fifo_tstrb;
       out_tvalid_next               = 0;
+
       rd_preprocess_info            = 0;
       state_next                    = state;
       in_fifo_rd_en                 = 0;
@@ -256,7 +286,8 @@ module op_lut_process_sm
               out_tuser_next[C_AXIS_DST_PORT_POS+7:C_AXIS_DST_PORT_POS] = dst_port;
 	      if(to_from_cpu)
 		state_next = SEND_PKT;
-	      state_next = CHANGE_PKT;
+	      else
+	      	state_next = CHANGE_PKT;
 	    end
 	end
 
@@ -265,7 +296,7 @@ module op_lut_process_sm
 	      out_tvalid_next = 1;
 	      in_fifo_rd_en = 1;
 	      // don't decrement the TTL and don't recalculate checksum for local pkts
-	      out_tdata_next = {in_fifo_tdata[255:208],ip_new_checksum,in_fifo_tdata[7:0],ip_new_ttl[7:0],in_fifo_tdata[175:96],src_mac_sel,next_hop_mac};
+	      out_tdata_next = {next_hop_mac,src_mac_sel,in_fifo_tdata[159:80],ip_new_ttl[7:0],in_fifo_tdata[71:64],ip_new_checksum,in_fifo_tdata[47:0]};
 	      rd_preprocess_info = 1;
 	      state_next = SEND_PKT;
 	    end
@@ -273,9 +304,10 @@ module op_lut_process_sm
 
 	SEND_PKT: begin
 	    if(in_fifo_vld && out_tready) begin
+	      out_tuser_next[C_AXIS_DST_PORT_POS+7:C_AXIS_DST_PORT_POS] = dst_port; 
 	      out_tvalid_next = 1;
 	      in_fifo_rd_en = 1;
-	      if(out_tlast_next)
+	      if(in_fifo_tlast)
 		state_next =  WAIT_PREPROCESS_RDY;
 	    end
 	end
@@ -283,9 +315,8 @@ module op_lut_process_sm
         DROP_PKT: begin
            if(in_fifo_vld) begin
               in_fifo_rd_en = 1;
-              if(out_tlast_next) begin
+              if(in_fifo_tlast)
                  state_next = WAIT_PREPROCESS_RDY;
-              end
            end
         end
       endcase // case(state)
