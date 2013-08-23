@@ -268,7 +268,7 @@ module cpld
 
 	assign fpga_prog_req = fpga_prog_req_d0 & ~FPGA_PROG_REQ_B;
 
-	reg switch_reg;
+	reg switch_reg = 1;
 	always @ (posedge cpld_clk_100MHz_bufg) begin
 		if (FPGA_DONE) switch_reg	<= FPGA_SWITCH;
 	end
