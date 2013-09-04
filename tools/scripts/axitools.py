@@ -79,6 +79,10 @@ def axis_dump( packets, f, bus_width, period, tuser_width = 128 ):
     last_ts   = None
     period    = int(period * 1e9)
 
+    #Cope with the case of individual packets being sent instead of a list
+    if isinstance(packets,Ether):
+	packets = [packets]
+
     for packet in packets:
         # Output delay parameter
         if last_ts is not None:
