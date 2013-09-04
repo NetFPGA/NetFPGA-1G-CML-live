@@ -81,7 +81,7 @@ def axis_dump( packets, f, bus_width, period, tuser_width = 128 ):
 
     #Cope with the case of individual packets being sent instead of a list
     if isinstance(packets,Ether):
-	packets = [packets]
+        packets = [packets]
 
     for packet in packets:
         # Output delay parameter
