@@ -83,33 +83,33 @@ module bridge
     genvar i;
 
   /* Generate control signals */
-  always @(posedge clk) begin
+  
+  always @(*) begin
     if (reset) begin
-      m_axis_tuser <= {C_AXIS_TUSER_WIDTH{1'b0}};
-      m_axis_tvalid <= 0;
-      m_axis_tlast <= 0;
-      s_axis_tready <= 0;
+      m_axis_tuser = {C_AXIS_TUSER_WIDTH{1'b0}};
+      m_axis_tvalid = 0;
+      m_axis_tlast = 0;
+      s_axis_tready = 0;
     end
     else begin
-      m_axis_tuser <= s_axis_tuser;
-      m_axis_tvalid <= s_axis_tvalid;
-      m_axis_tlast <= s_axis_tlast;
-      s_axis_tready <= m_axis_tready;
+      m_axis_tuser = s_axis_tuser;
+      m_axis_tvalid = s_axis_tvalid;
+      m_axis_tlast = s_axis_tlast;
+      s_axis_tready = m_axis_tready;
     end
   end
 
-  /* Generate tdata and tstrb */
-  generate
+ generate
   for (i=0; i<(C_AXIS_DATA_WIDTH/8); i=i+1) begin: conversion
-    always @(posedge clk) begin
-    	if (reset) begin
-       	m_axis_tdata[(i+1)*8-1:i*8] <= 0;
-       	m_axis_tstrb[i] <= 0;
+    always @(*) begin
+     if (reset) begin
+        m_axis_tdata[(i+1)*8-1:i*8] = 0;
+        m_axis_tstrb[i] = 0;
       end
-	    else begin
-		    m_axis_tdata[(i+1)*8-1:i*8] <= s_axis_tdata[((C_AXIS_DATA_WIDTH/8)-i)*8-1:((C_AXIS_DATA_WIDTH/8)-(i+1))*8];
-       	m_axis_tstrb[i] <= s_axis_tstrb[(C_AXIS_DATA_WIDTH/8)-i-1];
-	    end
+else begin
+m_axis_tdata[(i+1)*8-1:i*8] = s_axis_tdata[((C_AXIS_DATA_WIDTH/8)-i)*8-1:((C_AXIS_DATA_WIDTH/8)-(i+1))*8];
+        m_axis_tstrb[i] = s_axis_tstrb[(C_AXIS_DATA_WIDTH/8)-i-1];
+end
     end
   end
   endgenerate
