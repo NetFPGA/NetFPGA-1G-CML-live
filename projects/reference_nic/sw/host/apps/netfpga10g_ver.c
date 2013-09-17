@@ -47,12 +47,14 @@
 int main()
 {
     int f;
-    uint64_t v, addr0, addr1, addr2, v_date, v_month, v_year, v_hour, v_min, v_pro;
+    uint64_t v, addr0, addr1, addr2, addr3, v_date, v_month, v_year, v_hour, v_min;
+    uint64_t v_pro, v_tag_0, v_tag_1, v_tag_2;
 
 
 	addr0 = ID_BASE_ADDR + 0x4;
 	addr1 = ID_BASE_ADDR + 0x8;
 	addr2 = ID_BASE_ADDR + 0xc;
+	addr3 = ID_BASE_ADDR + 0x10;
 
 	// Open device handle
 	f = open("/dev/nf10", O_RDWR);
@@ -110,6 +112,21 @@ int main()
 		case 0xd : printf("The reference switch_lite. \n"); break;
 		default : printf("No project identified!\n"); break;
 	}
+
+	//Read git tag 
+	v = addr3;
+
+	if(ioctl(f, NF10_IOCTL_CMD_READ_REG, &v) < 0){
+		perror("nf10 ioctl failed");
+	return 0;
+	}
+
+	v &= 0xffffffff;
+	v_tag_0 = (0xf & v);
+	v_tag_1 = (0xff & v) >> 4;
+	v_tag_2 = (0xfff & v) >> 8;
+
+	printf("NetFPGA GitHub Tag : %llx. %llx. %llx. \n", v_tag_2, v_tag_1, v_tag_0);
 
 	close(f);
 
