@@ -43,10 +43,10 @@ Documentation: https://github.com/NetFPGA/NetFPGA-public/wiki/Partial-Synthesis
 The following pcores have been added
 nf10_identifier_v1_00_a -- used to identify (gives the time it was created and the name) the bitfile loaded in the FPGA
 nf10_input_arbiter_v1_10_a  -- input arbiter with registers
-nf10_10g_interface_v1_20_a -- nf10_10g interface with registers 
+nf10_10g_interface_v1_20_a -- nf10_10g interface with registers to check only good packets.
 nf10_bram_output_queues_v1_01_a -- BRAM ouput queues with fix from Shahbaz
 nf10_bram_output_queues_v1_10_a -- BRAM output queues with registers
-nf10_switch_output_port_lookup_v1_10_a -- router output port look up with registers
+nf10_router_output_port_lookup_v1_10_a -- router output port look up with registers
 
 6. Driver:
 Driver updated to fix multiple threads reading/writing axi registers
