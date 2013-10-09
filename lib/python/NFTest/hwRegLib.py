@@ -33,22 +33,15 @@ def regwrite(reg, val):
 ############################
 def regread(reg):
 #    if ifaceName.startswith('nf'):
-        return hwReg.readReg(reg)
+	return hwReg.readReg(reg)
 
 ############################
 # Function: regread_expect
 # Arguments: nf2 interface to read from, register, expected value, (optional) mask
 # Description: reads value from register and compares with expected value
 ############################
-def regread_expect(reg, exp, mask = 0xffffffff):
-    val = hwReg.readReg(reg)
-    if (val & mask) != (exp & mask):
-        name = __main__.nf_regmap.get(reg, "unknown")
-        print 'ERROR : Register read expected 0x%08x but found 0x%08x at address 0x%08x (%s)'%(exp, val, reg, name)
-        if ifaceName not in badReads:
-            badReads[ifaceName] = []
-        badReads[ifaceName].append({'Expected':exp, 'Value':val, 'Register':reg, 'RegName':name})
-    return val
+def regread_expect(reg, exp):
+	return hwReg.regread_expect(reg, exp)	  
 
 ############################
 # Function: fpga_reset

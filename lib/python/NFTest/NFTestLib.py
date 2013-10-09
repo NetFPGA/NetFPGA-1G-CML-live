@@ -321,7 +321,6 @@ def nftest_regread_expect(addr, val):
         return 0
     else:
         return hwRegLib.regread_expect(addr, val)
-
 ############################
 # Function: regread_result
 # Arguments: list containing the status of regread_expect
@@ -346,7 +345,7 @@ def nftest_regwrite(addr, val):
     if sim:
         simReg.regWrite(addr, val)
     else:
-        hwRegLib.regwrite(iface_map['nf0'], addr, val)
+        hwRegLib.regwrite(addr, val)
 
 ############################
 # Function: nftest_fpga_reset
