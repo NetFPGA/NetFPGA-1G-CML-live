@@ -56,19 +56,27 @@ module nf10_axis_sim_record
     input [C_S_AXIS_TUSER_WIDTH-1:0] s_axis_tuser,
     input s_axis_tvalid,
     output s_axis_tready,
-    input s_axis_tlast
+    input s_axis_tlast,
+
+    output [7:0] counter,
+    output valid,
+    output reg activity_rec
 );
 
     integer f;
     integer bubble_count = 0;
     integer result;
     reg [8*2-1:0] terminal_flag;
+    //reg [31:0] count = 1;
     
     assign s_axis_tready = 1;
+    //assign counter = count;
     
     initial begin
         f = $fopen(output_file, "w");
     end
+
+    reg [7:0] counter = 0;
 
     always @(posedge aclk) begin
         if (s_axis_tvalid == 1'b1) begin
@@ -78,9 +86,14 @@ module nf10_axis_sim_record
             end
             if (s_axis_tlast == 1'b1) begin
                 terminal_flag = ".";
+		//count <= count + 1;
+		//counter <= count;
+		counter <= counter + 1;
+		activity_rec <= 1;
             end
             else begin
                 terminal_flag = ",";
+		activity_rec <= 1;
             end
             
             $fwrite(f, "%x, %x, %x%0s # %0d ns\n",
@@ -93,6 +106,7 @@ module nf10_axis_sim_record
         end
         else begin
             bubble_count <= bubble_count + 1;
+	    activity_rec <= 0;
         end
     end
 endmodule

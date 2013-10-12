@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import hwPktLib
 from hwPktLib import scapy
 import hwRegLib
@@ -6,6 +7,13 @@ import simReg
 import simPkt
 import sys
 import os
+
+script_dir = os.path.dirname( sys.argv[0] )
+# Add path *relative to this script's location* of axitools module
+sys.path.append( os.path.join( script_dir, '..','..','..','..','tools','scripts' ) )
+
+# NB: axitools import must preceed any scapy imports
+import axitools
 
 sim = True # default, pass an argument if hardware is needed
 iface_map = {} # key is interface specified by test, value is physical interface to use
@@ -178,11 +186,7 @@ def nftest_init(sim_loop = [], hw_config=None):
 # Description: performs initialization
 ############################
 def nftest_start():
-    if sim:
-        simReg.regWrite(CPCI_Control_reg, 0)
-        simReg.regWrite(CPCI_Interrupt_Mask, 0)
-        simReg.regDelay(1000)
-    else:
+    if not sim:
         hwPktLib.start()
 #        hwRegLib.fpga_reset()
     nftest_barrier()
@@ -199,7 +203,13 @@ def nftest_send_phy(ifaceName, pkt):
         sys.exit(1)
     sent_phy[ifaceName].append(pkt)
     if sim:
-        simPkt.pktSendPHY(int(ifaceName[2])+1, pkt)
+        for pkt_s in pkt:
+	    pkt_s.tuser_sport = 1 << (int(ifaceName[2:3])*2) # physical ports are even-numbered
+
+        for i in range(len(pkt)):
+            simPkt.pktSendPHY(int(ifaceName[2:3])+1, pkt)
+	f = simLib.fPort(int(ifaceName[2]) + 1)
+	axitools.axis_dump( pkt, f, 256, 1e-9 )
     else:
         hwPktLib.send(iface_map[connections[ifaceName]], pkt)
 
@@ -212,7 +222,13 @@ def nftest_send_phy(ifaceName, pkt):
 def nftest_send_dma(ifaceName, pkt):
     sent_dma[ifaceName].append(pkt)
     if sim:
-        simPkt.pktSendDMA(int(ifaceName[2])+1, pkt)
+        for pkt_s in pkt:
+	    pkt_s.tuser_sport = 1 << (int(ifaceName[2:3])%4*2 + 1) # PCI ports are odd-numbered
+
+        for i in range(len(pkt)):
+            simPkt.pktSendDMA(int(ifaceName[2:3])+1, pkt)
+        f = simLib.fDMA()
+	axitools.axis_dump( pkt, f, 256, 1e-9 )
     else:
         hwPktLib.send(iface_map[ifaceName], pkt)
 
@@ -229,7 +245,10 @@ def nftest_expect_phy(ifaceName, pkt, mask = None):
 #        sys.exit(1)
     expected_phy[ifaceName].append(pkt)
     if sim:
-        simPkt.pktExpectPHY(int(ifaceName[2])+1, pkt, mask)
+        for i in range(len(pkt)):
+	    simPkt.pktExpectPHY(int(ifaceName[2:3])+1, pkt, mask)
+	f = simLib.fExpectPHY(int(ifaceName[2]) + 1)
+        axitools.axis_dump( pkt, f, 256, 1e-9 )
     else:
         hwPktLib.expect(iface_map[connections[ifaceName]], pkt, mask)
 
@@ -243,7 +262,10 @@ def nftest_expect_phy(ifaceName, pkt, mask = None):
 def nftest_expect_dma(ifaceName, pkt, mask = None):
     expected_dma[ifaceName].append(pkt)
     if sim:
-        simPkt.pktExpectDMA(int(ifaceName[2])+1, pkt, mask)
+        for i in range(len(pkt)):
+            simPkt.pktExpectDMA(int(ifaceName[2:3])+1, pkt, mask)
+	f = simLib.fExpectDMA(int(ifaceName[2]) + 1)
+        axitools.axis_dump( pkt, f, 256, 1e-9 )
     else:
         hwPktLib.expect(iface_map[ifaceName], pkt, mask)
 
@@ -269,27 +291,30 @@ def nftest_finish(reg_list):
     nftest_barrier()
     reg_errors = 0
     reg_status = 0
-    # write out the sent/expected pcaps for easy viewing
-    if not os.path.isdir("./source_pcaps"):
-        os.mkdir("./source_pcaps")
-    for iface in ifaceArray:
-        if len(sent_phy[iface]) > 0:
-            scapy.wrpcap("./source_pcaps/%s_sent_phy.pcap"%iface,
-                         sent_phy[iface])
-        if len(sent_dma[iface]) > 0:
-            scapy.wrpcap("./source_pcaps/%s_sent_dma.pcap"%iface,
-                         sent_dma[iface])
-        if len(expected_phy[iface]) > 0:
-            scapy.wrpcap("./source_pcaps/%s_expected_phy.pcap"%iface,
-                         expected_phy[iface])
-        if len(expected_dma[iface]) > 0:
-            scapy.wrpcap("./source_pcaps/%s_expected_dma.pcap"%iface,
-                         expected_dma[iface])
+    
 
     if sim:
         simLib.close()
         return 0
     else:
+
+	# write out the sent/expected pcaps for easy viewing
+	if not os.path.isdir("./source_pcaps"):
+	    os.mkdir("./source_pcaps")
+	for iface in ifaceArray:
+	    if len(sent_phy[iface]) > 0:
+		scapy.wrpcap("./source_pcaps/%s_sent_phy.pcap"%iface,
+		                 sent_phy[iface])
+	    if len(sent_dma[iface]) > 0:
+		scapy.wrpcap("./source_pcaps/%s_sent_dma.pcap"%iface,
+		                 sent_dma[iface])
+	    if len(expected_phy[iface]) > 0:
+		scapy.wrpcap("./source_pcaps/%s_expected_phy.pcap"%iface,
+		                 expected_phy[iface])
+	    if len(expected_dma[iface]) > 0:
+		scapy.wrpcap("./source_pcaps/%s_expected_dma.pcap"%iface,
+		                 expected_dma[iface])
+
         total_errors += hwPktLib.finish()
 	for i in range(len(reg_list)):
 		if(reg_list[i]==0):
@@ -317,10 +342,20 @@ def nftest_finish(reg_list):
 ############################
 def nftest_regread_expect(addr, val):
     if sim:
+        nftest_regread(addr)
         simReg.regRead(addr, val)
         return 0
     else:
         return hwRegLib.regread_expect(addr, val)
+
+############################
+# Function: nftest_regread
+# Arguments: address to read
+############################
+def nftest_regread(addr):
+        simReg.regreadstim(addr)
+        return 0
+
 ############################
 # Function: regread_result
 # Arguments: list containing the status of regread_expect

@@ -9,6 +9,8 @@
 #
 #  Author:
 #        David J. Miller, Gianni Antichi
+#		
+#		Modified by Georgina Kalogeridou
 #
 #  Description:
 #        Automatically substitute specific pcores with instances of the AXI
@@ -57,10 +59,14 @@ m_axis_re = re.compile( 'M_AXIS\w*' )
 s_axis_re = re.compile( 'S_AXIS\w*' )
 
 RECORDER_VER = '1.00.a'
-STIM_VER     = '1.00.a'
+STIM_VER     = '1.10.a'
+
+result = ''
+result_1 = ''
+result_2 = ''
 
 
-def insert_recorder( mhs, index, comment, inst_name, ver, axi_file, width, net, clock ):
+def insert_recorder( mhs, index, comment, inst_name_log, ver, axi_file, width, net, clock ):
     """
     Inserts an nf10_axis_sim core with provided arguments.
     """
@@ -78,12 +84,14 @@ PARAMETER output_file = %s
 %s\
 BUS_INTERFACE S_AXIS = %s
 PORT aclk = %s
+PORT counter = %s_counter
+PORT valid = %s_valid
+PORT activity_rec = %s_activity_rec
 END
 """ % (comment,
-       inst_name, ver, axi_file, width, net, clock) ) )
+       inst_name_log, ver, axi_file, width, net, clock, inst_name_log, inst_name_log, inst_name_log) ) )
 
-
-def insert_stimulator( mhs, index, comment, inst_name, ver, axi_file, width, net, clock, reset ):
+def insert_stimulator( mhs, index, comment, inst_name, ver, axi_file, width, net, clock, reset, inst_name_log ):
     """
     Inserts an nf10_axis_sim core with provided arguments.
     """
@@ -102,9 +110,43 @@ PARAMETER input_file = %s
 BUS_INTERFACE M_AXIS = %s
 PORT aclk = %s
 PORT aresetn = %s
+PORT counter = %s_counter
+PORT valid = %s_valid
+PORT activity_stim = %s_activity_stim
+PORT barrier_req = %s_barrier_req
+PORT barrier_proceed = nf10_barrier_0_barrier_proceed
 END
-""" % (comment, inst_name, ver, axi_file, width, net, clock, reset) ) )
+""" % (comment, inst_name, ver, axi_file, width, net, clock, reset, inst_name_log, inst_name_log, inst_name, inst_name) ) )
 
+def insert_barrier(mhs, index):
+    mhs[index:index] = mhstools.parse_mhs(cStringIO.StringIO(
+"""\
+# BARRIER
+BEGIN nf10_barrier
+PARAMETER INSTANCE = nf10_barrier_0
+PARAMETER HW_VER = 1.00.a
+PORT activity_stim = %s
+PORT activity_rec = %s
+PORT activity_trans_sim = nf10_axi_sim_transactor_0_activity_trans_sim
+PORT activity_trans_log = nf10_axi_sim_transactor_0_activity_trans_log
+PORT barrier_req = %s
+PORT barrier_req_trans = nf10_axi_sim_transactor_0_barrier_req_trans
+PORT barrier_proceed = nf10_barrier_0_barrier_proceed
+END
+
+# TRANSACTOR
+BEGIN nf10_axi_sim_transactor
+PARAMETER INSTANCE = nf10_axi_sim_transactor_0
+PARAMETER HW_VER = 1.10.a
+BUS_INTERFACE M_AXI = axi_interconnect_0
+PORT M_AXI_ARESETN = Peripheral_aresetn
+PORT M_AXI_ACLK = control_clk
+PORT activity_trans_sim = nf10_axi_sim_transactor_0_activity_trans_sim
+PORT activity_trans_log = nf10_axi_sim_transactor_0_activity_trans_log
+PORT barrier_req_trans = nf10_axi_sim_transactor_0_barrier_req_trans
+PORT barrier_proceed = nf10_barrier_0_barrier_proceed
+END
+""" %(result_1, result, result_2)))
 
 def subst_mhs( mhs, targets, opts ):
     """
@@ -124,7 +166,10 @@ def subst_mhs( mhs, targets, opts ):
         """
         Perform substitution with nf10_axis_sim_{record,stim}.
         """
-        core_name = ent.core_name()
+	global result
+	global result_1
+	global result_2        
+	core_name = ent.core_name()
         core_inst = mhstools.get_parameter( ent, 'INSTANCE' )
         m_width   = mhstools.get_parameter( ent, 'C_M_AXIS_DATA_WIDTH' )
         s_width   = mhstools.get_parameter( ent, 'C_S_AXIS_DATA_WIDTH' )
@@ -206,12 +251,13 @@ def subst_mhs( mhs, targets, opts ):
                 width = (s_width if other_width is None else other_width)
 
                 # Perform substitution
-                inst_name = 'record_%s' % net
+                inst_name_log = 'record_%s' % net
+		result = result + ' & ' + 'record_%s_activity_rec' % net
                 axi_file  = os.path.join( opts.axi_path, '%s%s_log.axi' % (core_inst,
                                                   '_%d' % netno if len(m_axis_nets) != 1 else '' ) )
                 insert_recorder( mhs, index+1,
                                  'Replacing core %s (instance %s)' % (core_name, core_inst),
-                                 inst_name, RECORDER_VER, axi_file, width, net, clock_net )
+                                 inst_name_log, RECORDER_VER, axi_file, width, net, clock_net )
                 print '\t\t%s (%s)' % (net, axi_file)
         if m_axis_nets:
             print '\tnf10_axis_sim_stim instance(s) on AXI Stream slave net(s):'
@@ -241,11 +287,13 @@ def subst_mhs( mhs, targets, opts ):
 
                 # Perform substitution
                 inst_name = 'stim_%s' % net
+		result_1 = result_1 + ' & ' + 'stim_%s_activity_stim' % net
+		result_2 = result_2 + ' & ' + 'stim_%s_barrier_req' % net
                 axi_file  = os.path.join( opts.axi_path, '%s%s_stim.axi' % (core_inst,
                                                   '_%d' % netno if len(m_axis_nets) != 1 else '' ) )
                 insert_stimulator( mhs, index+1,
                                    'Replacing core %s (instance %s)' % (core_name, core_inst),
-                                   inst_name, STIM_VER, axi_file, width, net, clock_net, reset_net )
+                                   inst_name, STIM_VER, axi_file, width, net, clock_net, reset_net, inst_name_log )
                 print '\t\t%s (%s)' % (net, axi_file)
         print
         return True
@@ -290,6 +338,7 @@ def subst_mhs( mhs, targets, opts ):
             cont_flag = do_overrides( index, ent )
         if not cont_flag:
             return False
+    insert_barrier(mhs, index)
     return True     # Success
 
 

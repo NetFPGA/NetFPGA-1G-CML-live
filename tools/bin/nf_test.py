@@ -39,7 +39,7 @@ OPTIONAL = 0
 
 teardown = 'teardown'
 setup = 'setup'
-run = 'run.py'
+run = 'make_pkts.py'
 commonDir = 'common'
 globalDir = 'global'
 projectRoot = 'projects'
@@ -196,16 +196,16 @@ def run_sim_test():
     passed = []; failed = []; gui = []
     for td in tests:
 	if args.gui:
-	    charis = os.system("make simgui -C %s" % rootDir + '/projects/' + project + '/test/' + td)
+	    charis = os.system("make simgui TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))
    	else:
-    	    charis = os.system("make sim -C %s" % rootDir + '/projects/' + project + '/test/' + td)	
+    	    charis = os.system("make sim TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))	
    	print charis
         if not args.no_compile:
             buildSim()
         if args.compile_only:
             sys.exit(0) #################
         prepareTestWorkDir(td)
-	global_run = rootDir + '/projects/' + project + '/test/' + td + '/run.py'
+	global_run = rootDir + '/projects/' + project + '/test/' + td + '/make_pkts.py'
         dst_dir = proj_test_dir + '/' + td
         which_run = global_run
         cmd = [which_run, '--sim']
@@ -277,6 +277,13 @@ def printEnv():
     print "   Project name:   " + project
     print "   Project dir:    " + projDir
     print "   Work dir:       " + workDir
+
+    if args.type == 'sim':
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/Makefile', src_test_dir])
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/system.xmp', src_test_dir])
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/system.mhs', src_test_dir])
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/pcores/', src_test_dir])
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/nf10/', src_test_dir])
 
 # verify that NF_ROOT has been set and exists
 def identifyRoot():
@@ -387,13 +394,24 @@ def prepareTestWorkDir(testName):
     if args.type == 'sim':
         for file in glob.glob(src_dir + '/*'):
             subprocess.call(['cp', '-r', '-p', file, dst_dir])
+	for i in range(4):
+	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_log.axi' %i, dst_dir])
+	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_stim.axi' %i, dst_dir])
+	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_expected.axi' %i, dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/dma_0_log.axi', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/dma_0_expected.axi', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/Makefile', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/reg_stim.log', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/reg_expect.axi', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/reg_stim.axi', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/system_axisim.mhs', dst_dir])
 
 def buildSim():
-    if not os.path.exists(make_file):
-        print 'Unable to find make file ' + make_file
-        sys.exit(1)
+    #if not os.path.exists(make_file):
+    #    print 'Unable to find make file ' + make_file
+    #    sys.exit(1)
     project = os.path.basename(os.path.abspath(os.environ['NF_DESIGN_DIR']))
-    subprocess.call(['cp', make_file, proj_test_dir + '/Makefile'])
+    #subprocess.call(['cp', make_file, proj_test_dir + '/Makefile'])
 
     print '=== Work directory is ' + proj_test_dir
 

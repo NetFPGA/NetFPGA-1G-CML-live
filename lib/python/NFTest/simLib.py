@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # Author: James Hsi, Eric Lo
+# Modified by Georgina Kalogeridou
 # Date: 1/31/2011
 #
 #  Overarching test module.
@@ -7,6 +8,7 @@
 # python -m pdb
 #
 
+from NFTest import *
 import os
 
 NUM_PORTS = 4
@@ -17,47 +19,47 @@ DMA_QUEUES = 4
 f_ingress = []
 f_expectPHY = []
 f_expectDMA = []
+f_dma = []
+f_regstim = []
+f_regexpect = []
 
-directory = 'packet_data'
-dma_filename = 'ingress_dma'
-pci_filename = 'pci_sim_data'
-ingress_fileHeader = 'ingress_port_'
-expectPHY_fileHeader = 'expected_port_'
-expectDMA_fileHeader = 'expected_dma_'
+# directory = 'packet_data'
+dma_stim = 'dma_0_stim.axi'
+dma_expect = 'dma_'
+ingress_fileHeader = 'nf10_10g_interface_' # 'ingress_port_'
+expectPHY_fileHeader = 'nf10_10g_interface_' # 'expected_port_'
+reg_expect = 'reg_expect.axi' 
+reg_stim = 'reg_stim.axi'
 
 ############################
 # Function: init()
 #   Creates the hardware and simulation files to be read by ModelSim,
 ############################
 def init():
-    if not os.path.isdir(directory):
-        os.mkdir(directory)
-    try:
-        global f_pci; global f_dma
-        f_pci = open(directory+'/'+pci_filename,'w')
-        f_dma = open(directory+'/'+dma_filename,'w')
-    except IOError:
-        print("File creation error")
-    writeFileHeader(fPCI(), directory+'/'+pci_filename)
-    writeFileHeader(fDMA(), directory+'/'+dma_filename)
+
+    global f_dma; global f_regstim; global f_regexpect
+    f_dma = open(dma_stim,'w')  
+    f_regstim = open(reg_stim, 'w')
+    f_regexpect = open(reg_expect, 'w')  
 
     for i in range(NUM_PORTS):
-        filename = ingress_fileHeader + str(i+1)
-        f_ingress.append(open(directory+'/'+filename, 'w'))
-        writeFileHeader(fPort(i+1), directory+"/"+filename)
-
-    # make XML files
+        filename = ingress_fileHeader + str(i) + "_stim.axi"
+        f_ingress.append(open(filename, 'w'))
+        
     for i in range(NUM_PORTS):
-        filename = expectPHY_fileHeader + str(i+1)
-        f_expectPHY.append(open(directory+'/'+filename, 'w'))
-        writeXMLHeader(fExpectPHY(i+1), directory+"/"+filename)
-
+        filename = expectPHY_fileHeader + str(i) + "_expected.axi"
+        f_expectPHY.append(open(filename, 'w'))
+  
     for i in range(NUM_PORTS):
-        filename = expectDMA_fileHeader + str(i+1)
-        f_expectDMA.append(open(directory+'/'+filename, 'w'))
-        writeXMLHeader(fExpectDMA(i+1), directory+"/"+filename)
+        filename = dma_expect + str(i) + "_expected.axi"
+        f_expectDMA.append(open(filename, 'w'))
+	
 
-
+    #f_dma.append(open(dma_stim, 'w'))
+    #f_expectDMA.append(open(dma_expect, 'w'))
+    #f_regstim.append(open(reg_stim, 'w'))
+    #f_regexpect.append(open(reg_expect, 'w'))
+   
 ############################
 # Function: writeFileHeader
 #  Writes timestamp and general information to file head.
@@ -96,29 +98,28 @@ def writeXMLHeader(fp, filePath):
 ############################
 def close():
     f_dma.close()
-    f_pci.close()
+    f_regstim.close()
+    f_regexpect.close()
 
     for i in range(NUM_PORTS):
         f_ingress[i].close()
 
     for i in range(NUM_PORTS):
-        f_expectPHY[i].write("</PACKET_STREAM>")
         f_expectPHY[i].close()
 
     for i in range(NUM_PORTS):
-        f_expectDMA[i].write("</DMA_PACKET_STREAM>")
         f_expectDMA[i].close()
 
-# Getters #################################################################
-
-
 ############################
-# Function: fPCI
+# Function: fregstim(), fregexpect()
 #  A Getter that returns the file pointer for file with
 #  register read/write info.
 ############################
-def fPCI():
-    return f_pci
+def fregstim():
+    return f_regstim
+
+def fregexpect():
+    return f_regexpect
 
 ############################
 # Function: fDMA
@@ -136,7 +137,7 @@ def fDMA():
 #
 ############################
 def fPort(port):
-    return f_ingress[port-1]
+    return f_ingress[port-1] # 0,1,2,3
 
 
 ############################
