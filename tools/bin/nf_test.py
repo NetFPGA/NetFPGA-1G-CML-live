@@ -39,7 +39,7 @@ OPTIONAL = 0
 
 teardown = 'teardown'
 setup = 'setup'
-run = 'make_pkts.py'
+run = 'run.py'
 commonDir = 'common'
 globalDir = 'global'
 projectRoot = 'projects'
@@ -205,7 +205,7 @@ def run_sim_test():
         if args.compile_only:
             sys.exit(0) #################
         prepareTestWorkDir(td)
-	global_run = rootDir + '/projects/' + project + '/test/' + td + '/make_pkts.py'
+	global_run = rootDir + '/projects/' + project + '/test/' + td + '/run.py'
         dst_dir = proj_test_dir + '/' + td
         which_run = global_run
         cmd = [which_run, '--sim']
