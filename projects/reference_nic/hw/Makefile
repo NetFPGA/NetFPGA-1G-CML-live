@@ -88,7 +88,7 @@ NF10_SCR_FILES := nf10/axi_interconnect_0_wrapper_xst.scr
 # Programming PCIE
 NF10_PROGPCIE = pciecopy exporttosdk
 
-# Default Packet length for make_pkts.py
+# Default Packet length for run.py
 PKTLEN = 10
 PKTNO = 2 
 
@@ -399,7 +399,7 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
 sim: axi_model
-	./../test/$(TESTNAME)/make_pkts.py
+	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
@@ -411,7 +411,7 @@ sim: axi_model
 ###### AXI SIMULATION TX, RX, and TXRX Paths #######
 
 simgui: axi_model
-	./../test/$(TESTNAME)/make_pkts.py
+	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
@@ -421,7 +421,7 @@ simgui: axi_model
 
 
 simtx: checkpktlen axi_model
-	./../test/$(TESTNAME)/make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
 	@echo "" > nf10_10g_interface_0_stim.axi
 	@echo "" > nf10_10g_interface_1_stim.axi
 	@echo "" > nf10_10g_interface_2_stim.axi
@@ -432,7 +432,7 @@ simtx: checkpktlen axi_model
 	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
 
 simtxgui: checkpktlen axi_model
-	./../test/$(TESTNAME)/make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
 	@echo "" > nf10_10g_interface_0_stim.axi
 	@echo "" > nf10_10g_interface_1_stim.axi
 	@echo "" > nf10_10g_interface_2_stim.axi
@@ -443,7 +443,7 @@ simtxgui: checkpktlen axi_model
 	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
 
 simrx: checkpktlen axi_model
-	./../test/$(TESTNAME)/make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
 	@echo "" > dma_0_stim.axi
 	cp nf10/system_axisim_rx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
@@ -451,7 +451,7 @@ simrx: checkpktlen axi_model
 	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
 
 simrxgui: checkpktlen axi_model
-	./../test/$(TESTNAME)/make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
 	@echo "" > dma_0_stim.axi
 	cp nf10/system_axisim_rx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
@@ -459,7 +459,7 @@ simrxgui: checkpktlen axi_model
 	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
 
 simtxrx: checkpktlen axi_model
-	./../test/$(TESTNAME)/make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
 	@echo "" > nf10_10g_interface_0_stim.axi
 	@echo "" > nf10_10g_interface_1_stim.axi
 	@echo "" > nf10_10g_interface_2_stim.axi
@@ -470,7 +470,7 @@ simtxrx: checkpktlen axi_model
 	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
 
 simtxrxgui: checkpktlen axi_model
-	./../test/$(TESTNAME)/make_pkts.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
 	@echo "" > nf10_10g_interface_0_stim.axi
 	@echo "" > nf10_10g_interface_1_stim.axi
 	@echo "" > nf10_10g_interface_2_stim.axi
