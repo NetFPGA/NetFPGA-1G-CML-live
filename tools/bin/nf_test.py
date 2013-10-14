@@ -197,6 +197,18 @@ def run_sim_test():
     for td in tests:
 	if args.gui:
 	    charis = os.system("make simgui TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))
+	elif args.tx:
+	    charis = os.system("make simtx TESTNAME=sim_tx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.tx and args.gui:
+	    charis = os.system("make simtxgui TESTNAME=sim_tx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.rx:
+	    charis = os.system("make simrx TESTNAME=sim_rx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.rx and args.gui:
+	    charis = os.system("make simrxgui TESTNAME=sim_rx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.txrx:
+	    charis = os.system("make simtxrx TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.txrx and args.gui:
+	    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
    	else:
     	    charis = os.system("make sim TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))	
    	print charis
@@ -254,6 +266,9 @@ def handleArgs():
     parser.add_argument('--vcs', action='store_true', help='Simulation only. If this option is present, vcs will run. Otherwise vsim will run.')
     parser.add_argument('--isim', action='store_true', help='Simulation only. If this option is present, ISIM will run. Otherwise vsim will run.')
     parser.add_argument('--gui', action='store_true', help='Simulation only. This will run the simulator in interactive mode (usually with a GUI).')
+    parser.add_argument('--tx', action='store_true', help='Simulation only. This will run the simulator sending from dma to phy.')
+    parser.add_argument('--rx', action='store_true', help='Simulation only. This will run the simulator sending from phy to dma.')
+    parser.add_argument('--txrx', action='store_true', help='Simulation only. This will run the simulator for loopback.')
     parser.add_argument('--lenmin', action='store_true', help='Simulation only. This will run the simulator for min length of the packet.')
     parser.add_argument('--lenmax', action='store_true', help='Simulation only. This will run the simulator for max length of the packet.')
     parser.add_argument('--no_compile', action='store_true', help='Simulation only. This will not compile the simulation binary.')

@@ -29,22 +29,28 @@ totalPktLengths = [0,0,0,0]
 for i in range(NUM_PKTS):
     sys.stdout.write('\r'+str(i))
     sys.stdout.flush()
-    for port in range(4):
-        DA = "00:ca:fe:00:00:%02x"%port
+    if isHW():
+        for port in range(4):
+            DA = "00:ca:fe:00:00:%02x"%port
+            pkt = make_IP_pkt(dst_MAC=DA, src_MAC=SA, dst_IP=DST_IP,
+                             src_IP=SRC_IP, TTL=TTL,
+                             pkt_len=random.randint(60,1514)) 
+            totalPktLengths[port] += len(pkt)
+        
+            nftest_send_dma('nf' + str(port), pkt)
+            nftest_expect_dma('nf' + str(port), pkt)
+    else:
+	DA = "00:ca:fe:00:00:00"
         pkt = make_IP_pkt(dst_MAC=DA, src_MAC=SA, dst_IP=DST_IP,
                              src_IP=SRC_IP, TTL=TTL,
                              pkt_len=random.randint(60,1514)) 
-        totalPktLengths[port] += len(pkt)
 	pkt.time = (i*(1e-8))
         pkts.append(pkt)
-        
-        if isHW():
-            nftest_send_dma('nf' + str(port), pkt)
-            nftest_expect_dma('nf' + str(port), pkt)
 
 if not isHW():
-    nftest_send_phy('nf0', pkts)
-    nftest_expect_dma('nf0', pkts)
+    for i in range(4):
+        nftest_send_dma('nf%d'%i, pkts) 
+        nftest_expect_phy('nf%d'%i, pkts)   
 
 print ""
 mres=[]
