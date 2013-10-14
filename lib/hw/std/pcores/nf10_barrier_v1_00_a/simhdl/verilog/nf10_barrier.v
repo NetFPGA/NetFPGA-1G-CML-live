@@ -28,8 +28,6 @@ module nf10_barrier #(
 //
 parameter INACTIVITY_TIMEOUT = 1500;
 time req_time;
-integer a = 0;
-integer b = 0;
 reg timeout;
 wire [NUM_PORTS:0] activity;
 wire activity_trans;
@@ -89,7 +87,6 @@ begin
       if ({barrier_req, barrier_req_trans} != 'h0) begin
          while ({barrier_req, barrier_req_trans} != 'h0) begin
             #1;
-            b = req_time + INACTIVITY_TIMEOUT;
             #(req_time + INACTIVITY_TIMEOUT - $time);
             if ({barrier_req, barrier_req_trans} != 'h0 && req_time + INACTIVITY_TIMEOUT <= $time)
                timeout = 1;
