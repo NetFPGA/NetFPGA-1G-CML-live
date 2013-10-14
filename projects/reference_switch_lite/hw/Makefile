@@ -403,7 +403,7 @@ xparam:
 	@rm -rf $(SDK_EXPORT_DIR)/../libs
 
 sim: axi_model xparam
-	./../test/$(TESTNAME)/make_pkts.py
+	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
@@ -412,7 +412,7 @@ sim: axi_model xparam
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
 simgui: axi_model xparam
-	./../test/$(TESTNAME)/make_pkts.py
+	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
