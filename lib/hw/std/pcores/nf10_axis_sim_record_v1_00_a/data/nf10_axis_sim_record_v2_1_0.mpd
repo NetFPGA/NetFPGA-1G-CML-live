@@ -69,7 +69,6 @@ PORT s_axis_tready = TREADY, DIR = O, BUS = S_AXIS
 PORT s_axis_tlast = TLAST, DIR = I, BUS = S_AXIS
 
 PORT counter = "", DIR = O, VEC = [7:0]
-PORT valid = "", DIR = O
 PORT activity_rec = "", DIR = O
 
 END

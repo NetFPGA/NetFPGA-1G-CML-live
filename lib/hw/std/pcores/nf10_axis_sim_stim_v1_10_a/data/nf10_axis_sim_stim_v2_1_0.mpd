@@ -71,7 +71,6 @@ PORT m_axis_tready = TREADY, DIR = I, BUS = M_AXIS
 PORT m_axis_tlast = TLAST, DIR = O, BUS = M_AXIS
 
 PORT counter = "", DIR = I, VEC = [7:0]
-PORT valid = "", DIR = I
 PORT activity_stim = "", DIR = O
 PORT barrier_req = "", DIR = O
 PORT barrier_proceed = "", DIR = I

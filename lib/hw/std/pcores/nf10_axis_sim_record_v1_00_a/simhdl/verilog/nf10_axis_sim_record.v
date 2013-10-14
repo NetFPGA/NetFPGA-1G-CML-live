@@ -59,7 +59,6 @@ module nf10_axis_sim_record
     input s_axis_tlast,
 
     output [7:0] counter,
-    output valid,
     output reg activity_rec
 );
 
@@ -67,10 +66,8 @@ module nf10_axis_sim_record
     integer bubble_count = 0;
     integer result;
     reg [8*2-1:0] terminal_flag;
-    //reg [31:0] count = 1;
     
     assign s_axis_tready = 1;
-    //assign counter = count;
     
     initial begin
         f = $fopen(output_file, "w");
@@ -86,8 +83,6 @@ module nf10_axis_sim_record
             end
             if (s_axis_tlast == 1'b1) begin
                 terminal_flag = ".";
-		//count <= count + 1;
-		//counter <= count;
 		counter <= counter + 1;
 		activity_rec <= 1;
             end

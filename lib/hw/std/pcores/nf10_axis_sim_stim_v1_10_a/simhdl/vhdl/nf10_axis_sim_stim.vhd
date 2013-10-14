@@ -68,7 +68,6 @@ entity nf10_axis_sim_stim is
         M_AXIS_TLAST  : out std_logic;
 
 	counter       : in std_logic_vector(7 downto 0);
-	valid	      : in std_logic;
 	activity_stim : out std_logic;
         barrier_req   : out std_logic;
         barrier_proceed : in std_logic

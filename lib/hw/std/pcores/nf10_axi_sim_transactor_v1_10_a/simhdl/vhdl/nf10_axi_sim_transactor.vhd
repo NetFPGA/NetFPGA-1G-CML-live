@@ -123,9 +123,6 @@ architecture rtl of nf10_axi_sim_transactor is
     signal addr_w, addr_r : std_logic_vector(31 downto 0);
     signal data_w, data_r : std_logic_vector(31 downto 0);
     shared variable f, o, v, j, k: integer range 0 to 31;
-    signal pkts_good: std_logic;
-    signal sima: std_logic;
-    signal all_exp_pkts_seen: std_logic;
 
 begin
 

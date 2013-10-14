@@ -85,11 +85,10 @@ PARAMETER output_file = %s
 BUS_INTERFACE S_AXIS = %s
 PORT aclk = %s
 PORT counter = %s_counter
-PORT valid = %s_valid
 PORT activity_rec = %s_activity_rec
 END
 """ % (comment,
-       inst_name_log, ver, axi_file, width, net, clock, inst_name_log, inst_name_log, inst_name_log) ) )
+       inst_name_log, ver, axi_file, width, net, clock, inst_name_log, inst_name_log) ) )
 
 def insert_stimulator( mhs, index, comment, inst_name, ver, axi_file, width, net, clock, reset, inst_name_log ):
     """
@@ -111,12 +110,11 @@ BUS_INTERFACE M_AXIS = %s
 PORT aclk = %s
 PORT aresetn = %s
 PORT counter = %s_counter
-PORT valid = %s_valid
 PORT activity_stim = %s_activity_stim
 PORT barrier_req = %s_barrier_req
 PORT barrier_proceed = nf10_barrier_0_barrier_proceed
 END
-""" % (comment, inst_name, ver, axi_file, width, net, clock, reset, inst_name_log, inst_name_log, inst_name, inst_name) ) )
+""" % (comment, inst_name, ver, axi_file, width, net, clock, reset, inst_name_log, inst_name, inst_name) ) )
 
 def insert_barrier(mhs, index):
     mhs[index:index] = mhstools.parse_mhs(cStringIO.StringIO(
