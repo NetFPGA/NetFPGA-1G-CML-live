@@ -3,11 +3,11 @@
 #  Xilinx EDK 13.4 EDK_O.87xd
 #  Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 #
-<<<<<<< HEAD
+
 #  File     system_axisim_fuse.sh (Wed Jul 31 16:03:14 2013)
-=======
+
 #  File     system_axisim_fuse.sh (Tue Jun 25 15:02:27 2013)
->>>>>>> 63b2e7886718c23bb944f6739ba2e2b1170f756a
+
 #
 #  ISE Simulator Fuse Script File
 #
@@ -23,8 +23,6 @@
 #  3. Launch the simulator using the following command:
 #     isim_system_axisim -gui -tclbatch system_axisim_setup.tcl
 #
-<<<<<<< HEAD
+
 fuse -incremental work.system_axisim_tb work.glbl -prj system_axisim.prj -L nf10_axis_converter_v1_00_a -L nf10_proc_common_v1_00_a -L xilinxcorelib_ver -L secureip -L unisims_ver  -o isim_system_axisim
-=======
-fuse -incremental work.system_axisim_tb work.glbl -prj system_axisim.prj -L xilinxcorelib_ver -L secureip -L unisims_ver -L nf10_proc_common_v1_00_a  -o isim_system_axisim
->>>>>>> 63b2e7886718c23bb944f6739ba2e2b1170f756a
+

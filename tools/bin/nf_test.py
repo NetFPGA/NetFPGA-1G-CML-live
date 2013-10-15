@@ -196,9 +196,21 @@ def run_sim_test():
     passed = []; failed = []; gui = []
     for td in tests:
 	if args.gui:
-	    charis = os.system("make simgui -C %s" % rootDir + '/projects/' + project + '/test/' + td)
+	    charis = os.system("make simgui TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))
+	elif args.tx:
+	    charis = os.system("make simtx TESTNAME=sim_tx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.tx and args.gui:
+	    charis = os.system("make simtxgui TESTNAME=sim_tx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.rx:
+	    charis = os.system("make simrx TESTNAME=sim_rx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.rx and args.gui:
+	    charis = os.system("make simrxgui TESTNAME=sim_rx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.txrx:
+	    charis = os.system("make simtxrx TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.txrx and args.gui:
+	    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
    	else:
-    	    charis = os.system("make sim -C %s" % rootDir + '/projects/' + project + '/test/' + td)	
+    	    charis = os.system("make sim TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))	
    	print charis
         if not args.no_compile:
             buildSim()
@@ -254,6 +266,9 @@ def handleArgs():
     parser.add_argument('--vcs', action='store_true', help='Simulation only. If this option is present, vcs will run. Otherwise vsim will run.')
     parser.add_argument('--isim', action='store_true', help='Simulation only. If this option is present, ISIM will run. Otherwise vsim will run.')
     parser.add_argument('--gui', action='store_true', help='Simulation only. This will run the simulator in interactive mode (usually with a GUI).')
+    parser.add_argument('--tx', action='store_true', help='Simulation only. This will run the simulator sending from dma to phy.')
+    parser.add_argument('--rx', action='store_true', help='Simulation only. This will run the simulator sending from phy to dma.')
+    parser.add_argument('--txrx', action='store_true', help='Simulation only. This will run the simulator for loopback.')
     parser.add_argument('--lenmin', action='store_true', help='Simulation only. This will run the simulator for min length of the packet.')
     parser.add_argument('--lenmax', action='store_true', help='Simulation only. This will run the simulator for max length of the packet.')
     parser.add_argument('--no_compile', action='store_true', help='Simulation only. This will not compile the simulation binary.')
@@ -277,6 +292,13 @@ def printEnv():
     print "   Project name:   " + project
     print "   Project dir:    " + projDir
     print "   Work dir:       " + workDir
+
+    if args.type == 'sim':
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/Makefile', src_test_dir])
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/system.xmp', src_test_dir])
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/system.mhs', src_test_dir])
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/pcores/', src_test_dir])
+    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/nf10/', src_test_dir])
 
 # verify that NF_ROOT has been set and exists
 def identifyRoot():
@@ -387,13 +409,24 @@ def prepareTestWorkDir(testName):
     if args.type == 'sim':
         for file in glob.glob(src_dir + '/*'):
             subprocess.call(['cp', '-r', '-p', file, dst_dir])
+	for i in range(4):
+	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_log.axi' %i, dst_dir])
+	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_stim.axi' %i, dst_dir])
+	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_expected.axi' %i, dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/dma_0_log.axi', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/dma_0_expected.axi', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/Makefile', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/reg_stim.log', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/reg_expect.axi', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/reg_stim.axi', dst_dir])
+	subprocess.call(['cp', '-r', '-p', src_test_dir + '/system_axisim.mhs', dst_dir])
 
 def buildSim():
-    if not os.path.exists(make_file):
-        print 'Unable to find make file ' + make_file
-        sys.exit(1)
+    #if not os.path.exists(make_file):
+    #    print 'Unable to find make file ' + make_file
+    #    sys.exit(1)
     project = os.path.basename(os.path.abspath(os.environ['NF_DESIGN_DIR']))
-    subprocess.call(['cp', make_file, proj_test_dir + '/Makefile'])
+    #subprocess.call(['cp', make_file, proj_test_dir + '/Makefile'])
 
     print '=== Work directory is ' + proj_test_dir
 
