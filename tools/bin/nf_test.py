@@ -195,20 +195,65 @@ def run_sim_test():
     #set up test dirs
     passed = []; failed = []; gui = []
     for td in tests:
-	if args.gui:
-	    charis = os.system("make simgui TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))
-	elif args.tx:
-	    charis = os.system("make simtx TESTNAME=sim_tx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
-	elif args.tx and args.gui:
-	    charis = os.system("make simtxgui TESTNAME=sim_tx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	if args.tx:
+	    if args.gui:
+	        if args.packet_length and args.packet_no:
+		    charis = os.system("make simtxgui TESTNAME=sim_tx_dma PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
+		elif args.packet_length: 
+		    charis = os.system("make simtxgui TESTNAME=sim_tx_dma PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
+	        elif args.packet_no:
+		    charis = os.system("make simtxgui TESTNAME=sim_tx_dma PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
+	        else:
+	            charis = os.system("make simtxgui TESTNAME=sim_tx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	    else:
+		if args.packet_length and args.packet_no:
+		    charis = os.system("make simtx TESTNAME=sim_tx_dma PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
+		elif args.packet_length: 
+		    charis = os.system("make simtx TESTNAME=sim_tx_dma PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
+	        elif args.packet_no:
+		    charis = os.system("make simtx TESTNAME=sim_tx_dma PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
+	        else:
+	            charis = os.system("make simtx TESTNAME=sim_tx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
 	elif args.rx:
-	    charis = os.system("make simrx TESTNAME=sim_rx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
-	elif args.rx and args.gui:
-	    charis = os.system("make simrxgui TESTNAME=sim_rx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	    if args.gui:
+	        if args.packet_length and args.packet_no:
+		    charis = os.system("make simrxgui TESTNAME=sim_rx_dma PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
+		elif args.packet_length: 
+		    charis = os.system("make simrxgui TESTNAME=sim_rx_dma PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
+	        elif args.packet_no:
+		    charis = os.system("make simrxgui TESTNAME=sim_rx_dma PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
+	        else:
+	            charis = os.system("make simrxgui TESTNAME=sim_rx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	    else:
+		if args.packet_length and args.packet_no:
+		    charis = os.system("make simrx TESTNAME=sim_rx_dma PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
+		elif args.packet_length: 
+		    charis = os.system("make simrx TESTNAME=sim_rx_dma PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
+	        elif args.packet_no:
+		    charis = os.system("make simrx TESTNAME=sim_rx_dma PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
+	        else:
+	            charis = os.system("make simrx TESTNAME=sim_rx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
 	elif args.txrx:
-	    charis = os.system("make simtxrx TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
-	elif args.txrx and args.gui:
-	    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	    if args.gui:
+	        if args.packet_length and args.packet_no:
+		    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
+		elif args.packet_length: 
+		    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
+	        elif args.packet_no:
+		    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
+	        else:
+	            charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	    else:
+		if args.packet_length and args.packet_no:
+		    charis = os.system("make simtxrx TESTNAME=sim_tx_rx PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
+		elif args.packet_length: 
+		    charis = os.system("make simtxrx TESTNAME=sim_tx_rx PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
+	        elif args.packet_no:
+		    charis = os.system("make simtxrx TESTNAME=sim_tx_rx PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
+	        else:
+	            charis = os.system("make simtxrx TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	elif args.gui:
+	    charis = os.system("make simgui TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))
    	else:
     	    charis = os.system("make sim TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))	
    	print charis
@@ -248,6 +293,8 @@ def handleArgs():
     parser.add_argument('--quiet', action='store_true', help='Hardware only. Run in quiet mode; don\'t output anything unless there are errors.', default = False)
     parser.add_argument('--major', help='Specify the string to match on the first part of the test directory name.', metavar='<string>', default='')
     parser.add_argument('--minor', help='Specify the string to match on the last part of the test directory name.', metavar='<string>', default='')
+    parser.add_argument('--packet_length', help='Specify the lenght of the packet.', type=int)
+    parser.add_argument('--packet_no', help='Specify the number of the packet.', type=int)
     parser.add_argument('--conn', help='Specify the conn file specifying the physical connections of the nfX ports.  Formatting is one connection per line, nfX:ethY.', metavar='<connections file>')
     parser.add_argument('--map', help='Remap interfaces per mapfile, which is a list of two interfaces per line.', metavar='<map_file>')
     parser.add_argument('--ci', choices=['teamcity'], help='For use when using a continuout integration tool.  Instructs the system to print out extra debugging information used by the CI tool.', metavar='<test_tool>')
@@ -352,6 +399,8 @@ def identifyWorkDir():
 
 def identifyTests():
     test_name = ''; both_test_name = ''
+    global length
+    global number
     if args.major:
         both_test_name = 'both_' + args.major + '_' + args.minor
         if args.type == 'sim':
@@ -364,6 +413,13 @@ def identifyTests():
             test_name = 'sim_'
         else:
             test_name = 'hw_'
+
+    if args.packet_length:
+	length = args.packet_length
+
+    if args.packet_no:
+	number = args.packet_no
+
     dirs = os.listdir(os.environ['NF_DESIGN_DIR'] + '/test')
     global tests;tests = []
     for test in dirs:
