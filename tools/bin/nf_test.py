@@ -236,22 +236,22 @@ def run_sim_test():
 	elif args.txrx:
 	    if args.gui:
 	        if args.packet_length and args.packet_no:
-		    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
+		    charis = os.system("make simtxrxgui TESTNAME=sim_txrx_dma PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
 		elif args.packet_length: 
-		    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
+		    charis = os.system("make simtxrxgui TESTNAME=sim_txrx_dma PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
 	        elif args.packet_no:
-		    charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
+		    charis = os.system("make simtxrxgui TESTNAME=sim_txrx_dma PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
 	        else:
-	            charis = os.system("make simtxrxgui TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	            charis = os.system("make simtxrxgui TESTNAME=sim_txrx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
 	    else:
 		if args.packet_length and args.packet_no:
-		    charis = os.system("make simtxrx TESTNAME=sim_tx_rx PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
+		    charis = os.system("make simtxrx TESTNAME=sim_txrx_dma PKTLEN=%d PKTNO=%d -C %s" % (length, number, rootDir + '/projects/' + project + '/test/'))
 		elif args.packet_length: 
-		    charis = os.system("make simtxrx TESTNAME=sim_tx_rx PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
+		    charis = os.system("make simtxrx TESTNAME=sim_txrx_dma PKTLEN=%d -C %s" % (length, rootDir + '/projects/' + project + '/test/'))
 	        elif args.packet_no:
-		    charis = os.system("make simtxrx TESTNAME=sim_tx_rx PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
+		    charis = os.system("make simtxrx TESTNAME=sim_txrx_dma PKTNO=%d -C %s" % (number, rootDir + '/projects/' + project + '/test/'))
 	        else:
-	            charis = os.system("make simtxrx TESTNAME=sim_tx_rx -C %s" % (rootDir + '/projects/' + project + '/test/'))
+	            charis = os.system("make simtxrx TESTNAME=sim_txrx_dma -C %s" % (rootDir + '/projects/' + project + '/test/'))
 	elif args.gui:
 	    charis = os.system("make simgui TESTNAME=%s -C %s" % (td, rootDir + '/projects/' + project + '/test/'))
    	else:
