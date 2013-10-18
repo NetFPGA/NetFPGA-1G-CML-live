@@ -11,6 +11,8 @@
 #  Author:
 #        Gianni Anitchi, Muhammad Shahbaz
 #        Jong Hun Han
+#	 Neelakandan Manihatty Bojan
+#
 #			Modified by Jong Han 06/05/2013
 #			Added Parital synthesis and PCIe programming option.
 #
@@ -263,8 +265,10 @@ simclean:
 
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
 
-#################################################################
+
+#######m#########################################################
 # BOOTLOOP ELF FILES
 #################################################################
 
@@ -394,7 +398,7 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	$(NF_ROOT)/tools/scripts/nf10_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS) 
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
-xparam:  
+regs:  
 	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
 	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
 	@mkdir -p $(SDK_EXPORT_DIR)/../libs
@@ -404,8 +408,10 @@ xparam:
 	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
 	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
 	@rm -rf $(SDK_EXPORT_DIR)/../libs
+	cd ../sw/host/include/  && cp ../../../../../tools/scripts/xparam2regdefines.py . && python xparam2regdefines.py
+	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
 
-sim: axi_model xparam
+sim: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
@@ -414,7 +420,7 @@ sim: axi_model xparam
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
-simgui: axi_model xparam
+simgui: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
