@@ -150,10 +150,10 @@ scripts:
 scriptsclean:
 	$(MAKE) -C $(NF10_SCRIPTS_DIR) clean
 
-hwlib:
+hwtestlib:
 	cd tools/lib/ && make
 
-hwlibclean:
+hwtestlibclean:
 	cd tools/lib/ && make clean
 
 check-env:
