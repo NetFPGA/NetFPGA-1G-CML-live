@@ -249,6 +249,7 @@ simclean:
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -rf ../lib/Python/reg_defines_*.*
 
 
 #######m#########################################################
@@ -393,6 +394,8 @@ regs:
 	@rm -rf $(SDK_EXPORT_DIR)/../libs
 	cd ../sw/host/include/  && cp ../../../../../tools/scripts/xparam2regdefines.py . && python xparam2regdefines.py
 	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
+	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
+	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_reference_router.py 
 
 sim: axi_model regs
 	./make_pkts.py
