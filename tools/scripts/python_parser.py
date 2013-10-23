@@ -49,7 +49,7 @@ for line in input_file:
     match_comments = re.match(r'\s*[/\*][\s*\*](.*)', line)
  	
     if match_defines:
-        newline1= "\ndef %s:\n    return %s" % (match_defines.group(1),match_defines.group(2))
+        newline1= "\ndef %s():\n    return %s" % (match_defines.group(1),match_defines.group(2))
 	output_file.write(newline1)
 
     elif match_comments:
