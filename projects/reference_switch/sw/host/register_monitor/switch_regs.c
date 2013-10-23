@@ -16,7 +16,7 @@ int main(){
     printf("Type                                |offset |\tValue   |\n");
     printf("---------------------------------------------------------\n");
     printf("RESET_CNTRS\t\t\t|00\t|       %llx \t|\n", regread(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_RESET_CNTRS_OFFSET));
-    printf("SWITCH_OP_LUT_NUM_MISSES_REG\t|04\t|       %llx \t|\n", regread(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG_OFFSET));
-    printf("SWITCH_OP_LUT_NUM_HITS_REG\t|08\t|       %llx \t|\n", regread(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET));
+    printf("SWITCH_OP_LUT_NUM_HITS_REG\t|04\t|       %llx \t|\n", regread(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET));
+    printf("SWITCH_OP_LUT_NUM_MISSES_REG\t|08\t|       %llx \t|\n", regread(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG_OFFSET));
     printf("---------------------------------------------------------\n");
 }
