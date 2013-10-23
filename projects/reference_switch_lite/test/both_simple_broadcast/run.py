@@ -55,8 +55,8 @@ if isHW():
 
     mres=[rres1]
 else:
-    nftest_regread_expect(0x74800004, 0) # lut_hit
-    nftest_regread_expect(0x74800008, 20) # lut_miss
+    nftest_regread_expect(SWITCH_OP_LUT_NUM_HITS_REG(), 0) # lut_hit
+    nftest_regread_expect(SWITCH_OP_LUT_NUM_MISSES_REG(), 0x14) # lut_miss
     mres=[]
 
 nftest_finish(mres)
