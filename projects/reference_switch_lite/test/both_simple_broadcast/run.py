@@ -53,11 +53,10 @@ if isHW():
 
     rres1=nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG_OFFSET(), 0X14)
     rres2=nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET(), 0x0)
-
+    mres=[rres1,rres2]
 else:
     nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET(), 0) # lut_hit
     nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG_OFFSET(), 0x14) # lut_miss
-
-mres=[rres1,rres2]
+    mres=[]
 
 nftest_finish(mres)
