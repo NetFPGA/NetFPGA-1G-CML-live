@@ -78,8 +78,8 @@ if isHW():
     # List containing the return values of the reg_reads
     mres=[rres1,rres2,rres3,rres4]
 else:
-    nftest_regread_expect(0x74800004, 10) # lut_hit
-    nftest_regread_expect(0x74800008, 10) # lut_miss
+    nftest_regread_expect(SWITCH_OP_LUT_NUM_HITS_REG(), 0xa) # lut_hit
+    nftest_regread_expect(SWITCH_OP_LUT_NUM_MISSES_REG(), 0xa) # lut_miss
     mres=[]
 
 nftest_finish(mres)
