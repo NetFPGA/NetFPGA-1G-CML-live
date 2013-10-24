@@ -13,7 +13,7 @@ int main(){
 
     printf("|             Router pcore registers                    |\n");
     printf("---------------------------------------------------------\n");
-    printf("Type			        |offset |\tValue   |\n");
+    printf("Type\t\t\t\t|offset |\tValue   |\n");
     printf("---------------------------------------------------------\n");
     printf("LPM_IP\t\t\t\t|00\t|       %llx \t|\n", regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_OFFSET));
     printf("LPM_IP_MASK\t\t\t|04\t|       %llx \t|\n", regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK_OFFSET));
