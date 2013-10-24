@@ -6,10 +6,12 @@
 #        nf10_axi_sim_transactor_v2_1_0.mpd
 #
 #  Library:
-#        hw/std/pcores/nf10_axi_sim_transactor_v1_00_a
+#        hw/std/pcores/nf10_axi_sim_transactor_v1_10_a
 #
 #  Author:
 #        David J. Miller
+#         
+#       Modified by Georgina Kalogeridou
 #
 #  Description:
 #        Microprocessor Peripheral Description File for AXI4 Lite
