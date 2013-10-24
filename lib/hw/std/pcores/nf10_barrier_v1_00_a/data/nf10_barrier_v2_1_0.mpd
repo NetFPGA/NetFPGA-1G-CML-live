@@ -11,6 +11,8 @@
 #  Author:
 #        David J. Miller
 #
+#       Modified by Georgina Kalogeridou
+#
 #  Description:
 #        Microprocessor Peripheral Description File for AXI Stream
 #        stimulation.  Stimulates an AXI Stream slave using packet
