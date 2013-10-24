@@ -11,6 +11,8 @@
  *  Author:
  *        James Hongyi Zeng
  *        David J. Miller
+ *	
+ *	Modified by Georgina Kalogeridou
  *
  *  Description:
  *        Records traffic received from an AXI Stream master to an
