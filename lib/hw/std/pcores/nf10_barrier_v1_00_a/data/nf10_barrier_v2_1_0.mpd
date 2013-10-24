@@ -3,10 +3,10 @@
 #  NetFPGA-10G http://www.netfpga.org
 #
 #  File:
-#        nf10_axis_sim_stim_v2_1_0.mpd
+#        nf10_barrier_v2_1_0.mpd
 #
 #  Library:
-#        hw/std/pcores/nf10_axis_sim_stim_v1_00_a
+#        hw/std/pcores/nf10_barrier_v1_00_a
 #
 #  Author:
 #        Georgina Kalogeridou
@@ -45,16 +45,10 @@ OPTION IP_GROUP = Communication High-Speed:MICROBLAZE
 OPTION DESC = NetFPGA-10G barrier test
 OPTION LONG_DESC = barrier test
 
-## Bus Interfaces
-#BUS_INTERFACE BUS = M_AXIS, BUS_STD = AXIS, BUS_TYPE = INITIATOR
-#BUS_INTERFACE BUS = G, BUS_STD = GI, BUS_TYPE = TARGET
-
 ## Generics for VHDL or Parameters for Verilog
 PARAMETER NUM_PORTS = 4, DT = INTEGER, RANGE = (4)
 
 ## Ports
-#PORT aclk = "", DIR = I, SIGIS = CLK, ASSIGNMENT=REQUIRE
-#PORT aresetn = "", DIR = I, SIGIS = RST
 
 PORT activity_stim = "", DIR = I, VEC = [NUM_PORTS:0]
 PORT activity_rec = "", DIR = I, VEC = [NUM_PORTS:0]
