@@ -11,6 +11,8 @@
 #  Author:
 #        David J. Miller
 #
+#       Modified by Georgina Kalogeridou
+#
 #  Description:
 #        Microprocessor Peripheral Description File for AXI Stream
 #        recorder.  Records traffic received from an AXI Stream
