@@ -89,7 +89,7 @@ NF10_SCR_FILES := nf10/axi_interconnect_0_wrapper_xst.scr
 NF10_PROGPCIE = pciecopy exporttosdk
 
 # Default Packet length for run.py
-PKTLEN = 10
+PKTLEN = 16
 PKTNO = 2 
 
 #################################################################
