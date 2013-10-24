@@ -293,9 +293,9 @@ def nftest_contains_ARP_table_entries(expected_entries):
 # Return:
 ################################################################
 def nftest_invalidate_all_tables(
-		arp_depth = ROUTER_OP_LUT_ARP_TABLE_DEPTH(),
-		lpm_depth = ROUTER_OP_LUT_ROUTE_TABLE_DEPTH(),
-		dst_ip_filter_depth = ROUTER_OP_LUT_DST_IP_FILTER_TABLE_DEPTH()):
+		arp_depth = XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ARP_TABLE_DEPTH(),
+		lpm_depth = XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH(),
+		dst_ip_filter_depth = XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH()):
 	nftest_invalidate_ARP_table(arp_depth)
 	nftest_invalidate_LPM_table(lpm_depth)
 	nftest_invalidate_dst_ip_filter_table(dst_ip_filter_depth)
