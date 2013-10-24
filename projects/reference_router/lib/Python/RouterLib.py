@@ -147,7 +147,7 @@ def get_dst_ip_filter_entry(index):
 #
 ################################################################
 def add_ARP_table_entry(index, IP, MAC):
-        if index < 0 or index > ROUTER_OP_LUT_ARP_TABLE_DEPTH()-1:
+        if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ARP_TABLE_DEPTH()-1:
                 print 'Bad data'
                 sys.exit(1)
         if re.match("(\d+)\.", IP):
@@ -161,7 +161,7 @@ def add_ARP_table_entry(index, IP, MAC):
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_WR_ADDR_OFFSET(), index)
 
 def invalidate_ARP_table_entry(index):
-        if index < 0 or index > ROUTER_OP_LUT_ARP_TABLE_DEPTH()-1:
+        if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ARP_TABLE_DEPTH()-1:
                 print 'Bad data'
                 sys.exit(1)
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP_OFFSET(), 0)
@@ -170,7 +170,7 @@ def invalidate_ARP_table_entry(index):
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_WR_ADDR_OFFSET(), index)
 
 def check_ARP_table_entry(index, IP, MAC):
-	if index < 0 or index > ROUTER_OP_LUT_ARP_TABLE_DEPTH() - 1:
+	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ARP_TABLE_DEPTH() - 1:
 		print 'check_ARP_table_entry: Bad data'
 		sys.exit(1)
         if re.match("(\d+)\.", IP):
@@ -184,7 +184,7 @@ def check_ARP_table_entry(index, IP, MAC):
 	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW_OFFSET(), mac_lo)
 
 def get_ARP_table_entry(index):
-	if index < 0 or index > ROUTER_OP_LUT_ARP_TABLE_DEPTH()-1:
+	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ARP_TABLE_DEPTH()-1:
 		print 'check_ARP_table_entry: Bad data'
 		sys.exit(1)
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_RD_ADDR_OFFSET(), index)
