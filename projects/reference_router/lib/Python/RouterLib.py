@@ -55,7 +55,7 @@ def get_router_MAC(port, MAC):
 #
 ################################################################
 def add_LPM_table_entry(index, IP, mask, next_IP, next_port):
-        if index < 0 or index > ROUTER_OP_LUT_ROUTE_TABLE_DEPTH() - 1 or next_port < 0 or next_port > 255:
+        if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH() - 1 or next_port < 0 or next_port > 255:
                 print 'Bad data'
                 sys.exit(1)
         if re.match("(\d+)\.", IP):
@@ -71,7 +71,7 @@ def add_LPM_table_entry(index, IP, mask, next_IP, next_port):
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_WR_ADDR_OFFSET(), index)
 
 def check_LPM_table_entry(index, IP, mask, next_IP, next_port):
-	if index < 0 or index > ROUTER_OP_LUT_ROUTE_TABLE_DEPTH() - 1 or next_port < 0 or next_port > 255:
+	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH() - 1 or next_port < 0 or next_port > 255:
 		print 'Bad data'
 		sys.exit(1)
         if re.match("(\d+)\.", IP):
@@ -88,7 +88,7 @@ def check_LPM_table_entry(index, IP, mask, next_IP, next_port):
 	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ_OFFSET(), next_port)
 
 def invalidate_LPM_table_entry(index):
-	if index < 0 or index > ROUTER_OP_LUT_ROUTE_TABLE_DEPTH()-1:
+	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH()-1:
 		print 'Bad data'
 		sys.exit(1)
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_OFFSET(), 0)
@@ -98,7 +98,7 @@ def invalidate_LPM_table_entry(index):
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_WR_ADDR_OFFSET(), index)
 
 def get_LPM_table_entry(index):
-	if index < 0 or index > ROUTER_OP_LUT_ROUTE_TABLE_DEPTH() - 1:
+	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH() - 1:
 		print 'get_LPM_table_entry_generic: Bad data'
 		sys.exit(1)
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_RD_ADDR_OFFSET(), index)	
@@ -118,7 +118,7 @@ def get_LPM_table_entry(index):
 #
 ################################################################
 def add_dst_ip_filter_entry(index, IP):
-        if index < 0 or index > ROUTER_OP_LUT_ROUTE_TABLE_DEPTH() - 1:
+        if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH() - 1:
                 print 'Bad data'
                 sys.exit(1)
         if re.match("(\d+)\.", IP):
@@ -127,14 +127,14 @@ def add_dst_ip_filter_entry(index, IP):
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_WR_ADDR_OFFSET(), index)
 
 def invalidate_dst_ip_filter_entry(index):
-	if index < 0 or index > ROUTER_OP_LUT_DST_IP_FILTER_TABLE_DEPTH()-1:
+	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_DST_IP_FILTER_TABLE_DEPTH()-1:
 		print 'Bad data'
 		sys.exit(1)
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_IP_OFFSET(), 0)
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_WR_ADDR_OFFSET(), index)
 
 def get_dst_ip_filter_entry(index):
-	if index < 0 or index > ROUTER_OP_LUT_DST_IP_FILTER_TABLE_DEPTH()-1:
+	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_DST_IP_FILTER_TABLE_DEPTH()-1:
 		print 'Bad data'
 		sys.exit(1)
 	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_RD_ADDR_OFFSET(), index)
