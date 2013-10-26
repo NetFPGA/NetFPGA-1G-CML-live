@@ -9,50 +9,44 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 4.9.0
+GIT VERSION 5.0.0
 
-Before using this code, please check the release notes for 4.9.0 below
+This is a release candidate.
+Before using this code, please check the release notes for 5.0.0 below
 
-1. Reference Router:
+1. Integrated test infrastructure with both_major_minor tests.
+We have a integrated test infrastructure for reference_nic, reference_switch and reference_switch_lite projects. 
 
-A fully functional reference router project along with the SW tools ( /projects/reference_router/sw/host) for its management is included in this release.
+wiki for simulation infrastructure:
+https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Simulations
+wiki for HW test infrastructure:
+https://github.com/NetFPGA/NetFPGA-public/wiki/HW-Tests
 
-Documentation: https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Reference-Router
+2. HW tests for reference router
+We will be having the following set of hardware tests for the reference_router project.
 
-2. PCIE programming:
+hw_badipchksum_packet  
+hw_lpm_generic  
+hw_nonip_packet       
+hw_router_table
+hw_invalidttl_packet   
+hw_lpm_misses  
+hw_nonipv4_packet     
+hw_wrong_destMAC
+hw_arp_misses  
+hw_ipdestfilter_hit    
+hw_lpm_nexthop  
+hw_packet_forwarding
 
-PCIE programming is incorporated as a default implementation for reference_nic, reference_switch, reference_router and reference_switch_lite projects.Run 'make' generates a bit file enabling PCIE programming in all the projects.
+wiki for router tests:
+https://github.com/NetFPGA/NetFPGA-public/wiki/Tests-for-reference-router
 
-Documentation: https://github.com/NetFPGA/NetFPGA-public/wiki/PCIE-Programming
+3. Register monitoring system
 
-3. HW tests.
+The register monitoring system is used to monitor the status of the registers of the output port lookup module while running the HW tests.
+Currently the Register monitoring system is available for reference_switch, reference_switch_lite and reference_router.
 
-Python based HW Tests for for reference_nic, reference_switch, reference_switch_lite. Contains the following: 
-bashrc (global), Python library (global top level library), Python library (project specific library containing register defines), python parser (to convert xparameters.h to reg_defines.py),
-Test folder (project specific contains conn, global and hw tests files), Shared library(global library)
-
-Documentation : https://github.com/NetFPGA/NetFPGA-public/wiki/HW-Tests
-
-4. Partial synthesis
-
-Partial synthesis is incorporated in the projects of reference_nic, reference_switch, reference_router and reference_switch_lite.This process should be determined by a user depending on the hw implementation.
-
-Documentation: https://github.com/NetFPGA/NetFPGA-public/wiki/Partial-Synthesis
-
-5. New pcores :
-
-The following pcores have been added
-nf10_identifier_v1_00_a -- used to identify (gives the time it was created and the name) the bitfile loaded in the FPGA
-nf10_input_arbiter_v1_10_a  -- input arbiter with registers
-nf10_10g_interface_v1_20_a -- nf10_10g interface with registers to check only good packets.
-nf10_bram_output_queues_v1_01_a -- BRAM ouput queues with fix from Shahbaz
-nf10_bram_output_queues_v1_10_a -- BRAM output queues with registers
-nf10_router_output_port_lookup_v1_10_a -- router output port look up with registers
-
-6. Driver:
-Driver updated to fix multiple threads reading/writing axi registers
+wiki for register monitoring system:
+https://github.com/NetFPGA/NetFPGA-public/wiki/Register-Monitoring-System
 
 
-For further details regarding current and previous release notes, check the link below
-
-https://github.com/NetFPGA/NetFPGA-public/wiki/Release-Notes
