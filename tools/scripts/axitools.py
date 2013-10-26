@@ -35,6 +35,8 @@
 
 import math
 import sys
+import os
+from NFTest import *
 
 # under cygwin, there is no hardware support - so suppress hardware initialisation
 if sys.platform.startswith('cygwin'):
@@ -84,6 +86,8 @@ def axis_dump( packets, f, bus_width, period, tuser_width = 128 ):
         if last_ts is not None:
             if (int(packet.time * 1e9)-last_ts) > 0 :
                 f.write( '+ %d\n' % (int(packet.time * 1e9)-last_ts) )
+	else:
+            f.write( '@ %d\n' % (int(packet.time * 1e9)))
         last_ts = int(packet.time * 1e9)
 
         # Set up TUSER
@@ -135,6 +139,16 @@ def axis_dump( packets, f, bus_width, period, tuser_width = 128 ):
             last_ts += period
         f.write( '\n' )
 
+def axis_reg( packets, f ):
+    last_ts   = None
+    for packet in packets:
+	if last_ts is not None:
+            if (int(packet.time * 1e9)-last_ts) > 0 :
+	        	f.write( '+ %d\n' % (int(packet.time * 1e9)-last_ts) )
+	else:
+            f.write( '@ %d\n' % (int(packet.time * 1e9)))
+	last_ts = int(packet.time * 1e9)
+
 
 def axis_load( f, period ):
     """
@@ -173,7 +187,9 @@ def axis_load( f, period ):
 
         # Handle delay specs
         if   line[0] == '@':
-            time = int(line[1:])/1e9
+            a = line.lstrip('@')
+	    b = a.lstrip(' ')
+            time = int(b)
         elif line[0] == '+':
             time += int(line[1:])/1e9
         elif line[0] == '*':

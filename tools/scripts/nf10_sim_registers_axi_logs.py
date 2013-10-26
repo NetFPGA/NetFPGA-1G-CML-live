@@ -32,6 +32,7 @@
 #
 
 from __future__ import with_statement
+from __future__ import generators
 
 import glob
 import os
@@ -39,50 +40,44 @@ import sys
 import csv, collections
 import re
 
-script_dir = os.path.dirname( sys.argv[0] )
-# Add path *relative to this script's location* of axitools module
-sys.path.append( os.path.join( script_dir, '..','..','..','..','tools','scripts' ) )
-
-import axitools
-
 REG_STIM     = 'reg_stim.log'    
 
 def main():
-    fail = False
     reg_stim = '%s' % (REG_STIM)
-    print 'Count registers'
+    print 'Check registers'
     with open( reg_stim ) as output:
       	f = output.readlines()    	
-	#w = ord('<') # chr(60)
-	#r = ord('>') # chr(62)
 	a = 0
 	b = 0
+ 	c = 0
+	d = 0
+	e = 0 
 
 	for line in f:
-	    #if 'OKAY' in line:
+	    if 'Error' in line:
+		e = 1
+		if '<' in line: 
+		    c = c + 1 # write
+		elif '>' in line:
+		    d = d + 1 # read
+		else:
+		    c = c
+		    d = d
+	   
+	    else:
 		if '<' in line:
 		    a = a + 1 # write
 		elif '>' in line:
 		    b = b + 1 # read
 		else:
 		    a = a
-		    b = b
-#	for line in f:
-#	    if '<' in line:
-#		if 'OKAY' in line:
-#	    	    a = a + 1 # write
-#	for line in f:
-#	    if '>' in line:
-#		if 'OKAY' in line: 	
-#	    	    b = b + 1 # read
-	if a == b:
-	    #for line in f:
-		#if 'OKAY' in line:
-	    print '\tPASS (%d registers written, %d registers read)' % (a, b)
-	elif a > b:
-	    print '\tFAIL (%d registers written but only %d registers read)' % (a, b)
+		    b = b		
+
+	if e == 1:	
+	    print '\tFAIL ( Check reg_stim.log file!!!! )'
 	else:
-	    print '\tFAIL (%d registers written but %d registers read)' % (a, b)
+	    print '\tPASS'
+
     print
     return 0
 

@@ -11,6 +11,7 @@
 #  Author:
 #        Gianni Anitchi, Muhammad Shahbaz
 #        Jong Hun Han
+#	 Neelakandan Manihatty Bojan
 #
 #  Description:
 #        This file is based on the standard Xilinx XPS Makefile
@@ -247,8 +248,11 @@ simclean:
 
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -rf ../lib/Python/reg_defines_*.*
 
-#################################################################
+
+#######m#########################################################
 # BOOTLOOP ELF FILES
 #################################################################
 
@@ -378,7 +382,7 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	nf10_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS) 
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
-xparam:  
+regs:  
 	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
 	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
 	@mkdir -p $(SDK_EXPORT_DIR)/../libs
@@ -388,8 +392,12 @@ xparam:
 	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
 	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
 	@rm -rf $(SDK_EXPORT_DIR)/../libs
+	cd ../sw/host/include/  && cp ../../../../../tools/scripts/xparam2regdefines.py . && python xparam2regdefines.py
+	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
+	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
+	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_reference_router.py 
 
-sim: axi_model xparam
+sim: axi_model regs
 	./make_pkts.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
@@ -397,7 +405,7 @@ sim: axi_model xparam
 	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf10/noninteractive_sim.tcl
 	nf10_sim_reconcile_axi_logs.py
 
-simgui: axi_model xparam
+simgui: axi_model regs
 	./make_pkts.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral

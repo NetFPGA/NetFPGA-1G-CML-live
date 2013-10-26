@@ -1,9 +1,21 @@
 #!/usr/bin/env python
 # Author: James Hsi, Eric Lo
+# Modified by Georgina Kalogeridou
 # Date: 1/31/2011
+
+from NFTest import *
 
 import simLib
 import simReg
+import os
+import sys
+
+script_dir = os.path.dirname( sys.argv[0] )
+# Add path *relative to this script's location* of axitools module
+sys.path.append( os.path.join( script_dir, '..','..','..','..','tools','scripts' ) )
+
+# NB: axitools import must preceed any scapy imports
+import axitools
 
 NUM_PORTS = 4
 
@@ -11,11 +23,14 @@ CMD_SEND = 1
 CMD_BARRIER = 2
 CMD_DELAY = 3
 
-CMD_PCI_BARRIER = 4
+CMD_BARRIER_REG = 4
 CMD_PCI_DELAY = 5
+
+f = []
 
 # Global counters for synchronization
 numExpectedPktsPHY = [0, 0, 0, 0]; numExpectedPktsDMA = [0, 0, 0, 0]
+numSendPktsPHY = [0, 0, 0, 0]; numSendPktsDMA = [0, 0, 0, 0]
 
 # Packet counters
 SentPktsPHYcount = [0, 0, 0, 0]; SentPktsDMAcount = [0, 0, 0, 0]
@@ -29,50 +44,7 @@ ExpectedPktsPHYcount = [0, 0, 0, 0]; ExpectedPktsDMAcount = [0, 0, 0, 0]
 #
 ############################
 def pktSendPHY(toPort, pkt):
-    f = simLib.fPort(toPort)
-
-    # convert packet to string
-    strpkt = ""
-    strpktHdr = ""
-    count = 1
-    for x in str(pkt):
-        strpktHdr += "%02x "%ord(x)
-        strpkt += "%02x"%ord(x)
-        if count < 4:
-            count += 1
-        else:
-            strpkt += "\n"
-            count = 1
-    # pad if pkt ends in incomplete word
-    if len(pkt)%4 != 0:
-        count -= 1
-        while count != 4:
-            strpkt += '00'
-            count += 1
-    # format nicely
-    DA = str.replace(strpktHdr[0:17], ' ', ':')
-    SA = str.replace(strpktHdr[18:35], ' ', ':')
-    ethType = str.replace(strpktHdr[36:41], ' ', '')
-    samplePkt = str.replace(strpktHdr[42:60], '\n', '')
-
-    # increment counter
-    SentPktsPHYcount[toPort-1] += 1
-
-    # write packet
-    f.write("// Packet " + str(SentPktsPHYcount[toPort-1]) + "\n")
-    f.write("// DA: " + DA + " SA: " + SA + " [" + ethType + "] " +
-            samplePkt + "...\n")
-    f.write("%08d"%CMD_SEND + " // SEND\n")
-
-    pktLen = len(pkt)
-    f.write("%08x"%pktLen + " // Length without CRC\n")
-    f.write("%08d"%toPort + " // Port " + str(toPort) + "\n")
-
-    f.write(str.rstrip(strpkt))
-
-    f.write('\neeeeffff // End of pkt marker for pkt ' +
-            str(SentPktsPHYcount[toPort-1]) + ' (this is not sent).\n')
-
+    numSendPktsPHY[toPort-1] += 1
 
 ############################
 # Function: pktSendDMA
@@ -81,39 +53,8 @@ def pktSendPHY(toPort, pkt):
 #
 ############################
 def pktSendDMA(toPort, pkt):
-    f = simLib.fDMA()
-
-    pktLen = len(pkt)
-    # convert packet to string
-    strpkt = ""
-    count = 1
-    for x in str(pkt):
-        strpkt += "%02x"%ord(x)
-        if count < 4:
-            count += 1
-        else:
-            strpkt += "\n"
-            count = 1
-    # pad packet if needed
-    if len(pkt)%4 != 0:
-        count -= 1
-        while count != 4:
-            strpkt += '00'
-            count += 1
-
-    # increment counter
-    SentPktsDMAcount[toPort-1] += 1
-
-    # write packet
-    f.write("// Packet " + str(SentPktsDMAcount[toPort-1]) + " at port " +
-            str(toPort) + "\n")
-
-    f.write("%08x"%pktLen + " // Length without CRC\n")
-    f.write(str.rstrip(strpkt))
-    f.write('\neeeeffff // End of pkt marker for pkt ' +
-            str(SentPktsDMAcount[toPort-1]) + ' (this is not sent).\n')
-
-    simReg.regDMA(toPort, len(pkt))
+    #f = simLib.fDMA()
+    numSendPktsDMA[toPort-1] += 1
 
 ############################
 # Function: pktExpectPHY
@@ -124,53 +65,7 @@ def pktSendDMA(toPort, pkt):
 ############################
 def pktExpectPHY(atPort, pkt, mask = None):
     numExpectedPktsPHY[atPort-1] += 1
-    f = simLib.fExpectPHY(atPort)
-
-    # convert packet to string
-    pktArr = [ord(x) for x in str(pkt)]
-    if mask:
-        maskArr = [ord(x) for x in str(mask)]
-    else:
-        maskArr = [0] * len(pkt)
-
-    strpkt = ""
-    count = 1
-    for i in xrange(len(pktArr)):
-        octet = "%02x "%pktArr[i]
-
-        # Handle masks
-        if (maskArr[i] & 0xf0) != 0:
-            octet = "X" + octet[1:]
-        if (maskArr[i] & 0x0f) != 0:
-            octet = octet[0] + "X "
-
-        strpkt += octet
-
-        if count < 16:
-            count += 1
-        else:
-            strpkt += "\n"
-            count = 1
-
-    DA = str.replace(strpkt[0:17], ' ', ':')
-    SA = str.replace(strpkt[18:35], ' ', ':')
-    ethType = str.replace(strpkt[36:41], ' ', '')
-    samplePkt = str.replace(strpkt[42:60], '\n', '')
-
-    # increment counter
-    ExpectedPktsPHYcount[atPort-1] += 1
-
-    # write packet
-    f.write("\n<!-- Packet " + str(ExpectedPktsPHYcount[atPort-1]) + "-->")
-    f.write("\n<!-- DA: " + DA + " SA: " + SA + " ["+ethType+"] " +
-            samplePkt + "...-->\n")
-    f.write("<PACKET Length=\"" + str(len(pkt)) + "\" Port=\"" +
-            str(atPort) + "\" Delay=\"0\">\n")
-    f.write(str.rstrip(strpkt))
-    f.write("\n</PACKET><!--pkt" + str(ExpectedPktsPHYcount[atPort-1]) +
-            "-->\n")
-
-
+   
 ############################
 # Function: pktExpectDMA
 # Arguments: atPort - the port the packet will be expected at (1-4)
@@ -180,52 +75,7 @@ def pktExpectPHY(atPort, pkt, mask = None):
 ############################
 def pktExpectDMA(atPort, pkt, mask = None):
     numExpectedPktsDMA[atPort-1] += 1
-    f = simLib.fExpectDMA(atPort)
-
-    # convert packet to string
-    pktArr = [ord(x) for x in str(pkt)]
-    if mask:
-        maskArr = [ord(x) for x in str(mask)]
-    else:
-        maskArr = [0] * len(pkt)
-
-    strpkt = ""
-    count = 1
-    for i in xrange(len(pktArr)):
-        octet = "%02x "%pktArr[i]
-
-        # Handle masks
-        if (maskArr[i] & 0xf0) != 0:
-            octet = "X" + octet[1:]
-        if (maskArr[i] & 0x0f) != 0:
-            octet = octet[0] + "X "
-
-        strpkt += octet
-
-        if count < 16:
-            count += 1
-        else:
-            strpkt += "\n"
-            count = 1
-
-    DA = str.replace(strpkt[0:17], ' ', ':')
-    SA = str.replace(strpkt[18:35], ' ', ':')
-    ethType = str.replace(strpkt[36:41], ' ', '')
-    samplePkt = str.replace(strpkt[42:60], '\n', '')
-
-    # increment counter
-    ExpectedPktsDMAcount[atPort-1] += 1
-
-    # write packet
-    f.write("\n<!-- Packet " + str(ExpectedPktsDMAcount[atPort-1]) + "-->")
-    f.write("\n<!-- DA: " + DA + " SA: " + SA + " [" + ethType + "] " +
-            samplePkt + "...-->\n")
-    f.write("<DMA_PACKET Length=\"" + str(len(pkt)) + "\" Port=\"" +
-            str(atPort) + "\" Delay=\"0\">\n")
-    f.write(str.rstrip(strpkt))
-    f.write("\n</DMA_PACKET><!--pkt" + str(ExpectedPktsDMAcount[atPort-1]) +
-            "-->\n")
-
+   
 # Synchronization ########################################################
 
 ############################
@@ -234,10 +84,11 @@ def pktExpectDMA(atPort, pkt, mask = None):
 #  Private function to be called by pktBarrier
 ############################
 def resetBarrier():
-    global numExpectedPktsPHY; global numExpectedPktsDMA
+    global numExpectedPktsPHY; global numExpectedPktsDMA; global numSendPktsDMA; global numSendPktsPHY
     numExpectedPktsPHY = [0, 0, 0, 0]
     numExpectedPktsDMA = [0, 0, 0, 0]
-
+    numSendPktsPHY = [0, 0, 0, 0]
+    numSendPktsDMA = [0, 0, 0, 0]
 
 ############################
 # Function: barrier
@@ -246,17 +97,43 @@ def resetBarrier():
 #   a barrier request
 ############################
 def barrier():
+    for i in range(NUM_PORTS): # 0,1,2,3
+	simLib.fPort(i + 1).write("# BARRIER\n")
+	simLib.fPort(i + 1).write("B " + "%d\n"%CMD_BARRIER)   
+	simLib.fPort(i + 1).write("# EXPECTED\n") 
+	simLib.fPort(i + 1).write("N " + "%d\n"%(numExpectedPktsPHY[i]))
+	simLib.fPort(i + 1).write("# SENT\n") 
+	simLib.fPort(i + 1).write("S " + "%d\n\n"%(numSendPktsPHY[i]))
+    simLib.fDMA().write("# BARRIER\n")
+    simLib.fDMA().write("B " + "%d\n"%CMD_BARRIER)   
+    simLib.fDMA().write("# EXPECTED\n") 
+    simLib.fDMA().write("N " + "%d\n"%(numExpectedPktsDMA[0]))
+    simLib.fDMA().write("# SENT\n") 
+    simLib.fDMA().write("S " + "%d\n\n"%(numSendPktsDMA[0]))
+    simLib.fregstim().write("# BARRIER\n")
+    simLib.fregstim().write("B " + "%d\n"%CMD_BARRIER_REG)
     for i in range(NUM_PORTS):
-        simLib.fPort(i + 1).write("%08d"%CMD_BARRIER + " // BARRIER\n")
-        simLib.fPort(i + 1).write("%08x"%(numExpectedPktsPHY[i]) +
-                                    " // Number of Packets\n")
-
-    simLib.fPCI().write("%08d"%CMD_PCI_BARRIER + " // BARRIER\n")
-    for i in range(NUM_PORTS):
-        simLib.fPCI().write("%08x"%(numExpectedPktsDMA[i]) +
-                            " // Number of expected pkts received via DMA port " +
-                            str(i + 1) + "\n")
-
+	#if numSendPktsPHY[i] == 0:
+	#    simLib.fregstim().write("")
+	#else: 
+	#if numExpectedPktsPHY[i] == numSendPktsPHY[i]:
+	#    simLib.fregstim().write("N " + "%d\n"%(numSendPktsPHY[i]))
+	#    simLib.fregstim().write("N " + "%d\n"%(numExpectedPktsPHY[i]))
+	#else:
+	simLib.fregstim().write("# Interface " + "%d\n"%(i)) 
+	#simLib.fregstim().write("S " + "%d\n"%(numSendPktsPHY[i]))
+        simLib.fregstim().write("N " + "%d\n"%(numExpectedPktsPHY[i]))
+	simLib.fregstim().write("S " + "%d\n"%(numSendPktsPHY[i]))
+    #if numSendPktsDMA[i] == 0:
+#	simLib.fregstim().write("")
+#    else:
+    simLib.fregstim().write("# DMA\n")
+    #simLib.fregstim().write("S " + "%d\n"%(numSendPktsDMA[i]))
+    simLib.fregstim().write("N " + "%d\n"%(numExpectedPktsDMA[i])) 
+    simLib.fregstim().write("S " + "%d\n"%(numSendPktsDMA[i]))
+    #simLib.fregexpect().write("# BARRIER\n")
+    #simLib.fregexpect().write("B " + "%d\n"%CMD_BARRIER_REG)
+       
     resetBarrier()
 
 MSB_MASK = (0xFFFFFFFF00000000)

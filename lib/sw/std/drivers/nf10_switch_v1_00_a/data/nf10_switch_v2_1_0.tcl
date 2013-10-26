@@ -41,6 +41,6 @@ proc generate {drv_handle} {
     #---------------------------
     # #defines in xparameters.h
     #---------------------------
-    xdefine_include_file $drv_handle "xparameters.h" "NF10_SWITCH_OUTPUT_PORT_LOOKUP" "C_BASEADDR" "C_HIGHADDR"
+    xdefine_include_file $drv_handle "xparameters.h" "NF10_SWITCH_OUTPUT_PORT_LOOKUP" "C_BASEADDR" "C_HIGHADDR" "RESET_CNTRS_OFFSET" "LUT_NUM_HITS_REG_OFFSET" "LUT_NUM_MISSES_REG_OFFSET"
 }
 

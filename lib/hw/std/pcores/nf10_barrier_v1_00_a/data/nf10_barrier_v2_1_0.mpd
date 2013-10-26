@@ -1,0 +1,61 @@
+################################################################################
+#
+#  NetFPGA-10G http://www.netfpga.org
+#
+#  File:
+#        nf10_barrier_v2_1_0.mpd
+#
+#  Library:
+#        hw/std/pcores/nf10_barrier_v1_00_a
+#
+#  Author:
+#        Georgina Kalogeridou
+#
+#  Copyright notice:
+#        Copyright (C) 2013 University of Cambridge
+#
+#  Licence:
+#        This file is part of the NetFPGA 10G development base package.
+#
+#        This file is free code: you can redistribute it and/or modify it under
+#        the terms of the GNU Lesser General Public License version 2.1 as
+#        published by the Free Software Foundation.
+#
+#        This package is distributed in the hope that it will be useful, but
+#        WITHOUT ANY WARRANTY; without even the implied warranty of
+#        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#        Lesser General Public License for more details.
+#
+#        You should have received a copy of the GNU Lesser General Public
+#        License along with the NetFPGA source package.  If not, see
+#        http://www.gnu.org/licenses/.
+#
+#
+
+BEGIN nf10_barrier
+
+## Peripheral Options
+OPTION IPTYPE = PERIPHERAL
+OPTION HDL = MIXED
+OPTION USAGE_LEVEL = BASE_USER
+OPTION STYLE = HDL
+OPTION RUN_NGCBUILD = TRUE
+OPTION IMP_NETLIST = TRUE
+OPTION IP_GROUP = Communication High-Speed:MICROBLAZE
+OPTION DESC = NetFPGA-10G barrier test
+OPTION LONG_DESC = barrier test
+
+## Generics for VHDL or Parameters for Verilog
+PARAMETER NUM_PORTS = 4, DT = INTEGER, RANGE = (4)
+
+## Ports
+
+PORT activity_stim = "", DIR = I, VEC = [NUM_PORTS:0]
+PORT activity_rec = "", DIR = I, VEC = [NUM_PORTS:0]
+PORT activity_trans_sim = "", DIR = I
+PORT activity_trans_log = "", DIR = I
+PORT barrier_req = "", DIR = I, VEC = [NUM_PORTS:0]
+PORT barrier_req_trans = "", DIR = I
+PORT barrier_proceed = "", DIR = O
+
+END
