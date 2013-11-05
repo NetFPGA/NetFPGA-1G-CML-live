@@ -18,6 +18,7 @@ entity nf7_mdio is
         C_FAMILY                        : string            := "kintex7";
         C_S_AXI_ADDR_WIDTH              : integer           := 5;
         C_S_AXI_DATA_WIDTH              : integer range 32 to 128   := 32;
+        C_NUM_PHY                       : integer range 1 to 32     := 4;
 	C_BASEADDR                      : std_logic_vector(31 downto 0) := x"ffffffff";
 	C_HIGHADDR                      : std_logic_vector(31 downto 0) := x"00000000";
 	C_MDIO_CLK_DIV			: integer           := 100
@@ -47,13 +48,14 @@ entity nf7_mdio is
 	mdio_clk			: in	std_logic;
 	mdio				: inout	std_logic;	
 	mdc				: out	std_logic;
-	phy_rstn			: out   std_logic_vector(3 downto 0)		
+	phy_rstn			: out   std_logic_vector(C_NUM_PHY - 1 downto 0)
     );
 end entity;
 
 architecture rtl of nf7_mdio is
 
     constant ZEROS                      : std_logic_vector(31 downto 0) := (others => '0');
+    constant ONES                       : std_logic_vector(31 downto 0) := (others => '1');
     constant C_S_AXI_MIN_SIZE           : std_logic_vector(31 downto 0) := x"0000001f";
     constant C_USE_WSTRB                : integer := 0;
     constant C_DPHASE_TIMEOUT           : integer := 8;
@@ -196,9 +198,9 @@ begin
        if rising_edge(gtx_clk) then
           if (bus2ip_resetn = '0') then
              phy_reset_count <= C_PHY_RESET_COUNT;
-             phy_rstn <= "0000";
+             phy_rstn <= ZEROS(C_NUM_PHY - 1 downto 0);
           elsif (phy_reset_count = 0) then
-             phy_rstn <= "1111";
+             phy_rstn <= ONES(C_NUM_PHY - 1 downto 0);
           else
              phy_reset_count <= phy_reset_count - 1;   
           end if; 

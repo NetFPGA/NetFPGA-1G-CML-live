@@ -58,6 +58,7 @@ PARAMETER C_HIGHADDR = 0x00000000, DT = std_logic_vector, ADDRESS = HIGH, PAIR =
 PARAMETER C_S_AXI_ADDR_WIDTH = 32, DT = INTEGER, BUS = S_AXI, ASSIGNMENT = CONSTANT
 PARAMETER C_S_AXI_DATA_WIDTH = 32, DT = INTEGER, BUS = S_AXI, ASSIGNMENT = CONSTANT
 PARAMETER C_MDIO_CLK_DIV = 100, DT = INTEGER
+PARAMETER C_NUM_PHY = 4, DT = INTEGER, DESC = "Number of PHYs", LONG_DESC = "This determines the width of the phy_rstn signal"
 
 ## Ports
 PORT S_AXI_ACLK = "", DIR = I, SIGIS = CLK, BUS = S_AXI, ASSIGNMENT = REQUIRE
@@ -83,6 +84,6 @@ PORT gtx_clk = "", DIR = I
 PORT mdio_clk = "", DIR = I, IO_IF = mdio, IO_IS = ETH_MDIO_I
 PORT mdc = "", DIR = O, PERMIT = BASE_USER, ASSIGNMENT = REQUIRE, DESC = 'Ethernet PHY Management Clock', IO_IF = mdio, IO_IS = ETH_MDC
 PORT mdio   = "", DIR = IO, THREE_STATE = FALSE, IO_IF = mdio, IO_IS = ETH_MDIO
-PORT phy_rstn = "", DIR = O, VEC = [3:0]
+PORT phy_rstn = "", DIR = O, VEC = [C_NUM_PHY - 1:0]
 
 END
