@@ -1,5 +1,5 @@
-export NF_ROOT=${HOME}/NetFPGA-10G-live
-export NF_DESIGN_DIR=${NF_ROOT}/projects/reference_switch
+export NF_ROOT=/local/scratch-2/gk340/mine.5.11a/NetFPGA-10G-live
+export NF_DESIGN_DIR=${NF_ROOT}/projects/reference_router
 export NF_WORK_DIR=/tmp/${USER}
 export PYTHONPATH=${NF_ROOT}/lib/python:${NF_DESIGN_DIR}/lib/Python:${NF_ROOT}/tools/scripts:
 export LD_LIBRARY_PATH=${NF_ROOT}/lib/java/NetFPGAFrontEnd/bin:${LD_LIBRARY_PATH}
