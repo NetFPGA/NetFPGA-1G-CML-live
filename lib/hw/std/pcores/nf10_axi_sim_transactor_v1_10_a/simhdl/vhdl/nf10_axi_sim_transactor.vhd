@@ -9,9 +9,7 @@
 --        hw/std/pcores/nf10_axi_sim_transactor_v1_10_a
 --
 --  Author:
---        David J. Miller
---
---	Modified by Georgina Kalogeridou
+--        David J. Miller, Georgina Kalogeridou
 --
 --  Description:
 --        Drives an AXI Stream slave using stimuli from an AXI grammar
@@ -123,6 +121,7 @@ architecture rtl of nf10_axi_sim_transactor is
     signal addr_w, addr_r : std_logic_vector(31 downto 0);
     signal data_w, data_r : std_logic_vector(31 downto 0);
     shared variable f, o, v, j, k: integer range 0 to 31;
+    
 
 begin
 
@@ -245,6 +244,16 @@ begin
                 wait for ( i * 1 ns);
                 wait_cycle;
 
+	    elsif c = 'D' then          
+                read_char( l, c );      
+                parse_int( l, i );
+		report "Time is " & integer'image(now / 1 ns) & string'(" ns.");
+		write(l, string'("Info: delaying ") & integer'image(i) & string'(" ns"));
+		writeline( output, l );
+		quiescent;
+                wait for ( i * 1 ns);
+                wait_cycle;
+		
             else
 			activity_trans_sim <= '1';
               		-- parse out each component of the stimulus
@@ -437,6 +446,8 @@ begin
         end function;
 
         variable l: line;
+	variable g: integer;
+	variable b: integer := 0;
 
     begin
 	activity_trans_log <= '0';
@@ -456,10 +467,20 @@ begin
 				hwrite( l, r_rsp_addr, RIGHT, r_rsp_addr'length/4 );
 				write( l, string'(" -> ") );
 				if addr_r = r_rsp_addr then
+
+				    for g in 0 to 31 loop
+					if (data_r(g) = '0') and (r_rsp_data(g) = 'X') then
+					    b := 1;
+					end if;
+				    end loop;
+
 				    if data_r = r_rsp_data then
 				        hwrite( l, r_rsp_data, RIGHT, r_rsp_data'length/4 );
 				        write( l, string'(" (" & result_str( r_rsp_rsp ) & ")") & ht & ht & string'("# ") & integer'image(now / 1 ns) & string'(" ns") );
-				    else 
+				    elsif b = 1 then 
+					hwrite( l, r_rsp_data, RIGHT, r_rsp_data'length/4 );
+				        write( l, string'(" (" & result_str( r_rsp_rsp ) & ")") & ht & ht & string'("# ") & integer'image(now / 1 ns) & string'(" ns") & string'(" ## ") & string'("WARNING! Undefined bits -- check waveforms!!!!") );
+				    elsif data_r /= r_rsp_data and b = 0 then
 					activity_trans_log <= '0';
 					write( l, string'("Data Error: register error!!!! "));
 					write( l, string'("Seen from user: "));
@@ -467,7 +488,7 @@ begin
 					write( l, string'(" but expected from system: "));
 					hwrite( l, r_rsp_data, RIGHT, r_rsp_data'length/4 );
 				    end if;
-				else 
+				else     
 					activity_trans_log <= '0';
 					write( l, string'("Address Error: register error!!!! "));
 					write( l, string'("Seen from user: "));

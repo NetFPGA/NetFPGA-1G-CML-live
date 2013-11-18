@@ -1,9 +1,8 @@
-#!/bin/env python
+#!/usr/bin/env python
 
 from NFTest import *
 from NFTest.hwRegLib import *
 from RegressRouterLib import *
-
 from reg_defines_reference_router import *
 
 phy2loop0 = ('../connections/2phy', [])
@@ -11,12 +10,12 @@ nftest_init(sim_loop = [], hw_config = [phy2loop0])
 
 nftest_start()
 
-# asserting the reset_counter to 1 for clearing the registers
-nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x1)
+if isHW():
+    # asserting the reset_counter to 1 for clearing the registers
+    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x1)
 
-# asseting teh reset_counter to 0 for enable the counters to increment
-nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x0)
-
+    # asseting teh reset_counter to 0 for enable the counters to increment
+    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x0)
 
 NUM_PORTS = 4
 

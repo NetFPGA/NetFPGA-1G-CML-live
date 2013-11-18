@@ -1,19 +1,23 @@
-#!/bin/env python
+#!/usr/bin/env python
 
 from NFTest import *
 import random
 from RegressRouterLib import *
+import os
+
+from scapy.layers.all import Ether, IP, TCP
 
 phy2loop0 = ('../connections/2phy', [])
 
 nftest_init(sim_loop = [], hw_config = [phy2loop0])
 nftest_start()
 
-# asserting the reset_counter to 1 for clearing the registers
-nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x1)
+if isHW():
+    # asserting the reset_counter to 1 for clearing the registers
+    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x1)
 
-# asseting teh reset_counter to 0 for enable the counters to increment
-nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x0)
+    # asseting teh reset_counter to 0 for enable the counters to increment
+    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x0)
 
 routerMAC = ["00:ca:fe:00:00:01", "00:ca:fe:00:00:02", "00:ca:fe:00:00:03", "00:ca:fe:00:00:04"]
 routerIP = ["192.168.0.40", "192.168.1.40", "192.168.2.40", "192.168.3.40"]
@@ -33,6 +37,7 @@ subnetMask = "255.255.255.0"
 nextHopIP = "192.168.1.54"
 outPort = 0x4
 nextHopMAC = "dd:55:dd:66:dd:77"
+pkts = []
 
 nftest_add_LPM_table_entry(index, subnetIP, subnetMask, nextHopIP, outPort)
 nftest_add_ARP_table_entry(index, nextHopIP, nextHopMAC)
@@ -42,13 +47,24 @@ nftest_barrier()
 for i in range(100):
     pkt = make_IP_pkt(src_MAC="aa:bb:cc:dd:ee:ff", dst_MAC=routerMAC[0],
                       src_IP="192.168.0.1", dst_IP="192.168.2.1")
+    if isHW():
+        nftest_send_phy('nf0', pkt)
+        nftest_expect_dma('nf0', pkt)
+    else:
+	pkt.time = (i*(1e-8))
+	pkts.append(pkt)
 
-    nftest_send_phy('nf0', pkt)
-    nftest_expect_dma('nf0', pkt)
+if not isHW():
+    nftest_send_phy('nf0', pkts)
+    nftest_expect_dma('nf0', pkts)
 
 nftest_barrier()
 
-rres1=nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_SENT_CPU_LPM_MISS_OFFSET(), 100)
+if isHW():
+    rres1=nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_SENT_CPU_LPM_MISS_OFFSET(), 100)
+    mres=[rres1]
+else:
+    nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_SENT_CPU_LPM_MISS_OFFSET(), 100)
+    mres=[]
 
-mres=[rres1]
 nftest_finish(mres)

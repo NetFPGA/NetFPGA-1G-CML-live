@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-# Author: James Hsi, Eric Lo
-# Modified by Georgina Kalogeridou
+# Author: James Hsi, Eric Lo, Georgina Kalogeridou
 # Date: 1/31/2011
 
 from NFTest import *
@@ -76,6 +75,12 @@ def regWrite(reg, value):
     f.write("%08x, "%reg) # // Address
     f.write("%08x, "%value) # // Data 
     f.write("f, -.\n")
+    g = simLib.fregexpect()
+    g.write("# WRITE\n")
+    g.write("W " + "%08x\n"%CMD_WRITE)
+    g.write("%08x, "%reg) # // Address
+    g.write("%08x, "%value) # // Data 
+    g.write("f, -.\n")
 
 # Synchronization ##################################
 
@@ -88,8 +93,10 @@ LSB_MASK = (0x00000000FFFFFFF)
 # Writes
 ############################
 def regDelay(nanoSeconds):
-    simLib.fPCI().write("00000005 // DELAY \n")
-    simLib.fPCI().write("%08x"%(MSB_MASK & nanoSeconds) + " // Delay (MSB) "
-                        + str(nanoSeconds) + " ns\n")
-    simLib.fPCI().write("%08x"%(LSB_MASK & nanoSeconds) + " // Delay (LSB) "
-                        + str(nanoSeconds) + " ns\n")
+    simLib.fregstim().write("# DELAY \n")
+    simLib.fregstim().write("D " + "%0d\n"%nanoSeconds)
+    simLib.fregstim().write("# DELAY (MSB) " + "%08x, "%(MSB_MASK & nanoSeconds) + str(nanoSeconds) + " ns\n")
+    #simLib.fregstim().write("%08x\n"%(MSB_MASK & nanoSeconds))
+    simLib.fregstim().write("# DELAY (LSB) " + "%08x, "%(LSB_MASK & nanoSeconds) + str(nanoSeconds) + " ns\n")
+    #simLib.fregstim().write("%08x\n"%(LSB_MASK & nanoSeconds))
+
