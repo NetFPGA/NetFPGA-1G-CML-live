@@ -39,15 +39,15 @@
 */
 
 	//DMA Stim packet_ dump for comparing
-	reg	[255:0]	dma_nf0_packet_data[0:1048575], dma_nf1_packet_data[0:1048575],
-						dma_nf2_packet_data[0:1048575], dma_nf3_packet_data[0:1048575];
-	reg	[127:0]	dma_nf0_packet_tuser[0:1048575], dma_nf1_packet_tuser[0:1048575],
-						dma_nf2_packet_tuser[0:1048575], dma_nf3_packet_tuser[0:1048575];
+	reg	[255:0]	dma_nf0_packet_data[0:65536], dma_nf1_packet_data[0:65536],
+						dma_nf2_packet_data[0:65536], dma_nf3_packet_data[0:65536];
+	reg	[127:0]	dma_nf0_packet_tuser[0:65536], dma_nf1_packet_tuser[0:65536],
+						dma_nf2_packet_tuser[0:65536], dma_nf3_packet_tuser[0:65536];
 
-	reg	[255:0]	if10g_nf0_packet_data[0:1048575], if10g_nf1_packet_data[0:1048575],
-						if10g_nf2_packet_data[0:1048575], if10g_nf3_packet_data[0:1048575];
-	reg	[127:0]	if10g_nf0_packet_tuser[0:1048575], if10g_nf1_packet_tuser[0:1048575],
-						if10g_nf2_packet_tuser[0:1048575], if10g_nf3_packet_tuser[0:1048575];
+	reg	[255:0]	if10g_nf0_packet_data[0:65536], if10g_nf1_packet_data[0:65536],
+						if10g_nf2_packet_data[0:65536], if10g_nf3_packet_data[0:65536];
+	reg	[127:0]	if10g_nf0_packet_tuser[0:65536], if10g_nf1_packet_tuser[0:65536],
+						if10g_nf2_packet_tuser[0:65536], if10g_nf3_packet_tuser[0:65536];
 
 	wire				bram_axis_clk	= system_axisim_tb.dut.nf10_bram_output_queues_0.axi_aclk;
 
