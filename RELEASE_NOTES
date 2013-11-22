@@ -9,43 +9,35 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 5.0.0
+GIT VERSION 5.0.1
 
-Before using this code, please check the release notes for 5.0.0 below
+Before using this code, please check the release notes for 5.0.1 below
+
 
 1. Integrated test infrastructure with both_major_minor tests.
-We have a integrated test infrastructure for reference_nic, reference_switch and reference_switch_lite projects. 
 
-wiki for simulation infrastructure:
-https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Simulations
-wiki for HW test infrastructure:
-https://github.com/NetFPGA/NetFPGA-public/wiki/HW-Tests
+We have a integrated test infrastructure for reference_router project. 
 
-2. HW tests for reference router
-We will be having the following set of hardware tests for the reference_router project.
-
-hw_badipchksum_packet  
-hw_lpm_generic  
-hw_nonip_packet       
-hw_router_table
-hw_invalidttl_packet   
-hw_lpm_misses  
-hw_nonipv4_packet     
-hw_wrong_destMAC
-hw_arp_misses  
-hw_ipdestfilter_hit    
-hw_lpm_nexthop  
-hw_packet_forwarding
+both_badipchksum_packet  
+both_lpm_generic  
+both_nonip_packet       
+both_router_table
+both_invalidttl_packet   
+both_lpm_misses  
+both_nonipv4_packet     
+both_wrong_destMAC
+both_arp_misses  
+both_ipdestfilter_hit    
+both_lpm_nexthop  
+both_packet_forwarding
 
 wiki for router tests:
 https://github.com/NetFPGA/NetFPGA-public/wiki/Tests-for-reference-router
 
-3. Register monitoring system
+wiki for simulation infrastructure:
+https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Simulations
 
-The register monitoring system is used to monitor the status of the registers of the output port lookup module while running the HW tests.
-Currently the Register monitoring system is available for reference_switch, reference_switch_lite and reference_router.
-
-wiki for register monitoring system:
-https://github.com/NetFPGA/NetFPGA-public/wiki/Register-Monitoring-System
+wiki for HW test infrastructure:
+https://github.com/NetFPGA/NetFPGA-public/wiki/HW-Tests
 
 
