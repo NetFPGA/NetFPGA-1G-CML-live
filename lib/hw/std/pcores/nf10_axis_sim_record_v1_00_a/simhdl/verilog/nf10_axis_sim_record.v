@@ -11,8 +11,7 @@
  *  Author:
  *        James Hongyi Zeng
  *        David J. Miller
- *	
- *	Modified by Georgina Kalogeridou
+ *	  Georgina Kalogeridou
  *
  *  Description:
  *        Records traffic received from an AXI Stream master to an
@@ -60,7 +59,7 @@ module nf10_axis_sim_record
     output s_axis_tready,
     input s_axis_tlast,
 
-    output [7:0] counter,
+    output reg [7:0] counter,
     output reg activity_rec
 );
 
@@ -73,9 +72,8 @@ module nf10_axis_sim_record
     
     initial begin
         f = $fopen(output_file, "w");
+        counter = 0;
     end
-
-    reg [7:0] counter = 0;
 
     always @(posedge aclk) begin
         if (s_axis_tvalid == 1'b1) begin

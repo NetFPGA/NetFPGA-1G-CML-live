@@ -63,7 +63,10 @@ def main():
 		else:
 		    c = c
 		    d = d
-	   
+
+	    elif 'WARNING' in line:
+		e = 2	   
+
 	    else:
 		if '<' in line:
 		    a = a + 1 # write
@@ -75,6 +78,8 @@ def main():
 
 	if e == 1:	
 	    print '\tFAIL ( Check reg_stim.log file!!!! )'
+	elif e == 2:
+	    print '\tPASS ( WARNING! Check reg_stim.log file!!!! )'
 	else:
 	    print '\tPASS'
 

@@ -489,14 +489,6 @@ BEGIN dma
  PORT pci_exp_0_txn = pcie_top_0_pci_exp_0_txn
 END
 
-BEGIN nf10_axi_sim_transactor
- PARAMETER INSTANCE = nf10_axi_sim_transactor_0
- PARAMETER HW_VER = 1.00.a
- BUS_INTERFACE M_AXI = axi_interconnect_0
- PORT M_AXI_ARESETN = Peripheral_aresetn
- PORT M_AXI_ACLK = control_clk
-END
-
 BEGIN nf10_endianess_manager
  PARAMETER INSTANCE = nf10_endianess_manager_0
  PARAMETER HW_VER = 1.00.a

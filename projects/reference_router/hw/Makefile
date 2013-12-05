@@ -244,7 +244,22 @@ simclean:
 	rm -rf simulation
 	rm -rf *[0-9]_{stim,expected,log}.axi $(AXISIM_MHS)
 	rm -f simgen.log
-	rm -f __xps/ise/_xmsgs/simgen.xmsgs
+	rm -rf __xps
+	rm -f *.axi
+	rm -f portconfig.sim
+	rm -f seed
+	rm -rf bootloops
+	rm -rf etc
+	rm -f *.opt
+	rm -f *.log
+	rm -f *.make
+	rm -rf ../test/nf10
+	rm -rf ../test/pcores
+	rm -f ../test/Makefile
+	rm -f ../test/system.mhs
+	rm -f ../test/system.xmp
+	rm -rf ../test/data
+
 
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
@@ -398,20 +413,22 @@ regs:
 	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_reference_router.py 
 
 sim: axi_model regs
-	./make_pkts.py
+	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf10/noninteractive_sim.tcl
-	nf10_sim_reconcile_axi_logs.py
+	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
+	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
 simgui: axi_model regs
-	./make_pkts.py
+	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
-	nf10_sim_reconcile_axi_logs.py
+	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
+	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
 system_incl.make:
 	@echo exit|xps -nw system.xmp
