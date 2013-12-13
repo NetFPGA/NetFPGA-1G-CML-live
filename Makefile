@@ -36,7 +36,7 @@
 
 
 NF10_SCRIPTS_DIR  = tools/scripts
-NF10_PYTHON_LIB = lib/python/NFTEST
+NF10_PYTHON_LIB = lib/python/NFTest
 XILINX_HW_LIB_DIR = $(XILINX_EDK)/hw/XilinxProcessorIPLib/pcores
 XILINX_SW_LIB_DIR = $(XILINX_EDK)/sw/XilinxProcessorIPLib/drivers
 

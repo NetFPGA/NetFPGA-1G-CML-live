@@ -259,9 +259,19 @@ simclean:
 	rm -rf ../test/nf10
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
-	rm -f ../test/system.mhs
+	rm -f ../test/*.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
+	rm -f ../test/*.make
+	rm -f ../test/*.opt
+	rm -f ../test/*.log
+	rm -rf ../test/bootloops
+	rm -rf ../test/etc
+	rm -rf ../test/simulation
+	rm -rf ../test/__xps
+	rm -f ../test/*.axi
+	rm -f ../test/seed
+	rm -f ../test/*.sim
 
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
