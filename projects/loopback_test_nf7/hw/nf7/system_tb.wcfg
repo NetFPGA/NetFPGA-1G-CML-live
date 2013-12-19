@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="./isim.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="attributes" />
+            <top_module name="family_support" />
+            <top_module name="glbl" />
+            <top_module name="ipif_pkg" />
+            <top_module name="lmb_bram_if_funcs" />
+            <top_module name="numeric_std" />
+            <top_module name="proc_common_pkg" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_misc" />
+            <top_module name="std_logic_signed" />
+            <top_module name="std_logic_unsigned" />
+            <top_module name="system_tb" />
+            <top_module name="textio" />
+            <top_module name="vcomponents" />
+            <top_module name="vital_primitives" />
+            <top_module name="vital_timing" />
+            <top_module name="vl_types" />
+            <top_module name="vpkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="7" />
+   <wvobject fp_name="/system_tb/reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="group36" type="group">
+      <obj_property name="label">eth1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/system_tb/dut/rgmii_txd_1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_txd_1[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rgmii_txd_1[3:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_tx_ctl_1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_tx_ctl_1</obj_property>
+         <obj_property name="ObjectShortName">rgmii_tx_ctl_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_txc_1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_txc_1</obj_property>
+         <obj_property name="ObjectShortName">rgmii_txc_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_rxd_1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rxd_1[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rxd_1[3:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_rx_ctl_1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rx_ctl_1</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rx_ctl_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_rxc_1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rxc_1</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rxc_1</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group105" type="group">
+      <obj_property name="label">eth2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_txd" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_txd[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rgmii_txd[3:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_tx_ctl" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_tx_ctl</obj_property>
+         <obj_property name="ObjectShortName">rgmii_tx_ctl</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_txc" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_txc</obj_property>
+         <obj_property name="ObjectShortName">rgmii_txc</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_rxd" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rxd[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rxd[3:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_rx_ctl" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rx_ctl</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rx_ctl</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_rxc" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rxc</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rxc</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group112" type="group">
+      <obj_property name="label">eth3</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_txd" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_txd[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rgmii_txd[3:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_tx_ctl" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_tx_ctl</obj_property>
+         <obj_property name="ObjectShortName">rgmii_tx_ctl</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_txc" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_txc</obj_property>
+         <obj_property name="ObjectShortName">rgmii_txc</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_rxd" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rxd[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rxd[3:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_rx_ctl" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rx_ctl</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rx_ctl</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_rxc" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rxc</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rxc</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group63" type="group">
+      <obj_property name="label">eth4</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/system_tb/dut/rgmii_txd_4" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_txd_4[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rgmii_txd_4[3:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_tx_ctl_4" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_tx_ctl_4</obj_property>
+         <obj_property name="ObjectShortName">rgmii_tx_ctl_4</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_txc_4" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_txc_4</obj_property>
+         <obj_property name="ObjectShortName">rgmii_txc_4</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_rxd_4" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rxd_4[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rxd_4[3:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_rx_ctl_4" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rx_ctl_4</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rx_ctl_4</obj_property>
+      </wvobject>
+      <wvobject fp_name="/system_tb/dut/rgmii_rxc_4" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rgmii_rxc_4</obj_property>
+         <obj_property name="ObjectShortName">rgmii_rxc_4</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group37" type="group">
+      <obj_property name="label">axis_gen_check_0</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="group37" type="group">
+         <obj_property name="label">axis_gen</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_0/nf10_axis_gen_check_0/gen_state" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">gen_state[1:0]</obj_property>
+            <obj_property name="ObjectShortName">gen_state[1:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_0/nf10_axis_gen_check_0/tx_count" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">tx_count[31:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_count[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_0/nf10_axis_gen_check_0/count_reset" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">count_reset</obj_property>
+            <obj_property name="ObjectShortName">count_reset</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group40" type="group">
+         <obj_property name="label">axis_check</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_0/nf10_axis_gen_check_0/check_state" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">check_state[1:0]</obj_property>
+            <obj_property name="ObjectShortName">check_state[1:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_0/nf10_axis_gen_check_0/rx_count" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">rx_count[31:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_count[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_0/nf10_axis_gen_check_0/err_count" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">err_count[31:0]</obj_property>
+            <obj_property name="ObjectShortName">err_count[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_0/nf10_axis_gen_check_0/ok" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">ok</obj_property>
+            <obj_property name="ObjectShortName">ok</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group39" type="group">
+      <obj_property name="label">axis_gen_check_1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="group55" type="group">
+         <obj_property name="label">axis_gen</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_1/nf10_axis_gen_check_1/gen_state" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">gen_state[1:0]</obj_property>
+            <obj_property name="ObjectShortName">gen_state[1:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_1/nf10_axis_gen_check_1/tx_count" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">tx_count[31:0]</obj_property>
+            <obj_property name="ObjectShortName">tx_count[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_1/nf10_axis_gen_check_1/count_reset" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">count_reset</obj_property>
+            <obj_property name="ObjectShortName">count_reset</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group53" type="group">
+         <obj_property name="label">axis_check</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_1/nf10_axis_gen_check_1/check_state" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">check_state[1:0]</obj_property>
+            <obj_property name="ObjectShortName">check_state[1:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_1/nf10_axis_gen_check_1/rx_count" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">rx_count[31:0]</obj_property>
+            <obj_property name="ObjectShortName">rx_count[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_1/nf10_axis_gen_check_1/err_count" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">err_count[31:0]</obj_property>
+            <obj_property name="ObjectShortName">err_count[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/system_tb/dut/nf10_axis_gen_check_1/nf10_axis_gen_check_1/ok" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">ok</obj_property>
+            <obj_property name="ObjectShortName">ok</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+</wave_config>
