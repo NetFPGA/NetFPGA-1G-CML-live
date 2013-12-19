@@ -1,0 +1,62 @@
+##############################################################
+#
+# Xilinx Core Generator version 14.4
+# Date: Mon Apr  8 19:25:36 2013
+#
+##############################################################
+#
+#  This file contains the customisation parameters for a
+#  Xilinx CORE Generator IP GUI. It is strongly recommended
+#  that you do not manually alter this file as it may cause
+#  unexpected and unsupported behavior.
+#
+##############################################################
+#
+#  Generated from component: xilinx.com:ip:tri_mode_eth_mac:5.5
+#
+##############################################################
+#
+NEWPROJECT .
+SETPROJECT .
+# BEGIN Project Options
+SET addpads = false
+SET asysymbol = true
+SET busformat = BusFormatAngleBracketNotRipped
+SET createndf = false
+SET designentry = Verilog
+SET device = xc7k325t
+SET devicefamily = kintex7
+SET flowvendor = Other
+SET formalverification = false
+SET foundationsym = false
+SET implementationfiletype = Ngc
+SET package = ffg676
+SET removerpms = false
+SET simulationfiles = Structural
+SET speedgrade = -1
+SET verilogsim = true
+SET vhdlsim = false
+# END Project Options
+# BEGIN Select
+SELECT Tri_Mode_Ethernet_MAC xilinx.com:ip:tri_mode_eth_mac:5.5
+# END Select
+# BEGIN Parameters
+CSET component_name=trimac_lite
+CSET enable_1588=false
+CSET enable_1588_1step=false
+CSET enable_avb=false
+CSET frame_filter=false
+CSET half_duplex=false
+CSET mac_speed=1000_Mbps
+CSET management_interface=false
+CSET number_of_table_entries=0
+CSET physical_interface=RGMII
+CSET statistics_counters=false
+CSET statistics_reset=true
+CSET statistics_width=64bit
+# END Parameters
+# BEGIN Extra information
+MISC pkg_timestamp=2012-11-02T16:09:01Z
+# END Extra information
+GENERATE
+# CRC: 8a5ef33d

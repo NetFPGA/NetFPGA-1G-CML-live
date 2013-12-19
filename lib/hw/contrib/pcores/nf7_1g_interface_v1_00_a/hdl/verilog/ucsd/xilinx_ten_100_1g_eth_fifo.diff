@@ -1,0 +1,16 @@
+6c6
+< // File       : trimac_lite_ten_100_1g_eth_fifo.v
+---
+> // File       : xilinx_ten_100_1g_eth_fifo.v
+71c71
+< module trimac_lite_ten_100_1g_eth_fifo #
+---
+> module xilinx_ten_100_1g_eth_fifo #
+127c127
+<   trimac_lite_tx_client_fifo #
+---
+>   xilinx_tx_client_fifo #
+160c160
+<   trimac_lite_rx_client_fifo rx_fifo_i
+---
+>   xilinx_rx_client_fifo rx_fifo_i

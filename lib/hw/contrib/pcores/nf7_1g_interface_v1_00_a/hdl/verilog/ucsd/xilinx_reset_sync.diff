@@ -1,0 +1,8 @@
+5c5
+< // File       : trimac_lite_reset_sync.v
+---
+> // File       : xilinx_reset_sync.v
+63c63
+< module trimac_lite_reset_sync #(
+---
+> module xilinx_reset_sync #(

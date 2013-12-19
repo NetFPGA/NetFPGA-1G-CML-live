@@ -1,0 +1,8 @@
+5c5
+< // File       : trimac_lite_sync_block.v
+---
+> // File       : xilinx_sync_block.v
+63c63
+< module trimac_lite_sync_block #(
+---
+> module xilinx_sync_block #(

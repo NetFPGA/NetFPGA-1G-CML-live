@@ -1,0 +1,91 @@
+################################################################################
+#
+#  NetFPGA-10G http://www.netfpga.org
+#
+#  File:
+#        nf7_1g_interface_v2_1_0.pao
+#
+#  Library:
+#        hw/std/pcores/nf10_1g_interface_v1_00_a
+#
+#  Author:
+#        Jack Meador
+#
+#  Description:
+#        Peripheral Analysis Order File
+#        This includes all files required for both TEMAC versions
+#        with and without MDIO and AXI4 control interface
+#
+#  Copyright notice:
+#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+#                                 Junior University
+#
+#  Licence:
+#        This file is part of the NetFPGA 10G development base package.
+#
+#        This file is free code: you can redistribute it and/or modify it under
+#        the terms of the GNU Lesser General Public License version 2.1 as
+#        published by the Free Software Foundation.
+#
+#        This package is distributed in the hope that it will be useful, but
+#        WITHOUT ANY WARRANTY; without even the implied warranty of
+#        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#        Lesser General Public License for more details.
+#
+#        You should have received a copy of the GNU Lesser General Public
+#        License along with the NetFPGA source package.  If not, see
+#        http://www.gnu.org/licenses/.
+#
+
+lib proc_common_v3_00_a all
+
+lib axi_lite_ipif_v1_01_a all
+
+lib nf10_axis_converter_v1_00_a all
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_mod verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_mod verilog
+
+simlib nf7_1g_interface_v1_00_a trimac_lite verilog
+simlib nf7_1g_interface_v1_00_a trimac verilog
+
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_tx_client_fifo verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_rx_client_fifo verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_ten_100_1g_eth_fifo verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_reset_sync verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_sync_block verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_rgmii_v2_0_if verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_counter_f verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_pselect_f verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_address_decoder verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_slave_attachment verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_axi_lite_ipif verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_axi4_lite_ipif_wrapper verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_block verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac/trimac_fifo_block verilog
+
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_tx_client_fifo verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_rx_client_fifo verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_ten_100_1g_eth_fifo verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_reset_sync verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_sync_block verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_rgmii_v2_0_if verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_block verilog
+lib nf7_1g_interface_v1_00_a xilinx/trimac_lite/trimac_lite_fifo_block verilog
+
+lib nf7_1g_interface_v1_00_a ucsd/xilinx_rgmii_v2_0_if.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/gig_eth_mac_block.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/xilinx_reset_sync.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/xilinx_ten_100_1g_eth_fifo.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/gig_eth_mac_rx.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/gig_eth_mac.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/CRC_gen.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/xilinx_tx_client_fifo.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/xilinx_rx_client_fifo.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/xilinx_sync_block.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/CRC_chk.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/gig_eth_mac_tx.v verilog
+lib nf7_1g_interface_v1_00_a ucsd/gig_eth_mac_fifo_block.v verilog
+
+lib nf7_1g_interface_v1_00_a nf7/cfg_core vhdl
+lib nf7_1g_interface_v1_00_a nf7/temac_regs vhdl
+lib nf7_1g_interface_v1_00_a nf7/nf7_1g_interface verilog
