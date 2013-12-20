@@ -1,0 +1,3 @@
+hdl/verilog/xilinx/*.v
+vivado.jou
+vivado_work/

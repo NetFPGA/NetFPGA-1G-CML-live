@@ -1,0 +1,79 @@
+################################################################################
+#
+#  NetFPGA-10G http://www.netfpga.org
+#
+#  File:
+#        dma_v2_1_0.pao
+#
+#  Library:
+#        hw/contrib/pcores/dma_v1_20_a
+#
+#  Author:
+#        Mario Flajslik
+#
+#  Description:
+#        Peripheral Analyze Order File
+#
+#  Copyright notice:
+#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+#                                 Junior University
+#
+#  Licence:
+#        This file is part of the NetFPGA 10G development base package.
+#
+#        This file is free code: you can redistribute it and/or modify it under
+#        the terms of the GNU Lesser General Public License version 2.1 as
+#        published by the Free Software Foundation.
+#
+#        This package is distributed in the hope that it will be useful, but
+#        WITHOUT ANY WARRANTY; without even the implied warranty of
+#        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#        Lesser General Public License for more details.
+#
+#        You should have received a copy of the GNU Lesser General Public
+#        License along with the NetFPGA source package.  If not, see
+#        http://www.gnu.org/licenses/.
+#
+#
+
+lib dma_v1_20_a dma/dma.v verilog
+lib dma_v1_20_a dma/dma_engine_wrapper.v verilog
+lib dma_v1_20_a dma/axi4_lite_regs.v verilog
+lib nf10_axis_converter_v1_00_a all
+lib axi_master_lite_v2_00_a all vhdl
+
+# Xilinx PCIe files
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_axi_basic_rx_null_gen.v                 verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_axi_basic_rx_pipeline.v                 verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_axi_basic_rx.v                          verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_axi_basic_top.v                         verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_axi_basic_tx_pipeline.v                 verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_axi_basic_tx_thrtl_ctl.v                verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_axi_basic_tx.v                          verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_gtp_pipe_rate.v                         verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_gtp_pipe_reset.v                        verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_gt_rx_valid_filter_7x.v                 verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_gt_top.v                                verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_gt_wrapper.v                            verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pcie_7x.v                               verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pcie_bram_7x.v                          verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pcie_brams_7x.v                         verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pcie_bram_top_7x.v                      verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pcie_pipe_lane.v                        verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pcie_pipe_misc.v                        verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pcie_pipe_pipeline.v                    verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pcie_top.v                              verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pipe_clock.v                            verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pipe_drp.v                              verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pipe_eq.v                               verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pipe_rate.v                             verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pipe_reset.v                            verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pipe_sync.v                             verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pipe_user.v                             verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_pipe_wrapper.v                          verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_qpll_drp.v                              verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_qpll_reset.v                            verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_qpll_wrapper.v                          verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7_rxeq_scan.v                             verilog
+lib dma_v1_20_a xilinx/pcie_7x_v1_7.v                                       verilog
+
