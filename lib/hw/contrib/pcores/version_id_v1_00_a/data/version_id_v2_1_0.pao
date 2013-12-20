@@ -1,0 +1,10 @@
+##############################################################################
+## Filename:          /home/jhirata/devel/netfpga/cml-repo/projects/reference_nic_nf7/hw/pcores/version_id_v1_00_a/data/version_id_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Tue Jun 11 11:26:46 2013 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v3_00_a  all 
+lib axi_lite_ipif_v1_01_a  all 
+lib version_id_v1_00_a user_logic vhdl
+lib version_id_v1_00_a version_id vhdl
