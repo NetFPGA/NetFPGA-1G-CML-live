@@ -276,7 +276,7 @@ simclean:
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
-	rm -rf ../lib/Python/reg_defines_*.*
+	rm ../lib/Python/reg_defines_*.*
 
 
 #######m#########################################################
