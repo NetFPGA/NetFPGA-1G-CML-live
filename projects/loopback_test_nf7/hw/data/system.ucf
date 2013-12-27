@@ -196,6 +196,10 @@ TIMEGRP "IN_RGMII_4" OFFSET = IN 1.5 ns VALID 3 ns BEFORE "rgmii_rxc_4" RISING;
 TIMEGRP "IN_RGMII_4" OFFSET = IN 1.5 ns VALID 3 ns BEFORE "rgmii_rxc_4" FALLING;
 
 # Clock Domain Crossing Constraints #
+INST    "*/Peripheral_aresetn_0"       TNM = "PReset";
+INST    "*gig_eth_mac_block*"   TNM = FFS "UCSD_FFs";
+
+TIMESPEC "TS_PReset_to_UCSD_FFs" = FROM "PReset" TO "UCSD_FFs" TIG;
 
 # Flow Control logic reclocking - control signal is synchronised - use with Xilinx trimac_core only
 #INST "*trimac_core*FLOW*PAUSE_REQ_TO_TX*"                        TNM="flow_rx_to_tx";
