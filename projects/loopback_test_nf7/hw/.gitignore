@@ -1,0 +1,9 @@
+/implementation/
+/synthesis/
+/etc/
+/hdl/
+/__xps/
+genmakes.tcl
+platgen.opt
+system.make
+system_incl.make

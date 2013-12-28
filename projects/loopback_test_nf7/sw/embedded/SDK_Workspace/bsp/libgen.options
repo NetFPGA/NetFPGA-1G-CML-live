@@ -1,0 +1,3 @@
+PROCESSOR=microblaze_0
+REPOSITORIES=-lp ../../../../../../lib/sw
+HWSPEC=../hw/system.xml
