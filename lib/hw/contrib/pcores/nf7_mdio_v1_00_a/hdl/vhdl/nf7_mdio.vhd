@@ -18,9 +18,12 @@ entity nf7_mdio is
         C_FAMILY                        : string            := "kintex7";
         C_S_AXI_ADDR_WIDTH              : integer           := 5;
         C_S_AXI_DATA_WIDTH              : integer range 32 to 128   := 32;
+        C_S_AXI_ACLK_FREQ_HZ            : integer           := 100_000_000;
+        C_RESET_MIN_MS                  : integer           := 33;
+        C_NUM_PHY                       : integer range 1 to 32     := 4;
 	C_BASEADDR                      : std_logic_vector(31 downto 0) := x"ffffffff";
 	C_HIGHADDR                      : std_logic_vector(31 downto 0) := x"00000000";
-	C_MDIO_CLK_DIV			: integer           := 100
+        C_MDIO_CLK_DIV                  : integer           := 20
     );
     port (
         S_AXI_ACLK                      : in    std_logic;
@@ -43,17 +46,16 @@ entity nf7_mdio is
         S_AXI_RVALID                    : out   std_logic;
         S_AXI_RREADY                    : in    std_logic;
 
-	gtx_clk				: in    std_logic; -- need a consistent 125 MHz clock for phy_rstn
-	mdio_clk			: in	std_logic;
 	mdio				: inout	std_logic;	
 	mdc				: out	std_logic;
-	phy_rstn			: out   std_logic_vector(3 downto 0)		
+	phy_rstn			: out   std_logic_vector(C_NUM_PHY - 1 downto 0)
     );
 end entity;
 
 architecture rtl of nf7_mdio is
 
     constant ZEROS                      : std_logic_vector(31 downto 0) := (others => '0');
+    constant ONES                       : std_logic_vector(31 downto 0) := (others => '1');
     constant C_S_AXI_MIN_SIZE           : std_logic_vector(31 downto 0) := x"0000001f";
     constant C_USE_WSTRB                : integer := 0;
     constant C_DPHASE_TIMEOUT           : integer := 8;
@@ -64,7 +66,10 @@ architecture rtl of nf7_mdio is
     constant C_ARD_NUM_CE_ARRAY         : INTEGER_ARRAY_TYPE := (
         0 => 4
     );
-    constant C_PHY_RESET_COUNT		: integer := 4194304; -- 2^22
+
+    -- plus 1 to ensure we _at_least_ meat the reset minimum time
+    constant C_PHY_RESET_COUNT		: integer := ((C_S_AXI_ACLK_FREQ_HZ / 1000) * C_RESET_MIN_MS) + 1;
+    signal phy_reset_count		: natural range 0 to C_PHY_RESET_COUNT - 1;
 
     signal bus2ip_clk                   : std_logic;
     signal bus2ip_reset                 : std_logic;
@@ -77,12 +82,11 @@ architecture rtl of nf7_mdio is
     signal bus2ip_rdce                  : std_logic_vector(calc_num_ce(C_ARD_NUM_CE_ARRAY)-1 downto 0);
     signal bus2ip_wrce                  : std_logic_vector(calc_num_ce(C_ARD_NUM_CE_ARRAY)-1 downto 0);
 
-    signal mdio_clk_cnt                 : integer;
+    signal mdio_clk_cnt                 : natural range 0 to C_MDIO_CLK_DIV - 1;
     signal mdio_clk_i                   : std_logic;
     signal mdio_o                       : std_logic;
     signal mdio_i                       : std_logic;
     signal mdio_t                       : std_logic;
-    signal phy_reset_count		: integer;
 
     component IOBUF
        port
@@ -148,14 +152,14 @@ begin
         ip2bus_data(C_S_AXI_DATA_WIDTH - 1 downto 32)   <= (others => '0');
     end generate;
 
-    mdio_clk_divider : process (mdio_clk)
+    mdio_clk_divider : process (bus2ip_clk)
        begin
-          if rising_edge(mdio_clk) then
+          if rising_edge(bus2ip_clk) then
           if (bus2ip_resetn = '0') then
-             mdio_clk_cnt <= C_MDIO_CLK_DIV;
+             mdio_clk_cnt <= C_MDIO_CLK_DIV - 1;
              mdio_clk_i <= '0';
           elsif (mdio_clk_cnt = 0) then
-             mdio_clk_cnt <= C_MDIO_CLK_DIV;
+             mdio_clk_cnt <= C_MDIO_CLK_DIV - 1;
              mdio_clk_i <= not mdio_clk_i;
           else
              mdio_clk_cnt <= mdio_clk_cnt - 1;   
@@ -189,16 +193,14 @@ begin
 	mdc				=> mdc
     );
 
-    -- using a C_PHY_RESET_COUNT that provides a 33 mS reset 
-    -- with a 125 MHz gtx clock for the Realtek RTL8211 PHY
-    phy_reset : process (gtx_clk)
+    phy_reset : process (bus2ip_clk)
        begin
-       if rising_edge(gtx_clk) then
+       if rising_edge(bus2ip_clk) then
           if (bus2ip_resetn = '0') then
-             phy_reset_count <= C_PHY_RESET_COUNT;
-             phy_rstn <= "0000";
+             phy_reset_count <= C_PHY_RESET_COUNT - 1;
+             phy_rstn <= ZEROS(C_NUM_PHY - 1 downto 0);
           elsif (phy_reset_count = 0) then
-             phy_rstn <= "1111";
+             phy_rstn <= ONES(C_NUM_PHY - 1 downto 0);
           else
              phy_reset_count <= phy_reset_count - 1;   
           end if; 

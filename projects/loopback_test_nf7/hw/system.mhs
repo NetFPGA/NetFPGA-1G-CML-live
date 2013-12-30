@@ -306,11 +306,9 @@ BEGIN nf7_mdio
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x7a040000
  PARAMETER C_HIGHADDR = 0x7a04ffff
- PARAMETER C_MDIO_CLK_DIV = 80
+ PARAMETER C_S_AXI_PROTOCOL = AXI4LITE
  BUS_INTERFACE S_AXI = axi_interconnect_memory_mapped_lite_0
  PORT S_AXI_ACLK = mb_clk
- PORT gtx_clk = gtx_clk
- PORT mdio_clk = core_clk
  PORT mdc = mdc
  PORT mdio = mdio
  PORT phy_rstn = phy_rstn_1 & phy_rstn_2 & phy_rstn_3 & phy_rstn_4
