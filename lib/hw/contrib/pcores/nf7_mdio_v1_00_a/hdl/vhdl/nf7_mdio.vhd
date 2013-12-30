@@ -23,7 +23,7 @@ entity nf7_mdio is
         C_NUM_PHY                       : integer range 1 to 32     := 4;
 	C_BASEADDR                      : std_logic_vector(31 downto 0) := x"ffffffff";
 	C_HIGHADDR                      : std_logic_vector(31 downto 0) := x"00000000";
-	C_MDIO_CLK_DIV			: integer           := 100
+        C_MDIO_CLK_DIV                  : integer           := 20
     );
     port (
         S_AXI_ACLK                      : in    std_logic;
@@ -46,7 +46,6 @@ entity nf7_mdio is
         S_AXI_RVALID                    : out   std_logic;
         S_AXI_RREADY                    : in    std_logic;
 
-	mdio_clk			: in	std_logic;
 	mdio				: inout	std_logic;	
 	mdc				: out	std_logic;
 	phy_rstn			: out   std_logic_vector(C_NUM_PHY - 1 downto 0)
@@ -83,7 +82,7 @@ architecture rtl of nf7_mdio is
     signal bus2ip_rdce                  : std_logic_vector(calc_num_ce(C_ARD_NUM_CE_ARRAY)-1 downto 0);
     signal bus2ip_wrce                  : std_logic_vector(calc_num_ce(C_ARD_NUM_CE_ARRAY)-1 downto 0);
 
-    signal mdio_clk_cnt                 : integer;
+    signal mdio_clk_cnt                 : natural range 0 to C_MDIO_CLK_DIV - 1;
     signal mdio_clk_i                   : std_logic;
     signal mdio_o                       : std_logic;
     signal mdio_i                       : std_logic;
@@ -153,14 +152,14 @@ begin
         ip2bus_data(C_S_AXI_DATA_WIDTH - 1 downto 32)   <= (others => '0');
     end generate;
 
-    mdio_clk_divider : process (mdio_clk)
+    mdio_clk_divider : process (bus2ip_clk)
        begin
-          if rising_edge(mdio_clk) then
+          if rising_edge(bus2ip_clk) then
           if (bus2ip_resetn = '0') then
-             mdio_clk_cnt <= C_MDIO_CLK_DIV;
+             mdio_clk_cnt <= C_MDIO_CLK_DIV - 1;
              mdio_clk_i <= '0';
           elsif (mdio_clk_cnt = 0) then
-             mdio_clk_cnt <= C_MDIO_CLK_DIV;
+             mdio_clk_cnt <= C_MDIO_CLK_DIV - 1;
              mdio_clk_i <= not mdio_clk_i;
           else
              mdio_clk_cnt <= mdio_clk_cnt - 1;   
