@@ -18,6 +18,8 @@ entity nf7_mdio is
         C_FAMILY                        : string            := "kintex7";
         C_S_AXI_ADDR_WIDTH              : integer           := 5;
         C_S_AXI_DATA_WIDTH              : integer range 32 to 128   := 32;
+        C_S_AXI_ACLK_FREQ_HZ            : integer           := 100_000_000;
+        C_RESET_MIN_MS                  : integer           := 33;
         C_NUM_PHY                       : integer range 1 to 32     := 4;
 	C_BASEADDR                      : std_logic_vector(31 downto 0) := x"ffffffff";
 	C_HIGHADDR                      : std_logic_vector(31 downto 0) := x"00000000";
@@ -44,7 +46,6 @@ entity nf7_mdio is
         S_AXI_RVALID                    : out   std_logic;
         S_AXI_RREADY                    : in    std_logic;
 
-	gtx_clk				: in    std_logic; -- need a consistent 125 MHz clock for phy_rstn
 	mdio_clk			: in	std_logic;
 	mdio				: inout	std_logic;	
 	mdc				: out	std_logic;
@@ -66,7 +67,10 @@ architecture rtl of nf7_mdio is
     constant C_ARD_NUM_CE_ARRAY         : INTEGER_ARRAY_TYPE := (
         0 => 4
     );
-    constant C_PHY_RESET_COUNT		: integer := 4194304; -- 2^22
+
+    -- plus 1 to ensure we _at_least_ meat the reset minimum time
+    constant C_PHY_RESET_COUNT		: integer := ((C_S_AXI_ACLK_FREQ_HZ / 1000) * C_RESET_MIN_MS) + 1;
+    signal phy_reset_count		: natural range 0 to C_PHY_RESET_COUNT - 1;
 
     signal bus2ip_clk                   : std_logic;
     signal bus2ip_reset                 : std_logic;
@@ -84,7 +88,6 @@ architecture rtl of nf7_mdio is
     signal mdio_o                       : std_logic;
     signal mdio_i                       : std_logic;
     signal mdio_t                       : std_logic;
-    signal phy_reset_count		: integer;
 
     component IOBUF
        port
@@ -191,13 +194,11 @@ begin
 	mdc				=> mdc
     );
 
-    -- using a C_PHY_RESET_COUNT that provides a 33 mS reset 
-    -- with a 125 MHz gtx clock for the Realtek RTL8211 PHY
-    phy_reset : process (gtx_clk)
+    phy_reset : process (bus2ip_clk)
        begin
-       if rising_edge(gtx_clk) then
+       if rising_edge(bus2ip_clk) then
           if (bus2ip_resetn = '0') then
-             phy_reset_count <= C_PHY_RESET_COUNT;
+             phy_reset_count <= C_PHY_RESET_COUNT - 1;
              phy_rstn <= ZEROS(C_NUM_PHY - 1 downto 0);
           elsif (phy_reset_count = 0) then
              phy_rstn <= ONES(C_NUM_PHY - 1 downto 0);

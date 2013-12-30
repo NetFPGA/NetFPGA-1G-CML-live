@@ -309,7 +309,6 @@ BEGIN nf7_mdio
  PARAMETER C_MDIO_CLK_DIV = 80
  BUS_INTERFACE S_AXI = axi_interconnect_memory_mapped_lite_0
  PORT S_AXI_ACLK = mb_clk
- PORT gtx_clk = gtx_clk
  PORT mdio_clk = core_clk
  PORT mdc = mdc
  PORT mdio = mdio
