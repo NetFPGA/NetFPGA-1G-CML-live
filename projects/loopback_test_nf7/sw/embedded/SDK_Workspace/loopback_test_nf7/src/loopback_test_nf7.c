@@ -51,10 +51,10 @@
 #define MDIO_BASE_ADDR 0x7a040000
 
 // MDIO registers
-#define MDIOCTRL      (MDIO_BASE_ADDR)
-#define MDIORD        (MDIO_BASE_ADDR + 0x4)
-#define MDIOWR        (MDIO_BASE_ADDR + 0x8)
-#define MDIOADDR      (MDIO_BASE_ADDR + 0xC)
+#define MDIOADDR      (MDIO_BASE_ADDR + 0x00)
+#define MDIOWR        (MDIO_BASE_ADDR + 0x04)
+#define MDIORD        (MDIO_BASE_ADDR + 0x08)
+#define MDIOCTRL      (MDIO_BASE_ADDR + 0x0c)
 #define OP_RD          1
 #define OP_WR          0
 #define ENB            1

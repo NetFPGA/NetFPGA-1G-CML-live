@@ -26,10 +26,10 @@ end entity;
 
 architecture rtl of nf7_mdio_core is
 
-   constant REG_IDX_ADDR		: integer   := 0;
-   constant REG_IDX_WR			: integer   := 1;
-   constant REG_IDX_RD			: integer   := 2;
-   constant REG_IDX_CTRL		: integer   := 3;
+   constant REG_IDX_ADDR		: integer   := 3;
+   constant REG_IDX_WR			: integer   := 2;
+   constant REG_IDX_RD			: integer   := 1;
+   constant REG_IDX_CTRL		: integer   := 0;
 
    signal addr_reg			: std_logic_vector(10 downto 0) := (others => '0');
    signal wr_reg			: std_logic_vector(15 downto 0) := (others => '0');
