@@ -48,6 +48,19 @@
 #include "nf10fops.h"
 #include "nf10iface.h"
 
+// These attributes have been removed since Kernel 3.8.x. Keep them here for backward
+// compatibility.
+// See https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=54b956b903607
+#ifndef __devinit
+  #define __devinit
+#endif
+#ifndef __devexit
+  #define __devexit
+#endif
+#ifndef __devexit_p
+  #define __devexit_p
+#endif
+
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Mario Flajslik");
 MODULE_DESCRIPTION("nf10 nic driver");
