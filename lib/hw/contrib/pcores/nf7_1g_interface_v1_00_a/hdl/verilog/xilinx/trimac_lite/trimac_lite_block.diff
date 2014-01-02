@@ -1,0 +1,127 @@
+93c93
+< module trimac_lite_block  (
+---
+> module trimac_lite_block (
+150a151
+>    parameter C_INCLUDE_IDELAYCTRL = 1;
+195,245c196,234
+<    //---------------------------------------------------------------------------
+<    // An IDELAYCTRL primitive needs to be instantiated for the Fixed Tap Delay
+<    // mode of the IDELAY.
+<    // All IDELAYs in Fixed Tap Delay mode and the IDELAYCTRL primitives have
+<    // to be LOC'ed in the UCF file.
+<    //---------------------------------------------------------------------------
+<    IDELAYCTRL dlyctrl (
+<       .RDY              (),
+<       .REFCLK           (refclk),
+<       .RST              (idelayctrl_reset)
+<    );
+< 
+< 
+<    // Create a synchronous reset in the IDELAYCTRL refclk clock domain.
+<    trimac_lite_reset_sync idelayctrl_reset_gen (
+<       .clk              (refclk),
+<       .enable           (1'b1),
+<       .reset_in         (glbl_rst),
+<       .reset_out        (idelayctrl_reset_sync)
+<    );
+< 
+< 
+<    // Reset circuitry for the IDELAYCTRL reset.
+< 
+<    // The IDELAYCTRL must experience a pulse which is at least 50 ns in
+<    // duration.  This is ten clock cycles of the 200MHz refclk.  Here we
+<    // drive the reset pulse for 12 clock cycles.
+<    always @(posedge refclk)
+<    begin
+<       if (idelayctrl_reset_sync) begin
+<          idelay_reset_cnt     <= 4'b0000;
+<          idelayctrl_reset     <= 1'b1;
+<       end
+<       else begin
+<          case (idelay_reset_cnt)
+<             4'b0000 : idelay_reset_cnt <= 4'b0001;
+<             4'b0001 : idelay_reset_cnt <= 4'b0010;
+<             4'b0010 : idelay_reset_cnt <= 4'b0011;
+<             4'b0011 : idelay_reset_cnt <= 4'b0100;
+<             4'b0100 : idelay_reset_cnt <= 4'b0101;
+<             4'b0101 : idelay_reset_cnt <= 4'b0110;
+<             4'b0110 : idelay_reset_cnt <= 4'b0111;
+<             4'b0111 : idelay_reset_cnt <= 4'b1000;
+<             4'b1000 : idelay_reset_cnt <= 4'b1001;
+<             4'b1001 : idelay_reset_cnt <= 4'b1010;
+<             4'b1010 : idelay_reset_cnt <= 4'b1011;
+<             4'b1011 : idelay_reset_cnt <= 4'b1100;
+<             default : idelay_reset_cnt <= 4'b1100;
+<          endcase
+<          if (idelay_reset_cnt === 4'b1100) begin
+<             idelayctrl_reset  <= 1'b0;
+---
+> 
+>       //---------------------------------------------------------------------------
+>       // An IDELAYCTRL primitive needs to be instantiated for the Fixed Tap Delay
+>       // mode of the IDELAY.
+>       // All IDELAYs in Fixed Tap Delay mode and the IDELAYCTRL primitives have
+>       // to be LOC'ed in the UCF file.
+>       //---------------------------------------------------------------------------
+>    generate 
+>      if (C_INCLUDE_IDELAYCTRL == 1)
+>       IDELAYCTRL dlyctrl (
+>          .RDY              (),
+>          .REFCLK           (refclk),
+>          .RST              (idelayctrl_reset)
+>       );
+>    endgenerate 
+>    
+>       // Create a synchronous reset in the IDELAYCTRL refclk clock domain.
+>    generate 
+>      if (C_INCLUDE_IDELAYCTRL == 1)
+>       trimac_lite_reset_sync idelayctrl_reset_gen (
+>          .clk              (refclk),
+>          .enable           (1'b1),
+>          .reset_in         (glbl_rst),
+>          .reset_out        (idelayctrl_reset_sync)
+>       );
+>      else
+>        assign idelayctrl_reset_sync = 1;
+>    endgenerate 
+>    
+>       // Reset circuitry for the IDELAYCTRL reset.
+>    
+>       // The IDELAYCTRL must experience a pulse which is at least 50 ns in
+>       // duration.  This is ten clock cycles of the 200MHz refclk.  Here we
+>       // drive the reset pulse for 12 clock cycles.
+>       always @(posedge refclk)
+>       begin
+>          if (idelayctrl_reset_sync) begin
+>             idelay_reset_cnt     <= 4'b0000;
+>             idelayctrl_reset     <= 1'b1;
+248c237,257
+<             idelayctrl_reset  <= 1'b1;
+---
+>             case (idelay_reset_cnt)
+>                4'b0000 : idelay_reset_cnt <= 4'b0001;
+>                4'b0001 : idelay_reset_cnt <= 4'b0010;
+>                4'b0010 : idelay_reset_cnt <= 4'b0011;
+>                4'b0011 : idelay_reset_cnt <= 4'b0100;
+>                4'b0100 : idelay_reset_cnt <= 4'b0101;
+>                4'b0101 : idelay_reset_cnt <= 4'b0110;
+>                4'b0110 : idelay_reset_cnt <= 4'b0111;
+>                4'b0111 : idelay_reset_cnt <= 4'b1000;
+>                4'b1000 : idelay_reset_cnt <= 4'b1001;
+>                4'b1001 : idelay_reset_cnt <= 4'b1010;
+>                4'b1010 : idelay_reset_cnt <= 4'b1011;
+>                4'b1011 : idelay_reset_cnt <= 4'b1100;
+>                default : idelay_reset_cnt <= 4'b1100;
+>             endcase
+>             if (idelay_reset_cnt === 4'b1100) begin
+>                idelayctrl_reset  <= 1'b0;
+>             end
+>             else begin
+>                idelayctrl_reset  <= 1'b1;
+>             end
+251,254d259
+<    end
+< 
+< 
+< 

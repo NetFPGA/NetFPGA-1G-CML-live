@@ -1,0 +1,10 @@
+90c90,91
+<       parameter     C_BASE_ADDRESS = 32'h00
+---
+>       parameter     C_BASE_ADDRESS = 32'h00,
+>       parameter C_INCLUDE_IDELAYCTRL=1
+243c244,245
+<        .C_BASE_ADDRESS              (C_BASE_ADDRESS)
+---
+>        .C_BASE_ADDRESS              (C_BASE_ADDRESS),
+>        .C_INCLUDE_IDELAYCTRL        (C_INCLUDE_IDELAYCTRL)

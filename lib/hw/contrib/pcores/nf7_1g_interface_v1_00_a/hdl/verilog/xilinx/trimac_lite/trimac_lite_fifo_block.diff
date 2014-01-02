@@ -1,0 +1,7 @@
+158a159
+>    parameter C_INCLUDE_IDELAYCTRL=1;
+213c214,215
+<    trimac_lite_block trimac_block (
+---
+>    trimac_lite_block #(C_INCLUDE_IDELAYCTRL) trimac_block
+>       (
