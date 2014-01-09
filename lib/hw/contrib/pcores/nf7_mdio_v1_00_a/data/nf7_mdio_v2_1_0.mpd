@@ -1,12 +1,12 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #        nf7_mdio_v2_1_0.mpd
 #
 #  Library:
-#        hw/std/pcores/nf7_mdio_v1_00_a
+#        hw/contrib/pcores/nf7_mdio_v1_00_a
 #
 #  Description:
 #        Microprocessor Peripheral Description File

@@ -1,6 +1,6 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #        Makefile
@@ -9,14 +9,13 @@
 #        hw/contrib/pcores/nf7_mdio_v1_00_a
 #
 #  Author:
-#        Jack Meador, Computer Measurement Laboratory, LLC
+#        Jack Meador
 #
 #  Description:
 #        make install : Make sure EDK libraries are available
 #
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
+#        Copyright (C) 2013 Computer Measurement Laboratory, LLC
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
