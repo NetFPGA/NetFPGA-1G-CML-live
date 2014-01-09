@@ -8,7 +8,7 @@
 //
 // Gigabit Ethernet MAC: TX logic
 //
-// Adapted to AXIS MAC Interface for NetFPGA7
+// Adapted to AXIS MAC Interface for NetFPGA-1G-CML 
 //
 // Author: Tinghui WANG
 //

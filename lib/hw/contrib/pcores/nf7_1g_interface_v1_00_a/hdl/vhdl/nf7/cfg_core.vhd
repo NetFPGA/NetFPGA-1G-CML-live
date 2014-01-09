@@ -1,3 +1,41 @@
+-- 
+-- File:
+--       cfg_core.vhd
+--
+-- Library:
+-- 		 hw/contrib/pcores/nf7_1g_interface_v1_10_a
+--
+-- Module:
+-- 	        register interface core	
+--
+-- Author:
+-- 		Jay Hirata
+-- 
+-- Description:
+--              Register interface customized for use with Xilinx Tri-mode Ethernet MAC
+--              This is used by C_MAC_SEL = 0 in nf7_1g_interface 
+--
+-- Copyright notice:
+-- 		Copyright (C) 2013 Computer Measurement Laboratory, LLC
+--
+-- License:
+--        This file is part of the NetFPGA 10G development base package.
+--
+--        This file is free code: you can redistribute it and/or modify it under
+--        the terms of the GNU Lesser General Public License version 2.1 as
+--        published by the Free Software Foundation.
+--
+--        This package is distributed in the hope that it will be useful, but
+--        WITHOUT ANY WARRANTY; without even the implied warranty of
+--        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+--        Lesser General Public License for more details.
+--
+--        You should have received a copy of the GNU Lesser General Public
+--        License along with the NetFPGA source package.  If not, see
+--        http://www.gnu.org/licenses/.
+--
+
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_misc.all;

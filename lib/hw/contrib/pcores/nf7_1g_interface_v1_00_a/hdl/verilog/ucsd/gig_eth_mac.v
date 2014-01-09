@@ -13,7 +13,7 @@
 //
 // ----------------------------------------------------------------------------
 //
-// Interface Adapted to AXIS MAC Interface for NetFPGA7
+// Interface Adapted to AXIS MAC Interface for NetFPGA-1G-CML 
 //
 // Author: Tinghui WANG
 //

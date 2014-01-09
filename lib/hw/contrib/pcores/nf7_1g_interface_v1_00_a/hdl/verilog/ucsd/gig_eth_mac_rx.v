@@ -4,6 +4,18 @@
 //
 // Author: Erik Rubow
 //
+// ----------------------------------------------------------------------------
+//
+// Gigabit Ethernet MAC: RX logic
+//
+// Adapted to AXIS MAC Interface for NetFPGA-1G-CML 
+//
+// Author: Tinghui WANG
+//         Jack Meador
+//
+// Copyright (C) 2013 Digilent Inc.
+// Copyright (C) 2013 Computer Measurement Laboratory, LLC
+//
 ///////////////////////////////////////////////////////////////////////////////
 
 module gig_eth_mac_rx

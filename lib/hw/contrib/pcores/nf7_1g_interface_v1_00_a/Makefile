@@ -1,22 +1,20 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #        Makefile
 #
 #  Library:
-#        hw/std/pcores/nf7_1g_interface_v1_10_a
+#        hw/contrib/pcores/nf7_1g_interface_v1_10_a
 #
 #  Author:
-#        Jack Meador, Computer Measurement Laboratory, LLC
+#        Adam Covington
+#        Jack Meador
 #
 #  Description:
-#        make install : Build 1G version of Xilinx TEMAC for NetFPGA-10G library
-#        Two versions of the TEMAC are built: the "trimac" version includes
-#        both an AXI4 register interface and a PHY MDIO interface. The "trimac_lite"
-#        version includes neither. Either is accessible via the C_INCLUDE_CTRL
-#        parameter in the EDK.
+#        make install : build trimac, trimac_lite and ucsd_mac
+#        in preparation for use with nf7_1g_interface
 #
 #        For more information about how Xilinx EDK works, please visit
 #        http://www.xilinx.com/support/documentation/dt_edk.htm
@@ -24,6 +22,7 @@
 #  Copyright notice:
 #        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
 #                                 Junior University
+#        Copyright (C) 2013, Computer Measurement Laboratory, LLC
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -40,7 +39,6 @@
 #        You should have received a copy of the GNU Lesser General Public
 #        License along with the NetFPGA source package.  If not, see
 #        http://www.gnu.org/licenses/.
-#
 #
 
 TRIMAC_WORK:= trimac_work

@@ -1,14 +1,15 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #        nf7_1g_interface_v2_1_0.pao
 #
 #  Library:
-#        hw/std/pcores/nf10_1g_interface_v1_00_a
+#        hw/contrib/pcores/nf7_1g_interface_v1_00_a
 #
 #  Author:
+#        Adam Covington
 #        Jack Meador
 #
 #  Description:
@@ -19,6 +20,7 @@
 #  Copyright notice:
 #        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
 #                                 Junior University
+#        Copyright (C) 2013 Computer Measurement Laboratory, LLC
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.

@@ -1,26 +1,33 @@
 /*******************************************************************************
  *
- *  NetFPGA-10G http://www.netfpga.org
+ *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
  *        nf7_1g_interface.v
  *
  *  Library:
- *        hw/std/pcores/nf7_1g_interface_v1_10_a
+ *        hw/contrib/pcores/nf7_1g_interface_v1_10_a
  *
  *  Module:
  *        nf7_1g_interface
  *
  *  Author:
- *        Jack Meador, Computer Measurement Laboratory, LLC
+ *        Adam Covington
+ *        Jack Meador
+ *        Jay Hirata
  *
  *  Description:
- *        This wrapper instantiates a 1G version of the Xilinx TEMAC
- *        PHY MDIO and AXI register access is optional.
+ *        Ethernet MAC wrapper parameterized to select one of three different 
+ *        configurations.
+ *
+ *        C_MAC_SEL = 0 : Xilinx tri-mode Ethernet MAC with external registers
+ *        C_MAC_SEL = 1 : Xilinx tri-mode Ethernet MAC with internal registers
+ *        C_MAC_SEL = 2 : UCSD Ethernet MAC (default)
  *
  *  Copyright notice:
  *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
  *                                 Junior University
+ *        Copyright (C) 2013 Computer Measurement Laboratory, LLC
  *
  *  Licence:
  *        This file is part of the NetFPGA 10G development base package.
@@ -54,7 +61,7 @@ module nf7_1g_interface
     parameter C_DEFAULT_SRC_PORT = 0,
     parameter C_DEFAULT_DST_PORT = 0,
     // Architecture configuration
-    parameter C_MAC_SEL = 0,
+    parameter C_MAC_SEL = 2,
 
     // The following is valid only when C_MAC_SEL = 1
     parameter C_S_AXI_ADDR_WIDTH = 32,
