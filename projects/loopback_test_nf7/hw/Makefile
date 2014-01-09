@@ -1,15 +1,15 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        HW Makefile
+#        Makefile
 #
 #  Project:
 #        loopback_test_nf7
 #
 #  Author:
-#        Jack Meador, Computer Measurement Laboratory, LLC
+#        Jack Meador
 #
 #  Description:
 #        This Makefile is a configurable wrapper for the

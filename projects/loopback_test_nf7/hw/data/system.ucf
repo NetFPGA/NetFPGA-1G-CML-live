@@ -1,23 +1,21 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        nf7.ucf
+#        system.ucf
 #
 #  Project:
-#        loopback_test_1g
+#        loopback_test_nf7
 #
 #  Author:
 #        Jack Meador
 #
 #  Description:
-#        UCF for loopback_test_1g
+#        UCF for loopback_test_nf7
 #
 #  Copyright notice:
 #        Copyright (C) 2013 Computer Measurement Laboratory
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.

@@ -1,6 +1,6 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #        Makefile
@@ -9,8 +9,7 @@
 #        loopback_test_nf7
 #
 #  Author:
-#        James Hongyi Zeng
-#        Jack Meador, Computer Measurement Laboratory, LLC
+#        Jack Meador
 #
 #  Description:
 #        all : Build software-initialized bitfile in bitfiles/download.bit
@@ -18,12 +17,8 @@
 #        sim : Rebuild software and run full system simulation
 #        run : Rebuild software and download elf to programmed PCB via MDM
 #
-#        For more information about how Xilinx EDK works, please visit
-#        http://www.xilinx.com/support/documentation/dt_edk.htm
-#
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
+#        Copyright (C) 2013 Computer Measurement Laboratory, LLC
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -40,10 +35,6 @@
 #        You should have received a copy of the GNU Lesser General Public
 #        License along with the NetFPGA source package.  If not, see
 #        http://www.gnu.org/licenses/.
-#
-#        This file was developed by SRI International and the University of
-#        Cambridge Computer Laboratory under DARPA/AFRL contract (FA8750-10-C-0237)
-#        ("CTSRD"), as part of the DARPA CRASH research programme.
 #
 
 SYSTEM = system

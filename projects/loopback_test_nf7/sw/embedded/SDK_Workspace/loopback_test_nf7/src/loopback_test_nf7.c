@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- *  NetFPGA-10G http://www.netfpga.org
+ *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
  *        loopback_test_nf7.c
@@ -9,7 +9,8 @@
  *        loopback_test_nf7
  *
  *  Author:
- *        Jack Meador, Computer Measurement Laboratory, LLC
+ *        James Hongyi Zeng
+ *        Jack Meador
  *
  *  Description:
  *        Test NetFPGA-1G-CML Ethernet Communications.
@@ -17,6 +18,8 @@
  *  Copyright notice:
  *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
  *                                 Junior University
+ *        Copyright (C) 2013 Computer Measurement Laboratory, LLC
+ *
  *
  *  Licence:
  *        This file is part of the NetFPGA 10G development base package.
