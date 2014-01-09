@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- *  NetFPGA-10G http://www.netfpga.org
+ *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
  *        dma.v
@@ -14,14 +14,18 @@
  *  Author:
  *        Mario Flajslik
  *        James Hongyi Zeng	
+ *        Jay Hirata
  *
  *  Description:
  *        Top level DMA module that wraps the dma_engine with the PCIe core,
  *        AXI lite master and AXI lite slave test registers.
  *
+ *        Modified to support PCIe core for NetFPGA-1G-CML.
+ *
  *  Copyright notice:
  *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
  *                                 Junior University
+#        Copyright (C) 2013 Computer Measurement Laboratory, LLC
  *
  *  Licence:
  *        This file is part of the NetFPGA 10G development base package.

@@ -252,10 +252,7 @@ module dma_engine
    logic [31:0]                 rd_data_hi;
 
    // instantiate dma channel
-   iface #(.IFACE_ID(0)) u_iface(.wr_q_req_data(wr_q_req_data),
-                                 .rd_q_req_data(rd_q_req_data),
-                                 .cm_q_req_data(cm_q_req_data),
-                                 .*);
+   iface #(.IFACE_ID(0)) u_iface(.*);
 
    // instantiate pcie engines
    pcie_rx u_pcie_rx(.*);
