@@ -1,12 +1,12 @@
 /*******************************************************************************
  *
- *  NetFPGA-10G http://www.netfpga.org
+ *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
  *        reg_lib.c
  *
  *  Project:
- *        
+ *        reference_switch_lite_nf1-cml
  *
  *  Author:
  *        Muhammad Shahbaz

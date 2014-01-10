@@ -1,6 +1,6 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #        Makefile
@@ -21,6 +21,7 @@
 #  Copyright notice:
 #        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
 #                                 Junior University
+#        Copyright (C) 2013 Computer Measurement Laboratory
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -50,6 +51,7 @@ all:
 	mkdir -p bitfiles
 	cp $(SW)/result/download.bit bitfiles/reference_switch_lite_nf1-cml.bit
 
+# Clean hardware, software, and remove generated bitfiles
 clean:
 	$(MAKE) -C $(HW) clean
 	$(MAKE) -C $(SW) clean

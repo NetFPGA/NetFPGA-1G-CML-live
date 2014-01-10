@@ -1,24 +1,25 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        nf7.ucf
+#        system.ucf
 #
 #  Project:
-#        reference_nic_nf7
+#        reference_switch_lite_nf1-cml
 #
 #  Author:
 #        Jack Meador
 #        Jay Hirata
+#        David Van Arnem
 #
 #  Description:
-#        UCF for reference_nic_nf7. Adapted from loopback_test_nf7
+#        UCF for reference_switch_lite_nf1-cml.
 #
 #  Copyright notice:
-#        Copyright (C) 2013 Computer Measurement Laboratory
 #        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
 #                                 Junior University
+#        Copyright (C) 2013 Computer Measurement Laboratory
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -151,7 +152,7 @@ INST "rgmii_txd*"                                               SLEW = FAST;
 INST "rgmii_tx_ctl*"                                            SLEW = FAST;
 INST "rgmii_txc*"                                               SLEW = FAST;
 
-## Commented out for UCSD
+## Commented out for UCSD MAC
 #
 ## RGMII IODELAY 
 ##
@@ -162,7 +163,7 @@ INST "rgmii_txc*"                                               SLEW = FAST;
 #INST "*trimac_block*rgmii_interface*delay_rgmii_rx_ctl"           IODELAY_GROUP = "DLYGRP1";
 #INST "*trimac_block*rgmii_interface*delay_rgmii_rxd"              IODELAY_GROUP = "DLYGRP1";
 #INST "*trimac_block*dlyctrl"                                      IODELAY_GROUP = "DLYGRP1";
-## End commented out for UCSD
+## End commented out for UCSD MAC
 
 # Identify RGMII Rx Pads.  
 INST "rgmii_rxd_1*"    TNM = IN_RGMII_1; 

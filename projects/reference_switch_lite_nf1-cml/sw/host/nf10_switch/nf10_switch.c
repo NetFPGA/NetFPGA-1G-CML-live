@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- *  NetFPGA-10G http://www.netfpga.org
+ *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
  *        nf10_switch.c
@@ -9,16 +9,19 @@
  *        stdio.h, stdlib.h, string.h ctype.h
  *
  *  Project:
- *        reference_switch(_lite)
+ *        reference_switch_lite_nf1-cml
  *
  *  Author:
  *        Muhammad Shahbaz
+ *        David Van Arnem
  *
  *  Description:
- *        For the Reference Switch project
+ *        Host software that communicates with the NetFPGA-1G-CML
+ *        using the nf10 device driver.
  *
  *  Copyright notice:
  *        Copyright (C) 2010, 2011 University of Cambridge
+ *        Copyright (C) 2013 Computer Measurement Laboratory
  *
  *  Licence:
  *        This file is part of the NetFPGA 10G development base package.
@@ -59,6 +62,7 @@ int main (int argc, char **argv)
        		return 0;
     	}
 
+    // defined in <repository>/lib/sw/std/drivers/nf10_switch_v1_00_a/src/nf10_switch_lib.c
 	run(dev);
 
 	// Close device handle

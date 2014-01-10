@@ -1,15 +1,15 @@
 ################################################################################
 #
-#  NetFPGA-1G-CML https://github.com/cmlab/netfpga-1g-cml
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #        HW Makefile
 #
 #  Project:
-#        reference_nic_nf7
+#        reference_switch_lite_nf1-cml
 #
 #  Author:
-#        Jack Meador, Computer Measurement Laboratory, LLC
+#        Jack Meador
 #
 #  Description:
 #        This Makefile is a configurable wrapper for the
@@ -24,7 +24,7 @@
 #        Copyright (C) 2013 Computer Measurement Laboratory, LLC
 #
 #  Licence:
-#        This file is part of the NetFPGA-1G-CML development base package.
+#        This file is part of the NetFPGA-10G development base package.
 #
 #        This file is free code: you can redistribute it and/or modify it under
 #        the terms of the GNU Lesser General Public License version 2.1 as
@@ -36,7 +36,7 @@
 #        Lesser General Public License for more details.
 #
 #        You should have received a copy of the GNU Lesser General Public
-#        License along with the NetFPGA-1G-CML source package.  If not, see
+#        License along with the NetFPGA source package.  If not, see
 #        http://www.gnu.org/licenses/.
 
 GIT_COMMIT = $(shell git log --abbrev=8 -1 --pretty=format:"%h")

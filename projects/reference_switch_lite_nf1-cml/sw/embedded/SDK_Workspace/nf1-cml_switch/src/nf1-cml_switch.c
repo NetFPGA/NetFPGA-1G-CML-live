@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- *  NetFPGA-1G-CML https://github.com/cmlab/netfpga-1g-cml
+ *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
  *      nf1-cml_switch.c
@@ -9,19 +9,20 @@
  *      reference_switch_lite_nf1-cml
  *
  *  Author:
- *      David Van Arnem, Computer Measurement Laboratory, LLC
+ *      David Van Arnem
  *
  *  Description:
  *      Standalone application that reconfigures the RTL8211 PHY LEDs to:
  *          LED0 (top right, ethernet magnetics) - Blink on any activity
  *          LED1 (top left, ethernet magnetics) - Link 1000 (Gigabit) up and blink on activity
  *          LED2 (board) - Solid on Link 1000 (Gigabit) up
+ *      This application is not necessary for the switch to function.
  *
  *  Copyright notice:
- *      Copyright (C) 2014, Computer Measurement Laboratory, LLC
+ *      Copyright (C) 2013, Computer Measurement Laboratory, LLC
  *
  *  Licence:
- *        This file is part of the NetFPGA-1G-CML development base package.
+ *        This file is part of the NetFPGA-10G development base package.
  *
  *        This file is free code: you can redistribute it and/or modify it under
  *        the terms of the GNU Lesser General Public License version 2.1 as
@@ -33,7 +34,7 @@
  *        Lesser General Public License for more details.
  *
  *        You should have received a copy of the GNU Lesser General Public
- *        License along with the NetFPGA-1G-CML source package. If not, see
+ *        License along with the NetFPGA source package. If not, see
  *        http://www.gnu.org/licenses/.
  *
  */ 
