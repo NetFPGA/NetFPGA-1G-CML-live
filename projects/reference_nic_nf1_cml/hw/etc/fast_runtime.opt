@@ -38,7 +38,7 @@ Program map
 -xe c;
 -detail;
 -mt 2;
--t 2;
+-t 3;
 <inputdir><design>.ngd;  # Input NGD file
 <inputdir><design>.pcf;  # Physical constraints file
 END Program map

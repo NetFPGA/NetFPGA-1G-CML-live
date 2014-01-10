@@ -3,10 +3,10 @@
 #  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        mdio_v2_1_0.mpd
+#        mdio_ctrl_v2_1_0.mpd
 #
 #  Library:
-#        hw/contrib/pcores/mdio_v1_00_a
+#        hw/contrib/pcores/mdio_ctrl_v1_00_a
 #
 #  Description:
 #        Microprocessor Peripheral Description File
@@ -33,7 +33,7 @@
 #
 #
 
-BEGIN mdio
+BEGIN mdio_ctrl
 
 ## Peripheral Options
 OPTION STYLE = HDL
@@ -42,8 +42,8 @@ OPTION IMP_NETLIST = TRUE
 OPTION HDL = VHDL
 OPTION USAGE_LEVEL = BASE_USER
 OPTION RUN_NGCBUILD = TRUE
-OPTION DESC = NetFPGA MDIO Engine
-OPTION LONG_DESC = 'NetFPGA MDIO Engine'
+OPTION DESC = NetFPGA MDIO Control Engine
+OPTION LONG_DESC = 'NetFPGA MDIO Control Engine'
 OPTION IP_GROUP = Communication Low-Speed:MICROBLAZE
 
 ## Bus Interfaces

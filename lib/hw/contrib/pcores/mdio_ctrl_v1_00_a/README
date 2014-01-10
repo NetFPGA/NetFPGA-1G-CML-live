@@ -1,5 +1,5 @@
-MDIO Core
-=========
+MDIO Ctrl Core
+==============
 
 A generic MDIO interface for communicating with PHYs on the bus.
 

@@ -464,7 +464,7 @@ BEGIN clock_generator
  PORT LOCKED = clk_gen_pre_lock
 END
 
-BEGIN mdio
+BEGIN mdio_ctrl
  PARAMETER INSTANCE = mdio_0
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x7a040000

@@ -3,17 +3,19 @@
 #  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        mdio_v2_1_0.pao
+#        Makefile
 #
 #  Library:
-#        hw/contrib/pcores/nf10_mdio_v1_00_a
+#        hw/contrib/pcores/mdio_ctrl_v1_00_a
+#
+#  Author:
+#        Jack Meador
 #
 #  Description:
-#        Peripheral Analyze Order File
+#        make install : Make sure EDK libraries are available
 #
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
+#        Copyright (C) 2013 Computer Measurement Laboratory, LLC
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -33,9 +35,8 @@
 #
 #
 
-lib proc_common_v3_00_a all
-lib axi_lite_ipif_v1_01_a all
-lib axi_ethernetlite_v1_01_b all
+#
+# The only thing needed is the Xilinx EDK IPLib 
 
-lib mdio_v1_00_a mdio_core.vhd vhdl
-lib mdio_v1_00_a mdio.vhd vhdl
+install: $(XILINX_EDK)/hw/XilinxProcessorIPLib/pcores
+

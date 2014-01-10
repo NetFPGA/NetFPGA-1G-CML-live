@@ -2,13 +2,13 @@
 --  NetFPGA-1G-CML http://www.netfpga.org
 -- 
 -- File:
---          nf7_mdio_core.vhd
+--          mdio_ctrl_core.vhd
 --
 -- Library:
---          hw/contrib/pcores/nf7_mdio_v1_00_a
+--          hw/contrib/pcores/mdio_ctrl_v1_00_a
 --
 -- Module:
---          nf7_mdio_core
+--          mdio_ctrl_core
 --
 -- Author:
 --          Jack Meador
@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 library axi_ethernetlite_v1_01_b;
 use axi_ethernetlite_v1_01_b.mdio_if;
 
-entity mdio_core is
+entity mdio_ctrl_core is
     port (
         clk                             : in    std_logic;
 	mdio_clk			: in	std_logic; -- 2.5 MHz max
@@ -62,7 +62,7 @@ entity mdio_core is
     );
 end entity;
 
-architecture rtl of mdio_core is
+architecture rtl of mdio_ctrl_core is
 
    constant REG_IDX_ADDR		: integer   := 3;
    constant REG_IDX_WR			: integer   := 2;
