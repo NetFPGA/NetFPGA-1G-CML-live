@@ -1,5 +1,5 @@
-NF7 MDIO Core
-=============
+MDIO Core
+=========
 
 A generic MDIO interface for communicating with PHYs on the bus.
 

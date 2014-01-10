@@ -3,10 +3,10 @@
 #  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        nf7_mdio_v2_1_0.mpd
+#        mdio_v2_1_0.mpd
 #
 #  Library:
-#        hw/contrib/pcores/nf7_mdio_v1_00_a
+#        hw/contrib/pcores/mdio_v1_00_a
 #
 #  Description:
 #        Microprocessor Peripheral Description File
@@ -33,7 +33,7 @@
 #
 #
 
-BEGIN nf7_mdio
+BEGIN mdio
 
 ## Peripheral Options
 OPTION STYLE = HDL

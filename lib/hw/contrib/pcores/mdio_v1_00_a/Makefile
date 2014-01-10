@@ -6,7 +6,7 @@
 #        Makefile
 #
 #  Library:
-#        hw/contrib/pcores/nf7_mdio_v1_00_a
+#        hw/contrib/pcores/mdio_v1_00_a
 #
 #  Author:
 #        Jack Meador

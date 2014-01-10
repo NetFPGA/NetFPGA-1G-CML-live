@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 library axi_ethernetlite_v1_01_b;
 use axi_ethernetlite_v1_01_b.mdio_if;
 
-entity nf7_mdio_core is
+entity mdio_core is
     port (
         clk                             : in    std_logic;
 	mdio_clk			: in	std_logic; -- 2.5 MHz max
@@ -62,7 +62,7 @@ entity nf7_mdio_core is
     );
 end entity;
 
-architecture rtl of nf7_mdio_core is
+architecture rtl of mdio_core is
 
    constant REG_IDX_ADDR		: integer   := 3;
    constant REG_IDX_WR			: integer   := 2;

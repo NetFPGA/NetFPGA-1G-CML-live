@@ -3,7 +3,7 @@
 #  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        nf7_mdio_v2_1_0.pao
+#        mdio_v2_1_0.pao
 #
 #  Library:
 #        hw/contrib/pcores/nf10_mdio_v1_00_a
@@ -37,5 +37,5 @@ lib proc_common_v3_00_a all
 lib axi_lite_ipif_v1_01_a all
 lib axi_ethernetlite_v1_01_b all
 
-lib nf7_mdio_v1_00_a nf7_mdio_core.vhd vhdl
-lib nf7_mdio_v1_00_a nf7_mdio.vhd vhdl
+lib mdio_v1_00_a mdio_core.vhd vhdl
+lib mdio_v1_00_a mdio.vhd vhdl

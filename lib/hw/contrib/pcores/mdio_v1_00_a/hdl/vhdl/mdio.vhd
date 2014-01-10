@@ -48,10 +48,10 @@ use proc_common_v3_00_a.ipif_pkg.calc_num_ce;
 library axi_lite_ipif_v1_01_a;
 use axi_lite_ipif_v1_01_a.axi_lite_ipif;
 
-library nf7_mdio_v1_00_a;
-use nf7_mdio_v1_00_a.nf7_mdio_core;
+library mdio_v1_00_a;
+use mdio_v1_00_a.mdio_core;
 
-entity nf7_mdio is
+entity mdio is
     generic (
         C_FAMILY                        : string            := "kintex7";
         C_S_AXI_ADDR_WIDTH              : integer           := 5;
@@ -90,7 +90,7 @@ entity nf7_mdio is
     );
 end entity;
 
-architecture rtl of nf7_mdio is
+architecture rtl of mdio is
 
     constant ZEROS                      : std_logic_vector(31 downto 0) := (others => '0');
     constant ONES                       : std_logic_vector(31 downto 0) := (others => '1');
@@ -213,7 +213,7 @@ begin
               T  => mdio_t
              );
 
-    nf7_mdio_core_i : entity nf7_mdio_v1_00_a.nf7_mdio_core 
+    mdio_core_i : entity mdio_v1_00_a.mdio_core 
     port map (
         clk                             => bus2ip_clk,
         rst_n                           => bus2ip_resetn,
