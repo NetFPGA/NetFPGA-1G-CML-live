@@ -245,8 +245,52 @@ begin
         end if;
     end process;
 
-    tx_cfg  <= tx_cfg_reg;
-    rx_cfg  <= rx_cfg_reg;
+    process (clk)
+    begin
+        if rising_edge (clk) then
+            if (rst_n = '0') then
+                tx_cfg <=
+                    tx_pause_mac_addr &
+                    tx_max_frame_size &
+                    '0' &       -- reserved
+                    tx_max_frame_en &
+                    tx_speed &
+                    '0' &       -- reserved
+                    tx_ifg_adjust_en &
+                    "000" &      -- reserved
+                    tx_hd_en &
+                    tx_fc_en &
+                    tx_jumbo_en &
+                    tx_fcs_en &
+                    tx_vlan_en &
+                    tx_en &
+                    tx_reset;
+
+                rx_cfg <=
+                    rx_pause_mac_addr &
+                    rx_max_frame_size &
+                    '0' &       -- reserved
+                    rx_max_frame_en &
+                    rx_speed &
+                    rx_promiscuous_en &
+                    '0' &       -- reserved
+                    rx_control_len_chk_dis &
+                    rx_len_type_chk_dis &
+                    '0' &       -- reserved
+                    rx_hd_en &
+                    rx_fc_en &
+                    rx_jumbo_en &
+                    rx_fcs_en &
+                    rx_vlan_en &
+                    rx_en &
+                    rx_reset;
+
+            else
+                tx_cfg  <= tx_cfg_reg;
+                rx_cfg  <= rx_cfg_reg;
+            end if;
+        end if;
+    end process;
 
 end rtl;
 
