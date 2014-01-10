@@ -179,7 +179,6 @@ void work_handler(struct work_struct *w){
     uint64_t len;
     int port = -1;
     uint64_t port_encoded;
-    unsigned long flags;
 #ifdef LOOPBACK_MODE
     struct iphdr *iph;
     struct tcphdr *th;
@@ -191,7 +190,7 @@ void work_handler(struct work_struct *w){
     int int_enabled = 1;
     int i;
 
-    spin_lock_irqsave(&work_lock, flags);
+    spin_lock_bh(&work_lock);
 
     while(tcnt){
 
@@ -346,7 +345,7 @@ void work_handler(struct work_struct *w){
         }
     }
 
-    spin_unlock_irqrestore(&work_lock, flags);
+    spin_unlock_bh(&work_lock);
 }
 
 int nf10priv_send_rx_dsc(struct nf10_card *card){
