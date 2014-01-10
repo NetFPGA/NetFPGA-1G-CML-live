@@ -4,14 +4,14 @@
 
 RESULT_DIR = result
 SDK_WORKSPACE = SDK_Workspace
-USER_APP_DIR = $(SDK_WORKSPACE)/loopback_test_nf7
+USER_APP_DIR = $(SDK_WORKSPACE)/loopback_test_nf1_cml
 BSP_DIR = $(SDK_WORKSPACE)/bsp
 HW_DIR = $(SDK_WORKSPACE)/hw
 
 DOWNLOAD_BIT = $(RESULT_DIR)/download.bit
 SYSTEM_BD = $(HW_DIR)/system_bd.bmm
 SYSTEM_BIT = $(HW_DIR)/system.bit
-ELF = $(RESULT_DIR)/loopback_test_nf7.elf
+ELF = $(RESULT_DIR)/loopback_test_nf1_cml.elf
 
 ################################################################################
 # Part 1 User Application
@@ -31,15 +31,15 @@ ELFCHECK :=
 S_UPPER_DEPS := 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-$(USER_APP_DIR)/src/loopback_test_nf7.c \
+$(USER_APP_DIR)/src/loopback_test_nf1_cml.c \
 $(USER_APP_DIR)/src/platform.c 
 
 OBJS += \
-$(RESULT_DIR)/loopback_test_nf7.o \
+$(RESULT_DIR)/loopback_test_nf1_cml.o \
 $(RESULT_DIR)/platform.o 
 
 C_DEPS += \
-$(RESULT_DIR)/loopback_test_nf7.d \
+$(RESULT_DIR)/loopback_test_nf1_cml.d \
 $(RESULT_DIR)/platform.d 
 
 ################################################################################

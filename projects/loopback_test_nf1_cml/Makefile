@@ -6,7 +6,7 @@
 #        Makefile
 #
 #  Project:
-#        loopback_test_nf7
+#        loopback_test_nf1_cml
 #
 #  Author:
 #        Jack Meador
@@ -53,15 +53,15 @@ sim:
 
 download: bitfiles/download.bit
 	cp $(SW)/result/download.bit bitfiles/download.bit
-	impact -batch nf7/program.bat
+	impact -batch nf1_cml/program.bat
 
-download_test: bitfiles/loopback_test_nf7.bit
-	cp bitfiles/loopback_test_nf7.bit bitfiles/download.bit
-	impact -batch nf7/program.bat
+download_test: bitfiles/loopback_test_nf1_cml.bit
+	cp bitfiles/loopback_test_nf1_cml.bit bitfiles/download.bit
+	impact -batch nf1_cml/program.bat
 
 run:
 	$(MAKE) -C $(SW)
-	xmd -tcl nf7/xmd-run.tcl
+	xmd -tcl nf1_cml/xmd-run.tcl
 
 simclean:
 	$(MAKE) -C $(HW) simclean

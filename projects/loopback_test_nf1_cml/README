@@ -6,7 +6,7 @@
 #        README
 #
 #  Project:
-#        loopback_test_nf7
+#        loopback_test_nf1_cml
 #
 #  Author:
 #        James Hongyi Zeng
@@ -39,9 +39,9 @@ and software part (sw, including embedded software and host
 software).
 
 This project requires the following NetFPGA components in the hardware lib:
-nf7_1g_interface
+nf1_cml_interface
 nf10_axis_gen_check
-nf7_mdio
+mdio
 
 
 Make options include:

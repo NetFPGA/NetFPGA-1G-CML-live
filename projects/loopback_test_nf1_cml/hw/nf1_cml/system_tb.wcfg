@@ -65,29 +65,29 @@
    <wvobject fp_name="group105" type="group">
       <obj_property name="label">eth2</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_txd" type="array" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_2/nf1_cml_interface_2/rgmii_txd" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_txd[3:0]</obj_property>
          <obj_property name="ObjectShortName">rgmii_txd[3:0]</obj_property>
          <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_tx_ctl" type="logic" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_2/nf1_cml_interface_2/rgmii_tx_ctl" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_tx_ctl</obj_property>
          <obj_property name="ObjectShortName">rgmii_tx_ctl</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_txc" type="logic" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_2/nf1_cml_interface_2/rgmii_txc" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_txc</obj_property>
          <obj_property name="ObjectShortName">rgmii_txc</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_rxd" type="array" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_2/nf1_cml_interface_2/rgmii_rxd" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_rxd[3:0]</obj_property>
          <obj_property name="ObjectShortName">rgmii_rxd[3:0]</obj_property>
          <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_rx_ctl" type="logic" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_2/nf1_cml_interface_2/rgmii_rx_ctl" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_rx_ctl</obj_property>
          <obj_property name="ObjectShortName">rgmii_rx_ctl</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_2/nf7_1g_interface_2/rgmii_rxc" type="logic" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_2/nf1_cml_interface_2/rgmii_rxc" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_rxc</obj_property>
          <obj_property name="ObjectShortName">rgmii_rxc</obj_property>
       </wvobject>
@@ -95,29 +95,29 @@
    <wvobject fp_name="group112" type="group">
       <obj_property name="label">eth3</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_txd" type="array" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_3/nf1_cml_interface_3/rgmii_txd" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_txd[3:0]</obj_property>
          <obj_property name="ObjectShortName">rgmii_txd[3:0]</obj_property>
          <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_tx_ctl" type="logic" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_3/nf1_cml_interface_3/rgmii_tx_ctl" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_tx_ctl</obj_property>
          <obj_property name="ObjectShortName">rgmii_tx_ctl</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_txc" type="logic" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_3/nf1_cml_interface_3/rgmii_txc" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_txc</obj_property>
          <obj_property name="ObjectShortName">rgmii_txc</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_rxd" type="array" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_3/nf1_cml_interface_3/rgmii_rxd" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_rxd[3:0]</obj_property>
          <obj_property name="ObjectShortName">rgmii_rxd[3:0]</obj_property>
          <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_rx_ctl" type="logic" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_3/nf1_cml_interface_3/rgmii_rx_ctl" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_rx_ctl</obj_property>
          <obj_property name="ObjectShortName">rgmii_rx_ctl</obj_property>
       </wvobject>
-      <wvobject fp_name="/system_tb/dut/nf7_1g_interface_3/nf7_1g_interface_3/rgmii_rxc" type="logic" db_ref_id="1">
+      <wvobject fp_name="/system_tb/dut/nf1_cml_interface_3/nf1_cml_interface_3/rgmii_rxc" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rgmii_rxc</obj_property>
          <obj_property name="ObjectShortName">rgmii_rxc</obj_property>
       </wvobject>

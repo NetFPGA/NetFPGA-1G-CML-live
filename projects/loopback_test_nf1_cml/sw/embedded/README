@@ -41,7 +41,7 @@ Method 1: GUI flow
 2. Open Xilinx SDK, select the workspace at SDK_Workspace
 3. In the Xilinx SDK GUI, click Xilinx Tools -> Repository and point the local/global repository to netfpga-10g/lib/sw/
 4. Import all projects under SDK_Workspace into your workspace by clicking File -> Import -> General -> Existing projects
-   do this for hw, bsp, and loopback_test_nf7 
+   do this for hw, bsp, and loopback_test_nf1_cml
 
 That's it!
 Now you can build your project with standard Eclipse IDE :)

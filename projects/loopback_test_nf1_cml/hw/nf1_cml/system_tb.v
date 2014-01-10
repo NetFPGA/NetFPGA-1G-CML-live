@@ -6,7 +6,7 @@
 //       system_tb.v 
 //
 //  Project:
-//       loopback_test_nf7
+//       loopback_test_nf1_cml
 //
 //  Author:
 //       Jack Meador

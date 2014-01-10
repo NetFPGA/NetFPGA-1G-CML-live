@@ -6,7 +6,7 @@
 #        Makefile
 #
 #  Project:
-#        loopback_test_nf7
+#        loopback_test_nf1_cml
 #
 #  Author:
 #        Jack Meador
@@ -54,7 +54,7 @@ chipscope: system.make
 
 sim: system.make
 	mkdir -p simulation/behavioral
-	cp nf7/system_tb.v simulation/behavioral
+	cp nf1_cml/system_tb.v simulation/behavioral
 	$(MAKE) -f system.make sim
 
 system.make system_incl.make: genmakes.tcl system.xmp system.mhs

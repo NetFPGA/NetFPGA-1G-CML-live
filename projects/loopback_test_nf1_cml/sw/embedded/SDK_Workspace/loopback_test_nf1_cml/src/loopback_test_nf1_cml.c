@@ -3,10 +3,10 @@
  *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
- *        loopback_test_nf7.c
+ *        loopback_test_nf1_cml.c
  *
  *  Project:
- *        loopback_test_nf7
+ *        loopback_test_nf1_cml
  *
  *  Author:
  *        James Hongyi Zeng

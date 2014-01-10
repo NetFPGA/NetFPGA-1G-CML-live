@@ -181,7 +181,7 @@ BEGIN nf10_axis_gen_check
  PARAMETER C_HIGHADDR = 0x7762ffff
  BUS_INTERFACE S_AXI = axi_interconnect_memory_mapped_lite_0
  BUS_INTERFACE M_AXIS = nf10_axis_gen_check_0_M_AXIS
- BUS_INTERFACE S_AXIS = nf7_1g_interface_1_M_AXIS
+ BUS_INTERFACE S_AXIS = nf1_cml_interface_1_M_AXIS
  PORT S_AXI_ACLK = mb_clk
  PORT aclk = core_clk
 END
@@ -195,13 +195,13 @@ BEGIN nf10_axis_gen_check
  PARAMETER C_HIGHADDR = 0x7760ffff
  BUS_INTERFACE S_AXI = axi_interconnect_memory_mapped_lite_0
  BUS_INTERFACE M_AXIS = nf10_axis_gen_check_1_M_AXIS
- BUS_INTERFACE S_AXIS = nf7_1g_interface_4_M_AXIS
+ BUS_INTERFACE S_AXIS = nf1_cml_interface_4_M_AXIS
  PORT S_AXI_ACLK = mb_clk
  PORT aclk = core_clk
 END
 
-BEGIN nf7_1g_interface
- PARAMETER INSTANCE = nf7_1g_interface_1
+BEGIN nf1_cml_interface
+ PARAMETER INSTANCE = nf1_cml_interface_1
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_INCLUDE_IDELAYCTRL = 1
  PARAMETER C_BASEADDR = 0x7a000000
@@ -210,7 +210,7 @@ BEGIN nf7_1g_interface
  PARAMETER C_TX_PAUSE_MAC_ADDR = 0
  PARAMETER C_RX_PAUSE_MAC_ADDR = 0
  BUS_INTERFACE S_AXIS = nf10_axis_gen_check_0_M_AXIS
- BUS_INTERFACE M_AXIS = nf7_1g_interface_1_M_AXIS
+ BUS_INTERFACE M_AXIS = nf1_cml_interface_1_M_AXIS
  BUS_INTERFACE S_AXI = axi_interconnect_memory_mapped_lite_0
  PORT glbl_rstn = Peripheral_aresetn
  PORT s_axi_aclk = mb_clk
@@ -226,8 +226,8 @@ BEGIN nf7_1g_interface
  PORT rgmii_rxc = rgmii_rxc_1
 END
 
-BEGIN nf7_1g_interface
- PARAMETER INSTANCE = nf7_1g_interface_2
+BEGIN nf1_cml_interface
+ PARAMETER INSTANCE = nf1_cml_interface_2
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x7a010000
  PARAMETER C_HIGHADDR = 0x7a01ffff
@@ -235,8 +235,8 @@ BEGIN nf7_1g_interface
  PARAMETER C_TX_PAUSE_MAC_ADDR = 0
  PARAMETER C_RX_PAUSE_MAC_ADDR = 0
  BUS_INTERFACE S_AXI = axi_interconnect_memory_mapped_lite_0
- BUS_INTERFACE S_AXIS = nf7_1g_interface_3_M_AXIS
- BUS_INTERFACE M_AXIS = nf7_1g_interface_2_M_AXIS
+ BUS_INTERFACE S_AXIS = nf1_cml_interface_3_M_AXIS
+ BUS_INTERFACE M_AXIS = nf1_cml_interface_2_M_AXIS
  PORT glbl_rstn = Peripheral_aresetn
  PORT axi_aclk = core_clk
  PORT gtx_clk = gtx_clk
@@ -251,8 +251,8 @@ BEGIN nf7_1g_interface
  PORT s_axi_aclk = mb_clk
 END
 
-BEGIN nf7_1g_interface
- PARAMETER INSTANCE = nf7_1g_interface_3
+BEGIN nf1_cml_interface
+ PARAMETER INSTANCE = nf1_cml_interface_3
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x7a020000
  PARAMETER C_HIGHADDR = 0x7a02ffff
@@ -260,8 +260,8 @@ BEGIN nf7_1g_interface
  PARAMETER C_TX_PAUSE_MAC_ADDR = 0
  PARAMETER C_RX_PAUSE_MAC_ADDR = 0
  BUS_INTERFACE S_AXI = axi_interconnect_memory_mapped_lite_0
- BUS_INTERFACE S_AXIS = nf7_1g_interface_2_M_AXIS
- BUS_INTERFACE M_AXIS = nf7_1g_interface_3_M_AXIS
+ BUS_INTERFACE S_AXIS = nf1_cml_interface_2_M_AXIS
+ BUS_INTERFACE M_AXIS = nf1_cml_interface_3_M_AXIS
  PORT glbl_rstn = Peripheral_aresetn
  PORT axi_aclk = core_clk
  PORT gtx_clk = gtx_clk
@@ -276,8 +276,8 @@ BEGIN nf7_1g_interface
  PORT s_axi_aclk = mb_clk
 END
 
-BEGIN nf7_1g_interface
- PARAMETER INSTANCE = nf7_1g_interface_4
+BEGIN nf1_cml_interface
+ PARAMETER INSTANCE = nf1_cml_interface_4
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x7a030000
  PARAMETER C_HIGHADDR = 0x7a03ffff
@@ -286,7 +286,7 @@ BEGIN nf7_1g_interface
  PARAMETER C_RX_PAUSE_MAC_ADDR = 0
  BUS_INTERFACE S_AXI = axi_interconnect_memory_mapped_lite_0
  BUS_INTERFACE S_AXIS = nf10_axis_gen_check_1_M_AXIS
- BUS_INTERFACE M_AXIS = nf7_1g_interface_4_M_AXIS
+ BUS_INTERFACE M_AXIS = nf1_cml_interface_4_M_AXIS
  PORT glbl_rstn = Peripheral_aresetn
  PORT axi_aclk = core_clk
  PORT gtx_clk = gtx_clk
@@ -301,8 +301,8 @@ BEGIN nf7_1g_interface
  PORT s_axi_aclk = mb_clk
 END
 
-BEGIN nf7_mdio
- PARAMETER INSTANCE = nf7_mdio_0
+BEGIN mdio
+ PARAMETER INSTANCE = mdio_0
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x7a040000
  PARAMETER C_HIGHADDR = 0x7a04ffff
