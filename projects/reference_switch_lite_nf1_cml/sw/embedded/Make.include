@@ -4,7 +4,7 @@
 
 RESULT_DIR = result
 SDK_WORKSPACE = SDK_Workspace
-USER_APP_DIR = $(SDK_WORKSPACE)/nf1-cml_switch
+USER_APP_DIR = $(SDK_WORKSPACE)/nf1_cml_switch
 BSP_DIR = $(SDK_WORKSPACE)/bsp
 HW_DIR = $(SDK_WORKSPACE)/hw
 
@@ -31,17 +31,17 @@ ELFCHECK :=
 S_UPPER_DEPS := 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-$(USER_APP_DIR)/src/nf1-cml_switch.c \
+$(USER_APP_DIR)/src/nf1_cml_switch.c \
 $(USER_APP_DIR)/src/platform.c \
 $(USER_APP_DIR)/src/phy_io.c
 
 OBJS += \
-$(RESULT_DIR)/nf1-cml_switch.o \
+$(RESULT_DIR)/nf1_cml_switch.o \
 $(RESULT_DIR)/platform.o \
 $(RESULT_DIR)/phy_io.o
 
 C_DEPS += \
-$(RESULT_DIR)/nf1-cml_switch.d \
+$(RESULT_DIR)/nf1_cml_switch.d \
 $(RESULT_DIR)/platform.d \
 $(RESULT_DIR)/phy_io.d
 

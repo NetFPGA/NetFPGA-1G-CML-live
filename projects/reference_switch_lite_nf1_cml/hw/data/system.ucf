@@ -6,7 +6,7 @@
 #        system.ucf
 #
 #  Project:
-#        reference_switch_lite_nf1-cml
+#        reference_switch_lite_nf1_cml
 #
 #  Author:
 #        Jack Meador
@@ -14,11 +14,9 @@
 #        David Van Arnem
 #
 #  Description:
-#        UCF for reference_switch_lite_nf1-cml.
+#        UCF for reference_switch_lite_nf1_cml.
 #
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
 #        Copyright (C) 2013 Computer Measurement Laboratory
 #
 #  Licence:

@@ -3,10 +3,10 @@
  *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
- *      nf1-cml_switch.c
+ *      nf1_cml_switch.c
  *
  *  Project:
- *      reference_switch_lite_nf1-cml
+ *      reference_switch_lite_nf1_cml
  *
  *  Author:
  *      David Van Arnem

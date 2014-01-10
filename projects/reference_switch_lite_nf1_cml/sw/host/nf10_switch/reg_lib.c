@@ -3,25 +3,19 @@
  *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
- *        nf10_switch.c
- *
- *  Library:
- *        stdio.h, stdlib.h, string.h ctype.h
+ *        reg_lib.c
  *
  *  Project:
- *        reference_switch_lite_nf1-cml
+ *        reference_switch_lite_nf1_cml
  *
  *  Author:
  *        Muhammad Shahbaz
- *        David Van Arnem
  *
  *  Description:
- *        Host software that communicates with the NetFPGA-1G-CML
- *        using the nf10 device driver.
+ *        Set of definitions for the NF10 register access library.
  *
  *  Copyright notice:
  *        Copyright (C) 2010, 2011 University of Cambridge
- *        Copyright (C) 2013 Computer Measurement Laboratory
  *
  *  Licence:
  *        This file is part of the NetFPGA 10G development base package.
@@ -42,31 +36,44 @@
  */
 
 #include "reg_lib.h"
-#include "nf10_switch_lib.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
 
-int main (int argc, char **argv)
+#define IOCTL_CMD_READ_STAT (SIOCDEVPRIVATE+0)
+#define IOCTL_CMD_WRITE_REG (SIOCDEVPRIVATE+1)
+#define IOCTL_CMD_READ_REG (SIOCDEVPRIVATE+2)
+
+inline uint32_t reg_rd(int dev, uint64_t addr)
 {
-	int dev = -1;
-
-	// Open device handle
-	dev = open("/dev/nf10", O_RDWR);
-    	if(dev < 0){
-       		perror("/dev/nf10");
-       		return 0;
-    	}
-
-    // defined in <repository>/lib/sw/std/drivers/nf10_switch_v1_00_a/src/nf10_switch_lib.c
-	run(dev);
-
-	// Close device handle
-	close(dev);
-
-	return 0;
+    if(ioctl(dev, IOCTL_CMD_READ_REG, &addr) < 0){
+        perror("ioctl failed");
+        return 0;
+    }
+    return addr & 0xffffffff;
 }
+
+inline int reg_wr(int dev, uint64_t addr, uint32_t val)
+{
+    addr = (addr << 32) + val;
+    if(ioctl(dev, IOCTL_CMD_WRITE_REG, addr) < 0){
+        perror("ioctl failed");
+        return 0;
+    }   
+    return -1;
+}
+
+/* 
+// Code for opening nf10 device
+int dev_open()
+{
+    int dev = open("/dev/nf10", O_RDWR);
+    if(dev < 0){
+        perror("/dev/nf10");
+        return 0;
+    }
+    return dev;
+}
+*/

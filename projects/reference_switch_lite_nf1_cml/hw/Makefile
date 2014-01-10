@@ -6,7 +6,7 @@
 #        HW Makefile
 #
 #  Project:
-#        reference_switch_lite_nf1-cml
+#        reference_switch_lite_nf1_cml
 #
 #  Author:
 #        Jack Meador

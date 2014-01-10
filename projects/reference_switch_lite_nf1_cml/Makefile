@@ -3,15 +3,20 @@
 #  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        README
+#        Makefile
 #
 #  Project:
-#        reference_switch_lite_nf1-cml
+#        reference_switch_lite_nf1_cml
 #
 #  Author:
-#        Gianni Anitchi
-#        Muhammad Shahbaz
+#        Mario Flajslik
 #        David Van Arnem
+#
+#  Description:
+#        make all : Make BRAM initialized bitfile to bitfiles/
+#
+#        For more information about how Xilinx EDK works, please visit
+#        http://www.xilinx.com/support/documentation/dt_edk.htm
 #
 #  Copyright notice:
 #        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
@@ -36,18 +41,18 @@
 #
 #
 
-A typical NetFPGA-1G-CML project is organized as hardware part (hw)
-and software part (sw, including embedded software and host
-software).
+SYSTEM = system
+HW = hw
+SW = sw/embedded/
 
-To build the project, simply use "make". The result bitfile is
-under bitfiles/.  The resulting bitfile has the FPGA BRAMs initialized
-with the software application in sw/embedded/SDK_Workspace/nf1-cml_switch.
+all:
+	$(MAKE) -C $(HW) exporttosdk
+	$(MAKE) -C $(SW)
+	mkdir -p bitfiles
+	cp $(SW)/result/download.bit bitfiles/reference_switch_lite_nf1_cml.bit
 
-If desired, the bitstream without the BRAM software initialization can be
-automatically loaded to the BPI flash on the NetFGPA-1G-CML for rapid
-configuration by entering the hw/ directory and using "make progflash".
-The switch will operate without the embedded software.
-
-More details regarding the project can be found in the following link
-<ADD URL HERE>
+# Clean hardware, software, and remove generated bitfiles
+clean:
+	$(MAKE) -C $(HW) clean
+	$(MAKE) -C $(SW) clean
+	rm -rf bitfiles

@@ -3,19 +3,25 @@
  *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
- *        reg_lib.h
+ *        nf10_switch.c
+ *
+ *  Library:
+ *        stdio.h, stdlib.h, string.h ctype.h
  *
  *  Project:
- *        reference_switch_lite_nf1-cml
+ *        reference_switch_lite_nf1_cml
  *
  *  Author:
  *        Muhammad Shahbaz
+ *        David Van Arnem
  *
  *  Description:
- *        Set of definitions for the NF10 register access library.
+ *        Host software that communicates with the NetFPGA-1G-CML
+ *        using the nf10 device driver.
  *
  *  Copyright notice:
  *        Copyright (C) 2010, 2011 University of Cambridge
+ *        Copyright (C) 2013 Computer Measurement Laboratory
  *
  *  Licence:
  *        This file is part of the NetFPGA 10G development base package.
@@ -35,13 +41,32 @@
  *
  */
 
-#ifndef _REG_LIB_H_
-#define _REG_LIB_H_
-
+#include "reg_lib.h"
+#include "nf10_switch_lib.h"
 #include <stdio.h>
-#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
 
-inline uint32_t reg_rd(int dev, uint64_t addr);
-inline int reg_wr(int dev, uint64_t addr, uint32_t val);
+int main (int argc, char **argv)
+{
+	int dev = -1;
 
-#endif
+	// Open device handle
+	dev = open("/dev/nf10", O_RDWR);
+    	if(dev < 0){
+       		perror("/dev/nf10");
+       		return 0;
+    	}
+
+    // defined in <repository>/lib/sw/std/drivers/nf10_switch_v1_00_a/src/nf10_switch_lib.c
+	run(dev);
+
+	// Close device handle
+	close(dev);
+
+	return 0;
+}

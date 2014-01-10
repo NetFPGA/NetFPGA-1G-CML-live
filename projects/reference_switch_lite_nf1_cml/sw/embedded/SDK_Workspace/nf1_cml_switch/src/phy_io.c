@@ -6,13 +6,13 @@
  *      phy_io.c
  *
  *  Project:
- *      reference_switch_lite_nf1-cml
+ *      reference_switch_lite_nf1_cml
  *
  *  Author:
  *      David Van Arnem
  *
  *  Description:
- *      Realtek RTL8211 PHY register input and output using the nf1-cml_mdio pcore
+ *      Realtek RTL8211 PHY register input and output using the nf1_cml_mdio pcore
  *
  *  Copyright notice:
  *      Copyright (C) 2013, Computer Measurement Laboratory, LLC
