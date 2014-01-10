@@ -1,0 +1,9 @@
+result/
+*/.metadata/
+SDK_Workspace/nf1-cml_switch/Debug
+
+SDK_Workspace/hw/docs/
+SDK_Workspace/hw/imgs/
+SDK_Workspace/hw/*.html
+SDK_Workspace/bsp/microblaze_0/
+*.log
