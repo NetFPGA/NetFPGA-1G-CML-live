@@ -47,7 +47,7 @@ HW = hw
 all:
 	$(MAKE) -C $(HW)
 	mkdir -p bitfiles
-	cp $(HW)/implementation/download.bit bitfiles/reference_nic_nf7.bit
+	cp $(HW)/implementation/download.bit bitfiles/reference_nic_nf1_cml.bit
 
 clean:
 	$(MAKE) -C $(HW) clean

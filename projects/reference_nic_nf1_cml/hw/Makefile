@@ -6,7 +6,7 @@
 #        HW Makefile
 #
 #  Project:
-#        reference_nic_nf7
+#        reference_nic_nf1_cml
 #
 #  Author:
 #        Jack Meador, Computer Measurement Laboratory, LLC
@@ -52,7 +52,7 @@ exporttosdk: system.make
 
 sim: system.make
 	mkdir -p simulation/behavioral
-	cp nf7/system_tb.v simulation/behavioral
+	cp nf1_cml/system_tb.v simulation/behavioral
 	$(MAKE) -f system.make sim
 
 system.make system_incl.make: genmakes.tcl system.xmp system.mhs

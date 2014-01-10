@@ -1,24 +1,22 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        nf7.ucf
+#        system.ucf
 #
 #  Project:
-#        reference_nic_nf7
+#        reference_nic_nf1_cml
 #
 #  Author:
 #        Jack Meador
 #        Jay Hirata
 #
 #  Description:
-#        UCF for reference_nic_nf7. Adapted from loopback_test_nf7
+#        UCF for reference_nic_nf1_cml.
 #
 #  Copyright notice:
 #        Copyright (C) 2013 Computer Measurement Laboratory
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -194,7 +192,7 @@ INST "rgmii_rx_ctl_4" TNM = IN_RGMII_4;
  
 
 # The following constraints should be derived from the Spec for the RTL PHY as
-# well as information about the board trace delays. The nf7 has RX delay
+# well as information about the board trace delays. The nf1-cml has RX delay
 # enabled, so data should arrive 2ns before the clock and have a hold time of
 # 2ns. This assumes that board traces for clock and data are equal. I haven't
 # looked at the board trace length, but I'll assume they're equal for now.
