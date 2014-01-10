@@ -124,6 +124,11 @@ architecture rtl of transactor_fifos is
 
     signal axi_r_addr_full               : std_logic;
     signal axi_r_addr_empty              : std_logic;
+
+    signal axi_w_addr_rd                 : std_logic;
+    signal axi_w_data_rd                 : std_logic;
+    signal axi_r_addr_rd                 : std_logic;
+
 begin
     ---------------------------------------------------------------------------
     -- AXI Write
@@ -134,6 +139,8 @@ begin
 
     w_req_addr_data <= w_req_addr & w_req_data;
     w_req_data_strb <= w_req_strb & w_req_data;
+    axi_w_addr_rd   <= (not axi_w_addr_empty) and M_AXI_AWREADY;
+    axi_w_data_rd   <= (not w_req_data_strb_empty) and M_AXI_WREADY;
 
     int_w_addr: entity proc_common_v3_00_a.srl_fifo_f
         generic map (
@@ -164,10 +171,11 @@ begin
             Data_In    => w_req_addr,
             FIFO_Full  => axi_w_addr_full,
 
-            FIFO_Read  => M_AXI_AWREADY,
+            FIFO_Read  => axi_w_addr_rd,
             Data_Out   => M_AXI_AWADDR,
             FIFO_Empty => axi_w_addr_empty,
             Addr       => open);
+
 
     axi_w_data: entity proc_common_v3_00_a.srl_fifo_f
         generic map (
@@ -181,7 +189,7 @@ begin
             Data_In    => w_req_data_strb,
             FIFO_Full  => w_req_data_strb_full,
 
-            FIFO_Read  => M_AXI_WREADY,
+            FIFO_Read  => axi_w_data_rd,
             Data_Out   => w_axi_data_strb,
             FIFO_Empty => w_req_data_strb_empty,
             Addr       => open);
@@ -206,6 +214,8 @@ begin
 
     r_req_ready <= not int_r_addr_full and not axi_r_addr_full;
     r_req_we    <= not int_r_addr_full and not axi_r_addr_full and r_req_valid;
+
+    axi_r_addr_rd   <= (not axi_r_addr_empty) and M_AXI_ARREADY;
 
     int_r_addr: entity proc_common_v3_00_a.srl_fifo_f
         generic map (
@@ -236,7 +246,7 @@ begin
             Data_In    => r_req_addr,
             FIFO_Full  => axi_r_addr_full,
 
-            FIFO_Read  => M_AXI_ARREADY,
+            FIFO_Read  => axi_r_addr_rd,
             Data_Out   => M_AXI_ARADDR,
             FIFO_Empty => axi_r_addr_empty,
             Addr       => open);

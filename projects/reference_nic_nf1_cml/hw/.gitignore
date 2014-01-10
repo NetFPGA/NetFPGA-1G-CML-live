@@ -1,0 +1,12 @@
+
+/__xps/
+/genmakes.tcl
+/hdl/
+/implementation/
+/synthesis/
+platgen.opt
+system.make
+system_incl.make
+smallbits.mcs
+/bootloops/
+

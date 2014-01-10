@@ -1,0 +1,12 @@
+2c2
+< // File       : trimac_lite_rgmii_v2_0_if.v
+---
+> // File       : xilinx_rgmii_v2_0_if.v
+70c70
+< module trimac_lite_rgmii_v2_0_if (
+---
+> module xilinx_rgmii_v2_0_if (
+141c141
+<   trimac_lite_sync_block tx_reset90_sync (
+---
+>   xilinx_sync_block tx_reset90_sync (

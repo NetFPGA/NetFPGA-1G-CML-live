@@ -1,0 +1,926 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADDRSIZE	small_async_fifo.v	/^		          parameter ADDRSIZE = 3) \/\/ Number of mem address bits$/;"	c
+ALMOST_EMPTY_SIZE	small_async_fifo.v	/^    parameter ALMOST_EMPTY_SIZE=3)$/;"	c
+ALMOST_FULL_SIZE	small_async_fifo.v	/^    parameter ALMOST_FULL_SIZE = 5,$/;"	c
+ALMOST_FULL_SIZE	small_async_fifo.v	/^    parameter ALMOST_FULL_SIZE=5$/;"	c
+BAR0_ADDR_SELECT_HI	dma_defs.vh	/^`define BAR0_ADDR_SELECT_HI 11$/;"	c
+BAR0_ADDR_SELECT_LO	dma_defs.vh	/^`define BAR0_ADDR_SELECT_LO 0$/;"	c
+BAR0_MEM_SELECT_HI	dma_defs.vh	/^`define BAR0_MEM_SELECT_HI 12$/;"	c
+BAR0_MEM_SELECT_LO	dma_defs.vh	/^`define BAR0_MEM_SELECT_LO 12$/;"	c
+BAR2_ADDR_SELECT_HI	dma_defs.vh	/^`define BAR2_ADDR_SELECT_HI 19$/;"	c
+BAR2_ADDR_SELECT_LO	dma_defs.vh	/^`define BAR2_ADDR_SELECT_LO 0$/;"	c
+BAR2_MEM_SELECT_HI	dma_defs.vh	/^`define BAR2_MEM_SELECT_HI 20$/;"	c
+BAR2_MEM_SELECT_LO	dma_defs.vh	/^`define BAR2_MEM_SELECT_LO 20$/;"	c
+Busy_clkA	lib.v	/^   output Busy_clkA;$/;"	p
+Busyhold_clkB	lib.v	/^   reg    FlagToggle_clkA, FlagToggle_clkB, Busyhold_clkB;$/;"	r
+CFG_ADDR_BITS	dma_defs.vh	/^`define CFG_ADDR_BITS 12$/;"	c
+CFG_X_AXI_DEPTH	dma_defs.vh	/^`define CFG_X_AXI_DEPTH 64$/;"	c
+CM_Q_DEPTH	dma_defs.vh	/^`define CM_Q_DEPTH 8$/;"	c
+CM_Q_WIDTH	dma_defs.vh	/^`define CM_Q_WIDTH (75 + `MEM_ADDR_BITS)$/;"	c
+DEPTH	mem.v	/^             parameter DEPTH=64, $/;"	c
+DEPTH	pcie_tx_q.v	/^    parameter DEPTH=32, $/;"	c
+DSIZE	small_async_fifo.v	/^    parameter DSIZE = 8,$/;"	c
+FlagIn_clkA	lib.v	/^   input clkA, FlagIn_clkA;$/;"	p
+FlagOut_clkB	lib.v	/^   output FlagOut_clkB;$/;"	p
+FlagToggle_clkA	lib.v	/^   reg    FlagToggle_clkA, FlagToggle_clkB, Busyhold_clkB;$/;"	r
+FlagToggle_clkA	lib.v	/^   reg    FlagToggle_clkA;$/;"	r
+FlagToggle_clkB	lib.v	/^   reg    FlagToggle_clkA, FlagToggle_clkB, Busyhold_clkB;$/;"	r
+ID_MEM_CFG	dma_defs.vh	/^`define ID_MEM_CFG 0$/;"	c
+ID_MEM_RX_DNE	dma_defs.vh	/^`define ID_MEM_RX_DNE 5$/;"	c
+ID_MEM_RX_DSC	dma_defs.vh	/^`define ID_MEM_RX_DSC 3$/;"	c
+ID_MEM_RX_PKT	dma_defs.vh	/^`define ID_MEM_RX_PKT 7$/;"	c
+ID_MEM_STAT	dma_defs.vh	/^`define ID_MEM_STAT 1$/;"	c
+ID_MEM_TX_DNE	dma_defs.vh	/^`define ID_MEM_TX_DNE 4$/;"	c
+ID_MEM_TX_DSC	dma_defs.vh	/^`define ID_MEM_TX_DSC 2$/;"	c
+ID_MEM_TX_PKT	dma_defs.vh	/^`define ID_MEM_TX_PKT 6$/;"	c
+MEM_ADDR_BITS	dma_defs.vh	/^`define MEM_ADDR_BITS 20$/;"	c
+MEM_N_RX_DNE	dma_defs.vh	/^`define MEM_N_RX_DNE 32$/;"	c
+MEM_N_RX_DSC	dma_defs.vh	/^`define MEM_N_RX_DSC 32$/;"	c
+MEM_N_RX_PKT	dma_defs.vh	/^`define MEM_N_RX_PKT 512$/;"	c
+MEM_N_TX_DNE	dma_defs.vh	/^`define MEM_N_TX_DNE 32$/;"	c
+MEM_N_TX_DSC	dma_defs.vh	/^`define MEM_N_TX_DSC 32$/;"	c
+MEM_N_TX_PKT	dma_defs.vh	/^`define MEM_N_TX_PKT 512$/;"	c
+MEM_VALID_X_DEPTH	dma_defs.vh	/^`define MEM_VALID_X_DEPTH 4$/;"	c
+NUM_PORTS	dma_defs.vh	/^`define NUM_PORTS 1$/;"	c
+PCIE_CM_Q_DEPTH	dma_defs.vh	/^`define PCIE_CM_Q_DEPTH 8$/;"	c
+PCIE_CM_Q_WIDTH	dma_defs.vh	/^`define PCIE_CM_Q_WIDTH (59 + `MEM_ADDR_BITS)$/;"	c
+PCIE_RD_Q_DEPTH	dma_defs.vh	/^`define PCIE_RD_Q_DEPTH 8$/;"	c
+PCIE_RD_Q_WIDTH	dma_defs.vh	/^`define PCIE_RD_Q_WIDTH (88 + `MEM_ADDR_BITS)$/;"	c
+PCIE_WR_Q_DEPTH	dma_defs.vh	/^`define PCIE_WR_Q_DEPTH 8$/;"	c
+PCIE_WR_Q_WIDTH	dma_defs.vh	/^`define PCIE_WR_Q_WIDTH (94 + `MEM_ADDR_BITS)$/;"	c
+PORT_BITS	dma_defs.vh	/^`define PORT_BITS ((`NUM_PORTS==1) ? 1 : $clog2(`NUM_PORTS))$/;"	c
+PORT_BITS	pcie_tx_q.v	/^    parameter PORT_BITS=1$/;"	c
+RD_Q_DEPTH	dma_defs.vh	/^`define RD_Q_DEPTH 32$/;"	c
+RD_Q_WIDTH	dma_defs.vh	/^`define RD_Q_WIDTH (84 + `MEM_ADDR_BITS)$/;"	c
+STATS_ADDR_BITS	dma_defs.vh	/^`define STATS_ADDR_BITS 12$/;"	c
+SignalIn	lib.v	/^   input [WIDTH-1:0]  SignalIn;$/;"	p
+SignalOut	lib.v	/^   output [WIDTH-1:0] SignalOut;$/;"	p
+SyncA_clkB	lib.v	/^   reg [2:0] SyncA_clkB, SyncB_clkA;$/;"	r
+SyncA_clkB	lib.v	/^   reg [2:0] SyncA_clkB;$/;"	r
+SyncA_clkB_0	lib.v	/^   reg [WIDTH-1:0]    SyncA_clkB_0;$/;"	r
+SyncA_clkB_1	lib.v	/^   reg [WIDTH-1:0]    SyncA_clkB_1;$/;"	r
+SyncB_clkA	lib.v	/^   reg [1:0] SyncB_clkA;$/;"	r
+SyncB_clkA	lib.v	/^   reg [2:0] SyncA_clkB, SyncB_clkA;$/;"	r
+TX_PENDING_DEPTH	dma_defs.vh	/^`define TX_PENDING_DEPTH 32$/;"	c
+TaskBusy_clkA	lib.v	/^   output TaskBusy_clkA, TaskDone_clkA;$/;"	p
+TaskBusy_clkB	lib.v	/^   output TaskBusy_clkB, TaskStart_clkB;$/;"	p
+TaskDone_clkA	lib.v	/^   output TaskBusy_clkA, TaskDone_clkA;$/;"	p
+TaskDone_clkB	lib.v	/^   input  TaskDone_clkB;$/;"	p
+TaskStart_clkA	lib.v	/^   input TaskStart_clkA;$/;"	p
+TaskStart_clkB	lib.v	/^   output TaskBusy_clkB, TaskStart_clkB;$/;"	p
+VALID_MODE	mem.v	/^             parameter VALID_MODE=0,$/;"	c
+WR_Q_DEPTH	dma_defs.vh	/^`define WR_Q_DEPTH 32$/;"	c
+WR_Q_WIDTH	dma_defs.vh	/^`define WR_Q_WIDTH (90 + `MEM_ADDR_BITS)$/;"	c
+aram	lib.v	/^module aram #(parameter WIDTH=32, parameter DEPTH=32, parameter ADDR_BITS=(DEPTH==1)?1:$clog2(DEPTH))$/;"	m
+axi	axi.v	/^module axi$/;"	m
+bram	lib.v	/^module bram #(parameter WIDTH=32, parameter DEPTH=32, parameter ADDR_BITS=(DEPTH==1)?1:$clog2(DEPTH))$/;"	m
+cfg	cfg.v	/^module cfg$/;"	m
+clkA	lib.v	/^   input              clkA;$/;"	p
+clkA	lib.v	/^   input clkA, FlagIn_clkA;$/;"	p
+clkA	lib.v	/^   input clkA;$/;"	p
+clkB	lib.v	/^   input              clkB;$/;"	p
+clkB	lib.v	/^   input  clkB;$/;"	p
+clkB	lib.v	/^   input clkB;$/;"	p
+cmds	tlpgen.py	/^cmds = [[w, 16, 0x12345678aabb0000]]$/;"	v
+dma_engine	dma.v	/^module dma_engine$/;"	m
+dram	lib.v	/^module dram #(parameter WIDTH=32, parameter DEPTH=32, parameter ADDR_BITS=(DEPTH==1)?1:$clog2(DEPTH))$/;"	m
+fifo	lib.v	/^module fifo #(parameter WIDTH=32, parameter DEPTH=32, parameter ALMOST_FULL=3)$/;"	m
+fifo_bram	small_async_fifo.v	/^module fifo_bram #(parameter DATASIZE = 8, \/\/ Memory data word width$/;"	m
+fifo_dram	small_async_fifo.v	/^module fifo_dram #(parameter DATASIZE = 8, \/\/ Memory data word width$/;"	m
+fifo_mem	small_async_fifo.v	/^module fifo_mem #(parameter DATASIZE = 8, \/\/ Memory data word width$/;"	m
+fifo_rram	small_async_fifo.v	/^module fifo_rram #(parameter DATASIZE = 8, \/\/ Memory data word width$/;"	m
+i	cfg.v	/^      integer i;$/;"	r
+i	pcie_rx.v	/^      integer i;$/;"	r
+i	pcie_rx_cm.v	/^      integer i;$/;"	r
+i	pcie_tx.v	/^      integer i;$/;"	r
+i	pcie_tx_rd.v	/^      integer i;$/;"	r
+i	small_async_fifo.v	/^   integer                   i;$/;"	r
+iface	iface.v	/^module iface #(parameter IFACE_ID = 0)$/;"	m
+input	pcie_tx_q.v	/^    input logic [WIDTH-1:0]  req_data,$/;"	c
+input	small_async_fifo.v	/^    input                    rinc, rclk, rrst_n);$/;"	p
+input	small_async_fifo.v	/^    input                    winc, wclk, wrst_n);$/;"	p
+input	small_async_fifo.v	/^    input              rclk, rrst_n);$/;"	p
+input	small_async_fifo.v	/^    input              rinc, rclk, rrst_n$/;"	p
+input	small_async_fifo.v	/^    input              wclk, wrst_n);$/;"	p
+input	small_async_fifo.v	/^    input              winc, wclk, wrst_n,$/;"	p
+input	small_async_fifo.v	/^    input logic [DATASIZE-1:0] wdata,$/;"	c
+logic	axi.v	/^    input logic         Bus2IP_MstRd_src_rdy_n,$/;"	p
+logic	axi.v	/^    input logic         Bus2IP_MstWr_dst_rdy_n,$/;"	p
+logic	axi.v	/^    input logic         Bus2IP_Mst_CmdAck,$/;"	p
+logic	axi.v	/^    input logic         Bus2IP_Mst_Cmplt,$/;"	p
+logic	axi.v	/^    input logic         Bus2IP_Mst_Error,$/;"	p
+logic	axi.v	/^    input logic         Bus2IP_Mst_Rearbitrate,$/;"	p
+logic	axi.v	/^    input logic         Bus2IP_Mst_Timeout,$/;"	p
+logic	axi.v	/^    input logic         axi_clk,$/;"	p
+logic	axi.v	/^    input logic         axi_rd_go,$/;"	p
+logic	axi.v	/^    input logic         axi_wr_go,$/;"	p
+logic	axi.v	/^    input logic         rst$/;"	p
+logic	axi.v	/^    input logic [31:0]  Bus2IP_MstRd_d,$/;"	p
+logic	axi.v	/^    input logic [31:0]  axi_rdwr_addr,$/;"	p
+logic	axi.v	/^    input logic [31:0]  axi_wr_data,$/;"	p
+logic	axi.v	/^    output logic        IP2Bus_MstRd_Req,$/;"	p
+logic	axi.v	/^    output logic        IP2Bus_MstWr_Req,$/;"	p
+logic	axi.v	/^    output logic        IP2Bus_Mst_Lock,$/;"	p
+logic	axi.v	/^    output logic        IP2Bus_Mst_Reset,$/;"	p
+logic	axi.v	/^    output logic        axi_error,$/;"	p
+logic	axi.v	/^    output logic        axi_rd_done,$/;"	p
+logic	axi.v	/^    output logic        axi_wr_done,$/;"	p
+logic	axi.v	/^    output logic [31:0] IP2Bus_MstWr_d,$/;"	p
+logic	axi.v	/^    output logic [31:0] IP2Bus_Mst_Addr,$/;"	p
+logic	axi.v	/^    output logic [31:0] axi_rd_data,$/;"	p
+logic	axi.v	/^    output logic [3:0]  IP2Bus_Mst_BE,$/;"	p
+logic	cfg.v	/^    input logic                      axi_clk,$/;"	p
+logic	cfg.v	/^    input logic                      axi_error,$/;"	p
+logic	cfg.v	/^    input logic                      axi_rd_done,$/;"	p
+logic	cfg.v	/^    input logic                      axi_wr_done, $/;"	p
+logic	cfg.v	/^    input logic                      pcie_clk,$/;"	p
+logic	cfg.v	/^    input logic                      rd_en_hi,$/;"	p
+logic	cfg.v	/^    input logic                      rd_en_lo,$/;"	p
+logic	cfg.v	/^    input logic                      rd_mem_valid,$/;"	p
+logic	cfg.v	/^    input logic                      rst$/;"	p
+logic	cfg.v	/^    input logic                      rx_clk,$/;"	p
+logic	cfg.v	/^    input logic                      tx_clk,$/;"	p
+logic	cfg.v	/^    input logic                      wr_en_hi,$/;"	p
+logic	cfg.v	/^    input logic                      wr_en_lo,$/;"	p
+logic	cfg.v	/^    input logic                      wr_mem_valid,$/;"	p
+logic	cfg.v	/^    input logic [31:0]               axi_rd_data,$/;"	p
+logic	cfg.v	/^    input logic [31:0]               wr_data_hi,$/;"	p
+logic	cfg.v	/^    input logic [31:0]               wr_data_lo,$/;"	p
+logic	cfg.v	/^    input logic [3:0]                wr_mask_hi,$/;"	p
+logic	cfg.v	/^    input logic [3:0]                wr_mask_lo,$/;"	p
+logic	cfg.v	/^    input logic [`MEM_ADDR_BITS-1:0] rd_addr_hi,$/;"	p
+logic	cfg.v	/^    input logic [`MEM_ADDR_BITS-1:0] rd_addr_lo,$/;"	p
+logic	cfg.v	/^    input logic [`MEM_ADDR_BITS-1:0] wr_addr_hi,$/;"	p
+logic	cfg.v	/^    input logic [`MEM_ADDR_BITS-1:0] wr_addr_lo,$/;"	p
+logic	cfg.v	/^    output logic                     axi_rd_go,$/;"	p
+logic	cfg.v	/^    output logic                     axi_wr_go,$/;"	p
+logic	cfg.v	/^    output logic                     mem_cfg_rd_valid,$/;"	p
+logic	cfg.v	/^    output logic                     rx_int_enable,$/;"	p
+logic	cfg.v	/^    output logic                     soft_reset,$/;"	p
+logic	cfg.v	/^    output logic                     tx_int_enable,$/;"	p
+logic	cfg.v	/^    output logic [15:0]              rx_byte_wait,$/;"	p
+logic	cfg.v	/^    output logic [31:0]              axi_rdwr_addr,$/;"	p
+logic	cfg.v	/^    output logic [31:0]              axi_wr_data,$/;"	p
+logic	cfg.v	/^    output logic [31:0]              rd_data_hi,$/;"	p
+logic	cfg.v	/^    output logic [31:0]              rd_data_lo,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              host_rx_dne_mask,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              host_rx_dne_offset,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              host_tx_dne_mask,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              host_tx_dne_offset,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              rx_dne_mask,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              rx_dsc_mask, $/;"	p
+logic	cfg.v	/^    output logic [63:0]              rx_dsc_mask_t, $/;"	p
+logic	cfg.v	/^    output logic [63:0]              rx_pkt_mask,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              tx_dne_mask,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              tx_dne_mask_r,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              tx_dsc_mask,$/;"	p
+logic	cfg.v	/^    output logic [63:0]              tx_pkt_mask,$/;"	p
+logic	dma.v	/^   input logic          Bus2IP_MstRd_src_rdy_n,$/;"	p
+logic	dma.v	/^   input logic          Bus2IP_MstWr_dst_rdy_n,$/;"	p
+logic	dma.v	/^   input logic          Bus2IP_Mst_CmdAck,$/;"	p
+logic	dma.v	/^   input logic          Bus2IP_Mst_Cmplt,$/;"	p
+logic	dma.v	/^   input logic          Bus2IP_Mst_Error,$/;"	p
+logic	dma.v	/^   input logic          Bus2IP_Mst_Rearbitrate,$/;"	p
+logic	dma.v	/^   input logic          Bus2IP_Mst_Timeout,$/;"	p
+logic	dma.v	/^   input logic          M_AXIS_TREADY,$/;"	p
+logic	dma.v	/^   input logic          S_AXIS_TLAST,$/;"	p
+logic	dma.v	/^   input logic          S_AXIS_TVALID,$/;"	p
+logic	dma.v	/^   input logic          axi_clk,$/;"	p
+logic	dma.v	/^   input logic          cfg_err_cpl_rdy_n,$/;"	p
+logic	dma.v	/^   input logic          cfg_interrupt_msienable,$/;"	p
+logic	dma.v	/^   input logic          cfg_interrupt_rdy_n,$/;"	p
+logic	dma.v	/^   input logic          cfg_rd_wr_done_n,$/;"	p
+logic	dma.v	/^   input logic          cfg_to_turnoff_n,$/;"	p
+logic	dma.v	/^   input logic          pcie_clk,$/;"	p
+logic	dma.v	/^   input logic          rst$/;"	p
+logic	dma.v	/^   input logic          rx_clk,$/;"	p
+logic	dma.v	/^   input logic          trn_reof_n,$/;"	p
+logic	dma.v	/^   input logic          trn_rerrfwd_n,$/;"	p
+logic	dma.v	/^   input logic          trn_rsof_n,$/;"	p
+logic	dma.v	/^   input logic          trn_rsrc_dsc_n,$/;"	p
+logic	dma.v	/^   input logic          trn_rsrc_rdy_n,$/;"	p
+logic	dma.v	/^   input logic          trn_tdst_dsc_n,$/;"	p
+logic	dma.v	/^   input logic          trn_tdst_rdy_n,$/;"	p
+logic	dma.v	/^   input logic          tx_clk,$/;"	p
+logic	dma.v	/^   input logic [11:0]   trn_rfc_npd_av,$/;"	p
+logic	dma.v	/^   input logic [11:0]   trn_rfc_pd_av,$/;"	p
+logic	dma.v	/^   input logic [127:0]  S_AXIS_TUSER,$/;"	p
+logic	dma.v	/^   input logic [15:0]   cfg_command,$/;"	p
+logic	dma.v	/^   input logic [15:0]   cfg_dcommand,$/;"	p
+logic	dma.v	/^   input logic [15:0]   cfg_dstatus,$/;"	p
+logic	dma.v	/^   input logic [15:0]   cfg_lcommand,$/;"	p
+logic	dma.v	/^   input logic [15:0]   cfg_lstatus,$/;"	p
+logic	dma.v	/^   input logic [15:0]   cfg_status,$/;"	p
+logic	dma.v	/^   input logic [2:0]    cfg_function_number,$/;"	p
+logic	dma.v	/^   input logic [2:0]    cfg_interrupt_mmenable,$/;"	p
+logic	dma.v	/^   input logic [2:0]    cfg_pcie_link_state_n,$/;"	p
+logic	dma.v	/^   input logic [31:0]   Bus2IP_MstRd_d,$/;"	p
+logic	dma.v	/^   input logic [31:0]   cfg_do,$/;"	p
+logic	dma.v	/^   input logic [3:0]    trn_tbuf_av,$/;"	p
+logic	dma.v	/^   input logic [4:0]    cfg_device_number,$/;"	p
+logic	dma.v	/^   input logic [63:0]   S_AXIS_TDATA,$/;"	p
+logic	dma.v	/^   input logic [63:0]   trn_rd,$/;"	p
+logic	dma.v	/^   input logic [6:0]    trn_rbar_hit_n,$/;"	p
+logic	dma.v	/^   input logic [7:0]    S_AXIS_TSTRB,$/;"	p
+logic	dma.v	/^   input logic [7:0]    cfg_bus_number,$/;"	p
+logic	dma.v	/^   input logic [7:0]    cfg_interrupt_do,$/;"	p
+logic	dma.v	/^   input logic [7:0]    trn_rfc_nph_av,$/;"	p
+logic	dma.v	/^   input logic [7:0]    trn_rfc_ph_av,$/;"	p
+logic	dma.v	/^   input logic [7:0]    trn_rrem_n,$/;"	p
+logic	dma.v	/^   output logic         IP2Bus_MstRd_Req,$/;"	p
+logic	dma.v	/^   output logic         IP2Bus_MstWr_Req,$/;"	p
+logic	dma.v	/^   output logic         IP2Bus_Mst_Lock,$/;"	p
+logic	dma.v	/^   output logic         IP2Bus_Mst_Reset,$/;"	p
+logic	dma.v	/^   output logic         M_AXIS_TLAST,$/;"	p
+logic	dma.v	/^   output logic         M_AXIS_TVALID,$/;"	p
+logic	dma.v	/^   output logic         S_AXIS_TREADY,$/;"	p
+logic	dma.v	/^   output logic         cfg_err_cor_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_err_cpl_abort_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_err_cpl_timeout_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_err_cpl_unexpect_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_err_ecrc_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_err_locked_n, $/;"	p
+logic	dma.v	/^   output logic         cfg_err_posted_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_err_ur_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_interrupt_assert_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_interrupt_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_pm_wake_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_rd_en_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_trn_pending_n,$/;"	p
+logic	dma.v	/^   output logic         cfg_wr_en_n,$/;"	p
+logic	dma.v	/^   output logic         trn_rcpl_streaming_n,$/;"	p
+logic	dma.v	/^   output logic         trn_rdst_rdy_n,$/;"	p
+logic	dma.v	/^   output logic         trn_rnp_ok_n,$/;"	p
+logic	dma.v	/^   output logic         trn_teof_n,$/;"	p
+logic	dma.v	/^   output logic         trn_terrfwd_n,$/;"	p
+logic	dma.v	/^   output logic         trn_tsof_n,$/;"	p
+logic	dma.v	/^   output logic         trn_tsrc_dsc_n,$/;"	p
+logic	dma.v	/^   output logic         trn_tsrc_rdy_n,$/;"	p
+logic	dma.v	/^   output logic [127:0] M_AXIS_TUSER,$/;"	p
+logic	dma.v	/^   output logic [31:0]  IP2Bus_MstWr_d,$/;"	p
+logic	dma.v	/^   output logic [31:0]  IP2Bus_Mst_Addr,$/;"	p
+logic	dma.v	/^   output logic [31:0]  cfg_di,$/;"	p
+logic	dma.v	/^   output logic [3:0]   IP2Bus_Mst_BE,$/;"	p
+logic	dma.v	/^   output logic [3:0]   cfg_byte_en_n,$/;"	p
+logic	dma.v	/^   output logic [47:0]  cfg_err_tlp_cpl_header,$/;"	p
+logic	dma.v	/^   output logic [63:0]  M_AXIS_TDATA,$/;"	p
+logic	dma.v	/^   output logic [63:0]  cfg_dsn,$/;"	p
+logic	dma.v	/^   output logic [63:0]  trn_td,$/;"	p
+logic	dma.v	/^   output logic [7:0]   M_AXIS_TSTRB,$/;"	p
+logic	dma.v	/^   output logic [7:0]   cfg_interrupt_di,$/;"	p
+logic	dma.v	/^   output logic [7:0]   trn_trem_n,$/;"	p
+logic	dma.v	/^   output logic [9:0]   cfg_dwaddr,$/;"	p
+logic	iface.v	/^    input logic                         M_AXIS_TREADY,$/;"	p
+logic	iface.v	/^    input logic                         S_AXIS_TLAST,$/;"	p
+logic	iface.v	/^    input logic                         S_AXIS_TVALID,$/;"	p
+logic	iface.v	/^    input logic                         axi_clk,$/;"	p
+logic	iface.v	/^    input logic                         axi_error,$/;"	p
+logic	iface.v	/^    input logic                         axi_rd_done,$/;"	p
+logic	iface.v	/^    input logic                         axi_wr_done,$/;"	p
+logic	iface.v	/^    input logic                         cm_q_req_grant,$/;"	p
+logic	iface.v	/^    input logic                         cm_q_wr_en,$/;"	p
+logic	iface.v	/^    input logic                         pcie_clk,$/;"	p
+logic	iface.v	/^    input logic                         rd_en_hi,$/;"	p
+logic	iface.v	/^    input logic                         rd_en_lo,$/;"	p
+logic	iface.v	/^    input logic                         rd_q_req_grant,$/;"	p
+logic	iface.v	/^    input logic                         read_completion_bundary,$/;"	p
+logic	iface.v	/^    input logic                         rst$/;"	p
+logic	iface.v	/^    input logic                         rx_clk,$/;"	p
+logic	iface.v	/^    input logic                         tx_clk,$/;"	p
+logic	iface.v	/^    input logic                         wr_en_hi,$/;"	p
+logic	iface.v	/^    input logic                         wr_en_lo,$/;"	p
+logic	iface.v	/^    input logic                         wr_q_req_grant,$/;"	p
+logic	iface.v	/^    input logic [127:0]                 S_AXIS_TUSER,$/;"	p
+logic	iface.v	/^    input logic [1:0]                   rd_if_select,$/;"	p
+logic	iface.v	/^    input logic [1:0]                   wr_if_select,$/;"	p
+logic	iface.v	/^    input logic [2:0]                   max_payload_size,$/;"	p
+logic	iface.v	/^    input logic [2:0]                   max_read_req_size,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  axi_rd_data,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_rx_cm_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_rx_err_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_rx_rd_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_rx_word_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_rx_wr_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_tx_cm_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_tx_err_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_tx_rd_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_tx_word_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  stat_pcie_tx_wr_cnt,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  wr_data_hi,$/;"	p
+logic	iface.v	/^    input logic [31:0]                  wr_data_lo,$/;"	p
+logic	iface.v	/^    input logic [3:0]                   rd_mem_select, $/;"	p
+logic	iface.v	/^    input logic [3:0]                   wr_mask_hi,$/;"	p
+logic	iface.v	/^    input logic [3:0]                   wr_mask_lo,$/;"	p
+logic	iface.v	/^    input logic [3:0]                   wr_mem_select, $/;"	p
+logic	iface.v	/^    input logic [63:0]                  S_AXIS_TDATA,$/;"	p
+logic	iface.v	/^    input logic [63:0]                  debug_r_h1[15:0],$/;"	p
+logic	iface.v	/^    input logic [63:0]                  debug_r_h2[15:0],$/;"	p
+logic	iface.v	/^    input logic [63:0]                  debug_r_ts[15:0],$/;"	p
+logic	iface.v	/^    input logic [63:0]                  debug_t_h1[15:0],$/;"	p
+logic	iface.v	/^    input logic [63:0]                  debug_t_h2[15:0],$/;"	p
+logic	iface.v	/^    input logic [63:0]                  debug_t_ts[15:0],$/;"	p
+logic	iface.v	/^    input logic [63:0]                  stat_pcie_rx_ts,$/;"	p
+logic	iface.v	/^    input logic [63:0]                  stat_pcie_tx_ts,$/;"	p
+logic	iface.v	/^    input logic [7:0]                   S_AXIS_TSTRB,$/;"	p
+logic	iface.v	/^    input logic [`CM_Q_WIDTH-1:0]       cm_q_data,$/;"	p
+logic	iface.v	/^    input logic [`MEM_ADDR_BITS-1:0]    rd_addr_hi,$/;"	p
+logic	iface.v	/^    input logic [`MEM_ADDR_BITS-1:0]    rd_addr_lo,$/;"	p
+logic	iface.v	/^    input logic [`MEM_ADDR_BITS-1:0]    wr_addr_hi,$/;"	p
+logic	iface.v	/^    input logic [`MEM_ADDR_BITS-1:0]    wr_addr_lo,$/;"	p
+logic	iface.v	/^    output logic                        M_AXIS_TLAST,$/;"	p
+logic	iface.v	/^    output logic                        M_AXIS_TVALID,$/;"	p
+logic	iface.v	/^    output logic                        S_AXIS_TREADY,$/;"	p
+logic	iface.v	/^    output logic                        axi_rd_go,$/;"	p
+logic	iface.v	/^    output logic                        axi_wr_go,$/;"	p
+logic	iface.v	/^    output logic                        cm_q_almost_full,$/;"	p
+logic	iface.v	/^    output logic                        cm_q_req_v,$/;"	p
+logic	iface.v	/^    output logic                        iface_rdy,$/;"	p
+logic	iface.v	/^    output logic                        mem_cfg_rd_valid,$/;"	p
+logic	iface.v	/^    output logic                        rd_q_req_v,$/;"	p
+logic	iface.v	/^    output logic                        wr_q_req_v,$/;"	p
+logic	iface.v	/^    output logic [127:0]                M_AXIS_TUSER,$/;"	p
+logic	iface.v	/^    output logic [31:0]                 axi_rdwr_addr,$/;"	p
+logic	iface.v	/^    output logic [31:0]                 axi_wr_data,$/;"	p
+logic	iface.v	/^    output logic [31:0]                 rd_data_hi,$/;"	p
+logic	iface.v	/^    output logic [31:0]                 rd_data_lo,$/;"	p
+logic	iface.v	/^    output logic [63:0]                 M_AXIS_TDATA,$/;"	p
+logic	iface.v	/^    output logic [7:0]                  M_AXIS_TSTRB,$/;"	p
+logic	iface.v	/^    output logic [`PCIE_CM_Q_WIDTH-1:0] cm_q_req_data,$/;"	p
+logic	iface.v	/^    output logic [`PCIE_RD_Q_WIDTH-1:0] rd_q_req_data,$/;"	p
+logic	iface.v	/^    output logic [`PCIE_WR_Q_WIDTH-1:0] wr_q_req_data,$/;"	p
+logic	lib.v	/^    input logic                 rd_clk$/;"	p
+logic	lib.v	/^    input logic                 rd_en,$/;"	p
+logic	lib.v	/^    input logic                 wr_clk,$/;"	p
+logic	lib.v	/^    input logic                 wr_en,$/;"	p
+logic	lib.v	/^    input logic [ADDR_BITS-1:0] rd_addr,$/;"	p
+logic	lib.v	/^    input logic [ADDR_BITS-1:0] wr_addr,$/;"	p
+logic	lib.v	/^    input logic [WIDTH-1:0]     wr_data,$/;"	p
+logic	lib.v	/^    output logic [WIDTH-1:0]    rd_data,$/;"	p
+logic	lib.v	/^   input logic             deq_clk,$/;"	p
+logic	lib.v	/^   input logic             deq_en,$/;"	p
+logic	lib.v	/^   input logic             enq_clk,$/;"	p
+logic	lib.v	/^   input logic             enq_en,$/;"	p
+logic	lib.v	/^   input logic             rst$/;"	p
+logic	lib.v	/^   input logic[WIDTH-1:0]  enq_data,$/;"	p
+logic	lib.v	/^   output logic            almost_full,$/;"	p
+logic	lib.v	/^   output logic            empty,$/;"	p
+logic	lib.v	/^   output logic            full,$/;"	p
+logic	lib.v	/^   output logic[WIDTH-1:0] deq_data,$/;"	p
+logic	mem.v	/^    input logic                       rd_clk,$/;"	p
+logic	mem.v	/^    input logic                       rd_en_hi,$/;"	p
+logic	mem.v	/^    input logic                       rd_en_lo,$/;"	p
+logic	mem.v	/^    input logic                       rd_mem_valid,$/;"	p
+logic	mem.v	/^    input logic                       rst$/;"	p
+logic	mem.v	/^    input logic                       valid_rd_clk,$/;"	p
+logic	mem.v	/^    input logic                       valid_wr_clear,$/;"	p
+logic	mem.v	/^    input logic                       valid_wr_clk,$/;"	p
+logic	mem.v	/^    input logic                       wr_clk,$/;"	p
+logic	mem.v	/^    input logic                       wr_en_hi,$/;"	p
+logic	mem.v	/^    input logic                       wr_en_lo,$/;"	p
+logic	mem.v	/^    input logic                       wr_mem_valid,$/;"	p
+logic	mem.v	/^    input logic [31:0]                valid_wr_mask,$/;"	p
+logic	mem.v	/^    input logic [31:0]                wr_data_hi,$/;"	p
+logic	mem.v	/^    input logic [31:0]                wr_data_lo,$/;"	p
+logic	mem.v	/^    input logic [3:0]                 wr_mask_hi,$/;"	p
+logic	mem.v	/^    input logic [3:0]                 wr_mask_lo,$/;"	p
+logic	mem.v	/^    input logic [`MEM_ADDR_BITS-12:0] valid_rd_addr,$/;"	p
+logic	mem.v	/^    input logic [`MEM_ADDR_BITS-12:0] valid_rd_addr_x,$/;"	p
+logic	mem.v	/^    input logic [`MEM_ADDR_BITS-12:0] valid_wr_addr,$/;"	p
+logic	mem.v	/^    input logic [`MEM_ADDR_BITS-1:0]  rd_addr_hi,$/;"	p
+logic	mem.v	/^    input logic [`MEM_ADDR_BITS-1:0]  rd_addr_lo,$/;"	p
+logic	mem.v	/^    input logic [`MEM_ADDR_BITS-1:0]  wr_addr_hi,$/;"	p
+logic	mem.v	/^    input logic [`MEM_ADDR_BITS-1:0]  wr_addr_lo,$/;"	p
+logic	mem.v	/^    output logic                      rd_vld_lo,$/;"	p
+logic	mem.v	/^    output logic                      valid_wr_stall,$/;"	p
+logic	mem.v	/^    output logic [31:0]               rd_data_hi,$/;"	p
+logic	mem.v	/^    output logic [31:0]               rd_data_lo,$/;"	p
+logic	mem.v	/^    output logic [31:0]               valid_rd_bits,$/;"	p
+logic	mem.v	/^    output logic [31:0]               valid_rd_bits_x,$/;"	p
+logic	pcie_cm_q.v	/^   input logic                         cm_q_req_grant,$/;"	p
+logic	pcie_cm_q.v	/^   input logic                         cm_q_wr_en,$/;"	p
+logic	pcie_cm_q.v	/^   input logic                         pcie_clk,$/;"	p
+logic	pcie_cm_q.v	/^   input logic                         read_completion_bundary,$/;"	p
+logic	pcie_cm_q.v	/^   input logic                         rst$/;"	p
+logic	pcie_cm_q.v	/^   input logic                         rx_clk,$/;"	p
+logic	pcie_cm_q.v	/^   input logic [9:0]                   max_payload_decoded,$/;"	p
+logic	pcie_cm_q.v	/^   input logic [`CM_Q_WIDTH-1:0]       cm_q_data,$/;"	p
+logic	pcie_cm_q.v	/^   output logic                        cm_q_almost_full,$/;"	p
+logic	pcie_cm_q.v	/^   output logic                        cm_q_req_v,$/;"	p
+logic	pcie_cm_q.v	/^   output logic [`PCIE_CM_Q_WIDTH-1:0] cm_q_req_data,$/;"	p
+logic	pcie_rd_q.v	/^   input logic                         clk,$/;"	p
+logic	pcie_rd_q.v	/^   input logic                         rd_q_enq_en,$/;"	p
+logic	pcie_rd_q.v	/^   input logic                         rd_q_req_grant,$/;"	p
+logic	pcie_rd_q.v	/^   input logic                         rst$/;"	p
+logic	pcie_rd_q.v	/^   input logic [9:0]                   max_read_decoded,$/;"	p
+logic	pcie_rd_q.v	/^   input logic [`RD_Q_WIDTH-1:0]       rd_q_enq_data,$/;"	p
+logic	pcie_rd_q.v	/^   output logic                        rd_q_full,$/;"	p
+logic	pcie_rd_q.v	/^   output logic                        rd_q_req_v,$/;"	p
+logic	pcie_rd_q.v	/^   output logic [`PCIE_RD_Q_WIDTH-1:0] rd_q_req_data,$/;"	p
+logic	pcie_rx.v	/^   input logic                       iface_rdy,$/;"	p
+logic	pcie_rx.v	/^   input logic                       ort_req_v,$/;"	p
+logic	pcie_rx.v	/^   input logic                       pcie_clk,$/;"	p
+logic	pcie_rx.v	/^   input logic                       rst$/;"	p
+logic	pcie_rx.v	/^   input logic                       trn_reof_n,$/;"	p
+logic	pcie_rx.v	/^   input logic                       trn_rerrfwd_n,$/;"	p
+logic	pcie_rx.v	/^   input logic                       trn_rsof_n,$/;"	p
+logic	pcie_rx.v	/^   input logic                       trn_rsrc_rdy_n,$/;"	p
+logic	pcie_rx.v	/^   input logic [1:0]                 ort_req_iface,$/;"	p
+logic	pcie_rx.v	/^   input logic [3:0]                 ort_req_mem,$/;"	p
+logic	pcie_rx.v	/^   input logic [3:0]                 ort_req_tag,$/;"	p
+logic	pcie_rx.v	/^   input logic [63:0]                trn_rd,$/;"	p
+logic	pcie_rx.v	/^   input logic [6:0]                 trn_rbar_hit_n,$/;"	p
+logic	pcie_rx.v	/^   input logic [7:0]                 trn_rrem_n,$/;"	p
+logic	pcie_rx.v	/^   input logic [`MEM_ADDR_BITS-1:0]  ort_req_addr,$/;"	p
+logic	pcie_rx.v	/^   input logic [`NUM_PORTS-1:0]      cm_q_almost_full,$/;"	p
+logic	pcie_rx.v	/^   output logic                      cfg_trn_pending_n,$/;"	p
+logic	pcie_rx.v	/^   output logic                      cm_q_wr_en,$/;"	p
+logic	pcie_rx.v	/^   output logic                      ort_next_tag_v,$/;"	p
+logic	pcie_rx.v	/^   output logic                      trn_rcpl_streaming_n,$/;"	p
+logic	pcie_rx.v	/^   output logic                      trn_rdst_rdy_n,$/;"	p
+logic	pcie_rx.v	/^   output logic                      trn_rnp_ok_n,$/;"	p
+logic	pcie_rx.v	/^   output logic                      wr_en_hi,$/;"	p
+logic	pcie_rx.v	/^   output logic                      wr_en_lo,$/;"	p
+logic	pcie_rx.v	/^   output logic [1:0]                wr_if_select,$/;"	p
+logic	pcie_rx.v	/^   output logic [31:0]               stat_pcie_rx_cm_cnt,$/;"	p
+logic	pcie_rx.v	/^   output logic [31:0]               stat_pcie_rx_err_cnt,$/;"	p
+logic	pcie_rx.v	/^   output logic [31:0]               stat_pcie_rx_rd_cnt,$/;"	p
+logic	pcie_rx.v	/^   output logic [31:0]               stat_pcie_rx_word_cnt,$/;"	p
+logic	pcie_rx.v	/^   output logic [31:0]               stat_pcie_rx_wr_cnt,$/;"	p
+logic	pcie_rx.v	/^   output logic [31:0]               wr_data_hi,$/;"	p
+logic	pcie_rx.v	/^   output logic [31:0]               wr_data_lo,$/;"	p
+logic	pcie_rx.v	/^   output logic [3:0]                ort_next_tag,$/;"	p
+logic	pcie_rx.v	/^   output logic [3:0]                wr_mask_hi,$/;"	p
+logic	pcie_rx.v	/^   output logic [3:0]                wr_mask_lo,$/;"	p
+logic	pcie_rx.v	/^   output logic [3:0]                wr_mem_select,$/;"	p
+logic	pcie_rx.v	/^   output logic [63:0]               debug_r_h1[7:0],$/;"	p
+logic	pcie_rx.v	/^   output logic [63:0]               debug_r_h2[7:0],$/;"	p
+logic	pcie_rx.v	/^   output logic [63:0]               debug_r_ts[7:0],$/;"	p
+logic	pcie_rx.v	/^   output logic [63:0]               stat_pcie_rx_ts,$/;"	p
+logic	pcie_rx.v	/^   output logic [`CM_Q_WIDTH-1:0]    cm_q_data,$/;"	p
+logic	pcie_rx.v	/^   output logic [`MEM_ADDR_BITS-1:0] wr_addr_hi,$/;"	p
+logic	pcie_rx.v	/^   output logic [`MEM_ADDR_BITS-1:0] wr_addr_lo,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic                       ort_req_v,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic                       pcie_clk,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic                       rst$/;"	p
+logic	pcie_rx_cm.v	/^   input logic                       trn_reof_n,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic                       trn_rerrfwd_n,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic                       trn_rsof_n,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic                       trn_rsrc_rdy_n,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic [1:0]                 ort_req_iface,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic [3:0]                 ort_req_mem,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic [3:0]                 ort_req_tag,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic [63:0]                trn_rd,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic [6:0]                 trn_rbar_hit_n,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic [7:0]                 trn_rrem_n,$/;"	p
+logic	pcie_rx_cm.v	/^   input logic [`MEM_ADDR_BITS-1:0]  ort_req_addr,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic                      cfg_trn_pending_n,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic                      ort_next_tag_v,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic                      stat_pcie_rx_cm_cnt_inc,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic                      stat_pcie_rx_err_cnt_inc,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic                      wr_en_hi,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic                      wr_en_lo,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [1:0]                wr_if_select,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [31:0]               wr_data_hi,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [31:0]               wr_data_lo,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [3:0]                ort_next_tag,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [3:0]                wr_mask_hi,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [3:0]                wr_mask_lo,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [3:0]                wr_mem_select,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [`MEM_ADDR_BITS-1:0] wr_addr_hi,$/;"	p
+logic	pcie_rx_cm.v	/^   output logic [`MEM_ADDR_BITS-1:0] wr_addr_lo,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic                    pcie_clk,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic                    rst$/;"	p
+logic	pcie_rx_rd.v	/^   input logic                    trn_reof_n,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic                    trn_rerrfwd_n,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic                    trn_rsof_n,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic                    trn_rsrc_rdy_n,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic [63:0]             trn_rd,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic [6:0]              trn_rbar_hit_n,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic [7:0]              trn_rrem_n,$/;"	p
+logic	pcie_rx_rd.v	/^   input logic [`NUM_PORTS-1:0]   cm_q_almost_full,$/;"	p
+logic	pcie_rx_rd.v	/^   output logic                   cm_q_wr_en,$/;"	p
+logic	pcie_rx_rd.v	/^   output logic                   stat_pcie_rx_rd_cnt_inc,$/;"	p
+logic	pcie_rx_rd.v	/^   output logic [`CM_Q_WIDTH-1:0] cm_q_data,$/;"	p
+logic	pcie_rx_wr.v	/^   input logic                       pcie_clk,$/;"	p
+logic	pcie_rx_wr.v	/^   input logic                       rst$/;"	p
+logic	pcie_rx_wr.v	/^   input logic                       trn_reof_n,$/;"	p
+logic	pcie_rx_wr.v	/^   input logic                       trn_rerrfwd_n,$/;"	p
+logic	pcie_rx_wr.v	/^   input logic                       trn_rsof_n,$/;"	p
+logic	pcie_rx_wr.v	/^   input logic                       trn_rsrc_rdy_n,$/;"	p
+logic	pcie_rx_wr.v	/^   input logic [63:0]                trn_rd,$/;"	p
+logic	pcie_rx_wr.v	/^   input logic [6:0]                 trn_rbar_hit_n,$/;"	p
+logic	pcie_rx_wr.v	/^   input logic [7:0]                 trn_rrem_n,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic                      stat_pcie_rx_wr_cnt_inc,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic                      wr_en_hi,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic                      wr_en_lo,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic [1:0]                wr_if_select,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic [31:0]               wr_data_hi,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic [31:0]               wr_data_lo,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic [3:0]                wr_mask_hi,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic [3:0]                wr_mask_lo,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic [3:0]                wr_mem_select,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic [`MEM_ADDR_BITS-1:0] wr_addr_hi,$/;"	p
+logic	pcie_rx_wr.v	/^   output logic [`MEM_ADDR_BITS-1:0] wr_addr_lo,$/;"	p
+logic	pcie_tx.v	/^   input logic                        bus_master_en,$/;"	p
+logic	pcie_tx.v	/^   input logic                        cfg_interrupt_msienable,$/;"	p
+logic	pcie_tx.v	/^   input logic                        cfg_interrupt_rdy_n,$/;"	p
+logic	pcie_tx.v	/^   input logic                        mem_cfg_rd_valid,$/;"	p
+logic	pcie_tx.v	/^   input logic                        ort_next_tag_v,$/;"	p
+logic	pcie_tx.v	/^   input logic                        pcie_clk,$/;"	p
+logic	pcie_tx.v	/^   input logic                        rst$/;"	p
+logic	pcie_tx.v	/^   input logic                        rx_clk,$/;"	p
+logic	pcie_tx.v	/^   input logic                        trn_tdst_rdy_n,$/;"	p
+logic	pcie_tx.v	/^   input logic                        tx_clk,$/;"	p
+logic	pcie_tx.v	/^   input logic [15:0]                 pcie_id,$/;"	p
+logic	pcie_tx.v	/^   input logic [2:0]                  cfg_interrupt_mmenable,$/;"	p
+logic	pcie_tx.v	/^   input logic [31:0]                 rd_data_hi,$/;"	p
+logic	pcie_tx.v	/^   input logic [31:0]                 rd_data_lo,$/;"	p
+logic	pcie_tx.v	/^   input logic [3:0]                  ort_next_tag,$/;"	p
+logic	pcie_tx.v	/^   input logic [3:0]                  trn_tbuf_av,$/;"	p
+logic	pcie_tx.v	/^   input logic [7:0]                  cfg_interrupt_do,$/;"	p
+logic	pcie_tx.v	/^   input logic [`NUM_PORTS-1:0]       cm_q_req_v,$/;"	p
+logic	pcie_tx.v	/^   input logic [`NUM_PORTS-1:0]       rd_q_req_v,$/;"	p
+logic	pcie_tx.v	/^   input logic [`NUM_PORTS-1:0]       wr_q_req_v,$/;"	p
+logic	pcie_tx.v	/^   input logic [`PCIE_CM_Q_WIDTH-1:0] cm_q_req_data,$/;"	p
+logic	pcie_tx.v	/^   input logic [`PCIE_RD_Q_WIDTH-1:0] rd_q_req_data,$/;"	p
+logic	pcie_tx.v	/^   input logic [`PCIE_WR_Q_WIDTH-1:0] wr_q_req_data,$/;"	p
+logic	pcie_tx.v	/^   output logic                       cfg_interrupt_n,$/;"	p
+logic	pcie_tx.v	/^   output logic                       ort_req_v,$/;"	p
+logic	pcie_tx.v	/^   output logic                       rd_en_hi,$/;"	p
+logic	pcie_tx.v	/^   output logic                       rd_en_lo,$/;"	p
+logic	pcie_tx.v	/^   output logic                       trn_teof_n,$/;"	p
+logic	pcie_tx.v	/^   output logic                       trn_tsof_n,$/;"	p
+logic	pcie_tx.v	/^   output logic                       trn_tsrc_rdy_n,$/;"	p
+logic	pcie_tx.v	/^   output logic [1:0]                 ort_req_iface,$/;"	p
+logic	pcie_tx.v	/^   output logic [1:0]                 rd_if_select,$/;"	p
+logic	pcie_tx.v	/^   output logic [31:0]                stat_pcie_tx_cm_cnt,$/;"	p
+logic	pcie_tx.v	/^   output logic [31:0]                stat_pcie_tx_err_cnt,$/;"	p
+logic	pcie_tx.v	/^   output logic [31:0]                stat_pcie_tx_rd_cnt,$/;"	p
+logic	pcie_tx.v	/^   output logic [31:0]                stat_pcie_tx_word_cnt,$/;"	p
+logic	pcie_tx.v	/^   output logic [31:0]                stat_pcie_tx_wr_cnt,$/;"	p
+logic	pcie_tx.v	/^   output logic [3:0]                 ort_req_mem,$/;"	p
+logic	pcie_tx.v	/^   output logic [3:0]                 ort_req_tag,$/;"	p
+logic	pcie_tx.v	/^   output logic [3:0]                 rd_mem_select,$/;"	p
+logic	pcie_tx.v	/^   output logic [63:0]                debug_t_h1[7:0],$/;"	p
+logic	pcie_tx.v	/^   output logic [63:0]                debug_t_h2[7:0],$/;"	p
+logic	pcie_tx.v	/^   output logic [63:0]                debug_t_ts[7:0],$/;"	p
+logic	pcie_tx.v	/^   output logic [63:0]                stat_pcie_tx_ts,$/;"	p
+logic	pcie_tx.v	/^   output logic [63:0]                trn_td,$/;"	p
+logic	pcie_tx.v	/^   output logic [7:0]                 cfg_interrupt_di,$/;"	p
+logic	pcie_tx.v	/^   output logic [7:0]                 trn_trem_n,$/;"	p
+logic	pcie_tx.v	/^   output logic [`MEM_ADDR_BITS-1:0]  ort_req_addr,$/;"	p
+logic	pcie_tx.v	/^   output logic [`MEM_ADDR_BITS-1:0]  rd_addr_hi,$/;"	p
+logic	pcie_tx.v	/^   output logic [`MEM_ADDR_BITS-1:0]  rd_addr_lo,$/;"	p
+logic	pcie_tx.v	/^   output logic [`NUM_PORTS-1:0]      cm_q_req_grant,$/;"	p
+logic	pcie_tx.v	/^   output logic [`NUM_PORTS-1:0]      rd_q_req_grant,$/;"	p
+logic	pcie_tx.v	/^   output logic [`NUM_PORTS-1:0]      wr_q_req_grant,$/;"	p
+logic	pcie_tx_cm.v	/^   input logic                        mem_cfg_rd_valid,$/;"	p
+logic	pcie_tx_cm.v	/^   input logic                        pcie_clk,$/;"	p
+logic	pcie_tx_cm.v	/^   input logic                        pcie_req_grant,$/;"	p
+logic	pcie_tx_cm.v	/^   input logic                        pcie_req_stall,$/;"	p
+logic	pcie_tx_cm.v	/^   input logic                        rst$/;"	p
+logic	pcie_tx_cm.v	/^   input logic                        rx_clk,$/;"	p
+logic	pcie_tx_cm.v	/^   input logic [15:0]                 pcie_id,$/;"	p
+logic	pcie_tx_cm.v	/^   input logic [`NUM_PORTS-1:0]       cm_q_req_v,$/;"	p
+logic	pcie_tx_cm.v	/^   input logic [`PCIE_CM_Q_WIDTH-1:0] cm_q_req_data,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic                       pcie_req_done,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic                       pcie_req_v,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic                       rd_en_hi,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic                       rd_en_lo,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic                       trn_teof_n,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic                       trn_tsof_n,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic                       trn_tsrc_rdy_n,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic [1:0]                 rd_if_select,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic [2:0]                 ppl_ctrl,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic [3:0]                 rd_mem_select,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic [63:0]                trn_td,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic [7:0]                 trn_trem_n,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic [`MEM_ADDR_BITS-1:0]  rd_addr_hi,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic [`MEM_ADDR_BITS-1:0]  rd_addr_lo,$/;"	p
+logic	pcie_tx_cm.v	/^   output logic [`NUM_PORTS-1:0]      cm_q_req_grant,$/;"	p
+logic	pcie_tx_q.v	/^    input logic              deq_clk,$/;"	p
+logic	pcie_tx_q.v	/^    input logic              deq_en,$/;"	p
+logic	pcie_tx_q.v	/^    input logic              enq_clk,$/;"	p
+logic	pcie_tx_q.v	/^    input logic              rst$/;"	p
+logic	pcie_tx_q.v	/^    output logic             empty,$/;"	p
+logic	pcie_tx_q.v	/^    output logic             req_grant,$/;"	p
+logic	pcie_tx_q.v	/^    output logic [WIDTH-1:0] deq_data,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic                        ort_next_tag_v,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic                        pcie_clk,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic                        pcie_req_grant,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic                        pcie_req_stall,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic                        rst$/;"	p
+logic	pcie_tx_rd.v	/^   input logic                        tx_clk,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic [15:0]                 pcie_id,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic [3:0]                  ort_next_tag,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic [`NUM_PORTS-1:0]       rd_q_req_v,$/;"	p
+logic	pcie_tx_rd.v	/^   input logic [`PCIE_RD_Q_WIDTH-1:0] rd_q_req_data,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic                       ort_req_v,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic                       pcie_req_done,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic                       pcie_req_v,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic                       trn_teof_n,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic                       trn_tsof_n,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic                       trn_tsrc_rdy_n,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic [1:0]                 ort_req_iface,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic [3:0]                 ort_req_mem,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic [3:0]                 ort_req_tag,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic [63:0]                trn_td,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic [7:0]                 trn_trem_n,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic [`MEM_ADDR_BITS-1:0]  ort_req_addr,$/;"	p
+logic	pcie_tx_rd.v	/^   output logic [`NUM_PORTS-1:0]      rd_q_req_grant,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic                        cfg_interrupt_msienable,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic                        pcie_clk,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic                        pcie_req_grant,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic                        pcie_req_stall,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic                        rst$/;"	p
+logic	pcie_tx_wr.v	/^   input logic                        rx_clk,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic [15:0]                 pcie_id,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic [2:0]                  cfg_interrupt_mmenable,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic [7:0]                  cfg_interrupt_do,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic [`NUM_PORTS-1:0]       wr_q_req_v,$/;"	p
+logic	pcie_tx_wr.v	/^   input logic [`PCIE_WR_Q_WIDTH-1:0] wr_q_req_data,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic                       cfg_interrupt_n,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic                       pcie_req_done,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic                       pcie_req_v,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic                       rd_en_hi,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic                       rd_en_lo,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic                       trn_teof_n,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic                       trn_tsof_n,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic                       trn_tsrc_rdy_n,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [1:0]                 rd_if_select,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [2:0]                 ppl_ctrl,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [3:0]                 rd_mem_select,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [63:0]                trn_td,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [7:0]                 cfg_interrupt_di,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [7:0]                 trn_trem_n,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [`MEM_ADDR_BITS-1:0]  rd_addr_hi,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [`MEM_ADDR_BITS-1:0]  rd_addr_lo,$/;"	p
+logic	pcie_tx_wr.v	/^   output logic [`NUM_PORTS-1:0]      wr_q_req_grant,$/;"	p
+logic	pcie_wr_q.v	/^   input logic                         clk,$/;"	p
+logic	pcie_wr_q.v	/^   input logic                         rst$/;"	p
+logic	pcie_wr_q.v	/^   input logic                         wr_q_enq_en,$/;"	p
+logic	pcie_wr_q.v	/^   input logic                         wr_q_req_grant,$/;"	p
+logic	pcie_wr_q.v	/^   input logic [9:0]                   max_payload_decoded,$/;"	p
+logic	pcie_wr_q.v	/^   input logic [`WR_Q_WIDTH-1:0]       wr_q_enq_data,$/;"	p
+logic	pcie_wr_q.v	/^   output logic                        wr_q_almost_full,$/;"	p
+logic	pcie_wr_q.v	/^   output logic                        wr_q_full,$/;"	p
+logic	pcie_wr_q.v	/^   output logic                        wr_q_req_v,$/;"	p
+logic	pcie_wr_q.v	/^   output logic [`PCIE_WR_Q_WIDTH-1:0] wr_q_req_data,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        S_AXIS_TLAST,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        S_AXIS_TVALID,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        clk,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        mem_vld_rx_dne_wr_stall,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        mem_vld_rx_dsc_rd_bit,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        mem_vld_rx_dsc_wr_stall,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        rst$/;"	p
+logic	rx_ctrl.v	/^   input logic                        rx_int_enable,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        tx_int_enable,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        wr_q_almost_full,$/;"	p
+logic	rx_ctrl.v	/^   input logic                        wr_q_full,$/;"	p
+logic	rx_ctrl.v	/^   input logic          clk,$/;"	p
+logic	rx_ctrl.v	/^   input logic          in_tlast,$/;"	p
+logic	rx_ctrl.v	/^   input logic          in_tvalid,$/;"	p
+logic	rx_ctrl.v	/^   input logic          out_tready,$/;"	p
+logic	rx_ctrl.v	/^   input logic          rst$/;"	p
+logic	rx_ctrl.v	/^   input logic          shift_tready,$/;"	p
+logic	rx_ctrl.v	/^   input logic [127:0]                S_AXIS_TUSER,$/;"	p
+logic	rx_ctrl.v	/^   input logic [127:0]  in_tuser,$/;"	p
+logic	rx_ctrl.v	/^   input logic [15:0]                 rx_byte_wait,$/;"	p
+logic	rx_ctrl.v	/^   input logic [1:0]    shift_by,$/;"	p
+logic	rx_ctrl.v	/^   input logic [31:0]                 mem_vld_rx_dne_rd_bits,$/;"	p
+logic	rx_ctrl.v	/^   input logic [31:0]                 mem_vld_tx_dne_rd_bits,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 S_AXIS_TDATA,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 host_rx_dne_mask,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 host_rx_dne_offset,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 host_tx_dne_mask,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 host_tx_dne_offset,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 mem_rx_dsc_rd_data,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 rx_dne_mask,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 rx_dsc_mask,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 rx_pkt_mask,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]                 tx_dne_mask,$/;"	p
+logic	rx_ctrl.v	/^   input logic [63:0]   in_tdata,$/;"	p
+logic	rx_ctrl.v	/^   input logic [7:0]                  S_AXIS_TSTRB,$/;"	p
+logic	rx_ctrl.v	/^   input logic [7:0]    in_tstrb,$/;"	p
+logic	rx_ctrl.v	/^   output logic                       S_AXIS_TREADY,$/;"	p
+logic	rx_ctrl.v	/^   output logic                       mem_rx_dne_wr_en,$/;"	p
+logic	rx_ctrl.v	/^   output logic                       mem_rx_dsc_rd_en,$/;"	p
+logic	rx_ctrl.v	/^   output logic                       mem_rx_pkt_wr_en,$/;"	p
+logic	rx_ctrl.v	/^   output logic                       mem_vld_rx_dne_wr_clear,$/;"	p
+logic	rx_ctrl.v	/^   output logic                       mem_vld_rx_dsc_wr_clear,$/;"	p
+logic	rx_ctrl.v	/^   output logic                       wr_q_enq_en,$/;"	p
+logic	rx_ctrl.v	/^   output logic         in_tready,$/;"	p
+logic	rx_ctrl.v	/^   output logic         out_tlast, $/;"	p
+logic	rx_ctrl.v	/^   output logic         out_tvalid,$/;"	p
+logic	rx_ctrl.v	/^   output logic         shift_tlast, $/;"	p
+logic	rx_ctrl.v	/^   output logic         shift_tvalid,$/;"	p
+logic	rx_ctrl.v	/^   output logic [127:0] out_tuser,$/;"	p
+logic	rx_ctrl.v	/^   output logic [127:0] shift_tuser,$/;"	p
+logic	rx_ctrl.v	/^   output logic [31:0]                mem_vld_rx_dne_wr_mask,$/;"	p
+logic	rx_ctrl.v	/^   output logic [31:0]                mem_vld_rx_dsc_wr_mask,$/;"	p
+logic	rx_ctrl.v	/^   output logic [31:0]                stat_mac_rx_err_cnt,$/;"	p
+logic	rx_ctrl.v	/^   output logic [31:0]                stat_mac_rx_pkt_cnt,$/;"	p
+logic	rx_ctrl.v	/^   output logic [31:0]                stat_mac_rx_word_cnt,$/;"	p
+logic	rx_ctrl.v	/^   output logic [63:0]                mem_rx_dne_wr_data,$/;"	p
+logic	rx_ctrl.v	/^   output logic [63:0]                mem_rx_pkt_wr_data,$/;"	p
+logic	rx_ctrl.v	/^   output logic [63:0]                stat_mac_rx_ts,$/;"	p
+logic	rx_ctrl.v	/^   output logic [63:0]  out_tdata,$/;"	p
+logic	rx_ctrl.v	/^   output logic [63:0]  shift_tdata,$/;"	p
+logic	rx_ctrl.v	/^   output logic [7:0]                 mem_rx_dne_wr_mask,$/;"	p
+logic	rx_ctrl.v	/^   output logic [7:0]                 mem_rx_pkt_wr_mask,$/;"	p
+logic	rx_ctrl.v	/^   output logic [7:0]   out_tstrb,$/;"	p
+logic	rx_ctrl.v	/^   output logic [7:0]   shift_tstrb,$/;"	p
+logic	rx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-12:0] mem_vld_rx_dne_rd_addr,$/;"	p
+logic	rx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-12:0] mem_vld_rx_dne_wr_addr,$/;"	p
+logic	rx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-12:0] mem_vld_rx_dsc_wr_addr,$/;"	p
+logic	rx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-12:0] mem_vld_tx_dne_rd_addr,$/;"	p
+logic	rx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-1:0]  mem_rx_dne_wr_addr,$/;"	p
+logic	rx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-1:0]  mem_rx_dsc_rd_addr,$/;"	p
+logic	rx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-1:0]  mem_rx_pkt_wr_addr,$/;"	p
+logic	rx_ctrl.v	/^   output logic [`WR_Q_WIDTH-1:0]     wr_q_enq_data,$/;"	p
+logic	small_async_fifo.v	/^    input logic                rden,$/;"	p
+logic	small_async_fifo.v	/^    input logic                wclken, wfull, wclk, rclk);$/;"	p
+logic	small_async_fifo.v	/^    input logic [ADDRSIZE-1:0] waddr, raddr,$/;"	p
+logic	stats.v	/^   input logic                      pcie_clk,$/;"	p
+logic	stats.v	/^   input logic                      rd_en_hi,$/;"	p
+logic	stats.v	/^   input logic                      rd_en_lo,$/;"	p
+logic	stats.v	/^   input logic                      rd_mem_valid,$/;"	p
+logic	stats.v	/^   input logic                      rst$/;"	p
+logic	stats.v	/^   input logic                      rx_clk,$/;"	p
+logic	stats.v	/^   input logic                      tx_clk,$/;"	p
+logic	stats.v	/^   input logic                      wr_en_hi,$/;"	p
+logic	stats.v	/^   input logic                      wr_en_lo,$/;"	p
+logic	stats.v	/^   input logic                      wr_mem_valid,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_mac_rx_err_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_mac_rx_pkt_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_mac_rx_word_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_mac_tx_pkt_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_mac_tx_word_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_rx_cm_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_rx_err_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_rx_rd_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_rx_word_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_rx_wr_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_tx_cm_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_tx_err_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_tx_rd_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_tx_word_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               stat_pcie_tx_wr_cnt,$/;"	p
+logic	stats.v	/^   input logic [31:0]               wr_data_hi,$/;"	p
+logic	stats.v	/^   input logic [31:0]               wr_data_lo,$/;"	p
+logic	stats.v	/^   input logic [3:0]                wr_mask_hi,$/;"	p
+logic	stats.v	/^   input logic [3:0]                wr_mask_lo,$/;"	p
+logic	stats.v	/^   input logic [63:0]               debug_r_h1[15:0],$/;"	p
+logic	stats.v	/^   input logic [63:0]               debug_r_h2[15:0],$/;"	p
+logic	stats.v	/^   input logic [63:0]               debug_r_ts[15:0],$/;"	p
+logic	stats.v	/^   input logic [63:0]               debug_t_h1[15:0],$/;"	p
+logic	stats.v	/^   input logic [63:0]               debug_t_h2[15:0],$/;"	p
+logic	stats.v	/^   input logic [63:0]               debug_t_ts[15:0],$/;"	p
+logic	stats.v	/^   input logic [63:0]               stat_mac_rx_ts,$/;"	p
+logic	stats.v	/^   input logic [63:0]               stat_mac_tx_ts,$/;"	p
+logic	stats.v	/^   input logic [63:0]               stat_pcie_rx_ts,$/;"	p
+logic	stats.v	/^   input logic [63:0]               stat_pcie_tx_ts,$/;"	p
+logic	stats.v	/^   input logic [`MEM_ADDR_BITS-1:0] rd_addr_hi,$/;"	p
+logic	stats.v	/^   input logic [`MEM_ADDR_BITS-1:0] rd_addr_lo,$/;"	p
+logic	stats.v	/^   input logic [`MEM_ADDR_BITS-1:0] wr_addr_hi,$/;"	p
+logic	stats.v	/^   input logic [`MEM_ADDR_BITS-1:0] wr_addr_lo,$/;"	p
+logic	stats.v	/^   output logic [31:0]              rd_data_hi,$/;"	p
+logic	stats.v	/^   output logic [31:0]              rd_data_lo,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        M_AXIS_TREADY,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        clk,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        mem_vld_tx_dne_wr_stall,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        mem_vld_tx_dsc_rd_bit,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        mem_vld_tx_dsc_wr_stall,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        mem_vld_tx_pkt_rd_bit,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        mem_vld_tx_pkt_wr_stall,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        rd_q_full,$/;"	p
+logic	tx_ctrl.v	/^   input logic                        rst$/;"	p
+logic	tx_ctrl.v	/^   input logic          clk,$/;"	p
+logic	tx_ctrl.v	/^   input logic          in_tlast,$/;"	p
+logic	tx_ctrl.v	/^   input logic          in_tvalid,$/;"	p
+logic	tx_ctrl.v	/^   input logic          out_tready,$/;"	p
+logic	tx_ctrl.v	/^   input logic          rst$/;"	p
+logic	tx_ctrl.v	/^   input logic [127:0]  in_tuser,$/;"	p
+logic	tx_ctrl.v	/^   input logic [63:0]                 mem_tx_dsc_rd_data,$/;"	p
+logic	tx_ctrl.v	/^   input logic [63:0]                 mem_tx_pkt_rd_data,$/;"	p
+logic	tx_ctrl.v	/^   input logic [63:0]                 rx_dsc_mask,$/;"	p
+logic	tx_ctrl.v	/^   input logic [63:0]                 tx_dne_mask,$/;"	p
+logic	tx_ctrl.v	/^   input logic [63:0]                 tx_dsc_mask,$/;"	p
+logic	tx_ctrl.v	/^   input logic [63:0]                 tx_pkt_mask,$/;"	p
+logic	tx_ctrl.v	/^   input logic [63:0]   in_tdata,$/;"	p
+logic	tx_ctrl.v	/^   input logic [7:0]    in_tstrb,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       M_AXIS_TLAST,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       M_AXIS_TVALID,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       mem_tx_dne_wr_en,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       mem_tx_dsc_rd_en,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       mem_tx_pkt_rd_en,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       mem_vld_tx_dne_wr_clear,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       mem_vld_tx_dsc_wr_clear,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       mem_vld_tx_pkt_wr_clear,$/;"	p
+logic	tx_ctrl.v	/^   output logic                       rd_q_enq_en,$/;"	p
+logic	tx_ctrl.v	/^   output logic         in_tready,$/;"	p
+logic	tx_ctrl.v	/^   output logic         out_tlast, $/;"	p
+logic	tx_ctrl.v	/^   output logic         out_tvalid,$/;"	p
+logic	tx_ctrl.v	/^   output logic [127:0]               M_AXIS_TUSER,$/;"	p
+logic	tx_ctrl.v	/^   output logic [127:0] out_tuser, $/;"	p
+logic	tx_ctrl.v	/^   output logic [31:0]                mem_vld_tx_dne_wr_mask,$/;"	p
+logic	tx_ctrl.v	/^   output logic [31:0]                mem_vld_tx_dsc_wr_mask,$/;"	p
+logic	tx_ctrl.v	/^   output logic [31:0]                mem_vld_tx_pkt_wr_mask,$/;"	p
+logic	tx_ctrl.v	/^   output logic [31:0]                stat_mac_tx_pkt_cnt,$/;"	p
+logic	tx_ctrl.v	/^   output logic [31:0]                stat_mac_tx_word_cnt,$/;"	p
+logic	tx_ctrl.v	/^   output logic [63:0]                M_AXIS_TDATA,$/;"	p
+logic	tx_ctrl.v	/^   output logic [63:0]                mem_tx_dne_wr_data,$/;"	p
+logic	tx_ctrl.v	/^   output logic [63:0]                stat_mac_tx_ts,$/;"	p
+logic	tx_ctrl.v	/^   output logic [63:0]  out_tdata,$/;"	p
+logic	tx_ctrl.v	/^   output logic [7:0]                 M_AXIS_TSTRB,$/;"	p
+logic	tx_ctrl.v	/^   output logic [7:0]                 mem_tx_dne_wr_mask,$/;"	p
+logic	tx_ctrl.v	/^   output logic [7:0]   out_tstrb,$/;"	p
+logic	tx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-12:0] mem_vld_tx_dne_wr_addr,$/;"	p
+logic	tx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-12:0] mem_vld_tx_dsc_wr_addr,$/;"	p
+logic	tx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-12:0] mem_vld_tx_pkt_wr_addr,$/;"	p
+logic	tx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-1:0]  mem_tx_dne_wr_addr,$/;"	p
+logic	tx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-1:0]  mem_tx_dsc_rd_addr,$/;"	p
+logic	tx_ctrl.v	/^   output logic [`MEM_ADDR_BITS-1:0]  mem_tx_pkt_rd_addr,$/;"	p
+logic	tx_ctrl.v	/^   output logic [`RD_Q_WIDTH-1:0]     rd_q_enq_data,$/;"	p
+mem	mem.v	/^module mem #($/;"	m
+mem	small_async_fifo.v	/^   reg [DATASIZE-1:0]    mem [0:DEPTH-1];  \/* synthesis syn_ramstyle="block_ram" *\/$/;"	r
+mem	small_async_fifo.v	/^   reg [DATASIZE-1:0]    mem [0:DEPTH-1];  \/* synthesis syn_ramstyle="registers" *\/$/;"	r
+mem	small_async_fifo.v	/^   reg [DATASIZE-1:0]    mem [0:DEPTH-1];  \/* synthesis syn_ramstyle="select_ram" *\/$/;"	r
+output	small_async_fifo.v	/^    output             rempty,$/;"	p
+output	small_async_fifo.v	/^    output             w_almost_full,$/;"	p
+output	small_async_fifo.v	/^    output reg               r_almost_empty,$/;"	c
+output	small_async_fifo.v	/^    output reg               w_almost_full,$/;"	c
+output	small_async_fifo.v	/^    output reg [ADDRSIZE :0] rptr,$/;"	p
+output	small_async_fifo.v	/^    output reg [ADDRSIZE :0] wptr,$/;"	p
+parameter	mem.v	/^             parameter HAS_WR_MASK=1)$/;"	c
+parameter	mem.v	/^             parameter WIDTH=64,$/;"	c
+parameter	pcie_tx_q.v	/^    parameter NUM_PORTS=1, $/;"	c
+parameter	small_async_fifo.v	/^    parameter ALMOST_EMPTY_SIZE = 3$/;"	c
+parameter	small_async_fifo.v	/^    parameter ASIZE = 3,$/;"	c
+pcie_cm_q	pcie_cm_q.v	/^module pcie_cm_q$/;"	m
+pcie_rd_q	pcie_rd_q.v	/^module pcie_rd_q #(parameter IFACE_ID = 0)$/;"	m
+pcie_rx	pcie_rx.v	/^module pcie_rx$/;"	m
+pcie_rx_cm	pcie_rx_cm.v	/^module pcie_rx_cm$/;"	m
+pcie_rx_rd	pcie_rx_rd.v	/^module pcie_rx_rd$/;"	m
+pcie_rx_wr	pcie_rx_wr.v	/^module pcie_rx_wr$/;"	m
+pcie_tx	pcie_tx.v	/^module pcie_tx$/;"	m
+pcie_tx_cm	pcie_tx_cm.v	/^module pcie_tx_cm$/;"	m
+pcie_tx_q	pcie_tx_q.v	/^module pcie_tx_q $/;"	m
+pcie_tx_rd	pcie_tx_rd.v	/^module pcie_tx_rd$/;"	m
+pcie_tx_wr	pcie_tx_wr.v	/^module pcie_tx_wr$/;"	m
+pcie_wr_q	pcie_wr_q.v	/^module pcie_wr_q #(parameter IFACE_ID = 0)$/;"	m
+r_almost_empty	small_async_fifo.v	/^    output             r_almost_empty,$/;"	p
+r_almost_empty_val	small_async_fifo.v	/^   wire                      r_almost_empty_val = ~subtract[ADDRSIZE];$/;"	n
+raddr	small_async_fifo.v	/^    output [ADDRSIZE-1:0]    raddr,$/;"	p
+raddr	small_async_fifo.v	/^   wire [ASIZE-1:0]    waddr, raddr;$/;"	n
+ram	lib.v	/^module ram #(parameter WIDTH=32, parameter DEPTH=32, parameter ADDR_BITS=(DEPTH==1)?1:$clog2(DEPTH))$/;"	m
+rbin	small_async_fifo.v	/^   reg [ADDRSIZE:0]          rbin;$/;"	r
+rbinnext	small_async_fifo.v	/^   wire [ADDRSIZE:0]         rgraynext, rbinnext;$/;"	n
+rdata	small_async_fifo.v	/^    output [DSIZE-1:0] rdata,$/;"	p
+rempty_val	small_async_fifo.v	/^   wire                      rempty_val = (rgraynext == rq2_wptr);$/;"	n
+rgraynext	small_async_fifo.v	/^   wire [ADDRSIZE:0]         rgraynext, rbinnext;$/;"	n
+rptr	small_async_fifo.v	/^    input [ADDRSIZE:0] rptr,$/;"	p
+rptr	small_async_fifo.v	/^   wire [ASIZE:0]      wptr, rptr, wq2_rptr, rq2_wptr;$/;"	n
+rptr_empty	small_async_fifo.v	/^module rptr_empty$/;"	m
+rq1_wptr	small_async_fifo.v	/^   reg [ADDRSIZE:0]    rq1_wptr;$/;"	r
+rq2_wptr	small_async_fifo.v	/^    input [ADDRSIZE :0]      rq2_wptr,$/;"	p
+rq2_wptr	small_async_fifo.v	/^   wire [ASIZE:0]      wptr, rptr, wq2_rptr, rq2_wptr;$/;"	n
+rq2_wptr_bin	small_async_fifo.v	/^   reg [ADDRSIZE :0]         rq2_wptr_bin;$/;"	r
+rram	lib.v	/^module rram #(parameter WIDTH=32, parameter DEPTH=32, parameter ADDR_BITS=(DEPTH==1)?1:$clog2(DEPTH))$/;"	m
+rx_ctrl	rx_ctrl.v	/^module rx_ctrl$/;"	m
+rx_pkt_shift	rx_ctrl.v	/^module rx_pkt_shift$/;"	m
+small_async_fifo	small_async_fifo.v	/^module small_async_fifo$/;"	m
+stats	stats.v	/^module stats$/;"	m
+subtract	small_async_fifo.v	/^   wire [ADDRSIZE :0]        subtract = wbinnext - wq2_rptr_bin - ALMOST_FULL_SIZE[ADDRSIZE:0];$/;"	n
+subtract	small_async_fifo.v	/^   wire [ADDRSIZE:0]         subtract = (rbinnext + ALMOST_EMPTY_SIZE)-rq2_wptr_bin;$/;"	n
+sync_r2w	small_async_fifo.v	/^module sync_r2w #(parameter ADDRSIZE = 3)$/;"	m
+sync_w2r	small_async_fifo.v	/^module sync_w2r #(parameter ADDRSIZE = 3)$/;"	m
+tx_ctrl	tx_ctrl.v	/^module tx_ctrl$/;"	m
+tx_pkt_shift	tx_ctrl.v	/^module tx_pkt_shift$/;"	m
+w	tlpgen.py	/^w = 1$/;"	v
+w_almost_full_val	small_async_fifo.v	/^   wire                      w_almost_full_val = ~subtract[ADDRSIZE];$/;"	n
+waddr	small_async_fifo.v	/^    output [ADDRSIZE-1:0]    waddr,$/;"	p
+waddr	small_async_fifo.v	/^   wire [ASIZE-1:0]    waddr, raddr;$/;"	n
+wbin	small_async_fifo.v	/^   reg [ADDRSIZE:0]          wbin;$/;"	r
+wbinnext	small_async_fifo.v	/^   wire [ADDRSIZE:0]         wgraynext, wbinnext;$/;"	n
+wdata	small_async_fifo.v	/^    input [DSIZE-1:0]  wdata,$/;"	p
+wfull	small_async_fifo.v	/^    output             wfull,$/;"	p
+wfull_val	small_async_fifo.v	/^   wire                      wfull_val = (wgraynext ==$/;"	n
+wgraynext	small_async_fifo.v	/^   wire [ADDRSIZE:0]         wgraynext, wbinnext;$/;"	n
+wptr	small_async_fifo.v	/^    input [ADDRSIZE:0] wptr,$/;"	p
+wptr	small_async_fifo.v	/^   wire [ASIZE:0]      wptr, rptr, wq2_rptr, rq2_wptr;$/;"	n
+wptr_full	small_async_fifo.v	/^module wptr_full$/;"	m
+wq1_rptr	small_async_fifo.v	/^   reg [ADDRSIZE:0]    wq1_rptr;$/;"	r
+wq2_rptr	small_async_fifo.v	/^		                                  {~wq2_rptr[ADDRSIZE:ADDRSIZE-1],wq2_rptr[ADDRSIZE-2:0]});$/;"	n
+wq2_rptr	small_async_fifo.v	/^    input [ADDRSIZE :0]      wq2_rptr,$/;"	p
+wq2_rptr	small_async_fifo.v	/^   wire [ASIZE:0]      wptr, rptr, wq2_rptr, rq2_wptr;$/;"	n
+wq2_rptr_bin	small_async_fifo.v	/^   reg [ADDRSIZE :0]         wq2_rptr_bin;$/;"	r
+x_flag	lib.v	/^module x_flag($/;"	m
+x_flag_ack	lib.v	/^module x_flag_ack($/;"	m
+x_signal	lib.v	/^module x_signal #(parameter WIDTH=1)$/;"	m
+x_task	lib.v	/^module x_task($/;"	m

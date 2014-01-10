@@ -1,0 +1,40 @@
+103a104
+>       parameter               C_INCLUDE_IDELAYCTRL = 1,
+189c190
+< 
+---
+>     
+257,261c258,265
+<    IDELAYCTRL dlyctrl (
+<       .RDY              (),
+<       .REFCLK           (refclk),
+<       .RST              (idelayctrl_reset)
+<    );
+---
+>    generate
+>       if (C_INCLUDE_IDELAYCTRL == 1)
+>        IDELAYCTRL dlyctrl (
+>           .RDY              (),
+>           .REFCLK           (refclk),
+>           .RST              (idelayctrl_reset)
+>        );
+>    endgenerate
+265,270c269,279
+<    trimac_reset_sync idelayctrl_reset_gen (
+<       .clk              (refclk),
+<       .enable           (1'b1),
+<       .reset_in         (glbl_rst),
+<       .reset_out        (idelayctrl_reset_sync)
+<    );
+---
+>    generate
+>       if (C_INCLUDE_IDELAYCTRL == 1)
+>        trimac_reset_sync idelayctrl_reset_gen (
+>           .clk              (refclk),
+>           .enable           (1'b1),
+>           .reset_in         (glbl_rst),
+>           .reset_out        (idelayctrl_reset_sync)
+>        );
+>       else
+>         assign idelayctrl_reset_sync = 1;
+>     endgenerate

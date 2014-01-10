@@ -1,0 +1,16 @@
+6c6
+< // File       : trimac_lite_rx_client_fifo.v
+---
+> // File       : xilinx_rx_client_fifo.v
+111c111
+< module trimac_lite_rx_client_fifo
+---
+> module xilinx_rx_client_fifo
+458c458
+<   trimac_lite_sync_block resync_wr_store_frame_tog
+---
+>   xilinx_sync_block resync_wr_store_frame_tog
+812c812
+<   trimac_lite_sync_block sync_rd_addr_tog
+---
+>   xilinx_sync_block sync_rd_addr_tog

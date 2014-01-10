@@ -1,0 +1,19 @@
+Version ID
+==========
+
+This pcore allows access to read the 32 bit USR_ACCESS register. The 32 bit
+register can be used to store any user data desired in 32 bits. Potential uses
+include version IDs of a design. For example, store the first 32 bits of a GIT
+hash in the register to allow someone to see which commit the bitstream was
+built with.
+
+This register is set through bitgen using the "-g USR_ACCESS:xxxxxxxx" option,
+where xxxxxxxx is the 32 bit hex value that you wish to set. Because this value
+is set through the command line option, it allows a value to easily be
+scripted.
+
+NOTE: There is also a 32 bit JTAG register that can also be set at bitgen time.
+However, this value can only be read through JTAG. This bitgen option (UserID)
+may also provide the same functionality if you do not need to read the value
+from the FPGA fabric.
+

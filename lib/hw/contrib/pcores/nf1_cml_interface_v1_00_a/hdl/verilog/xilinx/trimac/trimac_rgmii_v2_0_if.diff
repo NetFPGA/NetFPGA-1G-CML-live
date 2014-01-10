@@ -1,0 +1,14 @@
+143,148c143,148
+<   IOBUF mdio_iobuf (
+<      .I              (mdio_o),
+<      .IO             (mdio),
+<      .O              (mdio_i),
+<      .T              (mdio_t)
+<   );
+---
+> //  IOBUF mdio_iobuf (
+> //     .I              (mdio_o),
+> //     .IO             (mdio),
+> //     .O              (mdio_i),
+> //     .T              (mdio_t)
+> //  );
