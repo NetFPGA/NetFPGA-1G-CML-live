@@ -60,6 +60,7 @@ system.make system_incl.make: genmakes.tcl system.xmp system.mhs
 
 genmakes.tcl:
 	echo "xload xmp system.xmp" > genmakes.tcl
+	echo "xset parallel_synthesis yes" >> genmakes.tcl
 	echo "exit" >> genmakes.tcl
 
 clean: system.make
