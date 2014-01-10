@@ -13,14 +13,18 @@
  *
  *  Author:
  *        Mario Flajslik
+ *        Jay Hirata
  *
  *  Description:
  *        Top level PCIe transmit module that wraps read, write and completion
  *        transmit submodules.
  *
+ *        Modified to be compiled by Xilinx Vivado.
+ *
  *  Copyright notice:
  *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
  *                                 Junior University
+ *        Copyright (C) 2013 Computer Measurement Laboratory, LLC
  *
  *  Licence:
  *        This file is part of the NetFPGA 10G development base package.

@@ -355,7 +355,7 @@ module iface #(parameter IFACE_ID = 0)
                  .*);
    mem #(.DEPTH(`MEM_N_TX_PKT), .WIDTH(64), .VALID_MODE(1), .HAS_WR_MASK(1)) 
    u_mem_tx_pkt (.wr_mem_valid((wr_if_select == IFACE_ID[1:0]) && (wr_mem_select == `ID_MEM_TX_PKT)),
-                 .rd_mem_valid(1'b1),
+                 .rd_mem_valid(1),
                  .rd_addr_hi(mem_tx_pkt_rd_addr),
                  .rd_data_hi(mem_tx_pkt_rd_data[63:32]),
                  .rd_en_hi(mem_tx_pkt_rd_en),
@@ -378,7 +378,7 @@ module iface #(parameter IFACE_ID = 0)
                  .rst(rst_reg_p),
                  .*);
    mem #(.DEPTH(`MEM_N_TX_DNE), .WIDTH(4), .VALID_MODE(2), .HAS_WR_MASK(0)) 
-   u_mem_tx_dne (.wr_mem_valid(1'b1),
+   u_mem_tx_dne (.wr_mem_valid(1),
                  .rd_mem_valid((rd_if_select == IFACE_ID[1:0]) && (rd_mem_select == `ID_MEM_TX_DNE)), 
                  .wr_addr_hi(mem_tx_dne_wr_addr),
                  .wr_data_hi(mem_tx_dne_wr_data[63:32]),
@@ -408,7 +408,7 @@ module iface #(parameter IFACE_ID = 0)
    
    mem #(.DEPTH(`MEM_N_RX_DSC), .WIDTH(16), .VALID_MODE(1), .HAS_WR_MASK(1)) 
    u_mem_rx_dsc (.wr_mem_valid((wr_if_select == IFACE_ID[1:0]) && (wr_mem_select == `ID_MEM_RX_DSC)),
-                 .rd_mem_valid(1'b1),
+                 .rd_mem_valid(1),
                  .rd_addr_hi(mem_rx_dsc_rd_addr),
                  .rd_data_hi(mem_rx_dsc_rd_data[63:32]),
                  .rd_en_hi(mem_rx_dsc_rd_en),
@@ -431,7 +431,7 @@ module iface #(parameter IFACE_ID = 0)
                  .rst(rst_reg_p),
                  .*);
    mem #(.DEPTH(`MEM_N_RX_PKT), .WIDTH(64), .VALID_MODE(0), .HAS_WR_MASK(0)) 
-   u_mem_rx_pkt (.wr_mem_valid(1'b1),
+   u_mem_rx_pkt (.wr_mem_valid(1),
                  .rd_mem_valid((rd_if_select == IFACE_ID[1:0]) && (rd_mem_select == `ID_MEM_RX_PKT)), 
                  .wr_addr_hi(mem_rx_pkt_wr_addr),
                  .wr_data_hi(mem_rx_pkt_wr_data[63:32]),
@@ -459,7 +459,7 @@ module iface #(parameter IFACE_ID = 0)
                  .rst(rst_reg_r),
                  .*);
    mem #(.DEPTH(`MEM_N_RX_DNE), .WIDTH(8), .VALID_MODE(2), .HAS_WR_MASK(0)) 
-   u_mem_rx_dne (.wr_mem_valid(1'b1),
+   u_mem_rx_dne (.wr_mem_valid(1),
                  .rd_mem_valid((rd_if_select == IFACE_ID[1:0]) && (rd_mem_select == `ID_MEM_RX_DNE)), 
                  .wr_addr_hi(mem_rx_dne_wr_addr),
                  .wr_data_hi(mem_rx_dne_wr_data[63:32]),
@@ -529,110 +529,15 @@ module iface #(parameter IFACE_ID = 0)
    logic [`RD_Q_WIDTH-1:0]      rd_q_enq_data;
    logic                        rd_q_full;
 
-   rx_ctrl u_rx_ctrl (
-        .mem_rx_dsc_rd_addr(mem_rx_dsc_rd_addr),
-        .mem_rx_dsc_rd_data(mem_rx_dsc_rd_data),
-        .mem_rx_dsc_rd_en(mem_rx_dsc_rd_en),
-        .mem_rx_pkt_wr_addr(mem_rx_pkt_wr_addr),
-        .mem_rx_pkt_wr_data(mem_rx_pkt_wr_data),
-        .mem_rx_pkt_wr_mask(mem_rx_pkt_wr_mask),
-        .mem_rx_pkt_wr_en(mem_rx_pkt_wr_en),
-        .mem_rx_dne_wr_addr(mem_rx_dne_wr_addr),
-        .mem_rx_dne_wr_data(mem_rx_dne_wr_data),
-        .mem_rx_dne_wr_mask(mem_rx_dne_wr_mask),
-        .mem_rx_dne_wr_en(mem_rx_dne_wr_en),
-        .mem_vld_rx_dsc_wr_addr(mem_vld_rx_dsc_wr_addr),
-        .mem_vld_rx_dsc_wr_mask(mem_vld_rx_dsc_wr_mask),
-        .mem_vld_rx_dsc_wr_clear(mem_vld_rx_dsc_wr_clear),
-        .mem_vld_rx_dsc_wr_stall(mem_vld_rx_dsc_wr_stall),
-        .mem_vld_rx_dsc_rd_bit(mem_vld_rx_dsc_rd_bit),
-        .mem_vld_rx_dne_wr_addr(mem_vld_rx_dne_wr_addr),
-        .mem_vld_rx_dne_wr_mask(mem_vld_rx_dne_wr_mask),
-        .mem_vld_rx_dne_wr_clear(mem_vld_rx_dne_wr_clear),
-        .mem_vld_rx_dne_wr_stall(mem_vld_rx_dne_wr_stall),
-        .mem_vld_rx_dne_rd_addr(mem_vld_rx_dne_rd_addr),
-        .mem_vld_rx_dne_rd_bits(mem_vld_rx_dne_rd_bits),
-        .mem_vld_tx_dne_rd_addr(mem_vld_tx_dne_rd_addr),
-        .mem_vld_tx_dne_rd_bits(mem_vld_tx_dne_rd_bits),
-        .rx_dsc_mask(rx_dsc_mask),
-        .rx_pkt_mask(rx_pkt_mask),
-        .tx_dne_mask(tx_dne_mask_r),
-        .rx_dne_mask(rx_dne_mask),
-        .tx_int_enable(tx_int_enable),
-        .rx_int_enable(rx_int_enable),
-        .rx_byte_wait(rx_byte_wait),
-        .host_tx_dne_offset(host_tx_dne_offset),
-        .host_tx_dne_mask(host_tx_dne_mask),
-        .host_rx_dne_offset(host_rx_dne_offset),
-        .host_rx_dne_mask(host_rx_dne_mask),
-        .wr_q_enq_en(wr_q_enq_en),
-        .wr_q_enq_data(wr_q_enq_data),
-        .wr_q_almost_full(wr_q_almost_full),
-        .wr_q_full(wr_q_full),
-        .S_AXIS_TDATA(S_AXIS_TDATA),
-        .S_AXIS_TSTRB(S_AXIS_TSTRB),
-        .S_AXIS_TVALID(S_AXIS_TVALID),
-        .S_AXIS_TREADY(S_AXIS_TREADY),
-        .S_AXIS_TLAST(S_AXIS_TLAST),
-        .S_AXIS_TUSER(S_AXIS_TUSER),
-        .stat_mac_rx_ts(stat_mac_rx_ts),
-        .stat_mac_rx_word_cnt(stat_mac_rx_word_cnt),
-        .stat_mac_rx_pkt_cnt(stat_mac_rx_pkt_cnt),
-        .stat_mac_rx_err_cnt(stat_mac_rx_err_cnt),
-        .clk(rx_clk),
-        .rst(rst_reg_r)
-    );
-    //.tx_dne_mask(tx_dne_mask_r),
-    //.rst(rst_reg_r),
-    //.clk(rx_clk),
-
-   tx_ctrl u_tx_ctrl (
-        .mem_tx_dsc_rd_addr(mem_tx_dsc_rd_addr),
-        .mem_tx_dsc_rd_data(mem_tx_dsc_rd_data),
-        .mem_tx_dsc_rd_en(mem_tx_dsc_rd_en),
-        .mem_tx_pkt_rd_addr(mem_tx_pkt_rd_addr),
-        .mem_tx_pkt_rd_data(mem_tx_pkt_rd_data),
-        .mem_tx_pkt_rd_en(mem_tx_pkt_rd_en),
-        .mem_tx_dne_wr_addr(mem_tx_dne_wr_addr),
-        .mem_tx_dne_wr_data(mem_tx_dne_wr_data),
-        .mem_tx_dne_wr_mask(mem_tx_dne_wr_mask),
-        .mem_tx_dne_wr_en(mem_tx_dne_wr_en),
-        .mem_vld_tx_dsc_wr_addr(mem_vld_tx_dsc_wr_addr),
-        .mem_vld_tx_dsc_wr_mask(mem_vld_tx_dsc_wr_mask),
-        .mem_vld_tx_dsc_wr_clear(mem_vld_tx_dsc_wr_clear),
-        .mem_vld_tx_dsc_wr_stall(mem_vld_tx_dsc_wr_stall),
-        .mem_vld_tx_dsc_rd_bit(mem_vld_tx_dsc_rd_bit),
-        .mem_vld_tx_pkt_wr_addr(mem_vld_tx_pkt_wr_addr),
-        .mem_vld_tx_pkt_wr_mask(mem_vld_tx_pkt_wr_mask),
-        .mem_vld_tx_pkt_wr_clear(mem_vld_tx_pkt_wr_clear),
-        .mem_vld_tx_pkt_wr_stall(mem_vld_tx_pkt_wr_stall),
-        .mem_vld_tx_pkt_rd_bit(mem_vld_tx_pkt_rd_bit),
-        .mem_vld_tx_dne_wr_addr(mem_vld_tx_dne_wr_addr),
-        .mem_vld_tx_dne_wr_mask(mem_vld_tx_dne_wr_mask),
-        .mem_vld_tx_dne_wr_clear(mem_vld_tx_dne_wr_clear),
-        .mem_vld_tx_dne_wr_stall(mem_vld_tx_dne_wr_stall),
-        .tx_dsc_mask(tx_dsc_mask),
-        .tx_pkt_mask(tx_pkt_mask),
-        .tx_dne_mask(tx_dne_mask),
-        .rx_dsc_mask(rx_dsc_mask_t),
-        .rd_q_enq_en(rd_q_enq_en),
-        .rd_q_enq_data(rd_q_enq_data),
-        .rd_q_full(rd_q_full),
-        .M_AXIS_TDATA(M_AXIS_TDATA),
-        .M_AXIS_TSTRB(M_AXIS_TSTRB),
-        .M_AXIS_TVALID(M_AXIS_TVALID),
-        .M_AXIS_TREADY(M_AXIS_TREADY),
-        .M_AXIS_TLAST(M_AXIS_TLAST),
-        .M_AXIS_TUSER(M_AXIS_TUSER),
-        .stat_mac_tx_ts(stat_mac_tx_ts),
-        .stat_mac_tx_word_cnt(stat_mac_tx_word_cnt),
-        .stat_mac_tx_pkt_cnt(stat_mac_tx_pkt_cnt),
-        .rst(rst_reg_t),
-        .clk(tx_clk)
-    );
-    //.rx_dsc_mask(rx_dsc_mask_t),
-    //.rst(rst_reg_t),
-    //.clk(tx_clk)
+   rx_ctrl u_rx_ctrl (.tx_dne_mask(tx_dne_mask_r),
+                      .rst(rst_reg_r),
+                      .clk(rx_clk),
+                      .*);
+   
+   tx_ctrl u_tx_ctrl (.rx_dsc_mask(rx_dsc_mask_t),
+                      .rst(rst_reg_t), 
+                      .clk(tx_clk),
+                      .*);
    
 
    // ------------------------------------
@@ -643,22 +548,12 @@ module iface #(parameter IFACE_ID = 0)
                                                 .rst(rst_reg_r), 
                                                 .clk(rx_clk),
                                                 .*);
-
-   pcie_rd_q #(.IFACE_ID(IFACE_ID)) u_pcie_rd_q(
-        .rd_q_enq_en(rd_q_enq_en),
-        .rd_q_enq_data(rd_q_enq_data),
-        .rd_q_full(rd_q_full),
-        .rd_q_req_v(rd_q_req_v),
-        .rd_q_req_data(rd_q_req_data),
-        .rd_q_req_grant(rd_q_req_grant),
-        .max_read_decoded(max_read_decoded_reg_t),
-        .clk(tx_clk),
-        .rst(rst_reg_t)
-    );
-    //.max_read_decoded(max_read_decoded_reg_t),
-    //.rst(rst_reg_t),
-    //.clk(tx_clk),
-
+   
+   pcie_rd_q #(.IFACE_ID(IFACE_ID)) u_pcie_rd_q(.max_read_decoded(max_read_decoded_reg_t),
+                                                .rst(rst_reg_t), 
+                                                .clk(tx_clk),
+                                                .*);
+   
    pcie_cm_q u_pcie_cm_q(.max_payload_decoded(max_payload_decoded_reg_p),
                          .pcie_clk(pcie_clk),
                          .rx_clk(rx_clk),

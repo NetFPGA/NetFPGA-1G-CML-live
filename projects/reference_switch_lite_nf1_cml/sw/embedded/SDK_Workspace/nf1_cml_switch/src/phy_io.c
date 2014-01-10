@@ -51,7 +51,7 @@
 
 unsigned int phydef[] = PHY_DEFAULTS;
 
-#define MDIO_BASE_ADDR XPAR_NF7_MDIO_0_BASEADDR
+#define MDIO_BASE_ADDR XPAR_MDIO_CTRL_0_BASEADDR
 // MDIO registers
 #define MDIOADDR      (MDIO_BASE_ADDR + 0x00)
 #define MDIOWR        (MDIO_BASE_ADDR + 0x04)

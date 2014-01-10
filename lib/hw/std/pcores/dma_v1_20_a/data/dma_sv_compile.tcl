@@ -1,4 +1,4 @@
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #       dma_sv_compile.tcl 
@@ -7,7 +7,7 @@
 #        hw/contrib/pcores/dma_v1_20_a
 #
 #  Author:
-#        Jack Meador, Computer Measurement Laboratory, LLC
+#        Jack Meador
 #
 #  Description:
 #        vivado -mode tcl -source dma_sv_compile.tcl
@@ -15,12 +15,8 @@
 #        Compile dma_engine System Verilog module into EDF netlist and
 #        Verilog structural simulation model
 #
-#        For more information about how Xilinx EDK works, please visit
-#        http://www.xilinx.com/support/documentation/dt_edk.htm
-#
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
-#                                 Junior University
+#        Copyright (C) 2013 Computer Measurement Laboratory, LLC
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
@@ -90,5 +86,5 @@ set_property file_type SystemVerilog [get_files *.v]
 synth_design -top dma_engine -no_iobuf
 
 write_edif -force $netlist_dir/$ip_name.edf
-write_verilog -force $model_dir/$ip_name.v
+#write_verilog -force $model_dir/$ip_name.v
 exit

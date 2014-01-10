@@ -13,15 +13,19 @@
  *
  *  Author:
  *        Mario Flajslik
+ *        Jay Hirata
  *
  *  Description:
  *        PCIe completion transmit module. Once this module is granted access
  *        to the PCIe core interface it drives the next completion pakcet onto
  *        that interface.
  *
+ *        Modified to be compiled by Xilinx Vivado.
+ *
  *  Copyright notice:
  *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
  *                                 Junior University
+ *        Copyright (C) 2013 Computer Measurement Laboratory, LLC
  *
  *  Licence:
  *        This file is part of the NetFPGA 10G development base package.

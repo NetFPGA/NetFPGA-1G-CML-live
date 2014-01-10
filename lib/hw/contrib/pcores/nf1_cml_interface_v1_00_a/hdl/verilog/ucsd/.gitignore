@@ -1,0 +1,6 @@
+xilinx_reset_sync.v
+xilinx_rgmii_v2_0_if.v
+xilinx_rx_client_fifo.v
+xilinx_sync_block.v
+xilinx_ten_100_1g_eth_fifo.v
+xilinx_tx_client_fifo.v
