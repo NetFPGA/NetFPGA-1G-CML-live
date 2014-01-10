@@ -6,7 +6,7 @@
 #        Makefile
 #
 #  Library:
-#        hw/contrib/pcores/nf7_1g_interface_v1_10_a
+#        hw/contrib/pcores/nf1_cml_interface_v1_10_a
 #
 #  Author:
 #        Adam Covington
@@ -14,7 +14,7 @@
 #
 #  Description:
 #        make install : build trimac, trimac_lite and ucsd_mac
-#        in preparation for use with nf7_1g_interface
+#        in preparation for use with nf1_cml_interface
 #
 #        For more information about how Xilinx EDK works, please visit
 #        http://www.xilinx.com/support/documentation/dt_edk.htm
@@ -46,7 +46,7 @@ TRIMAC_LITE_WORK:= trimac_lite_work
 
 install: trimac trimac_lite ucsd_mac
 	@echo "///////////////////////////////////////////";
-	@echo "//nf7_1g_interface installed";
+	@echo "//nf1_cml_interface installed";
 	@echo "///////////////////////////////////////////";
 
 trimac: xco/trimac.xco
@@ -107,5 +107,5 @@ clean:
 	@rm -rf netlist
 	@rm -rf simhdl
 	@echo "/////////////////////////////////////////";
-	@echo "//nf7_1g_interface removed";
+	@echo "//nf1_cml_interface removed";
 	@echo "/////////////////////////////////////////";

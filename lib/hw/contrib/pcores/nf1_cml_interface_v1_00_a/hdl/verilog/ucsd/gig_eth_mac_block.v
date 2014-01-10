@@ -4,7 +4,7 @@
  *       gig_eth_mac_block.v
  *
  * Library:
- * 		 hw/std/pcores/nf7_1g_interface_v1_10_a
+ * 		 hw/std/pcores/nf1_cml_interface_v1_10_a
  *
  * Module:
  * 		gig_eth_mac_block

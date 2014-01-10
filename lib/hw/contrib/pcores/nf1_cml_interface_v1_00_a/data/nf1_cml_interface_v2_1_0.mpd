@@ -3,10 +3,10 @@
 #  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        nf7_1g_interface_v2_1_0.mpd
+#        nf1_cml_interface_v2_1_0.mpd
 #
 #  Library:
-#        hw/contrib/pcores/nf7_1g_interface_v1_00_a
+#        hw/contrib/pcores/nf1_cml_interface_v1_00_a
 #
 #  Author:
 #        Adam Covington
@@ -38,7 +38,7 @@
 #
 #
 
-BEGIN nf7_1g_interface
+BEGIN nf1_cml_interface
 
 ## Peripheral Options
 OPTION IPTYPE = PERIPHERAL
@@ -48,8 +48,8 @@ OPTION USAGE_LEVEL = BASE_USER
 OPTION RUN_NGCBUILD = TRUE
 OPTION STYLE = MIX
 OPTION IP_GROUP = Communication High-Speed:MICROBLAZE
-OPTION DESC = NetFPGA-7 Gigabit Ethernet Interface
-OPTION LONG_DESC = NetFPGA-7 Gigabit Ethernet Interface
+OPTION DESC = NetFPGA-1G-CML Gigabit Ethernet Interface
+OPTION LONG_DESC = NetFPGA-1G-CML Gigabit Ethernet Interface
 
 ## Bus Interfaces
 BUS_INTERFACE BUS = M_AXIS, BUS_STD = AXIS, BUS_TYPE = INITIATOR

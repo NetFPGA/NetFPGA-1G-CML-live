@@ -3,13 +3,13 @@
  *  NetFPGA-1G-CML http://www.netfpga.org
  *
  *  File:
- *        nf7_1g_interface.v
+ *        nf1_cml_interface.v
  *
  *  Library:
- *        hw/contrib/pcores/nf7_1g_interface_v1_10_a
+ *        hw/contrib/pcores/nf1_cml_interface_v1_10_a
  *
  *  Module:
- *        nf7_1g_interface
+ *        nf1_cml_interface
  *
  *  Author:
  *        Adam Covington
@@ -49,7 +49,7 @@
 
 `uselib lib=nf10_axis_converter_v1_00_a
 
-module nf7_1g_interface
+module nf1_cml_interface
 #(
     // Master AXI Stream Data Width
     parameter C_FAMILY = "kintex7",

@@ -3,7 +3,7 @@
 --       temac_regs.vhd
 --
 -- Library:
--- 		hw/contrib/pcores/nf7_1g_interface_v1_10_a
+-- 		hw/contrib/pcores/nf1_cml_interface_v1_10_a
 --
 -- Module:
 -- 	        register interface wrapper 
@@ -13,7 +13,7 @@
 -- 
 -- Description:
 --              Register interface customized for use with Xilinx Tri-mode Ethernet MAC
---              This is used by C_MAC_SEL = 0 in nf7_1g_interface.v 
+--              This is used by C_MAC_SEL = 0 in nf1_cml_interface.v 
 --
 -- Copyright notice:
 -- 		Copyright (C) 2013 Computer Measurement Laboratory, LLC
@@ -47,8 +47,8 @@ use proc_common_v3_00_a.ipif_pkg.calc_num_ce;
 library axi_lite_ipif_v1_01_a;
 use axi_lite_ipif_v1_01_a.axi_lite_ipif;
 
-library nf7_1g_interface_v1_00_a;
-use nf7_1g_interface_v1_00_a.cfg_core;
+library nf1_cml_interface_v1_00_a;
+use nf1_cml_interface_v1_00_a.cfg_core;
 
 entity temac_regs is
     generic (
@@ -189,7 +189,7 @@ begin
         ip2bus_data(C_S_AXI_DATA_WIDTH - 1 downto 32)   <= (others => '0');
     end generate;
 
-    cfg_core_i : entity nf7_1g_interface_v1_00_a.cfg_core
+    cfg_core_i : entity nf1_cml_interface_v1_00_a.cfg_core
     generic map (
         -- Default tx vector
         C_TX_PAUSE_MAC_ADDR             => C_TX_PAUSE_MAC_ADDR,

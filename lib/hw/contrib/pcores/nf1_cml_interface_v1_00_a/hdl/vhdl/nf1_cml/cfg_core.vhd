@@ -3,7 +3,7 @@
 --       cfg_core.vhd
 --
 -- Library:
--- 		 hw/contrib/pcores/nf7_1g_interface_v1_10_a
+-- 		 hw/contrib/pcores/nf1_cml_interface_v1_10_a
 --
 -- Module:
 -- 	        register interface core	
@@ -13,7 +13,7 @@
 -- 
 -- Description:
 --              Register interface customized for use with Xilinx Tri-mode Ethernet MAC
---              This is used by C_MAC_SEL = 0 in nf7_1g_interface 
+--              This is used by C_MAC_SEL = 0 in nf1_cml_interface 
 --
 -- Copyright notice:
 -- 		Copyright (C) 2013 Computer Measurement Laboratory, LLC
