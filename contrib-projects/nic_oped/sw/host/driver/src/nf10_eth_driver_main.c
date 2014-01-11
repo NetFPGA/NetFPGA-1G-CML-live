@@ -2104,9 +2104,6 @@ static int __init nf10_eth_driver_init(void)
 
     PDEBUG("nf10_eth_driver_init(): registering genl operations... victory!\n");
 
-    /* FIXME: Do we need to check for error on create_proc_read_entry? */
-    create_proc_read_entry("driver/nf10_eth_driver", 0, NULL, read_proc, NULL);
-
     /* Enable NAPI. */
     napi_enable(&nf10_napi_struct);
 
