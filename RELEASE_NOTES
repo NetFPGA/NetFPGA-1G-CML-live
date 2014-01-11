@@ -48,11 +48,12 @@ https://github.com/NetFPGA/NetFPGA-public/wiki/HW-Tests
 
 3. Updated xparam2regdefines.py to remove the "_OFFSET" suffix in the register names. Also updated the software monitoring system files to keep them in sync with the changes.
 
-4. Driver updates
+4. Driver fixes and updates
 
--- Remove libnl source code (from nic_oped contrib project). As modern OS have use their own libnl packages (for Fedora it's called libnl3). It can be installed by yum install libnl3
+-- removed libnl source code (from nic_oped contrib project). As modern OS have use their own libnl packages (for Fedora it's called libnl3). It can be installed by yum install libnl3
 -- removed the copy of driver files in reference_nic_1g
--- Updated driver to support kernel 3.12.5
+-- updated nic_oped driver to support kernel 3.12.5
+-- removed unused attributes of nf10driver.c in reference_nic driver
 
 
 
