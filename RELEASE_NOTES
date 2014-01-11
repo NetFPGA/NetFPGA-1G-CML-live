@@ -9,14 +9,15 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 5.0.1rc
+GIT VERSION 5.0.1
 
 Before using this code, please check the release notes for 5.0.1 below
 
+Here are the release notes for 5.0.1 
 
-1. Integrated test infrastructure with both_major_minor tests.
+1. Integrated test infrastructure with both_major_minor tests for reference_router.
 
-We have a integrated test infrastructure for reference_router project. 
+Following are the tests for reference_router. 
 
 both_badipchksum_packet  
 both_lpm_generic  
@@ -39,5 +40,19 @@ https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Simulations
 
 wiki for HW test infrastructure:
 https://github.com/NetFPGA/NetFPGA-public/wiki/HW-Tests
+
+
+2. Updated the Makefiles of reference projects 
+-- to remove residual files when doing a "make clean"
+-- renaming the bitfiles in accordance with the name of the project
+
+3. Updated xparam2regdefines.py to remove the "_OFFSET" suffix in the register names. Also updated the software monitoring system files to keep them in sync with the changes.
+
+4. Driver updates
+
+-- Remove libnl source code (from nic_oped contrib project). As modern OS have use their own libnl packages (for Fedora it's called libnl3). It can be installed by yum install libnl3
+-- removed the copy of driver files in reference_nic_1g
+-- Updated driver to support kernel 3.12.5
+
 
 
