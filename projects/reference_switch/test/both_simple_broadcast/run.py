@@ -13,10 +13,10 @@ nftest_init(sim_loop = [], hw_config = [phy2loop0])
 
 if isHW():
     # Clearing the LUT_HIT and LUT_MISS by asserting the reset_counters
-    nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_RESET_CNTRS_OFFSET(), 0x1)
+    nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_RESET_CNTRS(), 0x1)
 
     # Deasserting the reset_counters
-    nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_RESET_CNTRS_OFFSET(), 0x0)
+    nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_RESET_CNTRS(), 0x0)
 
 nftest_start()
 
@@ -49,12 +49,12 @@ nftest_barrier()
 
 if isHW():
     # Expecting the LUT_MISS counter to be incremented by 0x14, 20 packets 
-    rres1=nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET(), 0) # lut_hit
-    rres2=nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG_OFFSET(), 0x14)
+    rres1=nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG(), 0) # lut_hit
+    rres2=nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG(), 0x14)
     mres=[rres1,rres2]
 else:
-    nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET(), 0) # lut_hit
-    nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG_OFFSET(), 0x14) # lut_miss
+    nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG(), 0) # lut_hit
+    nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG(), 0x14) # lut_miss
     mres=[]
 
 

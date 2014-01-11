@@ -31,16 +31,16 @@ def set_router_MAC(port, MAC):
 
 	port -= 1
 
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_MAC_0_HIGH_OFFSET() + port * 8, mac_hi)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_MAC_0_LOW_OFFSET() + port * 8, mac_lo)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_MAC_0_HIGH() + port * 8, mac_hi)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_MAC_0_LOW() + port * 8, mac_lo)
 
 def get_router_MAC(port, MAC):
 	port = int(port)
 	if port < 1 or port > 4:
 		print 'bad port number'
 	port -= 1
-	mac_hi = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_MAC_0_HIGH_OFFSET() + port * 8)
-	mac_lo = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_MAC_0_LOW_OFFSET() + port * 8)
+	mac_hi = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_MAC_0_HIGH() + port * 8)
+	mac_lo = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_MAC_0_LOW() + port * 8)
 	mac_tmp = "%04x%08x"%(mac_hi, mac_lo)
         grp_mac = re.search("^(..)(..)(..)(..)(..)(..)$", mac_tmp).groups()
         str_mac = ''
@@ -64,11 +64,11 @@ def add_LPM_table_entry(index, IP, mask, next_IP, next_port):
                 mask = dotted(mask)
         if re.match("(\d+)\.", next_IP):
                 next_IP = dotted(next_IP)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_OFFSET(), IP)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK_OFFSET(), mask)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_NEXT_HOP_IP_OFFSET(), next_IP)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ_OFFSET(), next_port)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_WR_ADDR_OFFSET(), index)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP(), IP)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK(), mask)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_NEXT_HOP_IP(), next_IP)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ(), next_port)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_WR_ADDR(), index)
 
 def check_LPM_table_entry(index, IP, mask, next_IP, next_port):
 	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH() - 1 or next_port < 0 or next_port > 255:
@@ -81,31 +81,31 @@ def check_LPM_table_entry(index, IP, mask, next_IP, next_port):
         if re.match("(\d+)\.", IP):
 		next_IP = dotted(next_IP)
 
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_RD_ADDR_OFFSET(), index)
-	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_OFFSET(), IP)
-	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK_OFFSET(), mask)
-	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_NEXT_HOP_IP_OFFSET(), next_IP)
-	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ_OFFSET(), next_port)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_RD_ADDR(), index)
+	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP(), IP)
+	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK(), mask)
+	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_NEXT_HOP_IP(), next_IP)
+	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ(), next_port)
 
 def invalidate_LPM_table_entry(index):
 	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH()-1:
 		print 'Bad data'
 		sys.exit(1)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_OFFSET(), 0)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK_OFFSET(), 0xffffffff)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_NEXT_HOP_IP_OFFSET(), 0)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ_OFFSET(), 0)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_WR_ADDR_OFFSET(), index)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP(), 0)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK(), 0xffffffff)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_NEXT_HOP_IP(), 0)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ(), 0)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_WR_ADDR(), index)
 
 def get_LPM_table_entry(index):
 	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ROUTE_TABLE_DEPTH() - 1:
 		print 'get_LPM_table_entry_generic: Bad data'
 		sys.exit(1)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_RD_ADDR_OFFSET(), index)	
-	IP = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_OFFSET())
-	mask = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK_OFFSET())
-	next_hop = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_NEXT_HOP_IP_OFFSET())
-	output_port = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ_OFFSET())
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_RD_ADDR(), index)	
+	IP = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP())
+	mask = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_IP_MASK())
+	next_hop = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_NEXT_HOP_IP())
+	output_port = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_OQ())
 
 	ip_str = socket.inet_ntoa(struct.pack('!L', IP))
 	mask_str = socket.inet_ntoa(struct.pack('!L', mask))
@@ -123,22 +123,22 @@ def add_dst_ip_filter_entry(index, IP):
                 sys.exit(1)
         if re.match("(\d+)\.", IP):
                 IP = dotted(IP)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_IP_OFFSET(), IP)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_WR_ADDR_OFFSET(), index)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_IP(), IP)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_WR_ADDR(), index)
 
 def invalidate_dst_ip_filter_entry(index):
 	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_DST_IP_FILTER_TABLE_DEPTH()-1:
 		print 'Bad data'
 		sys.exit(1)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_IP_OFFSET(), 0)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_WR_ADDR_OFFSET(), index)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_IP(), 0)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_WR_ADDR(), index)
 
 def get_dst_ip_filter_entry(index):
 	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_DST_IP_FILTER_TABLE_DEPTH()-1:
 		print 'Bad data'
 		sys.exit(1)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_RD_ADDR_OFFSET(), index)
-	return nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_IP_OFFSET())
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_RD_ADDR(), index)
+	return nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_FILTER_IP())
 
 
 ################################################################
@@ -155,19 +155,19 @@ def add_ARP_table_entry(index, IP, MAC):
         mac = MAC.split(':')
         mac_hi = int(mac[0],16)<<8 | int(mac[1],16)
         mac_lo = int(mac[2],16)<<24 | int(mac[3],16)<<16 | int(mac[4],16)<<8 | int(mac[5],16)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP_OFFSET(), IP)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_HIGH_OFFSET(), mac_hi)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW_OFFSET(), mac_lo)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_WR_ADDR_OFFSET(), index)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP(), IP)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_HIGH(), mac_hi)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW(), mac_lo)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_WR_ADDR(), index)
 
 def invalidate_ARP_table_entry(index):
         if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ARP_TABLE_DEPTH()-1:
                 print 'Bad data'
                 sys.exit(1)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP_OFFSET(), 0)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_HIGH_OFFSET(), 0)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW_OFFSET(), 0)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_WR_ADDR_OFFSET(), index)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP(), 0)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_HIGH(), 0)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW(), 0)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_WR_ADDR(), index)
 
 def check_ARP_table_entry(index, IP, MAC):
 	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ARP_TABLE_DEPTH() - 1:
@@ -178,19 +178,19 @@ def check_ARP_table_entry(index, IP, MAC):
 	mac = MAC.split(':')
 	mac_hi = int(mac[0],16)<<8 | int(mac[1],16)
 	mac_lo = int(mac[2],16)<<24 | int(mac[3],16)<<16 | int(mac[4],16)<<8 | int(mac[5],16)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_RD_ADDR_OFFSET(), index)
-	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP_OFFSET(), IP)
-	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_HIGH_OFFSET(), mac_hi)
-	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW_OFFSET(), mac_lo)
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_LPM_RD_ADDR(), index)
+	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP(), IP)
+	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_HIGH(), mac_hi)
+	nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW(), mac_lo)
 
 def get_ARP_table_entry(index):
 	if index < 0 or index > XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_ARP_TABLE_DEPTH()-1:
 		print 'check_ARP_table_entry: Bad data'
 		sys.exit(1)
-	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_RD_ADDR_OFFSET(), index)
-	IP = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP_OFFSET())
-	mac_hi = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_HIGH_OFFSET())
-	mac_lo = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW_OFFSET())
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_RD_ADDR(), index)
+	IP = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_IP())
+	mac_hi = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_HIGH())
+	mac_lo = nftest_regread(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR1_ARP_MAC_LOW())
 
 	IP_str = socket.inet_ntoa(struct.pack('!L', IP))
 	mac_tmp = "%04x%08x"%(mac_hi, mac_lo)

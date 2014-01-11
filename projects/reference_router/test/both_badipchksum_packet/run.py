@@ -6,6 +6,7 @@ import os
 
 from scapy.layers.all import Ether, IP, TCP
 from RegressRouterLib import *
+from reg_defines_reference_router import *
 
 phy2loop0 = ('../connections/2phy', [])
 
@@ -14,10 +15,10 @@ nftest_start()
 
 if isHW():
     # asserting the reset_counter to 1 for clearing the registers
-    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x1)
+    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS(), 0x1)
 
     # asseting teh reset_counter to 0 for enable the counters to increment 
-    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x0)
+    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS(), 0x0)
 
 routerMAC = ["00:ca:fe:00:00:01", "00:ca:fe:00:00:02", "00:ca:fe:00:00:03", "00:ca:fe:00:00:04"]
 routerIP = ["192.168.0.40", "192.168.1.40", "192.168.2.40", "192.168.3.40"]
@@ -66,10 +67,10 @@ if not isHW():
     simReg.regDelay(1000)    
 
 if isHW(): 	
-    rres1=nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_DROPPED_CHECKSUM_OFFSET(), 60)
+    rres1=nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_DROPPED_CHECKSUM(), 60)
     mres=[rres1]
 else:
-    nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_DROPPED_CHECKSUM_OFFSET(), 30)
+    nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_DROPPED_CHECKSUM(), 30)
     mres=[]
 
 nftest_barrier()
