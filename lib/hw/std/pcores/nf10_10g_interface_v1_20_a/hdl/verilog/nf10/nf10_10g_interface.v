@@ -153,7 +153,7 @@ module nf10_10g_interface
 // Added by neels
 
   localparam NUM_RW_REGS       = 1;
-  localparam NUM_RO_REGS       = 2;
+  localparam NUM_RO_REGS       = 14;
 
     wire                                            Bus2IP_Clk;
     wire                                            Bus2IP_Resetn;
@@ -197,8 +197,22 @@ module nf10_10g_interface
     wire [C_S_AXIS_TUSER_WIDTH-1:0] s_axis_tuser_internal;
     wire  s_axis_tvalid_internal;
     wire  s_axis_tready_internal;
+
+
     wire  s_axis_tlast_internal;
 
+// tx_queues wires 
+    wire  tx_dequeued_pkt;
+    wire  tx_pkts_enqueued_signal;
+    wire  [15:0] tx_bytes_enqueued;
+    reg [31:0] tx_dequeue_bytes_ff,tx_dequeue_bytes_ff_d, tx_dequeue_bytes_ff_dd;
+     wire [31:0] tx_dequeue_bytes;
+    wire be;
+//    wire  drop_pkt;
+    wire info_fifo_rd_en;
+    wire info_fifo_wr_en;
+    wire fifo_wr_en;
+reg [31:0] tx_pkts_enqueued_counter, tx_bytes_enqueued_counter;
 // Modified by Neels for testing
 
   wire     [NUM_RW_REGS*C_S_AXI_DATA_WIDTH-1 : 0] rw_regs;
@@ -206,8 +220,23 @@ module nf10_10g_interface
 // wire rx_good_frame and rx_bad_frames are used to trigger the counters 	  
   reg      [C_S_AXI_DATA_WIDTH-1 : 0]             good_frames_counter;
   reg      [C_S_AXI_DATA_WIDTH-1 : 0]             bad_frames_counter;
+  reg      [C_S_AXI_DATA_WIDTH-1 : 0]             tx_dequeued_pkt_counter;	
+  reg      [C_S_AXI_DATA_WIDTH-1 : 0]             drop_pkt_counter;	
+  wire      [C_S_AXI_DATA_WIDTH-1 : 0]             bytes;
+  reg      [C_S_AXI_DATA_WIDTH-1 : 0]             bytes_counter;
   wire                                            rst_cntrs;
-
+  reg [31:0] tx_bytes_in_queue, tx_pkts_in_queue, rx_bytes_in_queue, rx_pkts_in_queue;
+  reg [31:0] rx_pkts_dropped, rx_bytes_dropped;
+  reg [31:0] tx_pkts_dropped, tx_bytes_dropped;
+  reg [31:0] rx_enqueued_pkts;
+// rx_queues
+  reg [C_S_AXI_DATA_WIDTH-1 : 0] rx_bytes_pushed_in; 
+  reg [C_S_AXI_DATA_WIDTH-1 : 0] rx_bytes_pushed_out;
+  reg [31:0] rx_queue_in_bytes_ff;
+  reg [31:0] number_of_ones;
+  
+  wire [31:0] rx_queue_in_bytes;
+  reg [31:0] rx_pkts_dequeued_counter, rx_bytes_dequeued_counter;
   wire reset = ~axi_resetn;
   assign m_axis_tuser_internal = {(C_M_AXIS_TUSER_WIDTH){1'b0}};
 
@@ -317,10 +346,13 @@ module nf10_10g_interface
        .tvalid(m_axis_tvalid_internal),
        .tlast(m_axis_tlast_internal),
        .tready(m_axis_tready_internal),
-
+       //.drop_pkt(drop_pkt),
        .clk(axi_aclk),
        .reset(~axi_resetn),
-
+       .fifo_wr_en(fifo_wr_en),
+       //	.info_fifo_rd_en(info_fifo_rd_en),
+	//.info_fifo_wr_en(info_fifo_wr_en),
+	//.rx_queue_in_bytes(rx_queue_in_bytes),
        // MAC side
        .rx_data(rx_data),
        .rx_data_valid(rx_data_valid),
@@ -330,19 +362,24 @@ module nf10_10g_interface
     );
 
     tx_queue #(
-       .AXI_DATA_WIDTH(C_S_AXIS_DATA_WIDTH_INTERNAL)
+       .AXI_DATA_WIDTH(C_S_AXIS_DATA_WIDTH_INTERNAL),
+       .C_S_AXIS_TUSER_WIDTH(C_S_AXIS_TUSER_WIDTH)
     )
     tx_queue (
        // AXI side
+       .tuser(s_axis_tuser_internal),
        .tdata(s_axis_tdata_internal),
        .tstrb(s_axis_tstrb_internal),
        .tvalid(s_axis_tvalid_internal),
        .tlast(s_axis_tlast_internal),
        .tready(s_axis_tready_internal),
-
+       .tx_dequeued_pkt(tx_dequeued_pkt),
+       .tx_pkts_enqueued_signal(tx_pkts_enqueued_signal),
+       .tx_bytes_enqueued(tx_bytes_enqueued),
+       .be(be),
        .clk(axi_aclk),
        .reset(~axi_resetn),
-
+       .bytes(bytes),
        // MAC side
        .tx_data(tx_data),
        .tx_data_valid(tx_data_valid),
@@ -477,11 +514,33 @@ module nf10_10g_interface
   );
 
 assign rst_cntrs = rw_regs[0];
-assign ro_regs = {good_frames_counter, bad_frames_counter};
+/*rx_bytes_pushed_out, rx_bytes_pushed_in,*/
+assign ro_regs = {tx_bytes_in_queue, tx_pkts_in_queue, rx_bytes_in_queue, rx_pkts_in_queue, tx_bytes_enqueued_counter, tx_pkts_enqueued_counter, tx_dequeue_bytes, tx_dequeued_pkt_counter,rx_bytes_dequeued_counter, rx_pkts_dequeued_counter, rx_queue_in_bytes, rx_enqueued_pkts, good_frames_counter, bad_frames_counter};
+
+
+
+always @(posedge axi_aclk)
+        if(~axi_resetn | rst_cntrs) begin//{
+        rx_pkts_dropped <= 'b0;
+        rx_bytes_dropped <= 'b0;
+	tx_bytes_in_queue <= 'b0;
+	tx_pkts_in_queue  <= 'b0;
+	rx_bytes_in_queue <= 'b0;
+	rx_pkts_in_queue  <= 'b0;
+                end//}
+
+        else    begin//{
+	rx_pkts_dropped <= (good_frames_counter + bad_frames_counter)-rx_pkts_dequeued_counter;
+	rx_bytes_dropped <= rx_queue_in_bytes - rx_bytes_dequeued_counter;
+	tx_bytes_in_queue <= tx_bytes_enqueued_counter - tx_dequeue_bytes;
+	tx_pkts_in_queue  <= tx_pkts_enqueued_counter - tx_dequeued_pkt_counter;
+	rx_bytes_in_queue <= rx_queue_in_bytes - (rx_bytes_dropped + rx_bytes_dequeued_counter);
+	rx_pkts_in_queue  <= good_frames_counter - (rx_pkts_dropped + rx_pkts_dequeued_counter);
+                end//}
 
 reg rx_good_frame_d1, rx_good_frame_d2;
 always @(posedge clk156)
-	if (~axi_resetn) begin
+	if (~axi_resetn | rst_cntrs) begin
 		rx_good_frame_d1 <= 0;
 		rx_good_frame_d2 <= 0;
 	end
@@ -496,11 +555,7 @@ assign rx_good_frame_sig = rx_good_frame_d1 & ~rx_good_frame_d2;
 
 reg rx_bad_frame_d1, rx_bad_frame_d2;
 always @(posedge clk156)
-	if (~axi_resetn) begin
-		rx_bad_frame_d1 <= 0;
-		rx_bad_frame_d2 <= 0;
-	end
-	else if (rst_cntrs) begin
+	if (~axi_resetn | rst_cntrs) begin
 		rx_bad_frame_d1 <= 0;
 		rx_bad_frame_d2 <= 0;
 	end
@@ -514,21 +569,242 @@ assign rx_bad_frame_sig = rx_bad_frame_d1 & ~rx_bad_frame_d2;
 	
 
 
+reg tx_dequeued_pkt_d1, tx_dequeued_pkt_d2;
+always @(posedge clk156)
+        if (~axi_resetn | rst_cntrs) begin
+                tx_dequeued_pkt_d1 <= 0;
+                tx_dequeued_pkt_d2 <= 0;
+        end
+        else begin
+                tx_dequeued_pkt_d1 <= tx_dequeued_pkt;
+                tx_dequeued_pkt_d2 <= tx_dequeued_pkt_d1;
+        end
+
+wire tx_dequeued_pkt_sig;
+assign tx_dequeued_pkt_sig = tx_dequeued_pkt_d1 & ~tx_dequeued_pkt_d2;
+
+
+reg [31:0] num;
+
+always @(*) begin//{
+num = 'd0;
+
+case(rx_data_valid)
+8'b00000001 : num ='d1;
+8'b00000011 : num ='d2;
+8'b00000111 : num ='d3;
+8'b00001111 : num ='d4;
+8'b00011111 : num ='d5;
+8'b00111111 : num ='d6;
+8'b01111111 : num ='d7;
+8'b11111111 : num ='d8;
+default: num ='d0;
+endcase 
+end//}
+	
+
 always@(posedge clk156)
-	if(~axi_resetn)
+      if(~axi_resetn | rst_cntrs)
+              rx_queue_in_bytes_ff <= 'b0;
+       else
+              rx_queue_in_bytes_ff <= rx_queue_in_bytes_ff+ num;
+
+assign rx_queue_in_bytes = rx_queue_in_bytes_ff;
+
+
+// tx_queue_dequeue calculation
+
+reg [31:0] num_tx;
+//reg [31:0] tx_dequeue_bytes_ff;
+//wire [31:0] tx_dequeue_bytes;
+
+always @(*) begin//{
+num_tx = 'd0;
+
+case(tx_data_valid)
+8'b00000001 : num_tx ='d1;
+8'b00000011 : num_tx ='d2;
+8'b00000111 : num_tx ='d3;
+8'b00001111 : num_tx ='d4;
+8'b00011111 : num_tx ='d5;
+8'b00111111 : num_tx ='d6;
+8'b01111111 : num_tx ='d7;
+8'b11111111 : num_tx ='d8;
+default: num_tx ='d0;
+endcase
+end//}
+
+
+always@(posedge clk156)
+      if(~axi_resetn | rst_cntrs)
+              tx_dequeue_bytes_ff <= 'b0;
+       else if(be)
+              tx_dequeue_bytes_ff <= tx_dequeue_bytes_ff+ num_tx;
+	else
+		tx_dequeue_bytes_ff <= tx_dequeue_bytes_ff;
+
+
+//assign tx_dequeue_bytes = tx_dequeue_bytes_ff;
+
+
+always @(posedge axi_aclk)
+        if(~axi_resetn | rst_cntrs) begin//{
+                tx_dequeue_bytes_ff_d <= 'b0;
+		tx_dequeue_bytes_ff_dd <= 'b0;
+		end//}
+        else    begin//{
+                tx_dequeue_bytes_ff_d  <= tx_dequeue_bytes_ff;
+                tx_dequeue_bytes_ff_dd <= tx_dequeue_bytes_ff_d;
+
+		end//}
+
+
+assign tx_dequeue_bytes = tx_dequeue_bytes_ff_dd;
+
+//tx_packets enqueued
+
+reg tx_pkts_enqueued_signal_d1, tx_pkts_enqueued_signal_d2;
+always @(posedge axi_aclk)
+        if (~axi_resetn | rst_cntrs) begin
+                tx_pkts_enqueued_signal_d1 <= 0;
+                tx_pkts_enqueued_signal_d2 <= 0;
+        end
+        else begin
+                tx_pkts_enqueued_signal_d1 <= tx_pkts_enqueued_signal;
+                tx_pkts_enqueued_signal_d2 <= tx_pkts_enqueued_signal_d1;
+        end
+
+wire tx_pkts_enqueued_signal_sig;
+assign tx_pkts_enqueued_signal_sig = tx_pkts_enqueued_signal_d1 & ~tx_pkts_enqueued_signal_d2;
+
+
+always @(posedge axi_aclk)
+        if (~axi_resetn | rst_cntrs) begin
+                tx_pkts_enqueued_counter <= 0;
+        end
+	else if (tx_pkts_enqueued_signal_sig) begin
+		tx_pkts_enqueued_counter <= tx_pkts_enqueued_counter + 'b1;
+	end 
+        else begin
+                 tx_pkts_enqueued_counter <= tx_pkts_enqueued_counter;
+
+        end
+
+
+always @(posedge axi_aclk)
+        if (~axi_resetn | rst_cntrs) begin
+                tx_bytes_enqueued_counter <= 0;
+        end
+        else begin
+                tx_bytes_enqueued_counter <= tx_bytes_enqueued_counter + tx_bytes_enqueued;
+        end
+
+// rx_dequeued pkts and bytes
+
+always @(posedge axi_aclk)
+         if (~axi_resetn | rst_cntrs) begin
+                 rx_pkts_dequeued_counter <= 0;
+         end
+         else if (m_axis_tvalid & m_axis_tready & m_axis_tlast) begin
+                 rx_pkts_dequeued_counter <= rx_pkts_dequeued_counter + 'b1;
+         end
+         else begin
+                  rx_pkts_dequeued_counter <= rx_pkts_dequeued_counter;
+ 
+         end
+
+
+
+localparam HUNT = 0;
+localparam ADD = 1;
+
+reg ps,ns;
+reg [31:0] ntemp_rx_bytes_dequeued_counter, nrx_bytes_dequeued_counter;
+reg [31:0] temp_rx_bytes_dequeued_counter;
+
+always @(*) begin//{
+ns = ps;
+ntemp_rx_bytes_dequeued_counter = temp_rx_bytes_dequeued_counter;
+nrx_bytes_dequeued_counter = rx_bytes_dequeued_counter;
+case(ps)
+HUNT: if(m_axis_tready & m_axis_tvalid) begin//{
+	ntemp_rx_bytes_dequeued_counter =  m_axis_tuser[15:0];
+	ns= ADD;
+	end//}
+ADD : if(m_axis_tready & m_axis_tvalid & m_axis_tlast) begin//{
+        nrx_bytes_dequeued_counter = nrx_bytes_dequeued_counter + ntemp_rx_bytes_dequeued_counter;
+        ns= HUNT;
+	end//}
+default: ns = HUNT;
+endcase
+
+end//}
+
+always @(posedge axi_aclk)
+	if(~axi_resetn | rst_cntrs) begin//{
+		ps <= HUNT;
+		temp_rx_bytes_dequeued_counter <= 'b0;  
+		rx_bytes_dequeued_counter <= 'b0;
+		end//}
+	else
+		begin//{
+		ps <= ns;
+                temp_rx_bytes_dequeued_counter <= ntemp_rx_bytes_dequeued_counter;
+                rx_bytes_dequeued_counter <= nrx_bytes_dequeued_counter;	
+		end//}
+
+// for reading the number of bytes pushed out
+
+/*reg info_fifo_rd_en_d1, info_fifo_rd_en_d2;
+always @(posedge clk156) 
+        if (~axi_resetn) begin 
+                info_fifo_rd_en_d1 <= 0;
+                info_fifo_rd_en_d2 <= 0;
+        end
+        else if (rst_cntrs) begin
+                info_fifo_rd_en_d1 <= 0;
+                info_fifo_rd_en_d2 <= 0;
+        end
+        else begin
+                info_fifo_rd_en_d1 <= info_fifo_rd_en;
+                info_fifo_rd_en_d2 <= info_fifo_rd_en_d1;
+        end
+
+wire info_fifo_rd_en_sig;
+assign info_fifo_rd_en_sig = info_fifo_rd_en_d1 & ~info_fifo_rd_en_d2;
+*/
+
+// rx_enqueued_pkts
+
+reg fifo_wr_en_d1, fifo_wr_en_d2;
+always @(posedge clk156)
+        if (~axi_resetn | rst_cntrs) begin
+                fifo_wr_en_d1 <= 0;
+                fifo_wr_en_d2 <= 0;
+        end
+        else begin
+                fifo_wr_en_d1 <= fifo_wr_en;
+                fifo_wr_en_d2 <= fifo_wr_en_d1;
+        end
+
+wire fifo_wr_en_sig;
+assign fifo_wr_en_sig = fifo_wr_en_d1 & ~fifo_wr_en_d2;
+
+
+always@(posedge clk156)
+	if(~axi_resetn|rst_cntrs)
 		begin
 			good_frames_counter <={C_S_AXI_DATA_WIDTH{1'b0}};
 			bad_frames_counter  <={C_S_AXI_DATA_WIDTH{1'b0}};
-		end
-	else if (rst_cntrs)
-		begin
-			good_frames_counter <={C_S_AXI_DATA_WIDTH{1'b0}};
-			bad_frames_counter  <={C_S_AXI_DATA_WIDTH{1'b0}};
+			tx_dequeued_pkt_counter <={C_S_AXI_DATA_WIDTH{1'b0}};
+			rx_enqueued_pkts <= 'b0;
 		end
 	else 
 		begin
 			if (rx_good_frame_sig) good_frames_counter <= good_frames_counter + 1'b1;
 			if (rx_bad_frame_sig)  bad_frames_counter  <= bad_frames_counter + 1'b1;	
+			if (tx_dequeued_pkt_sig) tx_dequeued_pkt_counter <= tx_dequeued_pkt_counter + 1'b1;
+			if (fifo_wr_en_sig) rx_enqueued_pkts <= rx_enqueued_pkts + 'b1;
 		end
 				
 endmodule
