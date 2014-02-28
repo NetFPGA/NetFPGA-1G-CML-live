@@ -13,6 +13,7 @@
  *
  *  Author:
  *        James Hongyi Zeng
+ *	  Neelakandan Manihatty Bojan (Modified to add registers on 25th Februrary 2014)  
  *
  *  Description:
  *        AXI-MAC converter: TX side
@@ -41,16 +42,22 @@
 
 module tx_queue
 #(
-   parameter AXI_DATA_WIDTH = 64 //Only 64 is supported right now.
+   parameter AXI_DATA_WIDTH = 64, //Only 64 is supported right now.
+   parameter C_S_AXIS_TUSER_WIDTH=128
+
 )
 (
    // AXI side
+   input [C_S_AXIS_TUSER_WIDTH-1:0] tuser,
    input [AXI_DATA_WIDTH-1:0]  tdata,
    input [AXI_DATA_WIDTH/8-1:0]  tstrb,
    input tvalid,
    input tlast,
    output tready,
-
+   output tx_dequeued_pkt,
+   output reg tx_pkts_enqueued_signal,
+   output reg [15:0] tx_bytes_enqueued,
+   output reg be,	
    input clk,
    input reset,
 
@@ -67,6 +74,9 @@ module tx_queue
    localparam SEND_PKT = 2;
    localparam IFG  = 3;
 
+   localparam METADATA='b0;
+   localparam EOP='b1;
+
    wire [3:0] tx_data_valid_encoded;
    reg  [7:0] tx_data_valid_decoded;
    reg  [3:0] tstrb_encoded;
@@ -80,6 +90,8 @@ module tx_queue
 
    reg  [2:0] state, state_next;
    reg  eop_axi_delay, tlast_delay;
+
+   reg tx_dequeued_pkt_next;   
 
    assign tready = ~fifo_almost_full;
    assign eop_axi = tlast;
@@ -167,12 +179,16 @@ module tx_queue
          endcase
      end
 
+assign tx_dequeued_pkt = tx_dequeued_pkt_next;
+
      always @* begin
          state_next = state;
          fifo_rd_en = 1'b0;
          info_fifo_rd_en = 1'b0;
          tx_start   = 1'b0;
          tx_data_valid = tx_data_valid_decoded;
+         tx_dequeued_pkt_next = 'b0;
+	 be = 'b0;
 
          case(state)
              IDLE: begin
@@ -181,6 +197,7 @@ module tx_queue
                      info_fifo_rd_en = 1'b1;
                      tx_start = 1'b1;
                      state_next = WAIT_FOR_ACK;
+		     be = 'b0;
                  end
              end
 
@@ -188,13 +205,17 @@ module tx_queue
                  if(tx_ack) begin
                      fifo_rd_en = 1'b1;
                      state_next = SEND_PKT;
+		     be = 'b1;
                  end
              end
 
              SEND_PKT: begin
                  fifo_rd_en = 1'b1;
+		 tx_dequeued_pkt_next ='b1;
+		 be = 'b1;
                  if(eop_mac) begin
                      state_next = IDLE;
+		     be = 'b1;	
                  end
              end
 
@@ -214,7 +235,41 @@ module tx_queue
          end
      end
 
+
+
+reg state1, state1_next;
+
+    always @(*) begin//{
+	state1_next = state1;
+	tx_pkts_enqueued_signal = 0;
+	tx_bytes_enqueued = 0;
+
+    case(state1)
+        METADATA: begin//{
+	  		if(tvalid&tready) begin//{
+			tx_pkts_enqueued_signal = 1;
+			tx_bytes_enqueued = tuser[15:0];
+			state1_next = EOP;
+		 	end//}
+		end//}
+
+	EOP: begin//{
+		if(tvalid&tlast&tready)
+			state1_next = METADATA;
+	end//}
+	default: state1_next= METADATA;
+	endcase 	
+end//}
+
+
      always @(posedge clk) begin
+	 if(reset)
+		state1 <= METADATA;
+	 else
+		state1 <= state1_next;
+	end
+
+	always @(posedge clk) begin	
          info_fifo_wr_en <= tlast & tvalid & tready;
      end
 endmodule

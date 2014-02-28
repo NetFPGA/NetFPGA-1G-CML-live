@@ -13,6 +13,7 @@
  *
  *  Author:
  *        James Hongyi Zeng
+ *        Neelakandan Manihatty Bojan (Modified to add registers on 25th Februrary 2014)		
  *
  *  Description:
  *        AXI-MAC converter: RX side
@@ -50,12 +51,8 @@ module rx_queue
    output reg tvalid,
    output reg tlast,
    input  tready,
-   //output drop_pkt,   
-   //output reg [31:0] rx_queue_in_bytes,
    input clk,
    input reset,
-//   output reg  info_fifo_rd_en,
-//   output reg  info_fifo_wr_en,
    output reg fifo_wr_en,
    // MAC side
    input [63:0] rx_data,
@@ -155,18 +152,6 @@ module rx_queue
          end
      end
 
-//assign drop_pkt = (drop_pkt_next == 'b1)? 'b1: 'b0;
-/*always@(posedge clk)
-	if(reset)
-		rx_queue_in_bytes <= 'b0;
-	else if(rx_data_valid==8'hFF)
-		rx_queue_in_bytes <= rx_queue_in_bytes +'d8;
-         else if((rx_data_valid==8'hF0)|(rx_data_valid==8'h0F))
-		rx_queue_in_bytes <= rx_queue_in_bytes + 'd4;
-	 else
-		rx_queue_in_bytes <= rx_queue_in_bytes;
-
-//assign drop_pkt = (drop_pkt_next == 'b1)? 'b1: 'b0;*/
 
      always @* begin
          state_next = state;

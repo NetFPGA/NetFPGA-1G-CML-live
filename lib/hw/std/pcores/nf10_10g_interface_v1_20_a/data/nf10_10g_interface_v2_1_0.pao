@@ -50,7 +50,7 @@ lib nf10_10g_interface_v1_20_a nf10/nf10_10g_interface.v verilog
 lib nf10_10g_interface_v1_20_a nf10/small_async_fifo.v verilog
 # added by Neels
 #lib nf10_10g_interface_v1_20_a nf10/axi4_lite_regs.v verilog
-
+#lib nf10_10g_interface_v1_20_a nf10/sync_pulse.v verilog
 lib nf10_10g_interface_v1_20_a xilinx/tx_sync.v verilog
 lib nf10_10g_interface_v1_20_a xilinx/chanbond_monitor.v verilog
 lib nf10_10g_interface_v1_20_a xilinx/cc_2b_1skp.v verilog
