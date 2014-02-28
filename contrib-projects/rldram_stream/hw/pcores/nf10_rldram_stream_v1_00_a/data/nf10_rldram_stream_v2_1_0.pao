@@ -1,0 +1,73 @@
+################################################################################
+#
+#  NetFPGA-10G http://www.netfpga.org
+#
+#  File:
+#        nf10_rldram_stream_v2_1_0.pao
+#
+#  Library:
+#        nf10_rldram_stream_v1_00_a
+#
+#  Author:
+#			Jong Hun Han
+#
+#  Description:
+#        
+#
+#  Copyright notice:
+#        Copyright (C) 2013 University of Cambridge
+#
+#  Licence:
+#        This file is part of the NetFPGA 10G development base package.
+#
+#        This file is free code: you can redistribute it and/or modify it under
+#        the terms of the GNU Lesser General Public License version 2.1 as
+#        published by the Free Software Foundation.
+#
+#        This package is distributed in the hope that it will be useful, but
+#        WITHOUT ANY WARRANTY; without even the implied warranty of
+#        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#        Lesser General Public License for more details.
+#
+#        You should have received a copy of the GNU Lesser General Public
+#        License along with the NetFPGA source package.  If not, see
+#        http://www.gnu.org/licenses/.
+#
+#
+lib proc_common_v3_00_a  all
+lib axi_lite_ipif_v1_01_a  all
+lib nf10_proc_common_v1_00_a all
+
+lib nf10_rldram_stream_v1_00_a nf10_rldram_stream.v verilog
+
+lib nf10_rldram_stream_v1_00_a xilinx/backend_rom.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/bcd6.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/cmp_rd_data.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_clk_module.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_conf.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_controller.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_controller_iobs.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_ctl.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_data_path.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_data_path_iobs.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_data_write.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_dly_cal_sm.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_infrastructure_iobs.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_infrastructure_top.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_iobs.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_main.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_mem_interface_top.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_phy_calib.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_rst.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_seven_seg.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_tap_logic.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_top.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_user_interface.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_v4_dm_iob.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_v4_dq_iob.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_v4_qk_iob.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_v4_qvld_iob.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_v5_dm_iob.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_v5_dq_iob.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/rld_v5_qk_iob.v verilog
+lib nf10_rldram_stream_v1_00_a xilinx/test_bench.v verilog
