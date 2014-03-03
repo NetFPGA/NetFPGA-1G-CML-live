@@ -1,0 +1,8 @@
+77c77
+< -p  xc6vlx240t-ff1156-1
+---
+> -p  xc7k325tffg676-1
+80c80
+< -iobuf YES
+---
+> -iobuf NO

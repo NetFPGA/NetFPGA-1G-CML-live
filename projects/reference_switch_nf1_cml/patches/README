@@ -1,0 +1,1 @@
+These files are used to patch Xilinx's XAPP1151 CAM generator files to work with the NetFPGA-1G-CML (specifically, the Kintex 7).  See the README in the project's root directory for how to use them.
