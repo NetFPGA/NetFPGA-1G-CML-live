@@ -1,2 +1,9 @@
 96a97
 >   CONSTANT KINTEX7               : STRING := "kintex7";
+748a750,755
+>            equalIgnoreCase(ancestor,ANY) )
+>       THEN
+>         is_derived := TRUE;
+>       END IF;
+>     ELSIF equalIgnoreCase( child, KINTEX7 ) THEN
+>       IF ( equalIgnoreCase(ancestor,KINTEX7) OR

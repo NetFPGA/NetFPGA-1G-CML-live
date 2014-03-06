@@ -11,7 +11,7 @@ HW_DIR = $(SDK_WORKSPACE)/hw
 DOWNLOAD_BIT = $(RESULT_DIR)/download.bit
 SYSTEM_BD = $(HW_DIR)/system_bd.bmm
 SYSTEM_BIT = $(HW_DIR)/system.bit
-ELF = $(RESULT_DIR)/nf7_switch.elf
+ELF = $(RESULT_DIR)/nf1_cml_switch.elf
 
 ################################################################################
 # Part 1 User Application

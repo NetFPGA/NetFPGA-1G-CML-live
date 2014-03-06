@@ -1,3 +1,3 @@
 PROCESSOR=microblaze_0
-REPOSITORIES=-lp /home/dvanarnem/devl/ict/netfpga-10g/lib/sw
+REPOSITORIES=-lp /home/dvanarnem/devl/ict/NetFPGA-10G-live/lib/sw
 HWSPEC=../hw/system.xml

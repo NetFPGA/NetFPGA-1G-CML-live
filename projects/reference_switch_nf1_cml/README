@@ -110,9 +110,6 @@ Enter the CAM memory type to implement
 (Choose SRL-based if you need a Ternary or Enhanced Ternary mode CAM)
 0 = SRL-based, 1 = BRAM-based: 1
 
-Choose the Ternary Mode setting.
-0 = Ternary Mode Off, 1 = Standard Ternary Mode, 2 = Enhanced Ternary Mode: 0
-
 NOTE: BRAM-based CAMs do not support Ternary Modes.
 Setting C_TERNARY_MODE = 0 ...
 
@@ -195,12 +192,12 @@ Edit the created cam.v file:
 
 (1) Change the module name to ‘cam’ from ‘cam_wrapper’.
 
-(2) Just after the port declaration (before the first assign), write a sentence:
+(2) Just after the port declaration (after "output [3 : 0] MATCH_ADDR;" and before "wire NlwRenamedSig_OI_BUSY;"), write a sentence:
 // synthesis translate_off
 
 (3) And before endmodule of ‘cam_wrapper’, write;
 // synthesis translate_on
-Please note the file has two modules therefore two ‘endmodule’. Make sure to insert the line for the first module; cam_wrapper (now the module name is ‘cam’).
+Please note the file has two modules therefore two ‘endmodule’. Make sure to insert the line for the first module; cam_wrapper (now the module name is ‘cam’).  The 'endmodule' is a few thousand lines of code in (around 5345).
 
 05. File copy
 
