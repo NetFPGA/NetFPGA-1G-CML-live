@@ -41,19 +41,19 @@ for i in range(NUM_PKTS):
             nftest_send_dma('nf' + str(port), pkt)
             if port == 0:
                 nftest_expect_dma('nf3', pkt)
-            else if port == 1:
+            elif port == 1:
                 nftest_expect_dma('nf2', pkt)
-            else if port == 2:
+            elif port == 2:
                 nftest_expect_dma('nf1', pkt)
-            else
+            else:
                 nftest_expect_dma('nf0', pkt)
     
     else:
-    DA = "00:ca:fe:00:00:00"
+        DA = "00:ca:fe:00:00:00"
         pkt = make_IP_pkt(dst_MAC=DA, src_MAC=SA, dst_IP=DST_IP,
                              src_IP=SRC_IP, TTL=TTL,
                              pkt_len=1514) 
-    pkt.time = (i*(1e-8))
+        pkt.time = (i*(1e-8))
         pkts.append(pkt)
 
 if not isHW():
