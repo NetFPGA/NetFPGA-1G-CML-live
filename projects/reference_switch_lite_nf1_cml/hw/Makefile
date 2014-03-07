@@ -10,6 +10,7 @@
 #
 #  Author:
 #        Jack Meador
+#        David Van Arnem
 #
 #  Description:
 #        This Makefile is a configurable wrapper for the
@@ -82,7 +83,7 @@ regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
 	rm -rf ../lib/Python/reg_defines_*.*
 
-regs:  
+regs: system_incl.make 
 	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
 	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../../../lib/sw/ -od $(SDK_EXPORT_DIR)/../empty_application
 	@mkdir -p $(SDK_EXPORT_DIR)/../libs
@@ -96,6 +97,3 @@ regs:
 	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
 	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
 	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_$(PROJECT_NAME).py
-
-system_incl.make:
-	@echo exit|xps -nw system.xmp
