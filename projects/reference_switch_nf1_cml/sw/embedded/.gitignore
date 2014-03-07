@@ -2,6 +2,5 @@ result/
 */.metadata/
 SDK_Workspace/nf1_cml_switch/Debug
 
-SDK_Workspace/hw/*
 SDK_Workspace/bsp/microblaze_0/
 *.log
