@@ -131,7 +131,7 @@ module nf10_bram_output_queues
 
   
   localparam NUM_RW_REGS       = 1;
-  localparam NUM_RO_REGS       = 30;
+  localparam NUM_RO_REGS       = 40;
 
   // -- Signals
 
@@ -169,6 +169,9 @@ module nf10_bram_output_queues
   wire     [C_S_AXI_DATA_WIDTH-1 : 0]             bytes_removed_3;
   wire     [C_S_AXI_DATA_WIDTH-1 : 0]             bytes_removed_4; 
   reg      [C_S_AXI_DATA_WIDTH-1 : 0]             bytes_removed_cntr [NUM_QUEUES-1:0];
+
+  reg      [C_S_AXI_DATA_WIDTH-1 : 0]             pkt_in_queue_cntr [NUM_QUEUES-1:0];
+  reg      [C_S_AXI_DATA_WIDTH-1 : 0]             bytes_in_queue_cntr [NUM_QUEUES-1:0];
 
   wire     [NUM_QUEUES-1:0]                       pkt_dropped;
   reg      [C_S_AXI_DATA_WIDTH-1 : 0]             pkt_dropped_cntr [NUM_QUEUES-1:0];
@@ -253,7 +256,46 @@ module nf10_bram_output_queues
   
   assign rst_cntrs = rw_regs[0]; 
   
-  assign ro_regs = {bytes_dropped_cntr[4],pkt_dropped_cntr[4],bytes_removed_cntr[4],pkt_removed_cntr[4],bytes_stored_cntr[4],pkt_stored_cntr[4],bytes_dropped_cntr[3],pkt_dropped_cntr[3],bytes_removed_cntr[3],pkt_removed_cntr[3],bytes_stored_cntr[3],pkt_stored_cntr[3],bytes_dropped_cntr[2],pkt_dropped_cntr[2],bytes_removed_cntr[2],pkt_removed_cntr[2],bytes_stored_cntr[2],pkt_stored_cntr[2],bytes_dropped_cntr[1],pkt_dropped_cntr[1],bytes_removed_cntr[1],pkt_removed_cntr[1],bytes_stored_cntr[1],pkt_stored_cntr[1],bytes_dropped_cntr[0],pkt_dropped_cntr[0],bytes_removed_cntr[0],pkt_removed_cntr[0],bytes_stored_cntr[0],pkt_stored_cntr[0]};
+  assign ro_regs = {bytes_in_queue_cntr[4],
+                    pkt_in_queue_cntr[4],
+		    bytes_dropped_cntr[4],
+		    pkt_dropped_cntr[4],
+		    bytes_removed_cntr[4],
+		    pkt_removed_cntr[4],
+		    bytes_stored_cntr[4],
+		    pkt_stored_cntr[4],
+                    bytes_in_queue_cntr[3],
+                    pkt_in_queue_cntr[3],
+		    bytes_dropped_cntr[3],
+		    pkt_dropped_cntr[3],
+		    bytes_removed_cntr[3],
+		    pkt_removed_cntr[3],
+		    bytes_stored_cntr[3],
+		    pkt_stored_cntr[3],
+                    bytes_in_queue_cntr[2],
+                    pkt_in_queue_cntr[2],
+		    bytes_dropped_cntr[2],
+		    pkt_dropped_cntr[2],
+		    bytes_removed_cntr[2],
+		    pkt_removed_cntr[2],
+		    bytes_stored_cntr[2],
+		    pkt_stored_cntr[2],
+                    bytes_in_queue_cntr[1],
+                    pkt_in_queue_cntr[1],
+		    bytes_dropped_cntr[1],
+		    pkt_dropped_cntr[1],
+		    bytes_removed_cntr[1],
+		    pkt_removed_cntr[1],
+		    bytes_stored_cntr[1],
+		    pkt_stored_cntr[1],
+		    bytes_in_queue_cntr[0],
+		    pkt_in_queue_cntr[0],		    
+		    bytes_dropped_cntr[0],
+		    pkt_dropped_cntr[0],
+		    bytes_removed_cntr[0],
+		    pkt_removed_cntr[0],
+		    bytes_stored_cntr[0],
+		    pkt_stored_cntr[0]};
   
   // -- Learning CAM Switch
   bram_output_queues #
@@ -335,6 +377,10 @@ module nf10_bram_output_queues
   
   // Output Queues counters
   always @ (posedge axi_aclk) begin
+    for(i=0;i<NUM_QUEUES;i=i+1) begin
+	pkt_in_queue_cntr[i] <= pkt_stored_cntr[i] - pkt_removed_cntr[i];
+	bytes_in_queue_cntr[i] <= bytes_stored_cntr[i] - bytes_removed_cntr[i];
+    end
     if (~axi_resetn) begin
     	for(i=0;i<NUM_QUEUES;i=i+1) begin
 		bytes_stored_cntr[i]  <= {C_S_AXI_DATA_WIDTH{1'b0}};

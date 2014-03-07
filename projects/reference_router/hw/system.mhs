@@ -258,12 +258,16 @@ END
 
 BEGIN nf10_10g_interface
  PARAMETER INSTANCE = nf10_10g_interface_0
- PARAMETER HW_VER = 1.10.a
+ PARAMETER HW_VER = 1.20.a
  PARAMETER C_XAUI_REVERSE = 1
  PARAMETER C_DEFAULT_VALUE_ENABLE = 1
  PARAMETER C_DEFAULT_SRC_PORT = 0x01
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_INTERCONNECT_S_AXI_IS_ACLK_ASYNC = 1
+ PARAMETER C_BASEADDR = 0x77a80000
+ PARAMETER C_HIGHADDR = 0x77a8ffff
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  BUS_INTERFACE M_AXIS = nf10_10g_interface_0_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_0
  PORT axi_aclk = core_clk
@@ -286,18 +290,23 @@ BEGIN nf10_10g_interface
  PORT xaui_rx_l3_n = nf10_10g_interface_0_xaui_rx_l3_n
  PORT xaui_rx_l0_p = nf10_10g_interface_0_xaui_rx_l0_p
  PORT axi_resetn = Peripheral_aresetn
+ PORT S_AXI_ACLK = control_clk
 END
 
 BEGIN nf10_10g_interface
  PARAMETER INSTANCE = nf10_10g_interface_1
- PARAMETER HW_VER = 1.10.a
+ PARAMETER HW_VER = 1.20.a
  PARAMETER C_XAUI_REVERSE = 1
  PARAMETER C_DEFAULT_VALUE_ENABLE = 1
  PARAMETER C_DEFAULT_SRC_PORT = 0x04
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_INTERCONNECT_S_AXI_IS_ACLK_ASYNC = 1
+ PARAMETER C_BASEADDR = 0x77a60000
+ PARAMETER C_HIGHADDR = 0x77a6ffff
  BUS_INTERFACE M_AXIS = nf10_10g_interface_1_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_1
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT dclk = control_clk
  PORT xaui_tx_l3_n = nf10_10g_interface_1_xaui_tx_l3_n
  PORT xaui_tx_l1_n = nf10_10g_interface_1_xaui_tx_l1_n
@@ -318,16 +327,21 @@ BEGIN nf10_10g_interface
  PORT refclk = refclk_B
  PORT axi_aclk = core_clk
  PORT axi_resetn = Peripheral_aresetn
+ PORT S_AXI_ACLK = control_clk
 END
 
 BEGIN nf10_10g_interface
  PARAMETER INSTANCE = nf10_10g_interface_2
- PARAMETER HW_VER = 1.10.a
+ PARAMETER HW_VER = 1.20.a
  PARAMETER C_XAUI_REVERSE = 1
  PARAMETER C_DEFAULT_VALUE_ENABLE = 1
  PARAMETER C_DEFAULT_SRC_PORT = 0x10
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_INTERCONNECT_S_AXI_IS_ACLK_ASYNC = 1
+ PARAMETER C_BASEADDR = 0x77a40000
+ PARAMETER C_HIGHADDR = 0x77a4ffff
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  BUS_INTERFACE M_AXIS = nf10_10g_interface_2_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_2
  PORT dclk = control_clk
@@ -350,15 +364,20 @@ BEGIN nf10_10g_interface
  PORT refclk = refclk_C
  PORT axi_aclk = core_clk
  PORT axi_resetn = Peripheral_aresetn
+ PORT S_AXI_ACLK = control_clk
 END
 
 BEGIN nf10_10g_interface
  PARAMETER INSTANCE = nf10_10g_interface_3
- PARAMETER HW_VER = 1.10.a
+ PARAMETER HW_VER = 1.20.a
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
  PARAMETER C_DEFAULT_VALUE_ENABLE = 1
  PARAMETER C_DEFAULT_SRC_PORT = 0x40
+ PARAMETER C_INTERCONNECT_S_AXI_IS_ACLK_ASYNC = 1
+ PARAMETER C_BASEADDR = 0x77a20000
+ PARAMETER C_HIGHADDR = 0x77a2ffff
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  BUS_INTERFACE M_AXIS = nf10_10g_interface_3_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_3
  PORT xaui_tx_l3_p = nf10_10g_interface_3_xaui_tx_l3_p
@@ -381,6 +400,7 @@ BEGIN nf10_10g_interface
  PORT refclk = refclk_D
  PORT axi_aclk = core_clk
  PORT axi_resetn = Peripheral_aresetn
+ PORT S_AXI_ACLK = control_clk
 END
 
 BEGIN diff_input_buf
@@ -410,9 +430,9 @@ END
 BEGIN diff_input_buf
  PARAMETER INSTANCE = diff_input_buf_3
  PARAMETER HW_VER = 1.00.a
- PORT SINGLE_ENDED_INPUT = refclk_D
  PORT DIFF_INPUT_N = DIFF_INPUT_BUF_3_DIFF_INPUT_N
  PORT DIFF_INPUT_P = DIFF_INPUT_BUF_3_DIFF_INPUT_P
+ PORT SINGLE_ENDED_INPUT = refclk_D
 END
 
 BEGIN nf10_mdio
@@ -504,30 +524,36 @@ END
 
 BEGIN nf10_input_arbiter
  PARAMETER INSTANCE = nf10_input_arbiter_0
- PARAMETER HW_VER = 1.00.a
+ PARAMETER HW_VER = 1.10.a
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_BASEADDR = 0x77a00000
+ PARAMETER C_HIGHADDR = 0x77a0ffff
+ BUS_INTERFACE M_AXIS = nf10_input_arbiter_0_M_AXIS
  BUS_INTERFACE S_AXIS_0 = nf10_10g_interface_0_M_AXIS
  BUS_INTERFACE S_AXIS_1 = nf10_10g_interface_1_M_AXIS
  BUS_INTERFACE S_AXIS_2 = nf10_10g_interface_2_M_AXIS
  BUS_INTERFACE S_AXIS_3 = nf10_10g_interface_3_M_AXIS
  BUS_INTERFACE S_AXIS_4 = dma_0_M_AXIS
- BUS_INTERFACE M_AXIS = nf10_input_arbiter_0_M_AXIS
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT axi_aclk = core_clk
  PORT axi_resetn = Peripheral_aresetn
 END
 
 BEGIN nf10_bram_output_queues
  PARAMETER INSTANCE = nf10_bram_output_queues_0
- PARAMETER HW_VER = 1.00.a
+ PARAMETER HW_VER = 1.10.a
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_BASEADDR = 0x76600000
+ PARAMETER C_HIGHADDR = 0x7660ffff
  BUS_INTERFACE S_AXIS = nf10_endianess_manager_0_M_AXIS
  BUS_INTERFACE M_AXIS_0 = nf10_bram_output_queues_0_M_AXIS_0
  BUS_INTERFACE M_AXIS_1 = nf10_bram_output_queues_0_M_AXIS_1
  BUS_INTERFACE M_AXIS_2 = nf10_bram_output_queues_0_M_AXIS_2
  BUS_INTERFACE M_AXIS_3 = nf10_bram_output_queues_0_M_AXIS_3
  BUS_INTERFACE M_AXIS_4 = nf10_bram_output_queues_0_M_AXIS_4
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT axi_aclk = core_clk
  PORT axi_resetn = Peripheral_aresetn
 END
