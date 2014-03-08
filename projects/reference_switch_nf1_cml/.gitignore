@@ -1,5 +1,4 @@
 # reference_switch_nf1_cml gitignore
 
 # subdirs
-bitfiles/
 *.swp

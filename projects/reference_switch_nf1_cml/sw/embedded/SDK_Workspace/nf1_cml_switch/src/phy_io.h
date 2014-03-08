@@ -6,7 +6,7 @@
  *      phy_io.h
  *
  *  Project:
- *      reference_switch_lite_nf1_cml
+ *      reference_lite_nf1_cml
  *
  *  Author:
  *      David Van Arnem

@@ -1,39 +1,43 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
-#        README
+#       README
 #
 #  Project:
-#        reference_switch
+#       reference_switch_nf1_cml
 #
 #  Author:
-#        Gianni Anitchi, Muhammad Shahbaz
+#       Gianni Anitchi
+#       Muhammad Shahbaz
+#       David Van Arnem
 #
 #  Copyright notice:
-#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+#       Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
 #                                 Junior University
 #
+#       Copyright (C) 2014 Computer Measurement Laboratory
+#
 #  Licence:
-#        This file is part of the NetFPGA 10G development base package.
+#       This file is part of the NetFPGA 10G development base package.
 #
-#        This file is free code: you can redistribute it and/or modify it under
-#        the terms of the GNU Lesser General Public License version 2.1 as
-#        published by the Free Software Foundation.
+#       This file is free code: you can redistribute it and/or modify it under
+#       the terms of the GNU Lesser General Public License version 2.1 as
+#       published by the Free Software Foundation.
 #
-#        This package is distributed in the hope that it will be useful, but
-#        WITHOUT ANY WARRANTY; without even the implied warranty of
-#        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-#        Lesser General Public License for more details.
+#       This package is distributed in the hope that it will be useful, but
+#       WITHOUT ANY WARRANTY; without even the implied warranty of
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#       Lesser General Public License for more details.
 #
-#        You should have received a copy of the GNU Lesser General Public
-#        License along with the NetFPGA source package.  If not, see
-#        http://www.gnu.org/licenses/.
+#       You should have received a copy of the GNU Lesser General Public
+#       License along with the NetFPGA source package.  If not, see
+#       http://www.gnu.org/licenses/.
 #
 #
 
-A typical NetFPGA-10G project is organized as hardware part (hw)
+A typical NetFPGA-1G-CML project is organized as hardware part (hw)
 and software part (sw, including embedded software and host
 software).
 
@@ -64,7 +68,7 @@ Please note that Xilinx ISE must be installed to generate the core. Tested ISE v
 
 02. Tool installation and setup
 
-On a directory you prefer, run:
+In a directory you prefer, run:
 unzip xapp1151_Param_CAM.zip
 
 Copy the patches/ directory from the reference_switch_nf1_cml project directory

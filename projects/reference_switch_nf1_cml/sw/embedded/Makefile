@@ -6,7 +6,7 @@
 #        Makefile
 #
 #  Project:
-#        reference_switch_lite_nf1_cml
+#        reference_switch_nf1_cml
 #
 #  Author:
 #        James Hongyi Zeng

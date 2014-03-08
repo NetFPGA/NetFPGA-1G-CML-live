@@ -6,7 +6,7 @@
  *      nf1_cml_switch.c
  *
  *  Project:
- *      reference_switch_lite_nf1_cml
+ *      reference_switch_nf1_cml
  *
  *  Author:
  *      David Van Arnem
@@ -64,52 +64,22 @@ int main()
     //   LED0 (top right) - Blink on any activity
     //   LED1 (top left) - Link 1000 (Gigabit) up and blink on activity
     //   LED2 (board) - Solid on Link 1000 (Gigabit) up
-//    for (i = 1; i < 5; i++) {
-////        PhyRead(i, 0x00, &bmcr_rd_val);
-////        xil_printf("BMCR for Phy %d before write : 0x%04x\r\n", i, bmcr_rd_val);
-////
-////        bmcr_rd_val |= 0x0140;
-////
-////        PhyWrite(i, 0x00, 0x0140);
-////
-////        PhyRead(i, 0x00, &bmcr_rd_val);
-////        xil_printf("BMCR for Phy %d before reset : 0x%04x\r\n", i, bmcr_rd_val);
-////
-////        bmcr_rd_val |= 0x8000;
-////
-////        PhyWrite(i, 0x00, bmcr_rd_val);
-////
-////        PhyRead(i, 0x00, &bmcr_rd_val);
-////        xil_printf("BMCR for Phy %d after reset  : 0x%04x\r\n\n", i, bmcr_rd_val);
-////
-//        // Set PHY to use extended page
-//        PhyWrite(i, 0x1f, 0x0007);
-//        // Specify which extended page to use
-//        PhyWrite(i, 0x1e, 0x002c);
-//        // Write the LED action control register
-//        PhyWrite(i, 0x1a, 0x0030);
-//        // Write the LED control register
-//        PhyWrite(i, 0x1c, 0x0440);
-//
-//        // Reset the PHY to use page 0
-//        PhyWrite(i, 0x1f, 0x0000);
-//        PhySleep(500);
-//    }
+    for (i = 1; i < 5; i++) {
+        // Set PHY to use extended page
+        PhyWrite(i, 0x1f, 0x0007);
+        // Specify which extended page to use
+        PhyWrite(i, 0x1e, 0x002c);
+        // Write the LED action control register
+        PhyWrite(i, 0x1a, 0x0030);
+        // Write the LED control register
+        PhyWrite(i, 0x1c, 0x0440);
+
+        // Reset the PHY to use page 0
+        PhyWrite(i, 0x1f, 0x0000);
+        PhySleep(500);
+    }
 
     xil_printf("PHY LED reconfiguration complete!\r\n");
-
-    while (1) {
-        for (i = 0; i < 1500000; i++);
-        PhyRead(1, BMSR, &gbsr_rd_val);
-//        PhyRead(1, PHYSR, &physr_rd_val);
-//        PhyRead(1, INSR, &insr_rd_val);
-//        PhyRead(1, RXERC, &rxerc_rd_val);
-
-        xil_printf("BMSR:  0x%04x\r\n", gbsr_rd_val);
-//        xil_printf("PHYSR: 0x%04x\r\n", physr_rd_val);
-//        xil_printf("INSR:  0x%04x\r\n", insr_rd_val);
-//        xil_printf("RXERC: 0x%04x\r\n\n", rxerc_rd_val);
-    }
 
     return 0;
 }
