@@ -10,6 +10,7 @@
 #
 #  Author:
 #        Jack Meador, Computer Measurement Laboratory, LLC
+#        David Van Arnem
 #
 #  Description:
 #        This Makefile is a configurable wrapper for the
@@ -21,7 +22,7 @@
 #        http://www.xilinx.com/support/documentation/dt_edk.htm
 #
 #  Copyright notice:
-#        Copyright (C) 2013 Computer Measurement Laboratory, LLC
+#        Copyright (C) 2013, 2014 Computer Measurement Laboratory, LLC
 #
 #  Licence:
 #        This file is part of the NetFPGA 10G development base package.
