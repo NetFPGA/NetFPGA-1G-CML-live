@@ -1,0 +1,6 @@
+609,610c609,610
+<   OR (C_FAMILY = aspartan3e) OR (C_FAMILY = spartan6)  )
+<     REPORT "Invalid configuration: C_FAMILY must be virtex4, virtex5, virtex6, virtex6l, spartan3, spartan3e, spartan3a, spartan3adsp, aspartan3, aspartan3e, or spartan6 "
+---
+>   OR (C_FAMILY = aspartan3e) OR (C_FAMILY = spartan6) OR (C_FAMILY = kintex7) )
+>     REPORT "Invalid configuration: C_FAMILY must be virtex4, virtex5, virtex6, virtex6l, spartan3, spartan3e, spartan3a, spartan3adsp, aspartan3, aspartan3e, spartan6, or kintex7 "

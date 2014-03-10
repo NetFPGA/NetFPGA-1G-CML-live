@@ -1,0 +1,12 @@
+159c159
+<     := if_then_else(  ( (derived(C_FAMILY,"virtex5")) or (derived(C_FAMILY, "virtex6")) or (derived(C_FAMILY, "virtex6l"))  ), 10, 9);
+---
+>     := if_then_else(  ( (derived(C_FAMILY,"virtex5")) or (derived(C_FAMILY, "virtex6")) or (derived(C_FAMILY, "virtex6l")) or (derived(C_FAMILY, "kintex7"))  ), 10, 9);
+161c161
+<     := if_then_else(  ( (derived(C_FAMILY,"virtex5")) or (derived(C_FAMILY, "virtex6")) or (derived(C_FAMILY, "virtex6l"))  ), 15, 14);
+---
+>     := if_then_else(  ( (derived(C_FAMILY,"virtex5")) or (derived(C_FAMILY, "virtex6")) or (derived(C_FAMILY, "virtex6l")) or (derived(C_FAMILY, "kintex7"))  ), 15, 14);
+164c164
+<     := if_then_else(  ( (derived(C_FAMILY,"virtex5")) or (derived(C_FAMILY, "virtex6")) or (derived(C_FAMILY, "virtex6l"))  ), 1024, 512);
+---
+>     := if_then_else(  ( (derived(C_FAMILY,"virtex5")) or (derived(C_FAMILY, "virtex6")) or (derived(C_FAMILY, "virtex6l")) or (derived(C_FAMILY, "kintex7"))  ), 1024, 512);
