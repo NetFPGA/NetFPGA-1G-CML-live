@@ -133,8 +133,9 @@ int main (void) {
 
     xil_printf("Router embedded software initialized!\r\n");
 
-   cleanup_platform();
-   return 0;
+    while (1);
+    cleanup_platform();
+    return 0;
 }
 
 //int ael2005_read (XEmacLite *EmacLiteInstPtr, u32 PhyAddr, u32 PhyDev, u16 address, u16 *data){
