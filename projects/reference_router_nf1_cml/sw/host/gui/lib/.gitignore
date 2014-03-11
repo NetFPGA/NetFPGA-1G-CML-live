@@ -38,3 +38,7 @@ Thumbs.db
 # Miscellaneous #
 #################
 *~
+
+# Add JARs (ignored by top-level) #
+###################################
+!*.jar
