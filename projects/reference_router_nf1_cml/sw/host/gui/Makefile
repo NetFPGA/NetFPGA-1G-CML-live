@@ -9,6 +9,7 @@
 SRC := src
 BIN := bin
 LIB := lib
+JARS := /usr/share/java
 
 COMMON_C := ../common
 REG_C := ../../../projects/router_buffer_sizing/lib/C
@@ -33,7 +34,7 @@ EMPTY =
 SPACE = $(EMPTY) $(EMPTY)
 
 # setup the classpath
-CLASSPATH := $(subst $(SPACE),:,$(wildcard $(LIB)/*.jar))
+CLASSPATH := $(subst $(SPACE),:,$(wildcard $(JARS)/*.jar))
 
 # compiler options
 JAVAC_OPTIONS := -d $(BIN) -classpath $(CLASSPATH) -sourcepath $(SRC)
@@ -49,10 +50,11 @@ $(COMMON_C)/$(NF10LIB_NAME):
 
 java: $(CONSTANTS_JAVA) $(JAVA_SRC_FILES)
 	@echo Building java...
+	@echo $(wildcard $(JARS)/*.jar)
 	@$(JAVAC) $(JAVAC_OPTIONS) $(JAVA_SRC_FILES)
 	@echo Done
 
-$(CONSTANTS_JAVA): reg_defines.h
+$(CONSTANTS_JAVA): ../reg_defines.h
 	@echo "/**********************************************************************" > $@
 	@echo " * File generated using the Makefile from $<." >> $@
 	@echo " * Author: Jad Naous" >> $@
