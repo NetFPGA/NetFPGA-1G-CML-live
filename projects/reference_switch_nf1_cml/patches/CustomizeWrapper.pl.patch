@@ -1,0 +1,8 @@
+108c108
+< $arch = lc(query4("Valid options are virtex4, virtex5, virtex6, virtex6l, spartan3, spartan3e, spartan3a, spartan3adsp, aspartan3, aspartan3e, spartan6:\n"));
+---
+> $arch = lc(query4("Valid options are virtex4, virtex5, virtex6, virtex6l, spartan3, spartan3e, spartan3a, spartan3adsp, aspartan3, aspartan3e, spartan6, kintex7:\n"));
+716c716
+<         || $rsp eq 'spartan6' ) {return 1;}
+---
+>         || $rsp eq 'spartan6' || $rsp eq 'kintex7') {return 1;}

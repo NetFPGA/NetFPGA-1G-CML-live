@@ -10,6 +10,7 @@
 #
 #  Author:
 #        Jack Meador
+#        David Van Arnem
 #
 #  Description:
 #        This Makefile is a configurable wrapper for the
@@ -39,8 +40,10 @@
 #        License along with the NetFPGA source package.  If not, see
 #        http://www.gnu.org/licenses/.
 
-GIT_COMMIT = $(shell git log --abbrev=8 -1 --pretty=format:"%h")
+include system_incl.make
 
+GIT_COMMIT = $(shell git log --abbrev=8 -1 --pretty=format:"%h")
+PROJECT_NAME = reference_switch_lite_nf1_cml
 
 bits: system.make
 	$(MAKE) -f system.make bits
@@ -75,3 +78,22 @@ smallbits.mcs: implementation/system.ncd
 progflash: smallbits.mcs
 	impact -batch program_flash.cmd
 
+regsclean:
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -rf ../lib/Python/reg_defines_*.*
+
+regs: system_incl.make 
+	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
+	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../../../lib/sw/ -od $(SDK_EXPORT_DIR)/../empty_application
+	@mkdir -p $(SDK_EXPORT_DIR)/../libs
+	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../../../lib/sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
+	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
+	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
+	@rm -rf $(SDK_EXPORT_DIR)/../libs
+	cd ../sw/host/include/  && cp ../../../../../tools/scripts/xparam2regdefines.py . && python xparam2regdefines.py
+	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
+	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
+	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_$(PROJECT_NAME).py

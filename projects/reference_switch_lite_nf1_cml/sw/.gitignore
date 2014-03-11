@@ -1,0 +1,7 @@
+# sw gitignore
+
+# subdirs
+host/include/
+
+# files
+host/reg_defines.h

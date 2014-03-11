@@ -1,0 +1,211 @@
+################################################################################
+#
+#  NetFPGA-1G-CML http://www.netfpga.org
+#
+#  File:
+#       README
+#
+#  Project:
+#       reference_switch_nf1_cml
+#
+#  Author:
+#       Gianni Anitchi
+#       Muhammad Shahbaz
+#       David Van Arnem
+#
+#  Copyright notice:
+#       Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+#                                 Junior University
+#
+#       Copyright (C) 2014 Computer Measurement Laboratory
+#
+#  Licence:
+#       This file is part of the NetFPGA 10G development base package.
+#
+#       This file is free code: you can redistribute it and/or modify it under
+#       the terms of the GNU Lesser General Public License version 2.1 as
+#       published by the Free Software Foundation.
+#
+#       This package is distributed in the hope that it will be useful, but
+#       WITHOUT ANY WARRANTY; without even the implied warranty of
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#       Lesser General Public License for more details.
+#
+#       You should have received a copy of the GNU Lesser General Public
+#       License along with the NetFPGA source package.  If not, see
+#       http://www.gnu.org/licenses/.
+#
+#
+
+A typical NetFPGA-1G-CML project is organized as hardware part (hw)
+and software part (sw, including embedded software and host
+software).
+
+To build the project, please follow the Switch CAM installation first and then do a "make". 
+The resulting bitfile is under bitfiles/
+
+More details regarding the project can be found in the following link
+https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Learning-CAM-Switch
+
+************************
+Switch CAM installation
+************************
+
+01. Xilinx Application
+Learning CAM switch design requires XILINX TCAM module. Obtain "xapp1151" 
+application from XILINX website. The tested CAM version is v1_1. As of the time 
+of writing the following link provides the access to the xapp1151 document: 
+
+http://www.xilinx.com/support/documentation/application_notes/xapp1151_Param_CAM.pdf
+
+The design files can be found by navigating to the Xilinx support site:
+
+http://www.xilinx.com/support.html
+
+Search for "xapp1151" and download the design files listed in the results (xapp1151_Param_CAM.zip).
+
+Please note that Xilinx ISE must be installed to generate the core. Tested ISE version is 14.6.
+
+02. Tool installation and setup
+
+In a directory you prefer, run:
+unzip xapp1151_Param_CAM.zip
+
+Copy the patches/ directory from the reference_switch_nf1_cml project directory
+(the same location as this README) to the unzipped directory:
+
+cp -r patches <path>/xapp1151_cam_v1_1/
+
+Then, enter the patches/ directory at the location you just copied to and run
+the shell script to patch the files:
+
+cd <path>/xapp1151_cam_v1_1/patches/
+sh cam_patch.sh
+
+This will patch the necessary files in the design to target the Kintex-7 FPGA
+(only devices up to 6-series are supported by the default design files).
+
+03. CAM module generation
+
+cd <path>/xapp1151_cam_v1_1/implement
+xilperl CustomizeWrapper.pl 
+
+You need to specify several parameters. To choose those options, see follows:
+
+***************************************************************
+CAM Reference Design Customizer v1.1
+***************************************************************
+
+***************************************************************
+Please input the following parameters for the CAM:
+***************************************************************
+
+Enter the FPGA base architecture to target
+Valid options are virtex4, virtex5, virtex6, virtex6l, spartan3, spartan3e, spartan3a, spartan3adsp, aspartan3, aspartan3e, spartan6, kintex7 :
+kintex7
+
+Input the CAM data width.  Valid values are 1-512:
+48
+
+Input the CAM depth.  Valid values are 16-4096:
+16
+
+Enter the CAM memory type to implement
+(Choose SRL-based if you need a Ternary or Enhanced Ternary mode CAM)
+0 = SRL-based, 1 = BRAM-based: 1
+
+NOTE: BRAM-based CAMs do not support Ternary Modes.
+Setting C_TERNARY_MODE = 0 ...
+
+Will the CAM be write-able (WE pin)? (If no, CAM will be read-only) (y/n): y
+
+Use a MIF file to initialize the memory contents? (y/n): n
+
+Choose what type of encoding the MATCH_ADDR port will have.
+0 = Binary Encoded, 1 = Single Match Unencoded (one-hot), 2 = Multi-match Unencoded: 0
+
+For Binary Encoded or Single Match Unencoded MATCH_ADDR, output lowest address match or highest address match?
+0 = Lowest, 1 = Highest: 0
+
+Please select the optional features to be implemented:
+Simultaneous Read/Write (y/n): y
+Register Outputs (y/n): n
+
+Please select from the following optional input ports:
+Enable (EN) (y/n): n
+
+Please select from the following optional output ports:
+Multiple Match Flag (MULTIPLE_MATCH) (y/n): n
+Single Match Flag (SINGLE_MATCH) (y/n): n
+Read Warning Flag (READ_WARNING) (y/n): n
+
+
+After the selections the parameters should be as follows:
+
+VHDL parameters were generated as follows:
+===============================================
+C_FAMILY              	: string  := kintex7;
+C_MEM_TYPE            	: integer := 0;
+C_WIDTH               	: integer := 48;
+C_DEPTH               	: integer := 16;
+C_ADDR_TYPE           	: integer := 0;
+C_MATCH_RESOLUTION_TYPE   : integer := 0;
+C_TERNARY_MODE        	: integer := 0;
+C_HAS_WE              	: integer := 1;
+C_MEM_INIT            	: integer := 0;
+C_HAS_CMP_DIN         	: integer := 1;
+C_REG_OUTPUTS         	: integer := 0;
+C_HAS_EN              	: integer := 0;
+C_HAS_MULTIPLE_MATCH  	: integer := 0;
+C_HAS_SINGLE_MATCH    	: integer := 0;
+C_HAS_READ_WARNING    	: integer := 0;
+
+===============================================
+
+Then in the same directory, verify vhdl_xst.scr has the following parameters:
+
+run
+-ifmt VHDL
+-work_lib cam
+-p  xc7k325tffg676-1
+-write_timing_constraints No
+-ifn vhdl_xst.prj
+-iobuf NO
+-max_fanout 100
+-ofn ./results/cam.ngc 
+-ofmt NGC
+-bufg 1
+-bus_delimiter ()
+-hierarchy_separator /
+-case Maintain
+-opt_mode Speed
+-opt_level 1
+-loop_iteration_limit 5000
+-use_new_parser yes
+
+Then run:
+xilperl RunXST.pl
+
+04. Verilog file for simulation/implementation
+
+After finishing above, run follows to create a verilog file for simulations:
+    cd results
+    netgen -sim -ofmt verilog cam.ngc
+
+Edit the created cam.v file:
+
+(1) Change the module name to ‘cam’ from ‘cam_wrapper’.
+
+(2) Just after the port declaration (after "output [3 : 0] MATCH_ADDR;" and before "wire NlwRenamedSig_OI_BUSY;"), write a sentence:
+// synthesis translate_off
+
+(3) And before endmodule of ‘cam_wrapper’, write;
+// synthesis translate_on
+Please note the file has two modules therefore two ‘endmodule’. Make sure to insert the line for the first module; cam_wrapper (now the module name is ‘cam’).  The 'endmodule' is a few thousand lines of code in (around 5345).
+
+05. File copy
+
+Copy cam.ngc in netlist directory of Switch pcore:
+cp cam.ngc $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_switch_output_port_lookup_v1_10_a/netlist
+Copy cam.v in verilog directory of Switch pcore:
+cp cam.v $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_switch_output_port_lookup_v1_10_a/hdl/verilog

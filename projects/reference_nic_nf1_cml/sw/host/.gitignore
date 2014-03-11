@@ -1,0 +1,9 @@
+driver/.*.cmd
+driver/Module.symvers
+driver/modules.order
+driver/nf10.ko
+driver/nf10.mod.c
+reg_defines.h
+
+driver/.tmp_versions/
+include/
