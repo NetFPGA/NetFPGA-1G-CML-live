@@ -9,11 +9,9 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 5.0.2rc
+GIT VERSION 5.0.2
 
-Before using this code, please check the release notes for 5.0.2rc below
-
-Here are the release notes for 5.0.2rc 
+Before using this code, please check the release notes for 5.0.2 below
 
 1. RLDRAM stream controller:
 
@@ -22,7 +20,8 @@ This contrib project uses Xilinx RLDRAM controller as a packet buffer.
 wiki:
 https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-RLDRAM-Stream
 
-2. Reference projects (nic, switch, switch_lite, router) have been updated with registers. 
+2. Reference projects (nic, switch, switch_lite, router) have been updated with registers.
+The register monitoring system has also been updated.
 
 wiki for the pcore with registers:
 
