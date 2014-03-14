@@ -161,7 +161,7 @@ router.sh: router_gui.jar
 install:
 
 clean:
-	@rm -rf $(COMMON_C)/$(NF10LIB_NAME)
-	@rm -rf $(BIN)/* router_gui.jar router.sh eventcap.sh eventcap_gui.jar
-	@rm -rf $(CONSTANTS_JAVA)
-	@rm -rf $(NF10LIB)
+	rm -rf $(COMMON_C)/$(NF10LIB_NAME)
+	rm -rf $(BIN)/* router_gui.jar router.sh eventcap.sh eventcap_gui.jar
+	rm -rf $(CONSTANTS_JAVA)
+	rm -rf $(NF10LIB)
