@@ -1,0 +1,4 @@
+130c130
+<     := if_then_else(  ( (derived(C_FAMILY,"virtex5")) or (derived(C_FAMILY, "virtex6")) or (derived(C_FAMILY, "virtex6l"))  ), 10, 9);
+---
+>     := if_then_else(  ( (derived(C_FAMILY,"virtex5")) or (derived(C_FAMILY, "virtex6")) or (derived(C_FAMILY, "virtex6l")) or (derived(C_FAMILY, "kintex7"))  ), 10, 9);
