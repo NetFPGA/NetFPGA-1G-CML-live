@@ -268,10 +268,10 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     nf10_NetFPGA_Hardware_Project_decoder(card);    // Read from the nf10_identifier_vx_xx_x pcore
 
     if (!nf10_ael2005_phy_configuration(card)) {    // Read from the AEL2005 PHY chips
-        printk(KERN_INFO "nf10: AEL2005 PHY chips configured\n");
+        printk(KERN_INFO "nf10: AEL2005 PHY chips are configured\n");
     }
     else {
-        printk(KERN_INFO "nf10: AEL2005 PHY chips configuration detected. Not programming again\n");
+        printk(KERN_INFO "nf10: AEL2005 PHY chips are already configured\n");
     }
 
     // success
