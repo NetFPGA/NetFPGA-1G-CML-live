@@ -44,6 +44,7 @@ all:
 	gcc -march=core2 -o rdaxi rdaxi.c
 	gcc -march=core2 -o wraxi wraxi.c
 	gcc -march=core2 -o netfpga10g_ver netfpga10g_ver.c
+	gcc -march=core2 -o ael2005_conf ael2005_conf.c
 
 clean:
-	rm stats rdaxi wraxi netfpga10g_ver
+	rm stats rdaxi wraxi netfpga10g_ver ael2005_conf
