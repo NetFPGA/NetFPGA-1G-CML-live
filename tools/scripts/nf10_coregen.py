@@ -70,7 +70,7 @@ class CoreGen(object):
                 self.userlogic = arg
 
     def showHelp(self):
-        print "nf10_coregen.py [--help --name <pcore name> --path <pcore path> --author <author name> --userlogic= <user_logic name]"
+        print "nf10_coregen.py [--help --name <pcore name> --path <pcore path> --author <author name> --userlogic <user_logic name>]"
 
     def createFileHeader(self,filename,desc="Some pcore file",fsuffix=".v"):
         return  "################################################################################\n\
@@ -378,7 +378,7 @@ self.createFileHeader(filename=self.name,
    endfunction // log2\n\
 \n\
    // --------- Internal Parameters ------\n\
-   localparam NUM_RW_REGS = 0;\n\
+   localparam NUM_RW_REGS = 1;\n\
    localparam NUM_WO_REGS = 1;\n\
    localparam NUM_RO_REGS = 1;\n\
 \n\
