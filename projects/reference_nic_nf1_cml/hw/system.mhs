@@ -477,4 +477,3 @@ BEGIN mdio_ctrl
  PORT phy_rstn = phy_rstn_1 & phy_rstn_2 & phy_rstn_3 & phy_rstn_4
 END
 
-

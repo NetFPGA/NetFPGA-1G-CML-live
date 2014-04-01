@@ -9,4 +9,4 @@ system.make
 system_incl.make
 smallbits.mcs
 /bootloops/
-
+etc/
