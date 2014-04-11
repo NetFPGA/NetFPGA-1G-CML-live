@@ -9,25 +9,35 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 5.0.2
+GIT VERSION 5.0.3rc
 
-Before using this code, please check the release notes for 5.0.2 below
+Before using this code, please check the release notes for 5.0.3rc below
 
-1. RLDRAM stream controller:
+1. nf10_coregen.py file
 
-This contrib project uses Xilinx RLDRAM controller as a packet buffer.
+wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/Creating-your-own-pcore-with-nf10_coregen.py-tool
 
-wiki:
-https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-RLDRAM-Stream
+2. User application to program the phy chips
 
-2. Reference projects (nic, switch, switch_lite, router) have been updated with registers.
-The register monitoring system has also been updated.
+wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/User-application-for-Phy-configuration
 
-wiki for the pcore with registers:
+3. Driver updates
 
-https://github.com/NetFPGA/NetFPGA-public/wiki/Input-arbiter-with-registers
-https://github.com/NetFPGA/NetFPGA-public/wiki/10G-MAC-Interface-with-registers
-https://github.com/NetFPGA/NetFPGA-public/wiki/BRAM-Output-Queues-with-registers
+-- Statistics relating to properly sent/received packets have been updated. 
+-- Added freeing of skb in all error conditions.
+-- updated driver to detect  the phy  configuration, dump details of the current image in the FPGA.
+
+
+4. Two contrib projects have been added 
+
+-- NetFlow simple 10G Bram
+wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/NetFlow-simple-10G-Bram
+   
+-- Memcached-Client
+wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/Memcached-Client-Project
+
+
+5. Some user updates/bug-fixes for the simulation framework.
 
 
 
