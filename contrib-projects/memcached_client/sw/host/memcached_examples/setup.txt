@@ -1,0 +1,10 @@
+server cfg:
+{'dst-mac': '00:60:DD:45:9A:69', 'dont-fragment': 'yes', 'protocol': 'binary', 'key': 'TestKey', 'success': 'no', 'opaque': '00110022', 'request-id': 23, 'src-mac': '00:01:02:03:04:05', 'src-port': 1234, 'src-ip': '1.1.1.5', 'flags': '0BCDEF01', 'value': 'TestValue', 'file': 'foobar', 'dst-port': 11211, 'dst-ip': '1.1.1.1', 'type': 'get', 'expiration': 0}
+
+maxeler: 
+	eth B8:CD:A7:00:01:01
+	df  no
+
+>>> (rq,rs) = m.generateMemcached(cfg)
+>>> (rqp, rsp) = m.generateUdpIp(cfg, rq, rs)
+>>> scapy.all.wrpcap('mixed-set.pcap', [rqp, rsp])
