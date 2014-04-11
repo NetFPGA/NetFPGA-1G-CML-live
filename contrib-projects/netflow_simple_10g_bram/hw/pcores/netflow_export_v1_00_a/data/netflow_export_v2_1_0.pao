@@ -1,0 +1,27 @@
+# ******************************************************************************
+ # *  Design:
+ # *        NetFlow_Simple_10G_Bram
+ # *  
+ # *  NetFPGA-10G http://www.netfpga.org
+ # *
+ # *  File:
+ # *        netflow_export_v2_1_0.pao
+ # *
+ # *  Pcore:
+ # *        netflow_export
+ # *
+ # *  Authors:
+ # *        Marco Forconesi, Gustavo Sutter, Sergio Lopez-Buedo
+ # *
+ # *  Description:
+ # *          VHDL sources files listed in the right order for synthesis
+# ******************************************************************************
+
+lib netflow_export_v1_00_a netflow_export_pack vhdl
+lib netflow_export_v1_00_a flow_encoding vhdl
+lib netflow_export_v1_00_a sys_time_generator vhdl
+lib netflow_export_v1_00_a netflow_v5_header vhdl
+lib netflow_export_v1_00_a ip_header vhdl
+lib netflow_export_v1_00_a udp_header vhdl
+lib netflow_export_v1_00_a ethernet_frame_sender vhdl
+lib netflow_export_v1_00_a netflow_export_top vhdl

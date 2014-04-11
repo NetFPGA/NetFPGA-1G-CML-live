@@ -41,6 +41,14 @@ import csv, collections
 import re
 
 REG_STIM     = 'reg_stim.log'    
+REG_EXPECT   = 'reg_expect.axi'
+
+def expected():
+    i = 0
+    with open(REG_EXPECT) as f:
+        for line in f.readlines():
+            i = i + 1
+    return i
 
 def main():
     reg_stim = '%s' % (REG_STIM)
@@ -52,8 +60,10 @@ def main():
  	c = 0
 	d = 0
 	e = 0 
+        lines = 0
 
 	for line in f:
+	    lines = lines + 1
 	    if 'Error' in line:
 		e = 1
 		if '<' in line: 
@@ -80,6 +90,8 @@ def main():
 	    print '\tFAIL ( Check reg_stim.log file!!!! )'
 	elif e == 2:
 	    print '\tPASS ( WARNING! Check reg_stim.log file!!!! )'
+	elif lines == 0 and expected() != 0:
+	    print '\tFAIL ( Did not get any results! )'
 	else:
 	    print '\tPASS'
 

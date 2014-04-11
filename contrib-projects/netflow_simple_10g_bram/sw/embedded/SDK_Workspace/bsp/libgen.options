@@ -1,0 +1,3 @@
+PROCESSOR=microblaze_0
+REPOSITORIES=-lp /home/marcof/prj/NetFPGA-10G-live/lib/sw/std
+HWSPEC=../hw/system.xml
