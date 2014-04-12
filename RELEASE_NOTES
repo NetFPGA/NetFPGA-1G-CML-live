@@ -36,6 +36,9 @@ wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/NetFlow-simple-10G-Bram
 -- Memcached-Client
 wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/Memcached-Client-Project
 
+Note: We wish to inform the users that NetFPGA-Team is not maintaining the contrib projects. 
+So any issues/questions pertaining to the contrib projects should be directed to the project owners. 
+
 
 5. Some user updates/bug-fixes for the simulation framework.
 
