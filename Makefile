@@ -62,6 +62,47 @@ SW_LIB_DIR_INSTANCES_CONTRIB := $(basename $(patsubst ./%,%,$(SW_LIB_DIR_INSTANC
 cores: xilinx std contrib scripts
 clean: xilinxclean stdclean contribclean scriptsclean
 
+# Make only the cores used by the NF1-CML projects
+# These are done separately to prevent build errors that occur when doing "make cores"
+# without ISE 13.4 installed
+cml_cores: scripts
+	if test -f $(NF10_HW_LIB_DIR_CONTRIB)/mdio_ctrl_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_CONTRIB)/mdio_ctrl_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_CONTRIB)/nf1_cml_interface_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_CONTRIB)/nf1_cml_interface_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_CONTRIB)/nf10_endianess_manager_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_CONTRIB)/nf10_endianess_manager_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_CONTRIB)/version_id_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_CONTRIB)/version_id_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_STD)/dma_v1_20_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/dma_v1_20_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_STD)/nf10_axis_gen_check_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_axis_gen_check_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_STD)/nf10_bram_output_queues_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_bram_output_queues_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_STD)/nf10_input_arbiter_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_input_arbiter_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_STD)/nf10_nic_output_port_lookup_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_nic_output_port_lookup_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_STD)/nf10_router_output_port_lookup_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_router_output_port_lookup_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_STD)/nf10_switch_output_port_lookup_v1_00_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_switch_output_port_lookup_v1_00_a; \
+	fi; \
+	if test -f $(NF10_HW_LIB_DIR_STD)/nf10_switch_output_prot_lookup_v1_10_a/Makefile; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_switch_output_prot_lookup_v1_10_a; \
+	fi;
+
 xilinx: check-env
 	for lib in $(HW_LIB_DIR_INSTANCES_XILINX) ; do \
 		if test -f $(NF10_HW_LIB_DIR_XILINX)/$$lib/Makefile; \

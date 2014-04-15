@@ -53,7 +53,7 @@ exporttosdk: system.make
 
 sim: system.make
 	mkdir -p simulation/behavioral
-	cp nf7/system_tb.v simulation/behavioral
+	cp nf1_cml/system_tb.v simulation/behavioral
 	$(MAKE) -f system.make sim
 
 system.make system_incl.make: genmakes.tcl system.xmp system.mhs
@@ -67,8 +67,26 @@ clean: system.make
 	$(MAKE) -f system.make clean
 	rm -rf *.log *.make platgen.opt bootloops/ __xps _xmsgs simgen.opt etc simulation pcores genmakes.tcl smallbits.mcs
 
-simclean: system.make
-	$(MAKE) -f system.make simclean
+simclean:
+	rm -rf simulation
+	rm -rf *[0-9]_{stim,expected,log}.axi $(AXISIM_MHS)
+	rm -f simgen.log
+	rm -f *.axi
+	rm -f portconfig.sim
+	rm -f seed
+	rm -rf bootloops
+	rm -rf etc
+	rm -f *.opt
+	rm -f *.log
+	rm -f *.make
+	rm -rf ../test/nf10
+	rm -rf ../test/pcores
+	rm -f ../test/Makefile
+	rm -f ../test/system.mhs
+	rm -f ../test/system.xmp
+	rm -rf ../test/data
+	rm -f genmakes.tcl
+	rm -rf __xps
 
 smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit
