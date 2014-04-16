@@ -45,6 +45,7 @@ def init():
     f_regexpect = open(reg_expect, 'w')  
 
     for i in range(NUM_PORTS):
+        # use "nf1_cml_interface_" as the filename header if an nf1_cml project
         if 'nf1_cml' in os.environ.get('NF_DESIGN_DIR'):
             filename = nf1_ingress_fileHeader + str(i) + "_stim.axi"
         else:
@@ -52,6 +53,7 @@ def init():
         f_ingress.append(open(filename, 'w'))
         
     for i in range(NUM_PORTS):
+        # use "nf1_cml_interface_" as the filename header if an nf1_cml project
         if 'nf1_cml' in os.environ.get('NF_DESIGN_DIR'):
             filename = nf1_expectPHY_fileHeader + str(i) + "_expected.axi"
         else:

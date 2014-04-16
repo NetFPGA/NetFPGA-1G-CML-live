@@ -345,7 +345,11 @@ def printEnv():
     	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/system.xmp', src_test_dir])
     	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/system.mhs', src_test_dir])
     	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/pcores/', src_test_dir])
-    	subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/nf10/', src_test_dir])
+        # copy nf1_cml dir for nf1_cml projects, otherwise nf10
+        if 'nf1_cml' in os.environ.get('NF_DESIGN_DIR'):
+    	    subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/nf1_cml/', src_test_dir])
+        else:
+    	    subprocess.call(['cp', '-r', '-p', rootDir + '/projects/' + project + '/hw/nf10/', src_test_dir])
 
 # verify that NF_ROOT has been set and exists
 def identifyRoot():
@@ -466,9 +470,18 @@ def prepareTestWorkDir(testName):
         for file in glob.glob(src_dir + '/*'):
             subprocess.call(['cp', '-r', '-p', file, dst_dir])
 	for i in range(4):
-	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_log.axi' %i, dst_dir])
-	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_stim.axi' %i, dst_dir])
-	    subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_expected.axi' %i, dst_dir])
+		if 'nf1_cml' in os.environ.get('NF_DESIGN_DIR'):
+			subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf1_cml_interface_%d_log.axi' %i, dst_dir])
+		else:
+			subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_log.axi' %i, dst_dir])
+		if 'nf1_cml' in os.environ.get('NF_DESIGN_DIR'):
+			subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf1_cml_interface_%d_log.axi' %i, dst_dir])
+		else:
+			subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_stim.axi' %i, dst_dir])
+		if 'nf1_cml' in os.environ.get('NF_DESIGN_DIR'):
+			subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf1_cml_interface_%d_log.axi' %i, dst_dir])
+		else:
+			subprocess.call(['cp', '-r', '-p', src_test_dir + '/nf10_10g_interface_%d_expected.axi' %i, dst_dir])
 	subprocess.call(['cp', '-r', '-p', src_test_dir + '/dma_0_log.axi', dst_dir])
 	subprocess.call(['cp', '-r', '-p', src_test_dir + '/dma_0_expected.axi', dst_dir])
 	subprocess.call(['cp', '-r', '-p', src_test_dir + '/Makefile', dst_dir])
