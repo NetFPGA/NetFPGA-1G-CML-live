@@ -26,8 +26,10 @@ f_regexpect = []
 # directory = 'packet_data'
 dma_stim = 'dma_0_stim.axi'
 dma_expect = 'dma_'
-ingress_fileHeader = 'nf1_cml_interface_' # 'ingress_port_'
-expectPHY_fileHeader = 'nf1_cml_interface_' # 'expected_port_'
+ingress_fileHeader = 'nf10_10g_interface_' # 'ingress_port_'
+expectPHY_fileHeader = 'nf10_10g_interface_' # 'expected_port_'
+nf1_ingress_fileHeader = 'nf1_cml_interface_'
+nf1_expectPHY_fileHeader = 'nf1_cml_interface_'
 reg_expect = 'reg_expect.axi' 
 reg_stim = 'reg_stim.axi'
 
@@ -43,11 +45,17 @@ def init():
     f_regexpect = open(reg_expect, 'w')  
 
     for i in range(NUM_PORTS):
-        filename = ingress_fileHeader + str(i) + "_stim.axi"
+        if 'nf1_cml' in os.environ.get('NF_DESIGN_DIR'):
+            filename = nf1_ingress_fileHeader + str(i) + "_stim.axi"
+        else:
+            filename = ingress_fileHeader + str(i) + "_stim.axi"
         f_ingress.append(open(filename, 'w'))
         
     for i in range(NUM_PORTS):
-        filename = expectPHY_fileHeader + str(i) + "_expected.axi"
+        if 'nf1_cml' in os.environ.get('NF_DESIGN_DIR'):
+            filename = nf1_expectPHY_fileHeader + str(i) + "_expected.axi"
+        else:
+            filename = expectPHY_fileHeader + str(i) + "_expected.axi"
         f_expectPHY.append(open(filename, 'w'))
   
     for i in range(NUM_PORTS):
