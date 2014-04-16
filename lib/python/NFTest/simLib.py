@@ -26,8 +26,8 @@ f_regexpect = []
 # directory = 'packet_data'
 dma_stim = 'dma_0_stim.axi'
 dma_expect = 'dma_'
-ingress_fileHeader = 'nf10_10g_interface_' # 'ingress_port_'
-expectPHY_fileHeader = 'nf10_10g_interface_' # 'expected_port_'
+ingress_fileHeader = 'nf1_cml_interface_' # 'ingress_port_'
+expectPHY_fileHeader = 'nf1_cml_interface_' # 'expected_port_'
 reg_expect = 'reg_expect.axi' 
 reg_stim = 'reg_stim.axi'
 
