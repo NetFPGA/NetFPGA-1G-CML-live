@@ -64,8 +64,15 @@ init_bram: bits
 bits: system.make
 	$(MAKE) -f system.make bits
 
-exporttosdk: system.make
-	$(MAKE) -f system.make exporttosdk
+exporttosdk: $(SYSTEM_HW_HANDOFF_DEP)
+	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
+	@mkdir -p $(SDK_EXPORT_DIR)/../libs
+	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
+	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
+	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
+	@rm -rf $(SDK_EXPORT_DIR)/../libs
 
 axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	@echo "*********************************************"
@@ -74,7 +81,7 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	$(NF_ROOT)/tools/scripts/nf1_cml_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS)
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
-sim: axi_model regs
+sim: axi_model
 	./../test/$(TESTNAME)/run.py
 	cp nf1_cml/system_axisim_tb.v simulation/behavioral
 	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
@@ -92,6 +99,10 @@ simgui: axi_model regs
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
+#	@echo "" > nf1_cml_interface_0_stim.axi
+#	@echo "" > nf1_cml_interface_1_stim.axi
+#	@echo "" > nf1_cml_interface_2_stim.axi
+#	@echo "" > nf1_cml_interface_3_stim.axi
 simtx: checkpktlen axi_model
 	@echo "****************************************"
 	@echo "****************************************"
@@ -99,10 +110,6 @@ simtx: checkpktlen axi_model
 	@echo "****************************************"
 	@echo "****************************************"
 	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
-	@echo "" > nf1_cml_interface_0_stim.axi
-	@echo "" > nf1_cml_interface_1_stim.axi
-	@echo "" > nf1_cml_interface_2_stim.axi
-	@echo "" > nf1_cml_interface_3_stim.axi
 	cp nf1_cml/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
@@ -115,6 +122,44 @@ simtxgui: checkpktlen axi_model
 	@echo "" > nf1_cml_interface_2_stim.axi
 	@echo "" > nf1_cml_interface_3_stim.axi
 	cp nf1_cml/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
+
+simrx: checkpktlen axi_model
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > dma_0_stim.axi
+	cp nf1_cml/system_axisim_rx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf1_cml/noninteractive_sim.tcl
+
+simrxgui: checkpktlen axi_model
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > dma_0_stim.axi
+	cp nf1_cml/system_axisim_rx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
+
+simtxrx: checkpktlen axi_model
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > nf1_cml_interface_0_stim.axi
+	@echo "" > nf1_cml_interface_1_stim.axi
+	@echo "" > nf1_cml_interface_2_stim.axi
+	@echo "" > nf1_cml_interface_3_stim.axi
+	cp nf1_cml/system_axisim_txrx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf1_cml/noninteractive_sim.tcl
+
+simtxrxgui: checkpktlen axi_model
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > nf10_10g_interface_0_stim.axi
+	@echo "" > nf10_10g_interface_1_stim.axi
+	@echo "" > nf10_10g_interface_2_stim.axi
+	@echo "" > nf10_10g_interface_3_stim.axi
+	cp nf1_cml/system_axisim_txrx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
@@ -163,26 +208,6 @@ smallbits.mcs: implementation/system.ncd
 
 progflash: smallbits.mcs
 	impact -batch program_flash.cmd
-
-regs: system_incl.make  
-	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
-	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../../../lib/sw/ -od $(SDK_EXPORT_DIR)/../empty_application
-	@mkdir -p $(SDK_EXPORT_DIR)/../libs
-	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../../../lib/sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
-	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
-	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
-	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
-	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
-	@rm -rf $(SDK_EXPORT_DIR)/../libs
-	cd ../sw/host/include/  && cp ../../../../../tools/scripts/xparam2regdefines.py . && python xparam2regdefines.py
-	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
-	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
-	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_$(PROJECT_NAME).py 
-
-regsclean:
-	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
-	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
-	rm -rf ../lib/Python/reg_defines_*.*
 
 $(MICROBLAZE_0_BOOTLOOP): $(MICROBLAZE_BOOTLOOP_LE)
 	mkdir -p $(BOOTLOOP_DIR)

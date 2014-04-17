@@ -8,5 +8,11 @@ platgen.opt
 system.make
 system_incl.make
 smallbits.mcs
+simulation/
 /bootloops/
 etc/
+*.axi
+*.sim
+seed
+*.opt
+system_axisim.mhs

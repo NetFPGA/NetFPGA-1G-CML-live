@@ -10,6 +10,7 @@
 #
 #  Author:
 #        Jack Meador
+#        David Van Arnem
 #
 #  Description:
 #        This Makefile is a configurable wrapper for the
@@ -42,7 +43,15 @@
 include system_incl.make
 
 GIT_COMMIT = $(shell git log --abbrev=8 -1 --pretty=format:"%h")
-PROJECT_NAME = reference_switch_nf1_cml
+PROJECT_NAME = reference_switch_lite_nf1_cml
+
+SYSTEM_FUSE = sh system_fuse.sh
+AXISIM_FUSE = sh system_axisim_fuse.sh
+
+AXISIM_MHS = $(patsubst %.mhs, %_axisim.mhs, $(MHSFILE))
+AXISIM_CMD = $(patsubst %_system, %_system_axisim, $(SIM_CMD))
+
+PATH := $(PATH):$(PYTHONPATH)
 
 bits: system.make
 	$(MAKE) -f system.make bits
@@ -50,39 +59,17 @@ bits: system.make
 exporttosdk: system.make
 	$(MAKE) -f system.make exporttosdk
 
-sim: system.make
-	mkdir -p simulation/behavioral
-	cp nf7/system_tb.v simulation/behavioral
-	$(MAKE) -f system.make sim
+axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
+	@echo "*********************************************"
+	@echo "Creating AXI simulation models..."
+	@echo "*********************************************"
+	$(NF_ROOT)/tools/scripts/nf1_cml_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS)
+	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
+	@echo "*********************************************"
+	@echo "Done with AXI simulation models..."
+	@echo "*********************************************"
 
-system.make system_incl.make: genmakes.tcl system.xmp system.mhs
-	xps -nw -scr genmakes.tcl
-
-genmakes.tcl:
-	echo "xload xmp system.xmp" > genmakes.tcl
-	echo "exit" >> genmakes.tcl
-
-clean: system.make
-	$(MAKE) -f system.make clean
-	rm -rf *.log *.make platgen.opt bootloops/ __xps _xmsgs simgen.opt etc simulation pcores genmakes.tcl smallbits.mcs
-
-simclean: system.make
-	$(MAKE) -f system.make simclean
-
-smallbits.mcs: implementation/system.ncd
-	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit
-	cd implementation/ && promgen -w -p mcs -c FF -bpi_dc parallel -data_width 16 -o smallbits.mcs -s 131072 -u 00000000 smallbits.bit
-	cp implementation/smallbits.mcs .
-
-progflash: smallbits.mcs
-	impact -batch program_flash.cmd
-
-regsclean:
-	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
-	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
-	rm -rf ../lib/Python/reg_defines_*.*
-
-regs:  
+regs: system_incl.make 
 	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
 	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../../../lib/sw/ -od $(SDK_EXPORT_DIR)/../empty_application
 	@mkdir -p $(SDK_EXPORT_DIR)/../libs
@@ -97,5 +84,69 @@ regs:
 	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
 	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_$(PROJECT_NAME).py
 
-#system_incl.make:
-#	@echo exit|xps -nw system.xmp
+sim: axi_model regs
+	./../test/$(TESTNAME)/run.py
+	cp nf1_cml/system_axisim_tb.v simulation/behavioral
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf1_cml/noninteractive_sim.tcl
+	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
+	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
+
+simgui: axi_model regs
+	./../test/$(TESTNAME)/run.py
+	cp nf1_cml/system_axisim_tb.v simulation/behavioral
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
+	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
+	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
+
+system.make system_incl.make: genmakes.tcl system.xmp system.mhs
+	xps -nw -scr genmakes.tcl
+
+genmakes.tcl:
+	echo "xload xmp system.xmp" > genmakes.tcl
+	echo "exit" >> genmakes.tcl
+
+clean: system.make
+	$(MAKE) -f system.make clean
+	rm -rf *.log *.make platgen.opt bootloops/ __xps _xmsgs simgen.opt etc simulation pcores genmakes.tcl smallbits.mcs
+
+simclean:
+	rm -rf simulation
+	rm -rf *[0-9]_{stim,expected,log}.axi $(AXISIM_MHS)
+	rm -f simgen.log
+	rm -f *.axi
+	rm -f portconfig.sim
+	rm -f seed
+	rm -rf bootloops
+	rm -rf etc
+	rm -f *.opt
+	rm -f *.log
+	rm -f *.make
+	rm -rf ../test/nf10
+	rm -rf ../test/pcores
+	rm -f ../test/Makefile
+	rm -f ../test/system.mhs
+	rm -f ../test/system.xmp
+	rm -rf ../test/data
+	rm -f genmakes.tcl
+	rm -rf __xps
+
+smallbits.mcs: implementation/system.ncd
+	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit
+	cd implementation/ && promgen -w -p mcs -c FF -bpi_dc parallel -data_width 16 -o smallbits.mcs -s 131072 -u 00000000 smallbits.bit
+	cp implementation/smallbits.mcs .
+
+progflash: smallbits.mcs
+	impact -batch program_flash.cmd
+
+regsclean:
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -rf ../lib/Python/reg_defines_*.*
+
+$(MICROBLAZE_0_BOOTLOOP): $(MICROBLAZE_BOOTLOOP_LE)
+	mkdir -p $(BOOTLOOP_DIR)
+	cp -f $(MICROBLAZE_BOOTLOOP_LE) $(MICROBLAZE_0_BOOTLOOP)
