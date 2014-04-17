@@ -50,8 +50,13 @@ AXISIM_FUSE = sh system_axisim_fuse.sh
 
 AXISIM_MHS = $(patsubst %.mhs, %_axisim.mhs, $(MHSFILE))
 AXISIM_CMD = $(patsubst %_system, %_system_axisim, $(SIM_CMD))
+AXISIM_EXE = ./isim_system_axisim
 
 PATH := $(PATH):$(PYTHONPATH)
+
+# Default Packet length for run.py
+PKTLEN = 16
+PKTNO = 2 
 
 init_bram: bits
 	$(MAKE) -f system.make init_bram
@@ -68,9 +73,6 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	@echo "*********************************************"
 	$(NF_ROOT)/tools/scripts/nf1_cml_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS)
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
-	@echo "*********************************************"
-	@echo "Done with AXI simulation models..."
-	@echo "*********************************************"
 
 sim: axi_model regs
 	./../test/$(TESTNAME)/run.py
@@ -90,6 +92,37 @@ simgui: axi_model regs
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
+simtx: checkpktlen axi_model
+	@echo "****************************************"
+	@echo "****************************************"
+	@echo " RUNNING TX SIM"
+	@echo "****************************************"
+	@echo "****************************************"
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > nf1_cml_interface_0_stim.axi
+	@echo "" > nf1_cml_interface_1_stim.axi
+	@echo "" > nf1_cml_interface_2_stim.axi
+	@echo "" > nf1_cml_interface_3_stim.axi
+	cp nf1_cml/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf1_cml/noninteractive_sim.tcl
+
+simtxgui: checkpktlen axi_model
+	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
+	@echo "" > nf1_cml_interface_0_stim.axi
+	@echo "" > nf1_cml_interface_1_stim.axi
+	@echo "" > nf1_cml_interface_2_stim.axi
+	@echo "" > nf1_cml_interface_3_stim.axi
+	cp nf1_cml/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
+
+checkpktlen: 
+	@if [ "$(PKTLEN)" = "" ]; then echo "Please follow command line './make simrxgui PKTLEN=10 PKTLNO=2'"; fi
+	@echo "Run with default packet payload length and no! $(PKTLETN) $(PKTNO)"
+
 system.make system_incl.make: genmakes.tcl system.xmp system.mhs
 	xps -nw -scr genmakes.tcl
 
@@ -100,7 +133,7 @@ genmakes.tcl:
 
 clean: system.make
 	$(MAKE) -f system.make clean
-	rm -rf *.log *.make platgen.opt bootloops/ __xps _xmsgs simgen.opt simulation pcores genmakes.tcl
+	rm -rf *.log *.make platgen.opt bootloops/ __xps _xmsgs simgen.opt etc simulation pcores genmakes.tcl
 
 simclean:
 	rm -rf simulation
@@ -114,7 +147,7 @@ simclean:
 	rm -f *.opt
 	rm -f *.log
 	rm -f *.make
-	rm -rf ../test/nf10
+	rm -rf ../test/nf1_cml
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
 	rm -f ../test/system.mhs
