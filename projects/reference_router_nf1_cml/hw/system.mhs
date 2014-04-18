@@ -95,7 +95,7 @@ BEGIN axi_intc
  BUS_INTERFACE S_AXI = axi_interconnect_0
  BUS_INTERFACE INTERRUPT = microblaze_0_interrupt
  PORT S_AXI_ACLK = clk_100_0000MHz
- PORT INTR = axi_timebase_wdt_0_Timebase_Interrupt & axi_timebase_wdt_0_WDT_Interrupt & RS232_Interrupt
+ PORT INTR = RS232_Interrupt
 END
 
 BEGIN lmb_v10
@@ -193,7 +193,7 @@ BEGIN clock_generator
  PARAMETER C_CLKOUT2_VARIABLE_PHASE = FALSE
  PARAMETER C_CLKOUT1_BUF = TRUE
  PARAMETER C_CLKOUT1_DUTY_CYCLE = 0.500000
- PARAMETER C_CLKOUT1_FREQ = 100000000
+ PARAMETER C_CLKOUT1_FREQ = 125000000
  PARAMETER C_CLKOUT1_GROUP = NONE
  PARAMETER C_CLKOUT1_PHASE = 0
  PARAMETER C_CLKOUT1_VARIABLE_PHASE = FALSE
@@ -273,8 +273,8 @@ BEGIN nf1_cml_interface
  PARAMETER C_BASEADDR = 0x77e60000
  PARAMETER C_HIGHADDR = 0x77e6ffff
  BUS_INTERFACE S_AXI = axi_interconnect_0
- BUS_INTERFACE M_AXIS = nf1_cml_interface_1_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_0
+ BUS_INTERFACE M_AXIS = nf1_cml_interface_0_M_AXIS
  PORT s_axi_aclk = clk_100_0000MHz
  PORT gtx_clk = gtx_clk_125_0000MHz
  PORT gtx_clk90 = gtx_clk_125_0000MHz_90
@@ -300,9 +300,9 @@ BEGIN nf1_cml_interface
  PARAMETER C_DEFAULT_SRC_PORT = 0x04
  PARAMETER C_BASEADDR = 0x77e40000
  PARAMETER C_HIGHADDR = 0x77e4ffff
- BUS_INTERFACE M_AXIS = nf1_cml_interface_2_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_1
  BUS_INTERFACE S_AXI = axi_interconnect_0
+ BUS_INTERFACE M_AXIS = nf1_cml_interface_1_M_AXIS
  PORT s_axi_aclk = clk_100_0000MHz
  PORT gtx_clk = gtx_clk_125_0000MHz
  PORT gtx_clk90 = gtx_clk_125_0000MHz_90
@@ -328,9 +328,9 @@ BEGIN nf1_cml_interface
  PARAMETER C_DEFAULT_SRC_PORT = 0x10
  PARAMETER C_BASEADDR = 0x77e20000
  PARAMETER C_HIGHADDR = 0x77e2ffff
- BUS_INTERFACE M_AXIS = nf1_cml_interface_3_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_2
  BUS_INTERFACE S_AXI = axi_interconnect_0
+ BUS_INTERFACE M_AXIS = nf1_cml_interface_2_M_AXIS
  PORT s_axi_aclk = clk_100_0000MHz
  PORT gtx_clk = gtx_clk_125_0000MHz
  PORT gtx_clk90 = gtx_clk_125_0000MHz_90
@@ -356,9 +356,9 @@ BEGIN nf1_cml_interface
  PARAMETER C_DEFAULT_SRC_PORT = 0x40
  PARAMETER C_BASEADDR = 0x77e00000
  PARAMETER C_HIGHADDR = 0x77e0ffff
- BUS_INTERFACE M_AXIS = nf1_cml_interface_4_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_3
  BUS_INTERFACE S_AXI = axi_interconnect_0
+ BUS_INTERFACE M_AXIS = nf1_cml_interface_3_M_AXIS
  PORT s_axi_aclk = clk_100_0000MHz
  PORT gtx_clk = gtx_clk_125_0000MHz
  PORT gtx_clk90 = gtx_clk_125_0000MHz_90
@@ -393,12 +393,12 @@ BEGIN nf10_input_arbiter
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
- BUS_INTERFACE S_AXIS_0 = nf1_cml_interface_1_M_AXIS
- BUS_INTERFACE S_AXIS_1 = nf1_cml_interface_2_M_AXIS
- BUS_INTERFACE S_AXIS_2 = nf1_cml_interface_3_M_AXIS
- BUS_INTERFACE S_AXIS_3 = nf1_cml_interface_4_M_AXIS
  BUS_INTERFACE S_AXIS_4 = dma_0_M_AXIS
  BUS_INTERFACE M_AXIS = nf10_input_arbiter_0_M_AXIS
+ BUS_INTERFACE S_AXIS_0 = nf1_cml_interface_0_M_AXIS
+ BUS_INTERFACE S_AXIS_1 = nf1_cml_interface_1_M_AXIS
+ BUS_INTERFACE S_AXIS_2 = nf1_cml_interface_2_M_AXIS
+ BUS_INTERFACE S_AXIS_3 = nf1_cml_interface_3_M_AXIS
  PORT axi_aclk = clk_125_0000MHz
  PORT axi_resetn = proc_sys_reset_0_Peripheral_aresetn
 END
@@ -454,8 +454,8 @@ END
 BEGIN mdio_ctrl
  PARAMETER INSTANCE = mdio_ctrl_0
  PARAMETER HW_VER = 1.00.a
- PARAMETER C_BASEADDR = 0x76800000
- PARAMETER C_HIGHADDR = 0x7680ffff
+ PARAMETER C_BASEADDR = 0x76820000
+ PARAMETER C_HIGHADDR = 0x7682ffff
  BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT mdc = mdc
@@ -466,14 +466,14 @@ END
 BEGIN nf10_router_output_port_lookup
  PARAMETER INSTANCE = nf10_router_output_port_lookup_0
  PARAMETER HW_VER = 1.00.a
- PARAMETER C_BAR0_BASEADDR = 0x73400000
- PARAMETER C_BAR0_HIGHADDR = 0x7340ffff
- PARAMETER C_BAR1_BASEADDR = 0x73420000
- PARAMETER C_BAR1_HIGHADDR = 0x7342ffff
+ PARAMETER C_BAR0_BASEADDR = 0x76800000
+ PARAMETER C_BAR0_HIGHADDR = 0x7680ffff
+ PARAMETER C_BAR1_BASEADDR = 0x74800000
+ PARAMETER C_BAR1_HIGHADDR = 0x7480ffff
  BUS_INTERFACE S_AXI = axi_interconnect_0
- BUS_INTERFACE S_AXIS = nf10_endianess_manager_0_M_AXIS_INT
  BUS_INTERFACE M_AXIS = nf10_router_output_port_lookup_0_M_AXIS
- PORT S_AXI_ACLK = clk_100_0000MHz
+ BUS_INTERFACE S_AXIS = nf10_endianess_manager_0_M_AXIS_INT
+ PORT S_AXI_ACLK = clk_125_0000MHz
  PORT S_AXI_ARESETN = proc_sys_reset_0_Peripheral_aresetn
 END
 
@@ -483,10 +483,10 @@ BEGIN nf10_endianess_manager
  PARAMETER C_S_AXIS_TDATA_WIDTH = 256
  PARAMETER C_M_AXIS_TDATA_WIDTH = 256
  BUS_INTERFACE M_AXIS = nf10_endianess_manager_0_M_AXIS
- BUS_INTERFACE M_AXIS_INT = nf10_endianess_manager_0_M_AXIS_INT
  BUS_INTERFACE S_AXIS_INT = nf10_router_output_port_lookup_0_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_input_arbiter_0_M_AXIS
+ BUS_INTERFACE M_AXIS_INT = nf10_endianess_manager_0_M_AXIS_INT
  PORT ARESETN = proc_sys_reset_0_Peripheral_aresetn
- PORT ACLK = clk_100_0000MHz
+ PORT ACLK = clk_125_0000MHz
 END
 

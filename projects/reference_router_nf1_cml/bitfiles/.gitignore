@@ -1,8 +1,4 @@
-_impact.cmd
-output.txt
-*.cfi
-*.mcs
-*.prm
-*cclktemp.bit
-*.ipf
-*impact.*
+*
+
+!*.bit
+!.gitignore

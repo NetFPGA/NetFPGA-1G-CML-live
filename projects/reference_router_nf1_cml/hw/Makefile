@@ -53,18 +53,23 @@ PATH      := $(PATH):$(PYTHONPATH)
 AXISIM_MHS = $(patsubst %.mhs, %_axisim.mhs, $(MHSFILE))
 AXISIM_CMD = $(patsubst %_system, %_system_axisim, $(SIM_CMD))
 
+.PHONY: exporttosdk
+
 bits: system.make
 	$(MAKE) -f system.make bits
 
-exporttosdk: $(SYSTEM_HW_HANDOFF_DEP)
-	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
-	@mkdir -p $(SDK_EXPORT_DIR)/../libs
-	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
-	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
-	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
-	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
-	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
-	@rm -rf $(SDK_EXPORT_DIR)/../libs
+exporttosdk: system.make
+	$(MAKE) -f system.make exporttosdk
+
+#exporttosdk: $(SYSTEM_HW_HANDOFF_DEP)
+#	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
+#	@mkdir -p $(SDK_EXPORT_DIR)/../libs
+#	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
+#	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
+#	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
+#	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
+#	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
+#	@rm -rf $(SDK_EXPORT_DIR)/../libs
 
 axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	@echo "*********************************************"
@@ -91,8 +96,8 @@ simgui: axi_model regs
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
-system_incl.make:
-	@echo exit|xps -nw system.xmp
+#system_incl.make:
+#	@echo exit|xps -nw system.xmp
 
 simclean:
 	rm -rf simulation

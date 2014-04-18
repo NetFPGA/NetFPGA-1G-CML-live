@@ -15,16 +15,16 @@ phy2loop0 = ('../connections/2phy', [])
 nftest_init(sim_loop = [], hw_config = [phy2loop0])
 nftest_start()
 
-if isHW:
-    # asserting the reset_counter to 1 for clearing the registers
-    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x1)
-
-    # asseting teh reset_counter to 0 for enable the counters to increment
-    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x0)
+if isHW():
+	# asserting the reset_counter to 1 for clearing the registers
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x1)
+	# asseting teh reset_counter to 0 for enable the counters to increment
+	nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x0)
 
 
 routerMAC = ["00:ca:fe:00:00:01", "00:ca:fe:00:00:02", "00:ca:fe:00:00:03", "00:ca:fe:00:00:04"]
 routerIP = ["192.168.0.40", "192.168.1.40", "192.168.2.40", "192.168.3.40"]
+# routerIP = ["192.168.200.1", "192.168.201.1", "192.168.202.1", "192.168.203.1"]
 
 # Clear all tables in a hardware test (not needed in software)
 if isHW():
@@ -32,8 +32,8 @@ if isHW():
 
 # Write the mac and IP addresses
 for port in range(4):
-    nftest_add_dst_ip_filter_entry (port, routerIP[port])
-    nftest_set_router_MAC ('nf%d'%port, routerMAC[port])
+	nftest_add_dst_ip_filter_entry (port, routerIP[port])
+	nftest_set_router_MAC ('nf%d'%port, routerMAC[port])
 
 index = 0
 subnetIP = "192.168.1.0"

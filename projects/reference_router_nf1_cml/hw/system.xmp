@@ -25,6 +25,8 @@ UcfFile: data/system.ucf
 EnableParTimingError: 1
 ShowLicenseDialog: 1
 BInfo: 
+LockAddr: nf10_router_output_port_lookup_0,C_BAR0_BASEADDR
+LockAddr: nf10_router_output_port_lookup_0,C_BAR1_BASEADDR
 Processor: microblaze_0
 ElfImp: 
 ElfSim: 

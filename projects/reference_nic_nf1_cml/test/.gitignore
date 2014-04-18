@@ -1,9 +1,9 @@
 bootloops/
+data/
 etc/
 simulation/
 __xps/
 nf1_cml/
-data/
 
 Makefile
 *.log
