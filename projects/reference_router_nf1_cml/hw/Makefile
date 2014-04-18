@@ -45,16 +45,75 @@ include system_incl.make
 GIT_COMMIT = $(shell git log --abbrev=8 -1 --pretty=format:"%h")
 PROJECT_NAME = reference_router_nf1_cml
 
+SYSTEM_FUSE = sh system_fuse.sh
+AXISIM_FUSE = sh system_axisim_fuse.sh
+
+PATH      := $(PATH):$(PYTHONPATH)
+
+AXISIM_MHS = $(patsubst %.mhs, %_axisim.mhs, $(MHSFILE))
+AXISIM_CMD = $(patsubst %_system, %_system_axisim, $(SIM_CMD))
+
 bits: system.make
 	$(MAKE) -f system.make bits
 
-exporttosdk: system.make
-	$(MAKE) -f system.make exporttosdk
+exporttosdk: $(SYSTEM_HW_HANDOFF_DEP)
+	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
+	@mkdir -p $(SDK_EXPORT_DIR)/../libs
+	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
+	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
+	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
+	@rm -rf $(SDK_EXPORT_DIR)/../libs
 
-sim: system.make
-	mkdir -p simulation/behavioral
-	cp nf7/system_tb.v simulation/behavioral
-	$(MAKE) -f system.make sim
+axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
+	@echo "*********************************************"
+	@echo "Creating AXI simulation models..."
+	@echo "*********************************************"
+	nf1_cml_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS) 
+	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
+
+sim: axi_model regs
+	./../test/$(TESTNAME)/run.py
+	cp nf1_cml/system_axisim_tb.v simulation/behavioral
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf1_cml/noninteractive_sim.tcl
+	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
+	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
+
+simgui: axi_model regs
+	./../test/$(TESTNAME)/run.py
+	cp nf1_cml/system_axisim_tb.v simulation/behavioral
+	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
+	cd simulation/behavioral && $(AXISIM_FUSE)
+	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
+	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
+	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
+
+system_incl.make:
+	@echo exit|xps -nw system.xmp
+
+simclean:
+	rm -rf simulation
+	rm -rf *[0-9]_{stim,expected,log}.axi $(AXISIM_MHS)
+	rm -f simgen.log
+	rm -rf __xps
+	rm -f *.axi
+	rm -f portconfig.sim
+	rm -f seed
+	rm -rf bootloops
+	rm -rf etc
+	rm -f *.opt
+	rm -f *.log
+	rm -f *.make
+	rm -rf ../test/nf10
+	rm -rf ../test/pcores
+	rm -f ../test/Makefile
+	rm -f ../test/system.mhs
+	rm -f ../test/system.xmp
+	rm -rf ../test/data
+	rm -f sim_log
 
 system.make system_incl.make: genmakes.tcl system.xmp system.mhs
 	xps -nw -scr genmakes.tcl
@@ -66,9 +125,6 @@ genmakes.tcl:
 clean: system.make
 	$(MAKE) -f system.make clean
 	rm -rf *.log *.make platgen.opt bootloops/ __xps _xmsgs simgen.opt etc simulation pcores genmakes.tcl smallbits.mcs
-
-simclean: system.make
-	$(MAKE) -f system.make simclean
 
 smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit
@@ -97,6 +153,10 @@ regs:
 	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
 	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
 	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_$(PROJECT_NAME).py
+
+$(MICROBLAZE_0_BOOTLOOP): $(MICROBLAZE_BOOTLOOP_LE)
+	@mkdir -p $(BOOTLOOP_DIR)
+	cp -f $(MICROBLAZE_BOOTLOOP_LE) $(MICROBLAZE_0_BOOTLOOP)
 
 #system_incl.make:
 #	@echo exit|xps -nw system.xmp

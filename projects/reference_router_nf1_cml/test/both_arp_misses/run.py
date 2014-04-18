@@ -64,11 +64,11 @@ for i in range(30):
                            dst_IP=DST_IP, src_IP=SRC_IP,
                            pkt_len=random.randint(60,1514))
     if isHW():
-	    nftest_send_phy('nf0', sent_pkt)
-        nftest_expect_dma('nf0', sent_pkt)
+		nftest_send_phy('nf0', sent_pkt)
+		nftest_expect_dma('nf0', sent_pkt)
     else:
-        sent_pkt.time = (i*(1e-8))
-        sent_pkts.append(sent_pkt)
+		sent_pkt.time = (i*(1e-8))
+		sent_pkts.append(sent_pkt)
 
 if not isHW():
     nftest_send_phy('nf0', sent_pkts)
