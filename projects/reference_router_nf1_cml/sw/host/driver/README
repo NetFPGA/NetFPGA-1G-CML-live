@@ -1,0 +1,3 @@
+Project reference_router_nf1_cml uses the same driver as reference_nic_nf1_cml. Please use the driver located at
+
+projects/reference_nic_nf1_cml/sw/host/driver.

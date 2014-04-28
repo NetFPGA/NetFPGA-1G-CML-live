@@ -69,7 +69,7 @@ BEGIN version_id
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x77e18000
  PARAMETER C_HIGHADDR = 0x77e18fff
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT S_AXI_ACLK = clk_100_0000MHz
 END
 
@@ -92,7 +92,7 @@ BEGIN axi_intc
  PARAMETER HW_VER = 1.04.a
  PARAMETER C_BASEADDR = 0x41200000
  PARAMETER C_HIGHADDR = 0x4120ffff
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  BUS_INTERFACE INTERRUPT = microblaze_0_interrupt
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT INTR = axi_timebase_wdt_0_Timebase_Interrupt & axi_timebase_wdt_0_WDT_Interrupt & RS232_Interrupt
@@ -154,7 +154,7 @@ BEGIN microblaze
  PARAMETER C_DCACHE_ALWAYS_USED = 0
  BUS_INTERFACE ILMB = microblaze_0_ilmb
  BUS_INTERFACE DLMB = microblaze_0_dlmb
- BUS_INTERFACE M_AXI_DP = axi4lite_0
+ BUS_INTERFACE M_AXI_DP = axi_interconnect_0
  BUS_INTERFACE DEBUG = microblaze_0_debug
  BUS_INTERFACE INTERRUPT = microblaze_0_interrupt
  PORT MB_RESET = proc_sys_reset_0_MB_Reset
@@ -168,7 +168,7 @@ BEGIN mdm
  PARAMETER C_USE_UART = 1
  PARAMETER C_BASEADDR = 0x41400000
  PARAMETER C_HIGHADDR = 0x4140ffff
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  BUS_INTERFACE MBDEBUG_0 = microblaze_0_debug
  PORT Debug_SYS_Rst = proc_sys_reset_0_MB_Debug_Sys_Rst
  PORT S_AXI_ACLK = clk_100_0000MHz
@@ -229,14 +229,14 @@ BEGIN axi_timebase_wdt
  PARAMETER C_WDT_ENABLE_ONCE = 0
  PARAMETER C_BASEADDR = 0x41a00000
  PARAMETER C_HIGHADDR = 0x41a0ffff
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT Timebase_Interrupt = axi_timebase_wdt_0_Timebase_Interrupt
  PORT WDT_Interrupt = axi_timebase_wdt_0_WDT_Interrupt
 END
 
 BEGIN axi_interconnect
- PARAMETER INSTANCE = axi4lite_0
+ PARAMETER INSTANCE = axi_interconnect_0
  PARAMETER HW_VER = 1.06.a
  PARAMETER C_INTERCONNECT_CONNECTIVITY_MODE = 0
  PORT interconnect_aclk = clk_100_0000MHz
@@ -252,7 +252,7 @@ BEGIN axi_uartlite
  PARAMETER C_ODD_PARITY = 1
  PARAMETER C_BASEADDR = 0x40600000
  PARAMETER C_HIGHADDR = 0x4060ffff
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT TX = RS232_Uart_1_sout
  PORT RX = RS232_Uart_1_sin
@@ -260,7 +260,7 @@ BEGIN axi_uartlite
 END
 
 BEGIN nf1_cml_interface
- PARAMETER INSTANCE = nf1_cml_interface_1
+ PARAMETER INSTANCE = nf1_cml_interface_0
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_MAC_SEL = 2
  PARAMETER C_INCLUDE_IDELAYCTRL = 1
@@ -272,7 +272,7 @@ BEGIN nf1_cml_interface
  PARAMETER C_DEFAULT_SRC_PORT = 0x01
  PARAMETER C_BASEADDR = 0x77e60000
  PARAMETER C_HIGHADDR = 0x77e6ffff
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  BUS_INTERFACE M_AXIS = nf1_cml_interface_1_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_0
  PORT s_axi_aclk = clk_100_0000MHz
@@ -290,7 +290,7 @@ BEGIN nf1_cml_interface
 END
 
 BEGIN nf1_cml_interface
- PARAMETER INSTANCE = nf1_cml_interface_2
+ PARAMETER INSTANCE = nf1_cml_interface_1
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_TX_PAUSE_MAC_ADDR = 0
  PARAMETER C_RX_PAUSE_MAC_ADDR = 0
@@ -302,7 +302,7 @@ BEGIN nf1_cml_interface
  PARAMETER C_HIGHADDR = 0x77e4ffff
  BUS_INTERFACE M_AXIS = nf1_cml_interface_2_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_1
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT s_axi_aclk = clk_100_0000MHz
  PORT gtx_clk = gtx_clk_125_0000MHz
  PORT gtx_clk90 = gtx_clk_125_0000MHz_90
@@ -318,7 +318,7 @@ BEGIN nf1_cml_interface
 END
 
 BEGIN nf1_cml_interface
- PARAMETER INSTANCE = nf1_cml_interface_3
+ PARAMETER INSTANCE = nf1_cml_interface_2
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_TX_PAUSE_MAC_ADDR = 0
  PARAMETER C_RX_PAUSE_MAC_ADDR = 0
@@ -330,7 +330,7 @@ BEGIN nf1_cml_interface
  PARAMETER C_HIGHADDR = 0x77e2ffff
  BUS_INTERFACE M_AXIS = nf1_cml_interface_3_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_2
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT s_axi_aclk = clk_100_0000MHz
  PORT gtx_clk = gtx_clk_125_0000MHz
  PORT gtx_clk90 = gtx_clk_125_0000MHz_90
@@ -346,7 +346,7 @@ BEGIN nf1_cml_interface
 END
 
 BEGIN nf1_cml_interface
- PARAMETER INSTANCE = nf1_cml_interface_4
+ PARAMETER INSTANCE = nf1_cml_interface_3
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_TX_PAUSE_MAC_ADDR = 0
  PARAMETER C_RX_PAUSE_MAC_ADDR = 0
@@ -358,7 +358,7 @@ BEGIN nf1_cml_interface
  PARAMETER C_HIGHADDR = 0x77e0ffff
  BUS_INTERFACE M_AXIS = nf1_cml_interface_4_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_3
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT s_axi_aclk = clk_100_0000MHz
  PORT gtx_clk = gtx_clk_125_0000MHz
  PORT gtx_clk90 = gtx_clk_125_0000MHz_90
@@ -412,8 +412,8 @@ BEGIN dma
  PARAMETER C_HIGHADDR = 0x7a80ffff
  BUS_INTERFACE M_AXIS = dma_0_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_bram_output_queues_0_M_AXIS_4
- BUS_INTERFACE M_AXI = axi4lite_0
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE M_AXI = axi_interconnect_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT M_AXI_LITE_ACLK = clk_100_0000MHz
  PORT S_AXIS_ACLK = clk_125_0000MHz
@@ -456,7 +456,7 @@ BEGIN mdio_ctrl
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x76800000
  PARAMETER C_HIGHADDR = 0x7680ffff
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT mdc = mdc
  PORT mdio = mdio
@@ -470,7 +470,7 @@ BEGIN nf10_switch_output_port_lookup
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
  PARAMETER C_BASEADDR = 0x74800000
  PARAMETER C_HIGHADDR = 0x7480ffff
- BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  BUS_INTERFACE M_AXIS = nf10_switch_output_port_lookup_0_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_input_arbiter_0_M_AXIS
  PORT S_AXI_ACLK = clk_100_0000MHz

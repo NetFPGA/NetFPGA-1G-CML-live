@@ -140,31 +140,31 @@ def XPAR_MDIO_0_HIGHADDR():
     return 0x7A04FFFF
 
 
+#  Definitions for peripheral NF1_CML_INTERFACE_0 */
+def XPAR_NF1_CML_INTERFACE_0_BASEADDR():
+    return 0x78200000
+def XPAR_NF1_CML_INTERFACE_0_HIGHADDR():
+    return 0x7820FFFF
+
+
 #  Definitions for peripheral NF1_CML_INTERFACE_1 */
 def XPAR_NF1_CML_INTERFACE_1_BASEADDR():
-    return 0x78200000
+    return 0x78220000
 def XPAR_NF1_CML_INTERFACE_1_HIGHADDR():
-    return 0x7820FFFF
+    return 0x7822FFFF
 
 
 #  Definitions for peripheral NF1_CML_INTERFACE_2 */
 def XPAR_NF1_CML_INTERFACE_2_BASEADDR():
-    return 0x78220000
+    return 0x78240000
 def XPAR_NF1_CML_INTERFACE_2_HIGHADDR():
-    return 0x7822FFFF
+    return 0x7824FFFF
 
 
 #  Definitions for peripheral NF1_CML_INTERFACE_3 */
 def XPAR_NF1_CML_INTERFACE_3_BASEADDR():
-    return 0x78240000
-def XPAR_NF1_CML_INTERFACE_3_HIGHADDR():
-    return 0x7824FFFF
-
-
-#  Definitions for peripheral NF1_CML_INTERFACE_4 */
-def XPAR_NF1_CML_INTERFACE_4_BASEADDR():
     return 0x78260000
-def XPAR_NF1_CML_INTERFACE_4_HIGHADDR():
+def XPAR_NF1_CML_INTERFACE_3_HIGHADDR():
     return 0x7826FFFF
 
 

@@ -1,0 +1,17 @@
+bootloops/
+data/
+etc/
+simulation/
+__xps/
+nf1_cml/
+
+Makefile
+*.log
+*.axi
+*.tcl
+*.sim
+seed
+*.mhs
+*.make
+*.xmp
+*.opt
