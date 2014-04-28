@@ -9,7 +9,7 @@
 #        reference_nic_nf1_cml
 #
 #  Author:
-#        Jack Meador, Computer Measurement Laboratory, LLC
+#        Jack Meador
 #        David Van Arnem
 #
 #  Description:
@@ -92,16 +92,7 @@ simgui: axi_model regs
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
-#	@echo "" > nf1_cml_interface_0_stim.axi
-#	@echo "" > nf1_cml_interface_1_stim.axi
-#	@echo "" > nf1_cml_interface_2_stim.axi
-#	@echo "" > nf1_cml_interface_3_stim.axi
 simtx: checkpktlen axi_model
-	@echo "****************************************"
-	@echo "****************************************"
-	@echo " RUNNING TX SIM"
-	@echo "****************************************"
-	@echo "****************************************"
 	./../test/$(TESTNAME)/run.py --packet_length $(PKTLEN) --packet_no $(PKTNO)
 	cp nf1_cml/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
@@ -161,22 +152,47 @@ checkpktlen:
 	@if [ "$(PKTLEN)" = "" ]; then echo "Please follow command line './make simrxgui PKTLEN=10 PKTLNO=2'"; fi
 	@echo "Run with default packet payload length and no! $(PKTLETN) $(PKTNO)"
 
-system.make system_incl.make: genmakes.tcl system.xmp system.mhs
-	xps -nw -scr genmakes.tcl
+system_incl.make:
+	echo exit|xps -nw system.xmp
 
-genmakes.tcl:
-	echo "xload xmp system.xmp" > genmakes.tcl
-	echo "xset parallel_synthesis yes" >> genmakes.tcl
-	echo "exit" >> genmakes.tcl
+clean: hwclean regsclean simclean
+	rm -f _impact.cmd
+	rm -rf __xps
+	rm -rf blockdiagram
+	rm -rf bootloops
+	rm -rf etc
+	rm -f *.opt
+	rm -f *.log
+	rm -f *.make
+	rm -f system.mss
 
-clean: system.make
-	$(MAKE) -f system.make clean
-	rm -rf *.log *.make platgen.opt bootloops/ __xps _xmsgs simgen.opt etc simulation pcores genmakes.tcl
+hwclean: netlistclean bitsclean
+	rm -rf implementation synthesis xst hdl
+	rm -rf xst.srp $(SYSTEM).srp
+	rm -f __xps/ise/_xmsgs/bitinit.xmsgs
+
+netlistclean:
+	rm -f $(POSTSYN_NETLIST)
+	rm -f platgen.log
+	rm -f __xps/ise/_xmsgs/platgen.xmsgs
+	rm -f $(BMM_FILE)
+
+bitsclean:
+	rm -f $(SYSTEM_BIT)
+	rm -f implementation/$(SYSTEM).ncd
+	rm -f implementation/$(SYSTEM)_bd.bmm
+	rm -f implementation/$(SYSTEM)_map.ncd
+	rm -f implementation/download.bit
+	rm -f __xps/$(SYSTEM)_routed
+
+regsclean:
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
 
 simclean:
 	rm -rf simulation
 	rm -rf *[0-9]_{stim,expected,log}.axi $(AXISIM_MHS)
 	rm -f simgen.log
+	rm -rf __xps
 	rm -f *.axi
 	rm -f portconfig.sim
 	rm -f seed
@@ -191,8 +207,6 @@ simclean:
 	rm -f ../test/system.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
-	rm -f genmakes.tcl
-	rm -rf __xps
 
 smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit

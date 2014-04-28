@@ -53,8 +53,6 @@ PATH      := $(PATH):$(PYTHONPATH)
 AXISIM_MHS = $(patsubst %.mhs, %_axisim.mhs, $(MHSFILE))
 AXISIM_CMD = $(patsubst %_system, %_system_axisim, $(SIM_CMD))
 
-.PHONY: exporttosdk
-
 bits: system.make
 	$(MAKE) -f system.make bits
 
@@ -99,7 +97,6 @@ clean: hwclean regsclean simclean
 	rm -f *.log
 	rm -f *.make
 	rm -f system.mss
-	rm -f data/system.ucf
 
 hwclean: netlistclean bitsclean
 	rm -rf implementation synthesis xst hdl

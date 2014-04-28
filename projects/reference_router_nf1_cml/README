@@ -129,7 +129,6 @@ For Binary Encoded or Single Match Unencoded MATCH_ADDR, output lowest address m
 
 Please select the optional features to be implemented:
 Simultaneous Read/Write (y/n): y
-Register Outputs (y/n): n
 
 Please select from the following optional input ports:
 Enable (EN) (y/n): n
@@ -207,9 +206,9 @@ Please note the file has two modules therefore two ‘endmodule’. Make sure to
 05. File copy
 
 Copy tcam.ngc in netlist directory of Switch pcore:
-cp tcam.ngc $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_10_a/netlist
+cp tcam.ngc $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_00_a/netlist
 Copy tcam.v in verilog directory of Switch pcore:
-cp tcam.v $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_10_a/hdl/verilog
+cp tcam.v $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_00_a/hdl/verilog
 
 
 06. Second CAM module generation

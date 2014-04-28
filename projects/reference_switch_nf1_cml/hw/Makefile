@@ -6,7 +6,7 @@
 #        HW Makefile
 #
 #  Project:
-#        reference_switch_lite_nf1_cml
+#        reference_switch_nf1_cml
 #
 #  Author:
 #        Jack Meador
@@ -22,7 +22,7 @@
 #        http://www.xilinx.com/support/documentation/dt_edk.htm
 #
 #  Copyright notice:
-#        Copyright (C) 2013 Computer Measurement Laboratory, LLC
+#        Copyright (C) 2013, 2014 Computer Measurement Laboratory, LLC
 #
 #  Licence:
 #        This file is part of the NetFPGA-10G development base package.
@@ -102,21 +102,44 @@ simgui: axi_model regs
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
-system.make system_incl.make: genmakes.tcl system.xmp system.mhs
-	xps -nw -scr genmakes.tcl
+system_incl.make:
+	echo exit | xps -nw system.xmp
 
-genmakes.tcl:
-	echo "xload xmp system.xmp" > genmakes.tcl
-	echo "exit" >> genmakes.tcl
+clean: hwclean regsclean simclean
+	rm -f _impact.cmd
+	rm -rf __xps
+	rm -rf blockdiagram
+	rm -rf bootloops
+	rm -rf etc
+	rm -f *.opt
+	rm -f *.log
+	rm -f *.make
+	rm -f system.mss
 
-clean: system.make
-	$(MAKE) -f system.make clean
-	rm -rf *.log *.make platgen.opt bootloops/ __xps _xmsgs simgen.opt etc simulation pcores genmakes.tcl smallbits.mcs
+hwclean: netlistclean bitsclean
+	rm -rf implementation synthesis xst hdl
+	rm -rf xst.srp $(SYSTEM).srp
+	rm -f __xps/ise/_xmsgs/bitinit.xmsgs
+
+netlistclean:
+	rm -f $(POSTSYN_NETLIST)
+	rm -f platgen.log
+	rm -f __xps/ise/_xmsgs/platgen.xmsgs
+	rm -f $(BMM_FILE)
+
+bitsclean:
+	rm -f $(SYSTEM_BIT)
+	rm -f implementation/$(SYSTEM).ncd
+	rm -f implementation/$(SYSTEM)_bd.bmm
+	rm -f implementation/$(SYSTEM)_map.ncd
+	rm -f implementation/download.bit
+	rm -f __xps/$(SYSTEM)_routed
 
 simclean:
 	rm -rf simulation
 	rm -rf *[0-9]_{stim,expected,log}.axi $(AXISIM_MHS)
 	rm -f simgen.log
+	rm -rf __xps
 	rm -f *.axi
 	rm -f portconfig.sim
 	rm -f seed
@@ -125,14 +148,17 @@ simclean:
 	rm -f *.opt
 	rm -f *.log
 	rm -f *.make
-	rm -rf ../test/nf10
+	rm -rf ../test/nf1_cml
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
 	rm -f ../test/system.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
-	rm -f genmakes.tcl
-	rm -rf __xps
+
+regsclean:
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
+	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -rf ../lib/Python/reg_defines_*.*
 
 smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit
@@ -141,11 +167,6 @@ smallbits.mcs: implementation/system.ncd
 
 progflash: smallbits.mcs
 	impact -batch program_flash.cmd
-
-regsclean:
-	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
-	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
-	rm -rf ../lib/Python/reg_defines_*.*
 
 $(MICROBLAZE_0_BOOTLOOP): $(MICROBLAZE_BOOTLOOP_LE)
 	mkdir -p $(BOOTLOOP_DIR)
