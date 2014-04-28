@@ -13,12 +13,12 @@ UserCmd1:
 UserCmd1Type: 0
 UserCmd2: 
 UserCmd2Type: 0
-GenSimTB: 0
+GenSimTB: 1
 SdkExportBmmBit: 1
 SdkExportDir: ../sw/embedded/SDK_Workspace
 InsertNoPads: 0
 WarnForEAArch: 1
-HdlLang: VHDL
+HdlLang: Verilog
 SimModel: BEHAVIORAL
 ExternalMemSim: 0
 UcfFile: data/system.ucf

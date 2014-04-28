@@ -6,7 +6,7 @@ from RegressRouterLib import *
 import os
 
 from scapy.layers.all import Ether, IP, TCP
-from reg_defines_reference_router import *
+from reg_defines_reference_router_nf1_cml import *
 
 phy2loop0 = ('../connections/2phy', [])
 
