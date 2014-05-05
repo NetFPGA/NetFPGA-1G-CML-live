@@ -151,11 +151,13 @@ pciecopy:
 ##################################################################
 identifier:
 	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/date_time_id.v
-	echo \`define PARA_NETFPGA_DATE	32\'h`date +%d%m%y` > date_time_id.v
-	echo \`define PARA_NETFPGA_TIME	32\'h`date +%H%M` >> date_time_id.v
-	echo \`define PARA_PROJECT_ID		32\'hb >> date_time_id.v
-	echo \`define PARA_NETFPGA_TAG	32\'h`../../../run_tag.sh` >> date_time_id.v
-	echo \`define PARA_BOARD_ID           32\'ha >> date_time_id.v
+	echo \`define PARA_NETFPGA_DATE 32\'h`date +%d%m%Y` > date_time_id.v
+	echo \`define PARA_NETFPGA_TIME 32\'h`date +%H%M%S` >> date_time_id.v
+	echo \`define PARA_PROJECT_ID   32\'h00ff8002 >> date_time_id.v
+	echo \`define PARA_NETFPGA_TAG  32\'h`../../../run_tag.sh` >> date_time_id.v
+	echo \`define PARA_BOARD_ID     32\'h00000204 >> date_time_id.v
+	echo \`define PARA_RESERVED_A   32\'h0000ffff >> date_time_id.v
+	echo \`define PARA_RESERVED_B   32\'hffff0000 >> date_time_id.v
 	mv -f date_time_id.v ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
 
 #

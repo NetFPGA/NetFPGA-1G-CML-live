@@ -76,7 +76,7 @@ module nf10_identifier
 );
 
 	localparam	NUM_RW_REGS		= 1;
-	localparam	NUM_RO_REGS		= 5;
+	localparam	NUM_RO_REGS		= 7;
 
 	wire														Bus2IP_Clk;
 	wire														Bus2IP_Resetn;
@@ -98,6 +98,8 @@ assign	ro_regs[63:32]	= `PARA_NETFPGA_TIME;
 assign	ro_regs[95:64]	= `PARA_PROJECT_ID;
 assign	ro_regs[127:96]	= `PARA_NETFPGA_TAG;
 assign  ro_regs[159:128] = `PARA_BOARD_ID;
+assign  ro_regs[191:160] = `PARA_RESERVED_A;
+assign  ro_regs[223:192] = `PARA_RESERVED_B;
 
 // -- AXILITE IPIF
 axi_lite_ipif_1bar
