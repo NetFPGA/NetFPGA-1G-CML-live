@@ -43,11 +43,17 @@
 
 SYSTEM = system
 HW = hw
+PROJECT_NAME = reference_nic_nf1_cml
 
 all:
 	$(MAKE) -C $(HW)
 	mkdir -p bitfiles
-	cp $(HW)/implementation/download.bit bitfiles/reference_nic_nf1_cml.bit
+	cp $(HW)/implementation/download.bit bitfiles/$(PROJECT_NAME).bit
+
+download: bitfiles/$(PROJECT_NAME).bit
+	cp bitfiles/$(PROJECT_NAME).bit bitfiles/download.bit
+	impact -batch nf1_cml/program.bat
+	rm -f bitfiles/download.bit
 
 clean:
 	$(MAKE) -C $(HW) clean

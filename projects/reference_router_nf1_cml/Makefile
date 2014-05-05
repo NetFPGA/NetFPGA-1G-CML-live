@@ -52,6 +52,11 @@ all:
 	mkdir -p bitfiles
 	cp $(SW)/result/download.bit bitfiles/$(PROJECT_NAME).bit
 
+download: bitfiles/$(PROJECT_NAME).bit
+	cp bitfiles/$(PROJECT_NAME).bit bitfiles/download.bit
+	impact -batch nf1_cml/program.bat
+	rm -f bitfiles/download.bit
+
 # Clean hardware, software, and remove generated bitfiles
 clean:
 	$(MAKE) -C $(HW) clean
