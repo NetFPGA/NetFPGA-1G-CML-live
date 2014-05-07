@@ -83,7 +83,7 @@ sim: axi_model
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
-simgui: axi_model regs
+simgui: axi_model
 	./../test/$(TESTNAME)/run.py
 	cp nf1_cml/system_axisim_tb.v simulation/behavioral
 	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral

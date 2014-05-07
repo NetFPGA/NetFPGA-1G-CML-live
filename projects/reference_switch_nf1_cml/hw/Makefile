@@ -43,7 +43,7 @@
 include system_incl.make
 
 GIT_COMMIT = $(shell git log --abbrev=8 -1 --pretty=format:"%h")
-PROJECT_NAME = reference_switch_lite_nf1_cml
+PROJECT_NAME = reference_switch_nf1_cml
 
 SYSTEM_FUSE = sh system_fuse.sh
 AXISIM_FUSE = sh system_axisim_fuse.sh
