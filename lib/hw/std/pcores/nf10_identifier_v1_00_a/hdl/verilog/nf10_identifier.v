@@ -75,32 +75,70 @@ module nf10_identifier
 	output													S_AXI_AWREADY
 );
 
-	localparam	NUM_RW_REGS		= 1;
-	localparam	NUM_RO_REGS		= 7;
+localparam	NUM_RW_REGS		= 1;
+localparam	NUM_RO_REGS		= 5;
 
-	wire														Bus2IP_Clk;
-	wire														Bus2IP_Resetn;
-	wire	[C_S_AXI_ADDR_WIDTH-1:0]					Bus2IP_Addr;
-	wire	[0:0]												Bus2IP_CS;
-	wire														Bus2IP_RNW;
-	wire	[C_S_AXI_DATA_WIDTH-1:0]					Bus2IP_Data;
-	wire	[C_S_AXI_DATA_WIDTH/8-1:0]					Bus2IP_BE;
-	wire	[C_S_AXI_DATA_WIDTH-1:0]					IP2Bus_Data;
-	wire														IP2Bus_RdAck;
-	wire														IP2Bus_WrAck;
-	wire														IP2Bus_Error;
-		
-	wire	[NUM_RW_REGS*C_S_AXI_DATA_WIDTH-1:0]	rw_regs;
-	wire	[NUM_RO_REGS*C_S_AXI_DATA_WIDTH-1:0]	ro_regs;
+wire														Bus2IP_Clk;
+wire														Bus2IP_Resetn;
+wire	[C_S_AXI_ADDR_WIDTH-1:0]					Bus2IP_Addr;
+wire	[0:0]												Bus2IP_CS;
+wire														Bus2IP_RNW;
+wire	[C_S_AXI_DATA_WIDTH-1:0]					Bus2IP_Data;
+wire	[C_S_AXI_DATA_WIDTH/8-1:0]					Bus2IP_BE;
+reg	[C_S_AXI_DATA_WIDTH-1:0]					IP2Bus_Data;
+reg														IP2Bus_RdAck;
+reg														IP2Bus_WrAck;
+wire														IP2Bus_Error = 0;
+
+reg   [C_S_AXI_DATA_WIDTH-1:0]               id_rom[0:15];
+
+initial begin
+   $readmemh("./rom_data.txt", id_rom, 0, 15);
+end
+
+//Address valid from 0x00 ~ 0x30
+wire  addr_valid_n = (Bus2IP_Addr[15:2] > 15);
+
+wire  w_wren = (Bus2IP_CS && ~Bus2IP_RNW);
+wire  w_rden = (Bus2IP_CS && Bus2IP_RNW);
+
+always @(posedge S_AXI_ACLK)
+   if (~S_AXI_ARESETN)
+      IP2Bus_WrAck   <= 0;
+   else if (~Bus2IP_CS)
+      IP2Bus_WrAck   <= 0;
+   else if (w_wren)
+      IP2Bus_WrAck   <= 1;
+
+wire  [C_S_AXI_DATA_WIDTH-1:0]   rom_data = (addr_valid_n) ? 0 : id_rom[Bus2IP_Addr[5:2]];
+
+reg   r_rd_delay_0, r_rd_delay_1;
+always @(posedge S_AXI_ACLK)
+   if (~S_AXI_ARESETN) begin
+      r_rd_delay_0   <= 0;
+      r_rd_delay_1   <= 0;
+   end
+   else begin
+      r_rd_delay_0   <= w_rden;
+      r_rd_delay_1   <= r_rd_delay_0;
+   end
+
+wire  w_rd_trig = r_rd_delay_0 & ~r_rd_delay_1;
+
+always @(posedge S_AXI_ACLK)
+   if (~S_AXI_ARESETN) begin
+      IP2Bus_Data    <= 0;
+      IP2Bus_RdAck   <= 0;
+   end
+   else if (~Bus2IP_CS) begin
+      IP2Bus_RdAck   <= 0;
+   end         
+   else if (w_rd_trig) begin
+      IP2Bus_Data    <= rom_data;
+      IP2Bus_RdAck   <= 1;
+   end
+
 	
-assign	ro_regs[31:0]	= `PARA_NETFPGA_DATE;
-assign	ro_regs[63:32]	= `PARA_NETFPGA_TIME;
-assign	ro_regs[95:64]	= `PARA_PROJECT_ID;
-assign	ro_regs[127:96]	= `PARA_NETFPGA_TAG;
-assign  ro_regs[159:128] = `PARA_BOARD_ID;
-assign  ro_regs[191:160] = `PARA_RESERVED_A;
-assign  ro_regs[223:192] = `PARA_RESERVED_B;
-
 // -- AXILITE IPIF
 axi_lite_ipif_1bar
 #(
@@ -110,65 +148,40 @@ axi_lite_ipif_1bar
 	.C_DPHASE_TIMEOUT		(C_DPHASE_TIMEOUT		),
 	.C_BAR0_BASEADDR		(C_BASEADDR				),
 	.C_BAR0_HIGHADDR		(C_HIGHADDR				))
-	axi_lite_ipif_inst
-	(
-		.S_AXI_ACLK					(S_AXI_ACLK			),
-		.S_AXI_ARESETN				(S_AXI_ARESETN		),
-		.S_AXI_AWADDR				(S_AXI_AWADDR		),
-		.S_AXI_AWVALID				(S_AXI_AWVALID		),
-		.S_AXI_WDATA				(S_AXI_WDATA		),
-		.S_AXI_WSTRB				(S_AXI_WSTRB		),
-		.S_AXI_WVALID				(S_AXI_WVALID		),
-		.S_AXI_BREADY				(S_AXI_BREADY		),
-		.S_AXI_ARADDR				(S_AXI_ARADDR		),
-		.S_AXI_ARVALID				(S_AXI_ARVALID		),
-		.S_AXI_RREADY				(S_AXI_RREADY		),
-		.S_AXI_ARREADY				(S_AXI_ARREADY		),
-		.S_AXI_RDATA				(S_AXI_RDATA		),
-		.S_AXI_RRESP				(S_AXI_RRESP		),
-		.S_AXI_RVALID				(S_AXI_RVALID		),
-		.S_AXI_WREADY				(S_AXI_WREADY		),
-		.S_AXI_BRESP				(S_AXI_BRESP		),
-		.S_AXI_BVALID				(S_AXI_BVALID		),
-		.S_AXI_AWREADY				(S_AXI_AWREADY		),
-	
-		//	Controls	to	the	IP/IPIF	modules
-		.Bus2IP_Clk					(Bus2IP_Clk			),
-		.Bus2IP_Resetn				(Bus2IP_Resetn		),
-		.Bus2IP_Addr				(Bus2IP_Addr		),
-		.Bus2IP_RNW					(Bus2IP_RNW			),
-		.Bus2IP_BE					(Bus2IP_BE			),
-		.Bus2IP_CS					(Bus2IP_CS			),
-		.Bus2IP_Data				(Bus2IP_Data		),
-		.IP2Bus_Data				(IP2Bus_Data		),
-		.IP2Bus_WrAck				(IP2Bus_WrAck		),
-		.IP2Bus_RdAck				(IP2Bus_RdAck		),
-		.IP2Bus_Error				(IP2Bus_Error		));
+axi_lite_ipif_inst
+(
+	.S_AXI_ACLK					(S_AXI_ACLK			),
+	.S_AXI_ARESETN				(S_AXI_ARESETN		),
+	.S_AXI_AWADDR				(S_AXI_AWADDR		),
+	.S_AXI_AWVALID				(S_AXI_AWVALID		),
+	.S_AXI_WDATA				(S_AXI_WDATA		),
+	.S_AXI_WSTRB				(S_AXI_WSTRB		),
+	.S_AXI_WVALID				(S_AXI_WVALID		),
+	.S_AXI_BREADY				(S_AXI_BREADY		),
+	.S_AXI_ARADDR				(S_AXI_ARADDR		),
+	.S_AXI_ARVALID				(S_AXI_ARVALID		),
+	.S_AXI_RREADY				(S_AXI_RREADY		),
+	.S_AXI_ARREADY				(S_AXI_ARREADY		),
+	.S_AXI_RDATA				(S_AXI_RDATA		),
+	.S_AXI_RRESP				(S_AXI_RRESP		),
+	.S_AXI_RVALID				(S_AXI_RVALID		),
+	.S_AXI_WREADY				(S_AXI_WREADY		),
+	.S_AXI_BRESP				(S_AXI_BRESP		),
+	.S_AXI_BVALID				(S_AXI_BVALID		),
+	.S_AXI_AWREADY				(S_AXI_AWREADY		),
 
-
-// -- IPIF REGS
-ipif_regs
-#(
-	.C_S_AXI_DATA_WIDTH			(C_S_AXI_DATA_WIDTH	),	
-	.C_S_AXI_ADDR_WIDTH			(C_S_AXI_ADDR_WIDTH	),
-	.NUM_RW_REGS					(NUM_RW_REGS			),
-	.NUM_RO_REGS					(NUM_RO_REGS			))
-	ipif_regs_inst
-	(			
-		.Bus2IP_Clk					(Bus2IP_Clk				),
-		.Bus2IP_Resetn				(Bus2IP_Resetn			),	
-		.Bus2IP_Addr				(Bus2IP_Addr			),
-		.Bus2IP_CS					(Bus2IP_CS[0]			),
-		.Bus2IP_RNW					(Bus2IP_RNW				),
-		.Bus2IP_Data				(Bus2IP_Data			),
-		.Bus2IP_BE					(Bus2IP_BE				),
-		.IP2Bus_Data				(IP2Bus_Data			),
-		.IP2Bus_RdAck				(IP2Bus_RdAck			),
-		.IP2Bus_WrAck				(IP2Bus_WrAck			),
-		.IP2Bus_Error				(IP2Bus_Error			),
-
-		.rw_regs						(rw_regs					),
-		.ro_regs						(ro_regs					));
+	//	Controls	to	the	IP/IPIF	modules
+	.Bus2IP_Clk					(Bus2IP_Clk			),
+	.Bus2IP_Resetn				(Bus2IP_Resetn		),
+	.Bus2IP_Addr				(Bus2IP_Addr		),
+	.Bus2IP_RNW					(Bus2IP_RNW			),
+	.Bus2IP_BE					(Bus2IP_BE			),
+	.Bus2IP_CS					(Bus2IP_CS			),
+	.Bus2IP_Data				(Bus2IP_Data		),
+	.IP2Bus_Data				(IP2Bus_Data		),
+	.IP2Bus_WrAck				(IP2Bus_WrAck		),
+	.IP2Bus_RdAck				(IP2Bus_RdAck		),
+	.IP2Bus_Error				(IP2Bus_Error		));
 
 
 endmodule
