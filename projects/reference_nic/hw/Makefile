@@ -152,15 +152,25 @@ pciecopy:
 # Identification information added. 
 ##################################################################
 identifier:
-	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/date_time_id.v
-	echo \`define PARA_NETFPGA_DATE	32\'h`date +%d%m%Y` > date_time_id.v
-	echo \`define PARA_NETFPGA_TIME	32\'h`date +%H%M%S` >> date_time_id.v
-	echo \`define PARA_PROJECT_ID	32\'h00ff8001 >> date_time_id.v
-	echo \`define PARA_NETFPGA_TAG	32\'h`../../../run_tag.sh` >> date_time_id.v
-	echo \`define PARA_BOARD_ID     32\'h00000204 >> date_time_id.v
-	echo \`define PARA_RESERVED_A	32\'h0000ffff >> date_time_id.v
-	echo \`define PARA_RESERVED_B   32\'hffff0000 >> date_time_id.v
-	mv -f date_time_id.v ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom_data.txt
+#	echo $(shell printf "%x\n" $(shell date +%s)) > rom_data.txt
+	printf "%x\n" $(shell date +%s) > rom_data.txt
+	echo 00ff8001 >> rom_data.txt
+	echo `../../../run_tag.sh` >> rom_data.txt
+	echo 00000204 >> rom_data.txt
+	echo 0000ffff >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	echo ffff0000 >> rom_data.txt
+	mv -f rom_data.txt ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
 
 #################################################################
 # PARTIAL SYNTHESIS. This must be run after make for completing 
