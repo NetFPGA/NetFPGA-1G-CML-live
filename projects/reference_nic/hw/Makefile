@@ -154,11 +154,10 @@ pciecopy:
 identifier:
 	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom_data.txt
 	cp ../../../tools/scripts/epoch.sh . && sh epoch.sh && rm -f epoch.sh
-	echo 00ff8001 >> rom_data.txt
+	echo 16028001 >> rom_data.txt
 	echo `../../../run_tag.sh` >> rom_data.txt
 	echo 00000204 >> rom_data.txt
 	echo 0000ffff >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
 	echo ffff0000 >> rom_data.txt
 	echo ffff0000 >> rom_data.txt
 	echo ffff0000 >> rom_data.txt

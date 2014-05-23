@@ -47,30 +47,24 @@
 #include "nf10_nfp_hw_decoder.h"
 
 void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
-    uint64_t val, byte[4];
+    uint64_t epoch, epoch_overflow, val, byte[4], byte4[4];
 
     //let's see what type of project you have...
     //printk(KERN_INFO "nf10: let's see what type of project you have...\n");
 
-    // Register 1 : Read date, month, year when synthesised.
+    // Register 1 : Holds the epoch time
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x4) << 32;
     mb();
-    val = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
-    byte[0] = (0xff & val);                 //year_lower
-    byte[1] = (0xffff & val) >> 8;          //year_upper
-    byte[2] = (0xffffff & val) >> 16;       //month
-    byte[3] = (0xffffffff & val) >>24;     //day
-
-    printk(KERN_INFO "nf10: This HW was implemented on %llx/%llx/%llx%llx (dd/mm/YYyy)\n", byte[3], byte[2], byte[1], byte[0]);
+    epoch = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
     
-   //Register 2 : Read time when synthesised
+   //Register 2 : Holds the epoch overflow
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x8) << 32;
     mb();
-    val = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
-    byte[0] = (0xff & val);                 //seconds
-    byte[1] = (0xffff & val) >> 8;          //min
-    byte[2] = (0xffffff & val) >> 16;       //hour
-    printk(KERN_INFO "nf10: Time: %llx:%llx:%llx (hour:min:sec)\n",byte[2], byte[1], byte[0]);
+    epoch_overflow = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
+    time_t tval = epoch+epoch_overflow;       // your read 32 bit register
+    struct tm result;
+    time_to_tm(tval, 0, &result);
+    printk(KERN_INFO "Bitfle timestamp: implemented on %d:%d:%d on %d/%d/%d\n", result.tm_hour, result.tm_min, result.tm_sec, result.tm_mday, result.tm_mon+1, result.tm_year + 1900 );      // see linux/time.h
 
     //Register 3 : Read project related information
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0xc) << 32;
@@ -78,7 +72,11 @@ void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
     val = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
     byte[0] = (0x3fff & val);               //project_id
     byte[1] = (0xffff & val) >> 15;         //identifies if it is a reference/contrib project
-    byte[2] = (0xffffffff & val) >> 16;     //project features 
+    byte[2] = (0xffffff & val) >> 16;     //DMA id 
+    byte4[0] = (0x1ffffff & val) >> 24;     //phy initialization
+    byte4[1] = (0x3ffffff & val) >> 25;     //registers in pipeline
+    byte4[2] = (0x7ffffff & val) >> 26;     //test suite availability
+    byte4[3] = (0xffffffff & val) >> 27;     //tool flow
     
     printk(KERN_INFO "nf10: Project ID code: %llx:%llx:%llx \n", byte[2], byte[1], byte[0]);
 
@@ -97,9 +95,38 @@ void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
     }
 
     switch (byte[2]) {
-        case 0xff: printk(KERN_INFO "nf10: Lots of features\n"); break;
-        default : printk(KERN_INFO "nf10: This is work in progress!\n"); break;
+        case 0x01: printk(KERN_INFO "nf10: Project has DMA version 1\n"); break;
+        case 0x02: printk(KERN_INFO "nf10: Project has DMA version 2\n"); break;
+        case 0x03: printk(KERN_INFO "nf10: Project has DMA version 3\n"); break;
+        default : printk(KERN_INFO "nf10: DMA version is unidentified !\n"); break;
     }
+
+    switch (byte4[0]) {
+        case 0x0 : printk(KERN_INFO "nf10: Phy initialized by microblaze\n"); break;
+        case 0x1 : printk(KERN_INFO "nf10: Phy requires initialization by the driver\n"); break;
+        default : printk(KERN_INFO "nf10: Phy initialization status unknown!\n"); break;
+    }
+
+    switch (byte4[1]) {
+        case 0x1 : printk(KERN_INFO "nf10: This project has registers in the pipeline\n"); break;
+        case 0x0 : printk(KERN_INFO "nf10: This project doesn't have registers in the pipeline\n"); break;
+        default : printk(KERN_INFO "nf10: Stautus of registers in pipeline is unknown!\n"); break;
+    }
+
+
+    switch (byte4[2]) {
+        case 0x1 : printk(KERN_INFO "nf10: Test suite is available for the project\n"); break;
+        case 0x0 : printk(KERN_INFO "nf10: Test suite is not available for the project\n"); break;
+        default : printk(KERN_INFO "nf10: Cannot determine the status of the test suite!\n"); break;
+    }
+
+    switch (byte4[3]) {
+        case 0x01 : printk(KERN_INFO "nf10: The project uses Xilinx ISE tool flow\n"); break;
+        case 0x02 : printk(KERN_INFO "nf10: The project uses Xilinx EDK tool flow\n"); break;
+        case 0x03 : printk(KERN_INFO "nf10: The project uses Xilinx Vivado tool flow\n"); break;
+        default : printk(KERN_INFO "nf10: Cannot determine the tool flow for the project!\n"); break;
+    }
+
 
     //Register 4 : Read git tag 
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x10) << 32;
