@@ -53,12 +53,12 @@ void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
     //printk(KERN_INFO "nf10: let's see what type of project you have...\n");
 
     // Register 1 : Holds the epoch time
-    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x4) << 32;
+    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR) << 32;
     mb();
     epoch = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
     
    //Register 2 : Holds the epoch overflow
-    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x8) << 32;
+    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x4) << 32;
     mb();
     epoch_overflow = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
     time_t tval = epoch+epoch_overflow;       // your read 32 bit register
@@ -67,7 +67,7 @@ void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
     printk(KERN_INFO "Bitfle timestamp: implemented on %d:%d:%d on %d/%d/%d\n", result.tm_hour, result.tm_min, result.tm_sec, result.tm_mday, result.tm_mon+1, result.tm_year + 1900 );      // see linux/time.h
 
     //Register 3 : Read project related information
-    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0xc) << 32;
+    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x8) << 32;
     mb();
     val = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
     byte[0] = (0x3fff & val);               //project_id
@@ -129,7 +129,7 @@ void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
 
 
     //Register 4 : Read git tag 
-    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x10) << 32;
+    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0xc) << 32;
     mb();
     val = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
     byte[0] = (0xf & val);                 //tag_0
@@ -138,7 +138,7 @@ void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
     printk(KERN_INFO "nf10: NetFPGA GitHub Tag : %llx.%llx.%llx\n", byte[2], byte[1], byte[0]);
 
     //Register 5 : Board specific information
-    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x14) << 32;
+    *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x10) << 32;
     mb();
     val = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
     byte[0] = (0xff & val);                 //Board revision number
