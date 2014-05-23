@@ -92,6 +92,14 @@ NF10_PROGPCIE = pciecopy exporttosdk
 PKTLEN = 16
 PKTNO = 2 
 
+# epoch maximum
+
+EPOCH_MAX = 1500000000 
+ZERO = 0
+epoch = $(shell date +%s )
+#residue = $(epoch) - $(EPOCH_MAX)
+residue =$(shell echo $(epoch)\-$(EPOCH_MAX) | bc)
+
 #################################################################
 # PHONY TARGETS
 #################################################################
@@ -153,8 +161,7 @@ pciecopy:
 ##################################################################
 identifier:
 	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom_data.txt
-#	echo $(shell printf "%x\n" $(shell date +%s)) > rom_data.txt
-	printf "%x\n" $(shell date +%s) > rom_data.txt
+	cp ../../../tools/scripts/epoch.sh . && sh epoch.sh && rm -f epoch.sh
 	echo 00ff8001 >> rom_data.txt
 	echo `../../../run_tag.sh` >> rom_data.txt
 	echo 00000204 >> rom_data.txt
