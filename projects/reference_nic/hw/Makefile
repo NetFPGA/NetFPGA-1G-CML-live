@@ -92,14 +92,6 @@ NF10_PROGPCIE = pciecopy exporttosdk
 PKTLEN = 16
 PKTNO = 2 
 
-# epoch maximum
-
-EPOCH_MAX = 1500000000 
-ZERO = 0
-epoch = $(shell date +%s )
-#residue = $(epoch) - $(EPOCH_MAX)
-residue =$(shell echo $(epoch)\-$(EPOCH_MAX) | bc)
-
 #################################################################
 # PHONY TARGETS
 #################################################################
