@@ -97,7 +97,7 @@ initial begin
 end
 
 //Address valid from 0x00 ~ 0x30
-wire  addr_valid_n = (Bus2IP_Addr[15:2] > 15);
+wire  addr_valid_n = ((Bus2IP_Addr == 0) || (|Bus2IP_Addr[5:2] == 1 && |Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:6] == 0));
 
 wire  w_wren = (Bus2IP_CS && ~Bus2IP_RNW);
 wire  w_rden = (Bus2IP_CS && Bus2IP_RNW);
@@ -137,8 +137,15 @@ always @(posedge S_AXI_ACLK)
       IP2Bus_Data    <= rom_data;
       IP2Bus_RdAck   <= 1;
    end
-
-	
+/*
+id_rom16x32 id_rom16x32
+(
+   .clka    (  S_AXI_ACLK        ),
+   .ena     (  w_rden            ),
+   .addra   (  Bus2IP_Addr[5:2]  ),
+   .douta   (  rom_data          )
+);
+*/
 // -- AXILITE IPIF
 axi_lite_ipif_1bar
 #(
