@@ -38,7 +38,7 @@
 *
 */
 
-`include "date_time_id.v"
+//`include "date_time_id.v"
 
 module nf10_identifier
 #(
@@ -89,13 +89,13 @@ reg	[C_S_AXI_DATA_WIDTH-1:0]					IP2Bus_Data;
 reg														IP2Bus_RdAck;
 reg														IP2Bus_WrAck;
 wire														IP2Bus_Error = 0;
-
+/*
 reg   [C_S_AXI_DATA_WIDTH-1:0]               id_rom[0:15];
 
 initial begin
    $readmemh("./rom_data.txt", id_rom, 0, 15);
 end
-
+*/
 //Address valid from 0x00 ~ 0x30
 wire  addr_valid_n = ((Bus2IP_Addr == 0) || (|Bus2IP_Addr[5:2] == 1 && |Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:6] == 0));
 
@@ -110,7 +110,7 @@ always @(posedge S_AXI_ACLK)
    else if (w_wren)
       IP2Bus_WrAck   <= 1;
 
-wire  [C_S_AXI_DATA_WIDTH-1:0]   rom_data = (addr_valid_n) ? 0 : id_rom[Bus2IP_Addr[5:2]];
+//wire  [C_S_AXI_DATA_WIDTH-1:0]   rom_data = (addr_valid_n) ? 0 : id_rom[Bus2IP_Addr[5:2]];
 
 reg   r_rd_delay_0, r_rd_delay_1;
 always @(posedge S_AXI_ACLK)
@@ -137,7 +137,7 @@ always @(posedge S_AXI_ACLK)
       IP2Bus_Data    <= rom_data;
       IP2Bus_RdAck   <= 1;
    end
-/*
+
 id_rom16x32 id_rom16x32
 (
    .clka    (  S_AXI_ACLK        ),
@@ -145,7 +145,7 @@ id_rom16x32 id_rom16x32
    .addra   (  Bus2IP_Addr[5:2]  ),
    .douta   (  rom_data          )
 );
-*/
+
 // -- AXILITE IPIF
 axi_lite_ipif_1bar
 #(
