@@ -96,6 +96,7 @@ initial begin
    $readmemh("./rom_data.txt", id_rom, 0, 15);
 end
 */
+
 //Address valid from 0x00 ~ 0x30
 wire  addr_valid_n = ((Bus2IP_Addr == 0) || (|Bus2IP_Addr[5:2] == 1 && |Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:6] == 0));
 
@@ -110,7 +111,7 @@ always @(posedge S_AXI_ACLK)
    else if (w_wren)
       IP2Bus_WrAck   <= 1;
 
-//wire  [C_S_AXI_DATA_WIDTH-1:0]   rom_data = (addr_valid_n) ? 0 : id_rom[Bus2IP_Addr[5:2]];
+wire  [C_S_AXI_DATA_WIDTH-1:0]   rom_data;// = (addr_valid_n) ? 0 : id_rom[Bus2IP_Addr[5:2]];
 
 reg   r_rd_delay_0, r_rd_delay_1;
 always @(posedge S_AXI_ACLK)
