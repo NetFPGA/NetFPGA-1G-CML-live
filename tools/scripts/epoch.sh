@@ -17,5 +17,5 @@ else
 fi
 
 # here I want to print the values in a text file
-printf "%x\n" "$reg_a" > rom_data.txt
-printf "%x\n" "$reg_b" >> rom_data.txt
+printf "%X\n" "$reg_a" > rom_data.txt
+printf "%X\n" "$reg_b" >> rom_data.txt
