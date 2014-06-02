@@ -64,7 +64,7 @@ void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
     time_t tval = epoch+epoch_overflow;       // your read 32 bit register
     struct tm result;
     time_to_tm(tval, 0, &result);
-    printk(KERN_INFO "Bitfle timestamp: implemented on %d:%d:%d on %d/%d/%d\n", result.tm_hour, result.tm_min, result.tm_sec, result.tm_mday, result.tm_mon+1, result.tm_year + 1900 );      // see linux/time.h
+    printk(KERN_INFO "nf10: Bitfile implemented on %d:%d:%d on %d/%d/%d\n", result.tm_hour, result.tm_min, result.tm_sec, result.tm_mday, result.tm_mon+1, result.tm_year + 1900 );      // see linux/time.h
 
     //Register 3 : Read project related information
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x8) << 32;
