@@ -152,23 +152,25 @@ pciecopy:
 # Identification information added. 
 ##################################################################
 identifier:
-	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom_data.txt
+	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif
 	cp ../../../tools/scripts/epoch.sh . && sh epoch.sh && rm -f epoch.sh
 	echo 16028001 >> rom_data.txt
 	echo `../../../run_tag.sh` >> rom_data.txt
 	echo 00000204 >> rom_data.txt
-	echo 0000ffff >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	echo ffff0000 >> rom_data.txt
-	mv -f rom_data.txt ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	echo 0000FFFF >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	cp ../../../tools/scripts/hex2bin.py . && python hex2bin.py && rm -f hex2bin.py 	
+	mv -f id_rom16x32.mif ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+
 
 #################################################################
 # PARTIAL SYNTHESIS. This must be run after make for completing 
