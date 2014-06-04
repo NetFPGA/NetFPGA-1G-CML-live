@@ -168,8 +168,8 @@ identifier:
 	echo FFFF0000 >> rom_data.txt
 	echo FFFF0000 >> rom_data.txt
 	echo FFFF0000 >> rom_data.txt
-	cp ../../../tools/scripts/hex2bin.py . && python hex2bin.py && rm -f hex2bin.py 	
-	mv -f id_rom16x32.mif ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	cp ../../../tools/scripts/format_coe.py . && python format_coe.py && rm -f format_coe.py 	
+	mv -f id_rom16x32.coe ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
 	rm -rf ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/
 	mkdir ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/
 	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/ && cp id_rom16x32.xco ./rom/
