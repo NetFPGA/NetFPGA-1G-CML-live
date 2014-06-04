@@ -174,7 +174,8 @@ identifier:
 	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && cp -f id_rom16x32.ngc ./../../../netlist/
 
 
-#
+#################################################################
+# PARTIAL SYNTHESIS. This must be run after make for completing 
 # implementation.
 #################################################################
 partial:
