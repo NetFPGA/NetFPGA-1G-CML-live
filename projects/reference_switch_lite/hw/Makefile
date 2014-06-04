@@ -147,7 +147,7 @@ pciecopy:
 # Identification information added. 
 ##################################################################
 identifier:
-	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif
+	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.coe
 	cp ../../../tools/scripts/epoch.sh . && sh epoch.sh && rm -f epoch.sh
 	echo 16028004 >> rom_data.txt
 	echo `../../../run_tag.sh` >> rom_data.txt
@@ -163,13 +163,18 @@ identifier:
 	echo FFFF0000 >> rom_data.txt
 	echo FFFF0000 >> rom_data.txt
 	echo FFFF0000 >> rom_data.txt
-	cp ../../../tools/scripts/hex2bin.py . && python hex2bin.py && rm -f hex2bin.py         
-	mv -f id_rom16x32.mif ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	cp ../../../tools/scripts/format_coe.py . && python format_coe.py && rm -f format_coe.py        
+	mv -f id_rom16x32.coe ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	rm -rf ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/
+	mkdir ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/ && cp id_rom16x32.xco ./rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/ && cp id_rom16x32.coe ./rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && coregen -b id_rom16x32.xco
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && cp -f id_rom16x32.v ./../
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && cp -f id_rom16x32.ngc ./../../../netlist/
 
 
 #
-#################################################################
-# PARTIAL SYNTHESIS. This must be run after make for completing 
 # implementation.
 #################################################################
 partial:

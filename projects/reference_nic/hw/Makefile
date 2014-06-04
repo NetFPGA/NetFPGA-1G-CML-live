@@ -152,7 +152,7 @@ pciecopy:
 # Identification information added. 
 ##################################################################
 identifier:
-	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif
+	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.coe
 	cp ../../../tools/scripts/epoch.sh . && sh epoch.sh && rm -f epoch.sh
 	echo 16028001 >> rom_data.txt
 	echo `../../../run_tag.sh` >> rom_data.txt
