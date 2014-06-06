@@ -1,21 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-# max value that can be stored by a 32 bit signed integer is 2^31-1
-EPOCH_MAX=2147483647
+EPOCH=`date +%s`
 
-# get the epoch value 
-EPOCH=$(date +%s)
+printf "%016x\n" ${EPOCH} | cut -c9-16 > rom_data.txt
+printf "%016x\n" ${EPOCH} | cut -c1-8  >> rom_data.txt
 
-# condition to check if overflow occurs
-if [ $EPOCH -gt $EPOCH_MAX ] 
-then
-      reg_a=$EPOCH_MAX
-      reg_b=`expr $EPOCH - $EPOCH_MAX`
-else
-      reg_a=$EPOCH
-      reg_b=0	
-fi
+# end
 
-# here I want to print the values in a text file
-printf "%X\n" "$reg_a" > rom_data.txt
-printf "%X\n" "$reg_b" >> rom_data.txt

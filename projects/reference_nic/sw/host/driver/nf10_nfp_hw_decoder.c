@@ -47,21 +47,18 @@
 #include "nf10_nfp_hw_decoder.h"
 
 void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
-    uint64_t epoch, epoch_overflow, val, byte[4], byte4[4];
+    uint64_t epoch_lower, epoch_upper, val, byte[4], byte4[4];
 
-    //let's see what type of project you have...
-    //printk(KERN_INFO "nf10: let's see what type of project you have...\n");
-
-    // Register 1 : Holds the epoch time
+    // Register 1 : Holds the epoch lower 32 bits
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR) << 32;
     mb();
-    epoch = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
+    epoch_lower = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
     
-   //Register 2 : Holds the epoch overflow
+   //Register 2 : Holds the epoch upper 32 bits
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x4) << 32;
     mb();
-    epoch_overflow = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
-    time_t tval = epoch+epoch_overflow;       // your read 32 bit register
+    epoch_upper = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
+    time_t tval = (epoch_upper<<32)|epoch_lower;      // update for future requirements
     struct tm result;
     time_to_tm(tval, 0, &result);
     printk(KERN_INFO "nf10: Bitfile implemented on %d:%d:%d on %d/%d/%d\n", result.tm_hour, result.tm_min, result.tm_sec, result.tm_mday, result.tm_mon+1, result.tm_year + 1900 );      // see linux/time.h
