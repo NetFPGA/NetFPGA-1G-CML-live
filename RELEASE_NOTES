@@ -20,6 +20,8 @@ board id, release tag, project identification, project features and misc details
 loaded in the FPGA, the driver can parse these registers and give some useful information to the users.
 
 
+Wikipage: https://github.com/NetFPGA/NetFPGA-public/wiki/Project-related-information-in-bitfiles
+
 
 
 
