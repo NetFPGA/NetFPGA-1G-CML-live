@@ -48,6 +48,8 @@
 
 void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
     uint64_t epoch_lower, epoch_upper, val, byte[4], byte4[4];
+    time_t tval;
+    struct tm result;
 
     // Register 1 : Holds the epoch lower 32 bits
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR) << 32;
@@ -58,10 +60,9 @@ void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card) {
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x4) << 32;
     mb();
     epoch_upper = (*(((uint64_t*)card->cfg_addr) + 129)) & 0xffffffff;
-    time_t tval = (epoch_upper<<32)|epoch_lower;      // update for future requirements
-    struct tm result;
+    tval = (epoch_upper<<32)|epoch_lower;      // update for future requirements
     time_to_tm(tval, 0, &result);
-    printk(KERN_INFO "nf10: Bitfile implemented on %d:%d:%d on %d/%d/%d\n", result.tm_hour, result.tm_min, result.tm_sec, result.tm_mday, result.tm_mon+1, result.tm_year + 1900 );      // see linux/time.h
+    printk(KERN_INFO "nf10: Bitfile implemented on %d:%d:%d on %d/%d/%ld\n", result.tm_hour, result.tm_min, result.tm_sec, result.tm_mday, result.tm_mon+1, result.tm_year + 1900 );      // see linux/time.h
 
     //Register 3 : Read project related information
     *(((uint64_t*)card->cfg_addr) + 129) = (ID_BASE_ADDR + 0x8) << 32;
