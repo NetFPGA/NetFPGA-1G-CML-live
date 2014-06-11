@@ -441,6 +441,7 @@ sim: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf10/noninteractive_sim.tcl
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
@@ -450,6 +451,7 @@ simgui: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
