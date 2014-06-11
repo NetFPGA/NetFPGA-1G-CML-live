@@ -40,7 +40,7 @@
 #        License along with the NetFPGA source package.  If not, see
 #        http://www.gnu.org/licenses/.
 
-include system_incl.make
+-include system_incl.make
 
 GIT_COMMIT = $(shell git log --abbrev=8 -1 --pretty=format:"%h")
 PROJECT_NAME = reference_switch_lite_nf1_cml
@@ -59,7 +59,7 @@ bits: system.make
 exporttosdk: system.make
 	$(MAKE) -f system.make exporttosdk
 
-axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
+axi_model: system.make $(BRAMINIT_ELF_SIM_FILES)
 	@echo "*********************************************"
 	@echo "Creating AXI simulation models..."
 	@echo "*********************************************"
@@ -102,7 +102,7 @@ simgui: axi_model regs
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
-system_incl.make:
+system.make system_incl.make:
 	echo exit|xps -nw system.xmp
 
 clean: hwclean regsclean simclean

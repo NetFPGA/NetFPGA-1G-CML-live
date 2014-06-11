@@ -40,7 +40,7 @@
 #        License along with the NetFPGA source package.  If not, see
 #        http://www.gnu.org/licenses/.
 
-include system_incl.make
+-include system_incl.make
 
 GIT_COMMIT = $(shell git log --abbrev=8 -1 --pretty=format:"%h")
 PROJECT_NAME = reference_nic_nf1_cml
@@ -58,7 +58,7 @@ PATH := $(PATH):$(PYTHONPATH)
 PKTLEN = 16
 PKTNO = 2 
 
-init_bram: bits
+init_bram: system.make
 	$(MAKE) -f system.make init_bram
 
 bits: system.make
@@ -67,7 +67,7 @@ bits: system.make
 exporttosdk: system.make
 	$(MAKE) -f system.make exporttosdk
 
-axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
+axi_model: system.make $(BRAMINIT_ELF_SIM_FILES)
 	@echo "*********************************************"
 	@echo "Creating AXI simulation models..."
 	@echo "*********************************************"
@@ -152,7 +152,7 @@ checkpktlen:
 	@if [ "$(PKTLEN)" = "" ]; then echo "Please follow command line './make simrxgui PKTLEN=10 PKTLNO=2'"; fi
 	@echo "Run with default packet payload length and no! $(PKTLETN) $(PKTNO)"
 
-system_incl.make:
+system.make system_incl.make:
 	echo exit|xps -nw system.xmp
 
 clean: hwclean regsclean simclean
