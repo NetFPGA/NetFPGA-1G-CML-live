@@ -6,11 +6,12 @@
 #        Makefile
 #
 #  Project:
-#        nic
+#        reference_flash_nf1_cml
 #
 #  Author:
 #        Mario Flajslik
 #        Jay Hirata, Computer Measurement Laboratory, LLC
+#        David Luman, Computer Measurement Laboratory, LLC
 #
 #  Description:
 #        make all : Make BRAM initialized bitfile to bitfiles/
@@ -43,7 +44,7 @@
 
 SYSTEM = system
 HW = hw
-PROJECT_NAME = reference_nic_nf1_cml
+PROJECT_NAME = reference_flash_nf1_cml
 
 all:
 	$(MAKE) -C $(HW)

@@ -37,7 +37,7 @@
 
 setMode -pff
 setSubmode -pffbpi
-addConfigDevice  -name "download" -path "../../bitfiles"
+addConfigDevice  -name "reference_flash_nf1_cml" -path "../../bitfiles"
 addDesign -version 0 -name "0"
 setCurrentDesign -version 0
 addDeviceChain -index 0
