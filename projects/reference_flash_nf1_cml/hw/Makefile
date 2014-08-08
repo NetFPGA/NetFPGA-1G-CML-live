@@ -161,7 +161,6 @@ clean: hwclean regsclean simclean
 	rm -rf __xps
 	rm -rf blockdiagram
 	rm -rf bootloops
-	rm -rf etc
 	rm -f *.opt
 	rm -f *.log
 	rm -f *.make
@@ -198,7 +197,6 @@ simclean:
 	rm -f portconfig.sim
 	rm -f seed
 	rm -rf bootloops
-	rm -rf etc
 	rm -f *.opt
 	rm -f *.log
 	rm -f *.make
