@@ -37,6 +37,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <inttypes.h>
 #include "pcie_axi_if.h"
 #include "bpi_axi_util.h"
 
@@ -70,6 +73,8 @@
 #define LOWER_BLOCK_SZ         0x10000
 #define UPPER_BLOCK_SZ         0x4000
 #define DEVICE_PRG_BUF_SZ      (512 * 2)      // in 16-bit words
+
+void print_progress_bar(uint64_t completed, uint64_t total, int width);
 
 void bpi_axi_wr(uint64_t addr, uint64_t val)
 {
@@ -188,12 +193,20 @@ int program_bpi(uint32_t bpi_start_addr, FILE *fp)
   uint32_t addr;
   uint8_t  *fbuf;
   uint32_t total_sz = 0;
+  uint32_t fsize;
+  struct winsize w;
+
+  fseek(fp, 0, SEEK_END);
+  fsize = (uint32_t)ftell(fp);
+  rewind(fp);
 
   printf("\n** Begin BPI programming**\n");
   fbuf = (uint8_t *)malloc(DEVICE_PRG_BUF_SZ);
 
   while(!done)
   {
+    ioctl(0, TIOCGWINSZ, &w);
+    print_progress_bar(total_sz, fsize, w.ws_col);
     cur_write_sz = fread((uint8_t *)(fbuf),       // read into buffer
                          1,                       // size of data items in bytes
                          DEVICE_PRG_BUF_SZ,       // number of data items
@@ -251,9 +264,38 @@ int program_bpi(uint32_t bpi_start_addr, FILE *fp)
     }
     block_cnt++;
   }
-  printf("     program BPI completed\n");
+  ioctl(0, TIOCGWINSZ, &w);
+  print_progress_bar(fsize, fsize, w.ws_col);
+  printf("\n     program BPI completed\n");
   free(fbuf);
   return(0);
 }
 
+void print_progress_bar(uint64_t completed, uint64_t total, int width)
+{
+    char *buffer;
+    int i;
+    int len;
+    int bars;
+
+    buffer = malloc(width + 1);
+
+    len = snprintf(buffer, width + 1, "%" PRIu64, total);
+    len = snprintf(buffer, width + 1, "Progress: %*" PRIu64 "/%"PRIu64 " %3d%% ", len, completed, total, (int)((completed * 100ULL) / total));
+    for (i = len; i < width; i++)
+        buffer[i] = ' ';
+    // don't print progress bar if there isn't much room
+    if (len < (width - 12)) {
+        bars = (int)((completed * (uint64_t)(width - len - 2)) / total);
+        for (i = len + 1; i < len + 1 + bars; i++)
+            buffer[i] = '-';
+        buffer[i] = '>';
+        buffer[len] = '[';
+        buffer[width - 1] = ']';
+    }
+    buffer[width] = '\0';
+    printf("%s\r", buffer);
+    fflush(stdout);
+    free(buffer);
+}
 
