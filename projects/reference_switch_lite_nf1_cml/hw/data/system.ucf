@@ -254,6 +254,10 @@ TIMESPEC "TS_rx_fifo_rd_to_wr"   = FROM "rx_fifo_rd_to_wr" TO "gtx_clk" 7800 ps 
 #TIMESPEC "TS_pause_dsr" = FROM "pause_dsr"                       TIG;
 
 
+# Ignore timing on paths from the TX configuration register
+INST "*temac_reg_i/cfg_core_i/tx_cfg*"  TNM = "tx_cfg";
+TIMESPEC "ts_from_tx_cfg" = FROM "tx_cfg" TIG;
+
 
 
 
