@@ -162,7 +162,7 @@ C_HAS_READ_WARNING    	: integer := 0;
 ===============================================
 
 Then in the same directory, open vhdl_xst.scr and change the parameters
-to match the following:
+to match the following. Note that the -ofn name has been changed from cam.ngc to tcam.ngc:
 
 run
 -ifmt VHDL
@@ -205,8 +205,12 @@ Please note the file has two modules therefore two ‘endmodule’. Make sure to
 
 05. File copy
 
+Create the netlist directory if it doesn't already exist:
+mkdir -p $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_00_a/netlist
+
 Copy tcam.ngc in netlist directory of Switch pcore:
 cp tcam.ngc $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_00_a/netlist
+
 Copy tcam.v in verilog directory of Switch pcore:
 cp tcam.v $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_00_a/hdl/verilog
 
@@ -286,8 +290,8 @@ C_HAS_READ_WARNING    	: integer := 0;
 
 ===============================================
 
-Then in the same directory, open vhdl_xst.scr and change the parameters
-to match the following:
+Then in the same directory, open vhdl_xst.scr and verify that the parameters
+match the following:
 
 run
 -ifmt VHDL
@@ -332,5 +336,6 @@ Please note the file has two modules therefore two ‘endmodule’. Make sure to
 
 Copy cam.ngc in netlist directory of Switch pcore:
 cp cam.ngc $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_00_a/netlist
+
 Copy cam.v in verilog directory of Switch pcore:
 cp cam.v $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_router_output_port_lookup_v1_00_a/hdl/verilog
