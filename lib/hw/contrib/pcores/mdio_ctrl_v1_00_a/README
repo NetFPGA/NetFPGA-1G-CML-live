@@ -11,3 +11,73 @@ A generic MDIO interface for communicating with PHYs on the bus.
   interface (Registers 0x07e4 - 0x07f0 from DS787).
 
 
+## Register Map
+
+0x00 | MDIOADDR | MDIO address register
+0x04 | MDIOWR   | MDIO write data register
+0x08 | MDIORD   | MDIO read data register
+0x0c | MDIOCTRL | MDIO control register
+
+
+### MDIOADDR - MDIO Address Register
+
+Bits        | Meaning
+--------------------------------------------------------------------------------
+[31 - 11]   | Reserved
+[10]        | Operation: 0 - write, 1 - read
+[9 - 5]     | PHY Address
+[4 - 0]     | Register Address
+
+### MDIOWR - MDIO Write Data Register
+
+Bits        | Meaning
+--------------------------------------------------------------------------------
+[31 - 16]   | Reserved
+[15 - 0]    | Data to write to PHY register
+
+
+
+### MDIORD - MDIO Read Data Register
+
+Bits        | Meaning
+--------------------------------------------------------------------------------
+[31 - 16]   | Reserved
+[15 - 0]    | Data read from PHY register
+
+
+
+### MDIOCTRL - MDIO Control Register
+
+Bits        | Meaning
+--------------------------------------------------------------------------------
+[31 - 4]    | Reserved
+[3]         | Enable: 0 - Disable interface, 1 - Enable interface
+[2 - 1]     | Reserved
+[0]         | Status: 0 - Ready for new request, 1 - Transfer in progress. Set
+            |   this bit to initiate a transfer.
+
+
+## Programming Method
+
+### Writes
+
+1.  Wait until not busy. Check MDIOCTRL bit 0.
+2.  Store PHY address, register address, and a 0 to bit 10 of MDIOADDR.
+3.  Write data to MDIOWR.
+4.  Enable MDIO by writing a 1 to bit 3 of the MDIOCTRL register.
+5.  Initiate transfer by writing a 1 to bit 0 of the MDIOCTRL register. Also,
+    rewrite the enable bit at bit 3. Basically, you'll be writing a 0x9 to the
+    register.
+6.  Check MDIOCTRL bit 0 to see when the transfer has completed.
+
+### Reads
+
+1.  Wait until not busy. Check MDIOCTRL bit 0.
+2.  Store PHY address, register address, and a 1 to bit 10 of MDIOADDR.
+3.  Enable MDIO by writing a 1 to bit 3 of the MDIOCTRL register.
+4.  Initiate transfer by writing a 1 to bit 0 of the MDIOCTRL register. Also,
+    rewrite the enable bit at bit 3. Basically, you'll be writing a 0x9 to the
+    register.
+5.  Check MDIOCTRL bit 0 to see when the transfer has completed.
+6.  Read data from MDIORD
+

@@ -1,0 +1,19 @@
+Since the flash hardware is different on the NetFPGA-CML-1G board, the
+options to the tool used to program the BPI-Flash have changed somewhat
+from the ones used with the original tool.
+
+The -b switch used to specify the bitstream option has been retained in
+this tool and has the same use.
+
+The -f option in the original tool was used to specify which flash
+device to load. The NetFPGA-CML-1G has only one large BPI-Flash part.
+This tool uses a -a option followed by a address in the BPI-Flash. This
+allows a address to be specified that will have the specified bitstream
+written above the bitstream that resides at the base address and is 
+used to configure the FPGA upon cold start of the board.
+
+The -i option was used in the original tool to specify that after 
+writing a bitstream to a device, the FPGA was to be re-configured from
+the second flash device. This tool retains the -i option, but in this
+usage it causes the FPGA to re-configure starting from the address
+specified by the -a option.

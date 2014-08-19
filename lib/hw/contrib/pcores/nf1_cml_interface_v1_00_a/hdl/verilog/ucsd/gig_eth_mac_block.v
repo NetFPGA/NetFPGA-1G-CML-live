@@ -156,6 +156,8 @@ module gig_eth_mac_block (
    assign rx_mac_aclk = rx_mac_aclk_int;
 
    assign glbl_rst = !glbl_rstn;
+   assign tx_reset_int = glbl_rst;
+   assign rx_reset_int = glbl_rst;
 
       //---------------------------------------------------------------------------
       // An IDELAYCTRL primitive needs to be instantiated for the Fixed Tap Delay

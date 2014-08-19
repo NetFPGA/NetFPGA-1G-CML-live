@@ -1,0 +1,69 @@
+################################################################################
+#
+#  NetFPGA-10G http://www.netfpga.org
+#
+#  File:
+#        README
+#
+#  Project:
+#        reference_flash_nf1_cml
+#
+#  Author:
+#        Mario Flajslik
+#        Jay Hirata, Computer Measurement Laboratory, LLC
+#        David Luman, Computer Measurement Laboratory, LLC
+#
+#  Copyright notice:
+#        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+#                                 Junior University
+#        Copyright (C) 2013, 2014 Computer Measurement Laboratory
+#
+#  Licence:
+#        This file is part of the NetFPGA 10G development base package.
+#
+#        This file is free code: you can redistribute it and/or modify it under
+#        the terms of the GNU Lesser General Public License version 2.1 as
+#        published by the Free Software Foundation.
+#
+#        This package is distributed in the hope that it will be useful, but
+#        WITHOUT ANY WARRANTY; without even the implied warranty of
+#        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#        Lesser General Public License for more details.
+#
+#        You should have received a copy of the GNU Lesser General Public
+#        License along with the NetFPGA source package.  If not, see
+#        http://www.gnu.org/licenses/.
+#
+#
+
+A typical NetFPGA-10G project is organized as hardware part (hw)
+and software part (sw, including embedded software and host
+software).
+
+To build the project, simply use "make". The resulting bitfile is
+under bitfiles/ and is suitable for immediately configuring the device
+using the Xilinx iMPACT tool. After that you can perform a warm restart of
+your system that will allow PCIe to be configured by the host without
+losing the FPGA configuration as a cold restart would cause. After the
+PCIe has been configured by the host, the driver can be loaded and the
+flash programmer application can be used. A bitstream that will be stored
+in the BPI-Flash by this project's flash programmer application must be in
+the Xilinx *.bin format. An example of how to convert a typical Xilinx
+*.bit file into the appropriate *.bin file for the NetFPGA-1G-CML board
+uses this project's *.bit file. This example is found in the Makefile in
+the hw/ subdirectory using the "bin" target, aong with the create_bin.cmd
+for the iMPACT tool.
+
+This project was built using Xilinx tools version 14.6.
+
+Embedded software is not included in this project because there is no software
+required at this time.
+
+The host software (driver and nf1_configure) has been tested on Fedora 20.
+
+To build the driver and the applications, enter the sw/host/driver directory
+run "make". Then do the same in the sw/host/nf1_configure directory.
+
+This project has its own 'lib' folder using symbolic links so that it doesn't
+include the Xilinx IP that was created in the default lib folder.
+

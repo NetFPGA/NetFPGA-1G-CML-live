@@ -145,7 +145,7 @@ After the selections the parameters should be as follows:
 VHDL parameters were generated as follows:
 ===============================================
 C_FAMILY              	: string  := kintex7;
-C_MEM_TYPE            	: integer := 0;
+C_MEM_TYPE            	: integer := 1;
 C_WIDTH               	: integer := 48;
 C_DEPTH               	: integer := 16;
 C_ADDR_TYPE           	: integer := 0;
@@ -205,7 +205,12 @@ Please note the file has two modules therefore two ‘endmodule’. Make sure to
 
 05. File copy
 
-Copy cam.ngc in netlist directory of Switch pcore:
+Create the netlist directory if it doesn't already exist:
+mkdir -p $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_switch_output_port_lookup_v1_10_a/netlist
+
+Copy cam.ngc into netlist directory of Switch pcore:
 cp cam.ngc $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_switch_output_port_lookup_v1_10_a/netlist
-Copy cam.v in verilog directory of Switch pcore:
+
+Copy cam.v into verilog directory of Switch pcore:
 cp cam.v $(NF10_ROOT_DIRECTORY)/lib/hw/std/pcores/nf10_switch_output_port_lookup_v1_10_a/hdl/verilog
+

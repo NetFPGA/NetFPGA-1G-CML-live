@@ -435,7 +435,7 @@ BEGIN dma
  PORT pci_exp_3_rxn = dma_0_pci_exp_3_rxn
  PORT pci_exp_0_rxp = dma_0_pci_exp_0_rxp
  PORT pcie_clk_n = dma_0_pcie_clk_n
- PORT reset_n = RESET
+ PORT reset_n = proc_sys_reset_0_Peripheral_aresetn
  PORT pcie_clk_p = dma_0_pcie_clk_p
 END
 
