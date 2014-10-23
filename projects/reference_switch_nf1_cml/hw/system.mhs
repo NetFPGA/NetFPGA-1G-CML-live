@@ -62,7 +62,8 @@
  PORT mdc = mdc, DIR = O
  PORT mdio = mdio, DIR = IO
  PORT phy_rstn = mdio_ctrl_0_phy_rstn, DIR = O, SIGIS = NONE, VEC = [3:0]
-
+ PORT bpi_addr_cmd = axi_gpio_0_GPIO_IO, DIR = IO, VEC = [29:0]
+ PORT bpi_data = axi_gpio_0_GPIO2_IO, DIR = IO, VEC = [15:0]
 
 BEGIN version_id
  PARAMETER INSTANCE = version_id_0
@@ -475,5 +476,32 @@ BEGIN nf10_switch_output_port_lookup
  BUS_INTERFACE S_AXIS = nf10_input_arbiter_0_M_AXIS
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT S_AXI_ARESETN = proc_sys_reset_0_Peripheral_aresetn
+END
+
+BEGIN axi_gpio
+ PARAMETER INSTANCE = axi_gpio_bpi_if
+ PARAMETER HW_VER = 1.01.b
+ PARAMETER C_IS_DUAL = 1
+ PARAMETER C_GPIO_WIDTH = 30
+ PARAMETER C_DOUT_DEFAULT = 0xffffffff
+ PARAMETER C_TRI_DEFAULT = 0x00000000
+ PARAMETER C_GPIO2_WIDTH = 16
+ PARAMETER C_BASEADDR = 0x40000000
+ PARAMETER C_HIGHADDR = 0x4000ffff
+ BUS_INTERFACE S_AXI = axi_interconnect_0
+ PORT GPIO_IO = axi_gpio_0_GPIO_IO
+ PORT GPIO2_IO = axi_gpio_0_GPIO2_IO
+ PORT S_AXI_ACLK = clk_100_0000MHz
+END
+
+BEGIN axi_hwicap
+ PARAMETER INSTANCE = axi_hwicap_0
+ PARAMETER HW_VER = 2.03.a
+ PARAMETER C_BASEADDR = 0x40200000
+ PARAMETER C_HIGHADDR = 0x4020ffff
+ PARAMETER C_INCLUDE_STARTUP = 1
+ BUS_INTERFACE S_AXI = axi_interconnect_0
+ PORT S_AXI_ACLK = clk_100_0000MHz
+ PORT ICAP_Clk = clk_100_0000MHz
 END
 

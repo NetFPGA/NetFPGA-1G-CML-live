@@ -132,6 +132,55 @@ NET rgmii_rxc_4    LOC = G11 | IOSTANDARD = LVCMOS18;
 NET rgmii_tx_ctl_4 LOC = J11 | IOSTANDARD = LVCMOS18;
 NET rgmii_txc_4    LOC = D14 | IOSTANDARD = LVCMOS18;
 
+# BPI Flash
+NET bpi_addr_cmd[0]           LOC = J23     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[1]           LOC = K23     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[2]           LOC = K22     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[3]           LOC = L22     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[4]           LOC = J25     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[5]           LOC = J24     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[6]           LOC = H22     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[7]           LOC = H24     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[8]           LOC = H23     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[9]           LOC = G21     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[10]          LOC = H21     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[11]          LOC = H26     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[12]          LOC = J26     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[13]          LOC = E26     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[14]          LOC = F25     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[15]          LOC = G26     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[16]          LOC = K17     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[17]          LOC = K16     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[18]          LOC = L20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[19]          LOC = J19     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[20]          LOC = J18     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[21]          LOC = J20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[22]          LOC = K20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[23]          LOC = G20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[24]          LOC = H19     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[25]          LOC = E20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[26]          LOC = D20     | IOSTANDARD = LVCMOS33;   # ADV
+NET bpi_addr_cmd[27]          LOC = C23     | IOSTANDARD = LVCMOS33;   # CE_N
+NET bpi_addr_cmd[28]          LOC = M17     | IOSTANDARD = LVCMOS33;   # OE_N
+NET bpi_addr_cmd[29]          LOC = L18     | IOSTANDARD = LVCMOS33;   # WE_N
+
+NET bpi_data[0]               LOC = B24     | IOSTANDARD = LVCMOS33;
+NET bpi_data[1]               LOC = A25     | IOSTANDARD = LVCMOS33;
+NET bpi_data[2]               LOC = B22     | IOSTANDARD = LVCMOS33;
+NET bpi_data[3]               LOC = A22     | IOSTANDARD = LVCMOS33;
+NET bpi_data[4]               LOC = A23     | IOSTANDARD = LVCMOS33;
+NET bpi_data[5]               LOC = A24     | IOSTANDARD = LVCMOS33;
+NET bpi_data[6]               LOC = D26     | IOSTANDARD = LVCMOS33;
+NET bpi_data[7]               LOC = C26     | IOSTANDARD = LVCMOS33;
+NET bpi_data[8]               LOC = C24     | IOSTANDARD = LVCMOS33;
+NET bpi_data[9]               LOC = D21     | IOSTANDARD = LVCMOS33;
+NET bpi_data[10]              LOC = C22     | IOSTANDARD = LVCMOS33;
+NET bpi_data[11]              LOC = B20     | IOSTANDARD = LVCMOS33;
+NET bpi_data[12]              LOC = A20     | IOSTANDARD = LVCMOS33;
+NET bpi_data[13]              LOC = E22     | IOSTANDARD = LVCMOS33;
+NET bpi_data[14]              LOC = C21     | IOSTANDARD = LVCMOS33;
+NET bpi_data[15]              LOC = B21     | IOSTANDARD = LVCMOS33;
+
 #
 # additional constraints
 #

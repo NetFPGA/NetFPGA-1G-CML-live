@@ -62,6 +62,8 @@
  PORT mdc = mdc, DIR = O
  PORT mdio = mdio, DIR = IO
  PORT phy_rstn = mdio_ctrl_0_phy_rstn, DIR = O, SIGIS = NONE, VEC = [3:0]
+ PORT bpi_addr_cmd = axi_gpio_0_GPIO_IO, DIR = IO, VEC = [29:0]
+ PORT bpi_data = axi_gpio_0_GPIO2_IO, DIR = IO, VEC = [15:0]
 
 
 BEGIN version_id
@@ -211,6 +213,7 @@ BEGIN clock_generator
  PARAMETER C_CLKOUT5_GROUP = NONE
  PARAMETER C_CLKOUT5_PHASE = 90
  PARAMETER C_CLKOUT5_VARIABLE_PHASE = FALSE
+ PARAMETER C_CLKOUT6_FREQ = 100000000
  PORT LOCKED = proc_sys_reset_0_Dcm_locked
  PORT CLKOUT0 = clk_100_0000MHz
  PORT RST = clk_gen_pre_lock
@@ -220,6 +223,7 @@ BEGIN clock_generator
  PORT CLKOUT1 = clk_125_0000MHz
  PORT CLKOUT4 = gtx_clk_125_0000Mhz
  PORT CLKOUT5 = gtx_clk_125_0000MHz_90
+ PORT CLKOUT6 = clk_aux_100_0000MHz
 END
 
 BEGIN axi_timebase_wdt
@@ -476,5 +480,32 @@ BEGIN mdio_ctrl
  PORT mdc = mdc
  PORT mdio = mdio
  PORT phy_rstn = mdio_ctrl_0_phy_rstn
+END
+
+BEGIN axi_gpio
+ PARAMETER INSTANCE = axi_gpio_bpi_if
+ PARAMETER HW_VER = 1.01.b
+ PARAMETER C_IS_DUAL = 1
+ PARAMETER C_GPIO_WIDTH = 30
+ PARAMETER C_DOUT_DEFAULT = 0xffffffff
+ PARAMETER C_TRI_DEFAULT = 0x00000000
+ PARAMETER C_GPIO2_WIDTH = 16
+ PARAMETER C_BASEADDR = 0x40000000
+ PARAMETER C_HIGHADDR = 0x4000ffff
+ BUS_INTERFACE S_AXI = axi_interconnect_0
+ PORT GPIO_IO = axi_gpio_0_GPIO_IO
+ PORT GPIO2_IO = axi_gpio_0_GPIO2_IO
+ PORT S_AXI_ACLK = clk_100_0000MHz
+END
+
+BEGIN axi_hwicap
+ PARAMETER INSTANCE = axi_hwicap_0
+ PARAMETER HW_VER = 2.03.a
+ PARAMETER C_BASEADDR = 0x40200000
+ PARAMETER C_HIGHADDR = 0x4020ffff
+ PARAMETER C_INCLUDE_STARTUP = 1
+ BUS_INTERFACE S_AXI = axi_interconnect_0
+ PORT S_AXI_ACLK = clk_aux_100_0000MHz
+ PORT ICAP_Clk = clk_100_0000MHz
 END
 

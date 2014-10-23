@@ -56,7 +56,7 @@ PATH=$XILINX/bin/lin64:$XILINX/../../ISE_DS/common/bin/lin64:$PATH
 
 export PATH
 
-NF_DESIGN_DIR=$NF_ROOT/projects/reference_nic/
+NF_DESIGN_DIR=$NF_ROOT/projects/reference_nic_nf1_cml/
 
 if [ "$NF_ROOT" == "" -o "$NF_DESIGN_DIR" == "" ]; then
 	echo
@@ -109,12 +109,12 @@ if [ -e $NF_DESIGN_DIR/sw/host/driver/nf10.ko ]; then
 	echo "(Re)loading $NF_DESIGN_DIR/sw/host/driver/nf10.ko"
 	insmod $NF_DESIGN_DIR/sw/host/driver/nf10.ko
 else
-	echo $0": no project specific driver found - trying reference_nic"
-	if [ -e $NF_ROOT/projects/reference_nic/sw/host/driver/nf10.ko ]; then
-		insmod $NF_ROOT/projects/reference_nic/sw/host/driver/nf10.ko
+	echo $0": no project specific driver found - trying reference_nic_nf1_cml"
+	if [ -e $NF_ROOT/projects/reference_nic_nf1_cml/sw/host/driver/nf10.ko ]; then
+		insmod $NF_ROOT/projects/reference_nic_nf1_cml/sw/host/driver/nf10.ko
 	else
 		echo $0 failed.
-		echo No reference_nic kernel driver 
+		echo No reference_nic_nf1_cml kernel driver 
 		echo AND
 		echo No project kernel driver
 		echo

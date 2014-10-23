@@ -53,6 +53,9 @@ AXISIM_CMD = $(patsubst %_system, %_system_axisim, $(SIM_CMD))
 
 PATH := $(PATH):$(PYTHONPATH)
 
+init_bram: bits
+	$(MAKE) -f system.make init_bram
+
 bits: system.make
 	$(MAKE) -f system.make bits
 
@@ -164,6 +167,9 @@ smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit
 	cd implementation/ && promgen -w -p mcs -c FF -bpi_dc parallel -data_width 16 -o smallbits.mcs -s 131072 -u 00000000 smallbits.bit
 	cp implementation/smallbits.mcs .
+
+bin: init_bram
+	cd implementation/ && impact -batch ../create_bin.cmd
 
 progflash: smallbits.mcs
 	impact -batch program_flash.cmd
