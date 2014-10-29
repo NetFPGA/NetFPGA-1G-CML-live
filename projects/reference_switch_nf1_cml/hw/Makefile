@@ -151,14 +151,24 @@ simclean:
 	rm -rf ../test/nf1_cml
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
-	rm -f ../test/system.mhs
+	rm -f ../test/*.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
+	rm -f ../test/*.make
+	rm -f ../test/*.opt
+	rm -f ../test/*.log
+	rm -rf ../test/bootloops
+	rm -rf ../test/etc
+	rm -rf ../test/simulation
+	rm -rf ../test/__xps
+	rm -f ../test/*.axi
+	rm -f ../test/seed
+	rm -f ../test/*.sim
 
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
-	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
-	rm -rf ../lib/Python/reg_defines_*.*
+	rm -f $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -f ../lib/Python/reg_defines_*.*
 
 smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit

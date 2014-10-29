@@ -48,6 +48,19 @@
 #include "nf10fops.h"
 #include "nf10iface.h"
 
+// These attributes have been removed since Kernel 3.8.x. Keep them here for backward
+// compatibility.
+// See https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=54b956b903607
+#ifndef __devinit
+  #define __devinit
+#endif
+#ifndef __devexit
+  #define __devexit
+#endif
+#ifndef __devexit_p
+  #define __devexit_p
+#endif
+
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Mario Flajslik");
 MODULE_DESCRIPTION("nf10 nic driver");
@@ -58,7 +71,7 @@ static struct pci_device_id pci_id[] = {
 };
 MODULE_DEVICE_TABLE(pci, pci_id);
 
-static int nf10_probe(struct pci_dev *pdev, const struct pci_device_id *id){
+static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id *id){
 	int err;
     int i;
     int ret = -ENODEV;
@@ -298,7 +311,7 @@ static int nf10_probe(struct pci_dev *pdev, const struct pci_device_id *id){
 	return ret;
 }
 
-static void nf10_remove(struct pci_dev *pdev){
+static void __devexit nf10_remove(struct pci_dev *pdev){
     struct nf10_card *card;
 
     // free private data
@@ -354,7 +367,7 @@ static struct pci_driver pci_driver = {
 	.name = "nf10",
 	.id_table = pci_id,
 	.probe = nf10_probe,
-	.remove = nf10_remove,
+	.remove = __devexit_p(nf10_remove),
     .err_handler = &pcie_err_handlers
 };
 

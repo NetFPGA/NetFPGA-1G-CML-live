@@ -1,23 +1,19 @@
-#!/usr/bin/python
-
 ################################################################################
 #
 #  NetFPGA-10G http://www.netfpga.org
 #
 #  File:
-#        xparam2regdefines.py
+#        Makefile
 #
 #  Project:
-#        
-#
-#  Module:
-#        
+#        reference_switch
 #
 #  Author:
 #        Neelakandan Manihatty Bojan
 #
 #  Description:
-#        This is used to convert xparameters.h to reg_defines.h
+#        make : Registers for monitoring the registers in reference_swich
+#
 #
 #  Copyright notice:
 #        Copyright (C) 2013 University of Cambridge
@@ -39,31 +35,9 @@
 #        http://www.gnu.org/licenses/.
 #
 #
-import re
-
-input_file = open("xparameters.h", "r")
-output_file = open("reg_defines.h", "w")
-baseaddr = 0
-baseaddr_int = 0
-offset_int =0
-
-for line in input_file:
-    match_baseaddr = re.match(r'\s*#define .*_BASEADDR (0x[a-zA-Z_0-9]{8})', line)
-    match_offset = re.match(r'\s*#define (.*) (0x[a-zA-Z_0-9]+)', line)
- 	
-    if match_baseaddr:
-        baseaddr = match_baseaddr.group(1)
-	baseaddr_int= int(baseaddr,16)	
-        output_file.write(line)
-
-    elif match_offset:
-	offset = match_offset.group(2)
-	offset_int=int(offset,16)
-        new_val = hex(baseaddr_int+offset_int)     
-	newline= "#define %s %s\n" % (match_offset.group(1),new_val)
-        output_file.write(newline)
-
-    else:
-        output_file.write(line)
 
 
+all:
+	gcc -march=core2 -o switch_regs switch_regs.c
+clean:
+	rm switch_regs
