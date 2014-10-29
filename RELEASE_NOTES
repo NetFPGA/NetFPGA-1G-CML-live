@@ -9,51 +9,25 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 5.0.1
+GIT VERSION 5.0.2
 
-Before using this code, please check the release notes for 5.0.1 below
+Before using this code, please check the release notes for 5.0.2 below
 
-Here are the release notes for 5.0.1 
+1. RLDRAM stream controller:
 
-1. Integrated test infrastructure with both_major_minor tests for reference_router.
+This contrib project uses Xilinx RLDRAM controller as a packet buffer.
 
-Following are the tests for reference_router. 
+wiki:
+https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-RLDRAM-Stream
 
-both_badipchksum_packet  
-both_lpm_generic  
-both_nonip_packet       
-both_router_table
-both_invalidttl_packet   
-both_lpm_misses  
-both_nonipv4_packet     
-both_wrong_destMAC
-both_arp_misses  
-both_ipdestfilter_hit    
-both_lpm_nexthop  
-both_packet_forwarding
+2. Reference projects (nic, switch, switch_lite, router) have been updated with registers.
+The register monitoring system has also been updated.
 
-wiki for router tests:
-https://github.com/NetFPGA/NetFPGA-public/wiki/Tests-for-reference-router
+wiki for the pcore with registers:
 
-wiki for simulation infrastructure:
-https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Simulations
-
-wiki for HW test infrastructure:
-https://github.com/NetFPGA/NetFPGA-public/wiki/HW-Tests
-
-
-2. Updated the Makefiles of reference projects 
--- to remove residual files when doing a "make clean"
--- renaming the bitfiles in accordance with the name of the project
-
-3. Updated xparam2regdefines.py to remove the "_OFFSET" suffix in the register names. Also updated the software monitoring system files to keep them in sync with the changes.
-
-4. Driver fixes and updates
-
--- removed libnl source code (from nic_oped contrib project). As modern OS have use their own libnl packages (for Fedora it's called libnl3). It can be installed by yum install libnl3
--- removed the copy of driver files in reference_nic_1g
--- updated nic_oped driver to support kernel 3.12.5
--- removed unused attributes of nf10driver.c in reference_nic driver
+https://github.com/NetFPGA/NetFPGA-public/wiki/Input-arbiter-with-registers
+https://github.com/NetFPGA/NetFPGA-public/wiki/10G-MAC-Interface-with-registers
+https://github.com/NetFPGA/NetFPGA-public/wiki/BRAM-Output-Queues-with-registers
 
 
 
