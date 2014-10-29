@@ -27,11 +27,11 @@ nf10_eth_driver:
 	$(MAKE) -C /lib/modules/$(KVERSION)/build SUBDIRS=$(shell pwd) modules
 
 driver_ctrl:
-	gcc driver_ctrl.c -lnl -lnl-genl -o driver_ctrl
+	gcc driver_ctrl.c -lnl-3 -lnl-genl-3 -o driver_ctrl
 
 nf10_reg_lib:
 	gcc -fpic -c nf10_reg_lib.c
-	gcc -lnl -lnl-genl -shared -Wl,-soname,libnf10reg.so.1 -o libnf10reg.so.1.0 nf10_reg_lib.o
+	gcc -lnl-3 -lnl-genl-3 -shared -Wl,-soname,libnf10reg.so.1 -o libnf10reg.so.1.0 nf10_reg_lib.o
 
 modules_install:
 	$(MAKE) -C /lib/modules/$(KVERSION)/build SUBDIRS=$(shell pwd) modules_install

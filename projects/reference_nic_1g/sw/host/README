@@ -1,0 +1,2 @@
+This project shares the same driver with reference_nic.
+Please refer to the reference_nic's sw/host directory for the driver.

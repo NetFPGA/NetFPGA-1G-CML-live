@@ -36,6 +36,7 @@
 
 
 NF10_SCRIPTS_DIR  = tools/scripts
+NF10_PYTHON_LIB = lib/python/NFTest
 XILINX_HW_LIB_DIR = $(XILINX_EDK)/hw/XilinxProcessorIPLib/pcores
 XILINX_SW_LIB_DIR = $(XILINX_EDK)/sw/XilinxProcessorIPLib/drivers
 
@@ -59,8 +60,8 @@ NF10_SW_LIB_DIR_CONTRIB   = lib/sw/contrib/drivers
 SW_LIB_DIR_INSTANCES_CONTRIB := $(shell cd $(NF10_SW_LIB_DIR_CONTRIB) && find . -maxdepth 1 -type d)
 SW_LIB_DIR_INSTANCES_CONTRIB := $(basename $(patsubst ./%,%,$(SW_LIB_DIR_INSTANCES_CONTRIB)))
 
-cores: xilinx std contrib scripts
-clean: xilinxclean stdclean contribclean scriptsclean
+cores: xilinx std contrib scripts pylib hwtestlib
+clean: xilinxclean stdclean contribclean scriptsclean pylibclean hwtestlibclean
 
 # Make only the cores used by the NF1-CML projects
 # These are done separately to prevent build errors that occur when doing "make cores"
@@ -190,6 +191,15 @@ scripts:
 
 scriptsclean:
 	$(MAKE) -C $(NF10_SCRIPTS_DIR) clean
+
+
+pylib:
+	$(MAKE) -C $(NF10_PYTHON_LIB)
+
+
+pylibclean:
+	$(MAKE) -C $(NF10_PYTHON_LIB) clean
+
 
 hwtestlib:
 	cd tools/lib/ && make
