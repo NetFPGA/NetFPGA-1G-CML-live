@@ -19,8 +19,8 @@ if isHW():
     nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_BASEADDR(), 0x0)
 
     # Initially we expect 0 packets in both the lut_hit and lut_miss registers
-    rres1= nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET(), 0x0)
-    rres2=nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET(), 0x0)
+    rres1= nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG(), 0x0)
+    rres2=nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG(), 0x0)
 
 nftest_start()
 
@@ -72,14 +72,14 @@ nftest_barrier()
 if isHW():
     # Now we expect to see the lut_hit and lut_miss registers incremented and we
     # verify this by doing a  reg
-    rres3= nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET(), 0xa)
-    rres4= nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG_OFFSET(), 0xa)
+    rres3= nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG(), 0xa)
+    rres4= nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG(), 0xa)
 
     # List containing the return values of the reg_reads
     mres=[rres1,rres2,rres3,rres4]
 else:
-    nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG_OFFSET(), 0xa) # lut_hit
-    nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG_OFFSET(), 0xa) # lut_miss
+    nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG(), 0xa) # lut_hit
+    nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_MISSES_REG(), 0xa) # lut_miss
     mres=[]
 
 nftest_finish(mres)

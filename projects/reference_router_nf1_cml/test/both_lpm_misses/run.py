@@ -3,6 +3,7 @@
 from NFTest import *
 import random
 from RegressRouterLib import *
+from reg_defines_reference_router_nf1_cml import *
 import os
 
 from scapy.layers.all import Ether, IP, TCP
@@ -14,10 +15,10 @@ nftest_start()
 
 if isHW():
     # asserting the reset_counter to 1 for clearing the registers
-    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x1)
+    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS(), 0x1)
 
     # asseting teh reset_counter to 0 for enable the counters to increment
-    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS_OFFSET(), 0x0)
+    nftest_regwrite(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_RESET_CNTRS(), 0x0)
 
 routerMAC = ["00:ca:fe:00:00:01", "00:ca:fe:00:00:02", "00:ca:fe:00:00:03", "00:ca:fe:00:00:04"]
 routerIP = ["192.168.0.40", "192.168.1.40", "192.168.2.40", "192.168.3.40"]
@@ -61,10 +62,10 @@ if not isHW():
 nftest_barrier()
 
 if isHW():
-    rres1=nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_SENT_CPU_LPM_MISS_OFFSET(), 100)
+    rres1=nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_SENT_CPU_LPM_MISS(), 100)
     mres=[rres1]
 else:
-    nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_SENT_CPU_LPM_MISS_OFFSET(), 100)
+    nftest_regread_expect(XPAR_NF10_ROUTER_OUTPUT_PORT_LOOKUP_0_BAR0_PKT_SENT_CPU_LPM_MISS(), 100)
     mres=[]
 
 nftest_finish(mres)

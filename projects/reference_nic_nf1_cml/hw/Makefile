@@ -204,9 +204,19 @@ simclean:
 	rm -rf ../test/nf1_cml
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
-	rm -f ../test/system.mhs
+	rm -f ../test/*.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
+	rm -rf ../test/etc
+	rm -rf ../test/*.log
+	rm -rf ../test/simulation
+	rm -rf ../test/*.make
+	rm -rf ../test/__xps
+	rm -rf ../test/*.opt
+	rm -rf ../test/bootloops
+	rm -rf ../test/*.axi
+	rm -rf ../test/seed
+	rm -rf ../test/*.sim
 
 smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit

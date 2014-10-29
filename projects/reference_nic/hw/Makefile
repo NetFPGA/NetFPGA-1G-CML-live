@@ -264,9 +264,19 @@ simclean:
 	rm -rf ../test/nf10
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
-	rm -f ../test/system.mhs
+	rm -f ../test/*.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
+	rm -rf ../test/etc
+	rm -rf ../test/*.log
+	rm -rf ../test/simulation
+	rm -rf ../test/*.make
+	rm -rf ../test/__xps
+	rm -rf ../test/*.opt
+	rm -rf ../test/bootloops
+	rm -rf ../test/*.axi
+	rm -rf ../test/seed
+	rm -rf ../test/*.sim
 
 #################################################################
 # BOOTLOOP ELF FILES
