@@ -11,6 +11,10 @@
 #  Author:
 #			Jong Han
 #
+#  Changes:
+#        2014/10/30 Jay Hirata - Update description and add C_INFO_FILE
+#           parameter
+#
 #  Description:
 #        
 #
@@ -41,12 +45,12 @@ BEGIN nf10_identifier
 OPTION IPTYPE = PERIPHERAL
 OPTION HDL = MIXED
 OPTION USAGE_LEVEL = BASE_USER
-OPTION STYLE = MIX 
+OPTION STYLE = HDL
 OPTION RUN_NGCBUILD = TRUE
 OPTION IMP_NETLIST = TRUE
-OPTION IP_GROUP = NetFPGA-10G Output Port Lookups
-OPTION DESC = Reference NIC
-OPTION LONG_DESC = Reference NIC
+OPTION IP_GROUP = NetFPGA Identification
+OPTION DESC = NetFPGA Identification Core
+OPTION LONG_DESC = Identifies the currently loaded design and provides project build information
 
 ## Bus Interfaces
 BUS_INTERFACE BUS = S_AXI, BUS_STD = AXI, BUS_TYPE = SLAVE
@@ -59,6 +63,7 @@ PARAMETER C_HIGHADDR = 0x00000000, DT = std_logic_vector(31 downto 0), PAIR = C_
 PARAMETER C_FAMILY = virtex5, DT = STRING
 PARAMETER C_S_AXI_PROTOCOL = AXI4LITE, DT = STRING, BUS = S_AXI, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
 PARAMETER C_S_AXI_ACLK_FREQ_HZ = 100000000, DT = INTEGER, BUS = S_AXI, IO_IS = clk_freq, CLK_PORT = S_AXI_ACLK, CLK_UNIT = HZ, ASSIGNMENT = REQUIRE
+PARAMETER C_INFO_FILE = "NONE", DT = STRING
 
 
 ## Ports

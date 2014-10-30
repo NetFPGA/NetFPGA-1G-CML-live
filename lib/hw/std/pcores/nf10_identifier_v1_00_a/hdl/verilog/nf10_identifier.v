@@ -14,6 +14,9 @@
 *  Author:
 *        Jong HAN
 *
+*  Changes:
+*        2014/10/30 Jay Hirata - Make identifier device independent
+*
 *  Description:
 *        Identifying a module.
 *
@@ -48,6 +51,7 @@ module nf10_identifier
     parameter   C_DPHASE_TIMEOUT            = 0,
     parameter   C_BASEADDR                  = 32'hFFFFFFFF,
     parameter   C_HIGHADDR                  = 32'h00000000,
+    parameter   C_INFO_FILE                 = "NONE",
     parameter   C_S_AXI_ACLK_FREQ_HZ        = 100
 )
 (
@@ -73,9 +77,16 @@ module nf10_identifier
     output                                  S_AXI_AWREADY
 );
 
-localparam  NUM_RW_REGS     = 1;
-localparam  NUM_RO_REGS     = 5;
+/* Read Only Memory */
+localparam  ROM_WIDTH = 32;
+localparam  ROM_ADDR_WIDTH = 4;
 
+reg [ROM_WIDTH - 1 : 0] info_rom [(2 ** ROM_ADDR_WIDTH) - 1 : 0];
+
+initial
+    $readmemh(C_INFO_FILE, info_rom, 0, 15);
+
+/* IPIF signals */
 wire                                        Bus2IP_Clk;
 wire                                        Bus2IP_Resetn;
 wire        [C_S_AXI_ADDR_WIDTH-1:0]        Bus2IP_Addr;
@@ -87,16 +98,6 @@ reg         [C_S_AXI_DATA_WIDTH-1:0]        IP2Bus_Data;
 reg                                         IP2Bus_RdAck;
 reg                                         IP2Bus_WrAck;
 wire                                        IP2Bus_Error = 0;
-/*
-reg   [C_S_AXI_DATA_WIDTH-1:0]               id_rom[0:15];
-
-initial begin
-   $readmemh("./rom_data.txt", id_rom, 0, 15);
-end
-*/
-
-//Address valid from 0x00 ~ 0x30
-wire addr_valid_n = ((Bus2IP_Addr == 0) || (|Bus2IP_Addr[5:2] == 1 && |Bus2IP_Addr[C_S_AXI_ADDR_WIDTH-1:6] == 0));
 
 wire w_wren = (Bus2IP_CS && ~Bus2IP_RNW);
 wire w_rden = (Bus2IP_CS && Bus2IP_RNW);
@@ -109,41 +110,14 @@ always @(posedge S_AXI_ACLK)
     else if (w_wren)
         IP2Bus_WrAck   <= 1;
 
-wire [C_S_AXI_DATA_WIDTH-1:0] rom_data;// = (addr_valid_n) ? 0 : id_rom[Bus2IP_Addr[5:2]];
-
-reg r_rd_delay_0, r_rd_delay_1;
-always @(posedge S_AXI_ACLK)
-    if (~S_AXI_ARESETN) begin
-        r_rd_delay_0   <= 0;
-        r_rd_delay_1   <= 0;
+always @(posedge Bus2IP_Clk)
+    if (w_rden) begin
+        IP2Bus_Data <= info_rom[Bus2IP_Addr[5:2]];
+        IP2Bus_RdAck <= 1;
+    end else begin
+        IP2Bus_Data <= 32'h00000000;
+        IP2Bus_RdAck <= 0;
     end
-    else begin
-        r_rd_delay_0   <= w_rden;
-        r_rd_delay_1   <= r_rd_delay_0;
-    end
-
-wire w_rd_trig = r_rd_delay_0 & ~r_rd_delay_1;
-
-always @(posedge S_AXI_ACLK)
-    if (~S_AXI_ARESETN) begin
-        IP2Bus_Data    <= 0;
-        IP2Bus_RdAck   <= 0;
-    end
-    else if (~Bus2IP_CS) begin
-        IP2Bus_RdAck   <= 0;
-    end
-    else if (w_rd_trig) begin
-        IP2Bus_Data    <= rom_data;
-        IP2Bus_RdAck   <= 1;
-    end
-
-id_rom16x32 id_rom16x32
-(
-    .clka       ( S_AXI_ACLK ),
-    .ena        ( w_rden ),
-    .addra      ( Bus2IP_Addr[5:2] ),
-    .douta      ( rom_data )
-);
 
 // -- AXILITE IPIF
 axi_lite_ipif_1bar
