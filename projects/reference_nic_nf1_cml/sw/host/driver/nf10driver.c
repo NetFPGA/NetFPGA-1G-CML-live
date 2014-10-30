@@ -104,7 +104,7 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     if(pci_enable_msi(pdev) != 0){
         printk(KERN_ERR "nf10: failed to enable MSI interrupts\n");
         ret = -EFAULT;
-		goto err_out_disable_device;
+		goto err_out_clear_master;
     }
 	
     // be nice and tell kernel that we'll use this resource
@@ -265,6 +265,15 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     // store private data to pdev
 	pci_set_drvdata(pdev, card);
 
+    nf10_NetFPGA_Hardware_Project_decoder(card);    // Read from the nf10_identifier_vx_xx_x pcore
+
+    //if (!nf10_ael2005_phy_configuration(card)) {    // Read from the AEL2005 PHY chips
+    //    printk(KERN_INFO "nf10: AEL2005 PHY chips are configured\n");
+    //}
+    //else {
+    //    printk(KERN_INFO "nf10: AEL2005 PHY chips were already configured\n");
+    //}
+
     // success
     ret = nf10iface_probe(pdev, card);
     if(ret < 0){
@@ -305,6 +314,8 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
 	release_mem_region(pci_resource_start(pdev, 0), pci_resource_len(pdev, 0));
  err_out_msi:
     pci_disable_msi(pdev);
+ err_out_clear_master:
+    pci_clear_master(pdev);
  err_out_disable_device:
 	pci_disable_device(pdev);
  err_out_none:
@@ -351,6 +362,7 @@ static void __devexit nf10_remove(struct pci_dev *pdev){
     // disabling device
     printk(KERN_INFO "nf10: disabling device\n");
     pci_disable_msi(pdev);
+    pci_clear_master(pdev);
 	pci_disable_device(pdev);
 }
 
