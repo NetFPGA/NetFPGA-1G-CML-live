@@ -16,3 +16,4 @@ etc/
 seed
 *.opt
 system_axisim.mhs
+rom_data.txt

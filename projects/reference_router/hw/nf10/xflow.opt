@@ -70,7 +70,7 @@ Program map
 -xe n;
 -ol high;
 #-cm speed;
--t 9;
+-t 5;
 -register_duplication on;
 -logic_opt on;
 -timing;
