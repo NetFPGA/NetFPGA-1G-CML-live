@@ -484,6 +484,7 @@ BEGIN nf10_identifier
  PARAMETER HW_VER = 1.00.a
  PARAMETER C_BASEADDR = 0x6a000000
  PARAMETER C_HIGHADDR = 0x6a00ffff
+ PARAMETER C_INFO_FILE = ../rom_data.txt
  BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT S_AXI_ARESETN = proc_sys_reset_0_Peripheral_aresetn

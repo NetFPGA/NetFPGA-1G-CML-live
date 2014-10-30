@@ -140,6 +140,13 @@ def XPAR_MDIO_0_HIGHADDR():
     return 0x7A04FFFF
 
 
+#  Definitions for peripheral NF10_IDENTIFIER_0 */
+def XPAR_NF10_IDENTIFIER_0_BASEADDR():
+    return 0x6A000000
+def XPAR_NF10_IDENTIFIER_0_HIGHADDR():
+    return 0x6A00FFFF
+
+
 #  Definitions for peripheral NF10_NIC_OUTPUT_PORT_LOOKUP_0 */
 def XPAR_NF10_NIC_OUTPUT_PORT_LOOKUP_0_BASEADDR():
     return 0x75400000
@@ -173,13 +180,6 @@ def XPAR_NF1_CML_INTERFACE_3_BASEADDR():
     return 0x78260000
 def XPAR_NF1_CML_INTERFACE_3_HIGHADDR():
     return 0x7826FFFF
-
-
-#  Definitions for peripheral VERSION_ID_0 */
-def XPAR_VERSION_ID_0_BASEADDR():
-    return 0x80000000
-def XPAR_VERSION_ID_0_HIGHADDR():
-    return 0x80000FFF
 
 
 # *****************************************************************/
