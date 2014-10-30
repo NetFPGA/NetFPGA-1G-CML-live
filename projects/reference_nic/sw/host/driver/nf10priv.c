@@ -91,8 +91,8 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     uint64_t dsc_l0, dsc_l1;
     uint64_t dma_addr;
 
-    if(len > 1514)
-        printk(KERN_ERR "nf10: ERROR too big packet. TX size: %d\n", len);
+    //if(len > 1514)
+        //printk(KERN_ERR "nf10: ERROR too big packet. TX size: %d\n", len);
 
     // packet buffer management
     spin_lock_irqsave(&tx_lock, flags);
@@ -275,56 +275,66 @@ void work_handler(struct work_struct *w){
 
             //printk(KERN_ERR "rec %d\n", len);
 
-            if(len > 1514 || len < 60 || port < 0 || port > 3){
-                printk(KERN_ERR"nf10: invalid pakcet\n");
+            if(port < 0 || port > 3){
+                printk(KERN_ERR "nf10: invalid port\n");
+                dev_kfree_skb_any(skb);
             }
             else if(((struct nf10_ndev_priv*)netdev_priv(card->ndev[port]))->port_up){
 
-                // update skb with port information
-                skb_put(skb, len);            
-                
-                skb->dev = card->ndev[port];
-                skb->protocol = eth_type_trans(skb, card->ndev[port]);
-                skb->ip_summed = CHECKSUM_NONE;
+                if(len > 1514 || len < 60){
+                    //printk(KERN_ERR "nf10: invalid packet size\n");
+                    card->ndev[port]->stats.rx_dropped++;
+                    dev_kfree_skb_any(skb);
+                }
+                else {
 
-                // update stats
-                card->ndev[port]->stats.rx_packets++;
-                card->ndev[port]->stats.rx_bytes += skb->len;
+                    // update skb with port information
+                    skb_put(skb, len);            
+                
+                    skb->dev = card->ndev[port];
+                    skb->protocol = eth_type_trans(skb, card->ndev[port]);
+                    skb->ip_summed = CHECKSUM_NONE;
+
+                    // update stats
+                    card->ndev[port]->stats.rx_packets++;
+                    card->ndev[port]->stats.rx_bytes += skb->len;
 
 #ifdef LOOPBACK_MODE
-                iph = (struct iphdr *)skb->data;
-                if(skb->protocol == htons(ETH_P_IP)){
-                    ((uint8_t*)skb->data)[14] ^= 0x1;
-                    ((uint8_t*)skb->data)[18] ^= 0x1;
-                    ip_send_check(iph);
-                    if(((uint8_t*)skb->data)[9] == 6){
-                        memset(&sck, 0, sizeof(sck));
-                        th = tcp_hdr(skb);
-                        th->check = 0;
-                        skb->ip_summed = CHECKSUM_PARTIAL;
-                        isck = inet_sk(&sck);
-                        isck->inet_saddr = iph->saddr;
-                        isck->inet_daddr = iph->daddr;
-                        tcp_v4_send_check(&sck, skb);
-                    }
+                    iph = (struct iphdr *)skb->data;
+                    if(skb->protocol == htons(ETH_P_IP)){
+                        ((uint8_t*)skb->data)[14] ^= 0x1;
+                        ((uint8_t*)skb->data)[18] ^= 0x1;
+                        ip_send_check(iph);
+                        if(((uint8_t*)skb->data)[9] == 6){
+                            memset(&sck, 0, sizeof(sck));
+                            th = tcp_hdr(skb);
+                            th->check = 0;
+                            skb->ip_summed = CHECKSUM_PARTIAL;
+                            isck = inet_sk(&sck);
+                            isck->inet_saddr = iph->saddr;
+                            isck->inet_daddr = iph->daddr;
+                            tcp_v4_send_check(&sck, skb);
+                        }
 
-                    if(((uint8_t*)skb->data)[9] == 17){
-                        ((uint8_t*)skb->data)[26] = 0;
-                        ((uint8_t*)skb->data)[27] = 0;
+                        if(((uint8_t*)skb->data)[9] == 17){
+                            ((uint8_t*)skb->data)[26] = 0;
+                            ((uint8_t*)skb->data)[27] = 0;
+                        }
+                   
+                        netif_receive_skb(skb);
+                        
                     }
-               
-                    netif_receive_skb(skb);
-                    
-                }
-                else{
-                    kfree_skb(skb);
-                }
+                    else{
+                        card->ndev[port]->stats.rx_dropped++;
+                        dev_kfree_skb_any(skb);
+                    }
 #else
-                netif_receive_skb(skb);
+                    netif_receive_skb(skb);
 #endif            
+                }
             }
-            else{ // invalid or down port, drop packet
-                kfree_skb(skb);
+            else{ // interface down: drop packet
+                dev_kfree_skb_any(skb);
             }
         }
 

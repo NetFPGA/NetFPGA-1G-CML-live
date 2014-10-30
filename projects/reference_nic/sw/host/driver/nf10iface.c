@@ -72,6 +72,7 @@ static netdev_tx_t nf10i_tx(struct sk_buff *skb, struct net_device *dev){
     if(skb->len > 1514){
         printk(KERN_ERR "nf10: packet too big, dropping");
         dev_kfree_skb_any(skb);
+        card->ndev[port]->stats.tx_errors++;
         return NETDEV_TX_OK;        
     }
 
@@ -79,6 +80,7 @@ static netdev_tx_t nf10i_tx(struct sk_buff *skb, struct net_device *dev){
     if(nf10priv_xmit(card, skb, port)){
         //printk(KERN_ERR "nf10: dropping packet at port %d", port);
         dev_kfree_skb_any(skb);
+        card->ndev[port]->stats.tx_errors++;
         return NETDEV_TX_OK;
     }
 

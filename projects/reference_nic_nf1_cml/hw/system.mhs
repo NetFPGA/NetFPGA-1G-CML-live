@@ -66,16 +66,6 @@
  PORT phy_rstn_3 = phy_rstn_3, DIR = O, RST_POLARITY = 0
  PORT phy_rstn_4 = phy_rstn_4, DIR = O, RST_POLARITY = 0
 
-
-BEGIN version_id
- PARAMETER INSTANCE = version_id_0
- PARAMETER HW_VER = 1.00.a
- PARAMETER C_BASEADDR = 0x80000000
- PARAMETER C_HIGHADDR = 0x80000FFF
- BUS_INTERFACE S_AXI = axi_interconnect_0
- PORT S_AXI_ACLK = clk_100_0000MHz
-END
-
 BEGIN proc_sys_reset
  PARAMETER INSTANCE = proc_sys_reset_0
  PARAMETER HW_VER = 3.00.a
@@ -489,3 +479,12 @@ BEGIN mdio_ctrl
  PORT phy_rstn = phy_rstn_1 & phy_rstn_2 & phy_rstn_3 & phy_rstn_4
 END
 
+BEGIN nf10_identifier
+ PARAMETER INSTANCE = nf10_identifier_0
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_BASEADDR = 0x6a000000
+ PARAMETER C_HIGHADDR = 0x6a00ffff
+ BUS_INTERFACE S_AXI = axi_interconnect_0
+ PORT S_AXI_ACLK = clk_100_0000MHz
+ PORT S_AXI_ARESETN = proc_sys_reset_0_Peripheral_aresetn
+END
