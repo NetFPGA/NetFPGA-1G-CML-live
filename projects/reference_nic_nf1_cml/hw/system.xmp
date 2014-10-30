@@ -3,7 +3,7 @@ XmpVersion: 14.6
 VerMgmt: 14.6
 IntStyle: default
 Flow: ise
-ModuleSearchPath: ../lib
+ModuleSearchPath: ../lib/hw
 MHS File: system.mhs
 Architecture: kintex7
 Device: xc7k325t

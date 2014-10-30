@@ -13,6 +13,7 @@
  *
  *  Author:
  *        James Hongyi Zeng
+ *        Neelakandan Manihatty Bojan (Modified to add registers on 25th Februrary 2014)		
  *
  *  Description:
  *        AXI-MAC converter: RX side
@@ -50,10 +51,9 @@ module rx_queue
    output reg tvalid,
    output reg tlast,
    input  tready,
-
    input clk,
    input reset,
-
+   output reg fifo_wr_en,
    // MAC side
    input [63:0] rx_data,
    input [ 7:0] rx_data_valid,
@@ -72,7 +72,7 @@ module rx_queue
 
    wire fifo_almost_full;
    wire fifo_empty;
-   reg  fifo_wr_en;
+//   reg  fifo_wr_en;
 
    wire info_fifo_empty;
    reg  info_fifo_rd_en;
@@ -87,7 +87,9 @@ module rx_queue
    reg  [2:0] err_state, err_state_next;
    reg  err_tvalid;
 
-
+   //reg  drop_pkt_next;
+   //reg [31:0] tx_queue_in_bytes;
+   
    // Instantiate clock domain crossing FIFO
    FIFO36_72 #(
    	.SIM_MODE("FAST"),
@@ -150,6 +152,7 @@ module rx_queue
          end
      end
 
+
      always @* begin
          state_next = state;
          fifo_wr_en = 1'b0;
@@ -159,11 +162,13 @@ module rx_queue
              IDLE: begin
                  if(rx_data_valid == 8'hFF) begin
                      info_fifo_wr_en = 1'b1;
+		     //tx_queue_in_bytes = tx_queue_in_bytes + 'd8; // fifo in bytes 	
                      if(~fifo_almost_full) begin
                          fifo_wr_en = 1'b1;
                          state_next = WAIT_FOR_EOP;
                      end
                      else begin
+			// drop_pkt_next='b1;
                          state_next = DROP;
                      end
                  end

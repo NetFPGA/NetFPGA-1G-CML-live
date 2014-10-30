@@ -4,9 +4,19 @@ from NFTest import *
 import sys
 import os
 from scapy.layers.all import Ether, IP, TCP
+from reg_defines_reference_nic_nf1_cml import *
 
 conn = ('../connections/conn', [])
 nftest_init(sim_loop = ['nf0', 'nf1', 'nf2', 'nf3'], hw_config = [conn])
+
+if isHW():
+     # asserting the reset_counter to 1 for clearing the registers
+     nftest_regwrite(XPAR_NF10_INPUT_ARBITER_0_RESET_CNTRS(), 0x1) 
+     nftest_regwrite(XPAR_NF10_BRAM_OUTPUT_QUEUES_0_RESET_CNTRS(), 0x1)
+    # asseting teh reset_counter to 0 for enable the counters to increment
+     nftest_regwrite(XPAR_NF10_INPUT_ARBITER_0_RESET_CNTRS(), 0x0)
+     nftest_regwrite(XPAR_NF10_BRAM_OUTPUT_QUEUES_0_RESET_CNTRS(), 0x0)
+
 nftest_start()
 
 # set parameters

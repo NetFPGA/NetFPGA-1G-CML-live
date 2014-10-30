@@ -14,9 +14,13 @@ nftest_init(sim_loop = [], hw_config = [phy2loop0])
 if isHW():
     # asserting the reset_counter to 1 for clearing the registers
     nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_BASEADDR(), 0x1)
+    nftest_regwrite(XPAR_NF10_INPUT_ARBITER_0_RESET_CNTRS(), 0x1)
+    nftest_regwrite(XPAR_NF10_BRAM_OUTPUT_QUEUES_0_RESET_CNTRS(), 0x1)
 
     # asseting teh reset_counter to 0 for enable the counters to increment
     nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_BASEADDR(), 0x0)
+    nftest_regwrite(XPAR_NF10_INPUT_ARBITER_0_RESET_CNTRS(), 0x0)
+    nftest_regwrite(XPAR_NF10_BRAM_OUTPUT_QUEUES_0_RESET_CNTRS(), 0x0)
 
     # Initially we expect 0 packets in both the lut_hit and lut_miss registers
     rres1= nftest_regread_expect(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_LUT_NUM_HITS_REG(), 0x0)

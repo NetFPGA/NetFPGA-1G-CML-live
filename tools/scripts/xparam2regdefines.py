@@ -49,7 +49,7 @@ offset_int =0
 
 for line in input_file:
     match_baseaddr = re.match(r'\s*#define .*_BASEADDR (0x[a-zA-Z_0-9]{8})', line)
-    match_offset = re.match(r'\s*#define (.*) (0x[a-zA-Z_0-9]+)', line)
+    match_offset = re.match(r'\s*#define (.*)_OFFSET (0x[a-zA-Z_0-9]+)', line)
  	
     if match_baseaddr:
         baseaddr = match_baseaddr.group(1)

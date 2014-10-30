@@ -247,6 +247,8 @@ bitsclean:
 ## Shahbaz: to clean register system generated files
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
+	rm -f $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -f ../lib/Python/reg_defines_*.*
 
 simclean:
 	rm -rf simulation
@@ -408,7 +410,22 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	$(NF_ROOT)/tools/scripts/nf10_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS) 
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
-sim: axi_model
+regs:  
+	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
+	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
+	@mkdir -p $(SDK_EXPORT_DIR)/../libs
+	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
+	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
+	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
+	@rm -rf $(SDK_EXPORT_DIR)/../libs
+	cd ../sw/host/include/  && cp ../../../../../tools/scripts/xparam2regdefines.py . && python xparam2regdefines.py
+	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
+	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
+	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_reference_nic.py 
+
+sim: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
@@ -420,7 +437,7 @@ sim: axi_model
 
 ###### AXI SIMULATION TX, RX, and TXRX Paths #######
 
-simgui: axi_model
+simgui: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
