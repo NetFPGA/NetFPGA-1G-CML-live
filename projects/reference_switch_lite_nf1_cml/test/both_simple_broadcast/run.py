@@ -14,9 +14,13 @@ nftest_init(sim_loop = [], hw_config = [phy2loop0])
 if isHW():
     # Clearing the LUT_HIT and LUT_MISS by asserting the reset_counters
     nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_RESET_CNTRS(), 0x1)
+    nftest_regwrite(XPAR_NF10_INPUT_ARBITER_0_RESET_CNTRS(), 0x1)
+    nftest_regwrite(XPAR_NF10_BRAM_OUTPUT_QUEUES_0_RESET_CNTRS(), 0x1)
 
     # Deasserting the reset_counters
     nftest_regwrite(XPAR_NF10_SWITCH_OUTPUT_PORT_LOOKUP_0_RESET_CNTRS(), 0x0)
+    nftest_regwrite(XPAR_NF10_INPUT_ARBITER_0_RESET_CNTRS(), 0x0)
+    nftest_regwrite(XPAR_NF10_BRAM_OUTPUT_QUEUES_0_RESET_CNTRS(), 0x0)
 
 nftest_start()
 
