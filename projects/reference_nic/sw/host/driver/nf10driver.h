@@ -114,5 +114,7 @@ struct nf10_ndev_priv{
     int port_up;
 };
 
+int nf10_ael2005_phy_configuration(struct nf10_card *card);
+void nf10_NetFPGA_Hardware_Project_decoder(struct nf10_card *card);
 
 #endif

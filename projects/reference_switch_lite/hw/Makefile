@@ -150,8 +150,9 @@ identifier:
 	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/date_time_id.v
 	echo \`define PARA_NETFPGA_DATE	32\'h`date +%d%m%y` > date_time_id.v
 	echo \`define PARA_NETFPGA_TIME	32\'h`date +%H%M` >> date_time_id.v
-	echo \`define PARA_NETFPGA_ID		32\'hd >> date_time_id.v
-	echo \`define PARA_NETFPGA_TAG	32\'h`../../../run_tag.sh` >> date_time_id.v
+	echo \`define PARA_PROJECT_ID		32\'hd >> date_time_id.v
+	echo \`define PARA_NETFPGA_TAG	32\'h`../../../run_tag.sh` >> date_time_id.v	        
+	echo \`define PARA_BOARD_ID           32\'ha >> date_time_id.v
 	mv -f date_time_id.v ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
 
 #

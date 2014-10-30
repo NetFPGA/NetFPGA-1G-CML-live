@@ -1,0 +1,29 @@
+# ******************************************************************************
+ # *  Design:
+ # *        NetFlow_Simple_10G_Bram
+ # *  
+ # *  NetFPGA-10G http://www.netfpga.org
+ # *
+ # *  File:
+ # *        netflow_cache_v2_1_0.pao
+ # *
+ # *  Pcore:
+ # *        netflow_cache
+ # *
+ # *  Authors:
+ # *        Marco Forconesi, Gustavo Sutter, Sergio Lopez-Buedo
+ # *
+ # *  Description:
+ # *          VHDL sources files listed in the right order for synthesis
+# ******************************************************************************
+
+lib netflow_cache_v1_00_a BSRAM vhdl
+lib netflow_cache_v1_00_a hash_function vhdl
+lib netflow_cache_v1_00_a netflow_cache_pack vhdl
+lib netflow_cache_v1_00_a export_expired_flows_from_mem vhdl
+lib netflow_cache_v1_00_a create_or_update_flows vhdl
+lib netflow_cache_v1_00_a pkt_classification vhdl
+lib netflow_cache_v1_00_a exp_via_10g_interface vhdl
+lib netflow_cache_v1_00_a exp_to_netflow_exp vhdl
+lib netflow_cache_v1_00_a timestamp_counter_generator vhdl
+lib netflow_cache_v1_00_a netflow_cache_top vhdl
