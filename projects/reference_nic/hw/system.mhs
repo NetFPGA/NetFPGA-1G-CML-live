@@ -119,7 +119,7 @@
  PORT axi_emc_0_Mem_CEN_pin = axi_emc_0_Mem_CEN, DIR = O, VEC = [0:0]
  PORT axi_emc_0_Mem_OEN_pin = axi_emc_0_Mem_OEN, DIR = O, VEC = [0:0]
  PORT axi_emc_0_Mem_WEN_pin = axi_emc_0_Mem_WEN, DIR = O
- PORT axi_emc_0_Mem_DQ_pin = axi_emc_0_Mem_DQ, DIR = IO, VEC = [31:0]
+ PORT axi_emc_0_Mem_DQ_pin = axi_emc_0_Mem_DQ, DIR = IO, VEC = [7:0]
  PORT axi_cfg_fpga_0_GPIO_IO_pin = axi_cfg_fpga_0_GPIO_IO, DIR = IO, VEC = [1:0]
 
 

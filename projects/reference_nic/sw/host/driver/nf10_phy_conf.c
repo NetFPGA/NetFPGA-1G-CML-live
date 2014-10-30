@@ -221,9 +221,11 @@ int nf10_ael2005_phy_configuration(struct nf10_card *card){
 
         for(port = 0; port < 4; port ++) {
             if(port == 0) dev = 2;
-            if(port == 1) dev = 1;
-            if(port == 2) dev = 0;
-            if(port == 3) dev = 3;
+            else if(port == 1) dev = 1;
+            else if(port == 2) dev = 0;
+            else if(port == 3) dev = 3;
+           else dev = 42;              /* Make the compiler happy. */
+
             value = 0;
 
             // Check if we have a 10GBASE-SR cable

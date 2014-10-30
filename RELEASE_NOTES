@@ -9,38 +9,21 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 5.0.3
+GIT VERSION 5.0.4
 
-Before using this code, please check the release notes for 5.0.3 below
+Before using this code, please check the release notes for 5.0.4rc below
 
-1. nf10_coregen.py file
+1. Project related information stored in the bitfile.
 
-wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/Creating-your-own-pcore-with-nf10_coregen.py-tool
-
-2. User application to program the phy chips
-
-wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/AEL2005--PHY-Chips--Configuration
-
-3. Driver updates
-
--- Statistics relating to properly sent/received packets have been updated. 
--- Added freeing of skb in all error conditions.
--- updated driver to detect  the phy  configuration, dump details of the current image in the FPGA.
+We have updated the nf10_identifier module to store information related to date and time the synthesis started, 
+board id, release tag, project identification, project features and misc details. So that once the bitfile is 
+loaded in the FPGA, the driver can parse these registers and give some useful information to the users.
 
 
-4. Two contrib projects have been added 
-
--- NetFlow simple 10G Bram
-wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/NetFlow-simple-10G-Bram
-   
--- Memcached-Client
-wiki: https://github.com/NetFPGA/NetFPGA-public/wiki/Memcached-Client-Project
-
-Note: We wish to inform the users that NetFPGA-Team is not maintaining the contrib projects. 
-So any issues/questions pertaining to the contrib projects should be directed to the project owners. 
+Wikipage: https://github.com/NetFPGA/NetFPGA-public/wiki/Project-related-information-in-bitfiles
 
 
-5. Some user updates/bug-fixes for the simulation framework.
+
 
 
 
