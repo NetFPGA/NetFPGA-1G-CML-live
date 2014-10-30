@@ -377,41 +377,53 @@ END
 
 BEGIN nf10_bram_output_queues
  PARAMETER INSTANCE = nf10_bram_output_queues_0
- PARAMETER HW_VER = 1.00.a
+ PARAMETER HW_VER = 1.10.a
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_BASEADDR = 0x76600000
+ PARAMETER C_HIGHADDR = 0x7660ffff
  BUS_INTERFACE M_AXIS_0 = nf10_bram_output_queues_0_M_AXIS_0
  BUS_INTERFACE M_AXIS_1 = nf10_bram_output_queues_0_M_AXIS_1
  BUS_INTERFACE M_AXIS_2 = nf10_bram_output_queues_0_M_AXIS_2
  BUS_INTERFACE M_AXIS_3 = nf10_bram_output_queues_0_M_AXIS_3
  BUS_INTERFACE S_AXIS = nf10_nic_output_port_lookup_0_M_AXIS
  BUS_INTERFACE M_AXIS_4 = nf10_bram_output_queues_0_M_AXIS_4
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT axi_aclk = clk_125_0000MHz
  PORT axi_resetn = proc_sys_reset_0_Peripheral_aresetn
 END
 
 BEGIN nf10_input_arbiter
  PARAMETER INSTANCE = nf10_input_arbiter_0
- PARAMETER HW_VER = 1.00.a
+ PARAMETER HW_VER = 1.10.a
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_BASEADDR = 0x77a00000
+ PARAMETER C_HIGHADDR = 0x77a0ffff
  BUS_INTERFACE S_AXIS_0 = nf1_cml_interface_1_M_AXIS
  BUS_INTERFACE S_AXIS_1 = nf1_cml_interface_2_M_AXIS
  BUS_INTERFACE S_AXIS_2 = nf1_cml_interface_3_M_AXIS
  BUS_INTERFACE S_AXIS_3 = nf1_cml_interface_4_M_AXIS
  BUS_INTERFACE M_AXIS = nf10_input_arbiter_0_M_AXIS
  BUS_INTERFACE S_AXIS_4 = dma_0_M_AXIS
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT axi_aclk = clk_125_0000MHz
  PORT axi_resetn = proc_sys_reset_0_Peripheral_aresetn
 END
 
 BEGIN nf10_nic_output_port_lookup
  PARAMETER INSTANCE = nf10_nic_output_port_lookup_0
- PARAMETER HW_VER = 1.00.a
+ PARAMETER HW_VER = 1.10.a
+ PARAMETER C_BASEADDR = 0x75400000
+ PARAMETER C_HIGHADDR = 0x7540ffff
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_INTERCONNECT_S_AXI_IS_ACLK_ASYNC = 1
  BUS_INTERFACE M_AXIS = nf10_nic_output_port_lookup_0_M_AXIS
  BUS_INTERFACE S_AXIS = nf10_input_arbiter_0_M_AXIS
+ BUS_INTERFACE S_AXI = axi_interconnect_0
+ PORT S_AXI_ACLK = clk_125_0000MHz
+ PORT S_AXI_ARESETN = proc_sys_reset_0_Peripheral_aresetn
  PORT axi_aclk = clk_125_0000MHz
  PORT axi_resetn = proc_sys_reset_0_Peripheral_aresetn
 END
