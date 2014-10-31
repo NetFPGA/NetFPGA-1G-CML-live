@@ -24,6 +24,14 @@ Wikipage: https://github.com/NetFPGA/NetFPGA-public/wiki/Project-related-informa
 
 
 
+NetFPGA-1G-CML
+==============
 
+This release includes the 5.0.4 updates.
+
+It updates the nf10_identifier with a device independent implementation that
+provides greater reusability between boards (fpga devices).
+
+It also adds flash programability hardware to the reference projects.
 
 
