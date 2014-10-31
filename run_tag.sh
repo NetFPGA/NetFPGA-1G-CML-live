@@ -6,4 +6,4 @@ tag_a=${tag_name:12:1}
 tag_b=${tag_name:14:1}
 tag_c=${tag_name:16:1}
 
-echo ${tag_a}${tag_b}${tag_c}
+echo 00000${tag_a}${tag_b}${tag_c}

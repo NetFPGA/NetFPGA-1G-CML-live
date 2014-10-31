@@ -152,12 +152,32 @@ pciecopy:
 # Identification information added. 
 ##################################################################
 identifier:
-	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/date_time_id.v
-	echo \`define PARA_NETFPGA_DATE	32\'h`date +%d%m%y` > date_time_id.v
-	echo \`define PARA_NETFPGA_TIME	32\'h`date +%H%M` >> date_time_id.v
-	echo \`define PARA_NETFPGA_ID		32\'ha >> date_time_id.v
-	echo \`define PARA_NETFPGA_TAG	32\'h`../../../run_tag.sh` >> date_time_id.v
-	mv -f date_time_id.v ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.coe
+	cp ../../../tools/scripts/epoch.sh . && sh epoch.sh && rm -f epoch.sh
+	echo 16028001 >> rom_data.txt
+	echo `../../../run_tag.sh` >> rom_data.txt
+	echo 00000204 >> rom_data.txt
+	echo 0000FFFF >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	cp ../../../tools/scripts/format_coe.py . && python format_coe.py && rm -f format_coe.py 	
+	mv -f id_rom16x32.coe ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	rm -rf ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/
+	mkdir ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/ && cp id_rom16x32.xco ./rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/ && cp id_rom16x32.coe ./rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && coregen -b id_rom16x32.xco
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && cp -f id_rom16x32.v ./../
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && cp -f id_rom16x32.ngc ./../../../netlist/
+
 
 #################################################################
 # PARTIAL SYNTHESIS. This must be run after make for completing 
@@ -247,6 +267,8 @@ bitsclean:
 ## Shahbaz: to clean register system generated files
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
+	rm -f $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -f ../lib/Python/reg_defines_*.*
 
 simclean:
 	rm -rf simulation
@@ -264,9 +286,19 @@ simclean:
 	rm -rf ../test/nf10
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
-	rm -f ../test/system.mhs
+	rm -f ../test/*.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
+	rm -rf ../test/etc
+	rm -rf ../test/*.log
+	rm -rf ../test/simulation
+	rm -rf ../test/*.make
+	rm -rf ../test/__xps
+	rm -rf ../test/*.opt
+	rm -rf ../test/bootloops
+	rm -rf ../test/*.axi
+	rm -rf ../test/seed
+	rm -rf ../test/*.sim
 
 #################################################################
 # BOOTLOOP ELF FILES
@@ -398,10 +430,26 @@ axi_model: __xps/simgen.opt $(BRAMINIT_ELF_SIM_FILES)
 	$(NF_ROOT)/tools/scripts/nf10_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS) 
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
-sim: axi_model
+regs:  
+	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
+	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
+	@mkdir -p $(SDK_EXPORT_DIR)/../libs
+	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
+	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
+	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
+	@rm -rf $(SDK_EXPORT_DIR)/../libs
+	cd ../sw/host/include/  && cp ../../../../../tools/scripts/xparam2regdefines.py . && python xparam2regdefines.py
+	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
+	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
+	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_reference_nic.py 
+
+sim: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf10/noninteractive_sim.tcl
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
@@ -410,10 +458,11 @@ sim: axi_model
 
 ###### AXI SIMULATION TX, RX, and TXRX Paths #######
 
-simgui: axi_model
+simgui: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
@@ -428,6 +477,7 @@ simtx: checkpktlen axi_model
 	@echo "" > nf10_10g_interface_3_stim.axi
 	cp nf10/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
 
@@ -439,6 +489,7 @@ simtxgui: checkpktlen axi_model
 	@echo "" > nf10_10g_interface_3_stim.axi
 	cp nf10/system_axisim_tx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
 
@@ -447,6 +498,7 @@ simrx: checkpktlen axi_model
 	@echo "" > dma_0_stim.axi
 	cp nf10/system_axisim_rx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
 
@@ -455,6 +507,7 @@ simrxgui: checkpktlen axi_model
 	@echo "" > dma_0_stim.axi
 	cp nf10/system_axisim_rx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
 
@@ -466,6 +519,7 @@ simtxrx: checkpktlen axi_model
 	@echo "" > nf10_10g_interface_3_stim.axi
 	cp nf10/system_axisim_txrx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_EXE) -tclbatch ../../nf10/noninteractive_sim.tcl
 
@@ -477,6 +531,7 @@ simtxrxgui: checkpktlen axi_model
 	@echo "" > nf10_10g_interface_3_stim.axi
 	cp nf10/system_axisim_txrx_tb.v simulation/behavioral/system_axisim_tb.v
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_EXE) -gui -tclbatch system_axisim_setup.tcl
 

@@ -11,6 +11,9 @@
 #  Author:
 #        Muhammad Shahbaz
 #
+#  Modified by:
+#  	 Neelakandan Manihatty Bojan
+#
 #  Description:
 #        Xflow option file that utilizes multi-core CPU
 #
@@ -64,9 +67,13 @@ Program map
 -w;			 # Overwrite output files.
 -pr b;                   # Pack internal FF/latches into IOBs
 #-fp <design>.mfp;       # Floorplan file
+-xe n;
 -ol high;
+#-cm speed;
+-t 11;
+-register_duplication on;
+-logic_opt on;
 -timing;
--t 43;
 -detail;
 <inputdir><design>.ngd;  # Input NGD file
 <inputdir><design>.pcf;  # Physical constraints file
@@ -95,6 +102,7 @@ Program par
 -mt 4;                       # James: Use 4 cores if possible
 -w;                 # Overwrite existing placed and routed ncd
 -ol high;              # Overall effort level
+-xe n;
 <inputdir><design>_map.ncd;  # Input mapped NCD file
 <design>.ncd;                # Output placed and routed NCD
 <inputdir><design>.pcf;      # Input physical constraints file
@@ -106,7 +114,7 @@ END Program par
 # Type "trce -h" for a detailed list of trce command line options
 #
 Program post_par_trce
--e 3;                 # Produce error report limited to 3 items per constraint
+-e 100;                 # Produce error report limited to 3 items per constraint
 #-o <design>.twr;     # Output trace report file
 -xml <design>.twx;    # Output XML version of the timing report
 #-tsi <design>.tsi;  # Produce Timing Specification Interaction report

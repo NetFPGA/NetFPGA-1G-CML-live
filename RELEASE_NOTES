@@ -9,35 +9,21 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 5.0.1rc
+GIT VERSION 5.0.4
 
-Before using this code, please check the release notes for 5.0.1 below
+Before using this code, please check the release notes for 5.0.4rc below
+
+1. Project related information stored in the bitfile.
+
+We have updated the nf10_identifier module to store information related to date and time the synthesis started, 
+board id, release tag, project identification, project features and misc details. So that once the bitfile is 
+loaded in the FPGA, the driver can parse these registers and give some useful information to the users.
 
 
-1. Integrated test infrastructure with both_major_minor tests.
+Wikipage: https://github.com/NetFPGA/NetFPGA-public/wiki/Project-related-information-in-bitfiles
 
-We have a integrated test infrastructure for reference_router project. 
 
-both_badipchksum_packet  
-both_lpm_generic  
-both_nonip_packet       
-both_router_table
-both_invalidttl_packet   
-both_lpm_misses  
-both_nonipv4_packet     
-both_wrong_destMAC
-both_arp_misses  
-both_ipdestfilter_hit    
-both_lpm_nexthop  
-both_packet_forwarding
 
-wiki for router tests:
-https://github.com/NetFPGA/NetFPGA-public/wiki/Tests-for-reference-router
 
-wiki for simulation infrastructure:
-https://github.com/NetFPGA/NetFPGA-public/wiki/NetFPGA-10G-Simulations
-
-wiki for HW test infrastructure:
-https://github.com/NetFPGA/NetFPGA-public/wiki/HW-Tests
 
 

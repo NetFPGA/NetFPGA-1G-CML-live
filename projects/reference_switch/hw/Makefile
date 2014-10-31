@@ -150,12 +150,31 @@ pciecopy:
 # Identification information added. 
 ##################################################################
 identifier:
-	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/date_time_id.v
-	echo \`define PARA_NETFPGA_DATE	32\'h`date +%d%m%y` > date_time_id.v
-	echo \`define PARA_NETFPGA_TIME	32\'h`date +%H%M` >> date_time_id.v
-	echo \`define PARA_NETFPGA_ID		32\'hb >> date_time_id.v
-	echo \`define PARA_NETFPGA_TAG	32\'h`../../../run_tag.sh` >> date_time_id.v
-	mv -f date_time_id.v ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	rm -f ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.coe
+	cp ../../../tools/scripts/epoch.sh . && sh epoch.sh && rm -f epoch.sh
+	echo 16028002 >> rom_data.txt
+	echo `../../../run_tag.sh` >> rom_data.txt
+	echo 00000204 >> rom_data.txt
+	echo 0000FFFF >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	echo FFFF0000 >> rom_data.txt
+	cp ../../../tools/scripts/format_coe.py . && python format_coe.py && rm -f format_coe.py        
+	mv -f id_rom16x32.coe ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/
+	rm -rf ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/
+	mkdir ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/ && cp id_rom16x32.xco ./rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/ && cp id_rom16x32.coe ./rom/
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && coregen -b id_rom16x32.xco
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && cp -f id_rom16x32.v ./../
+	cd ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/rom/ && cp -f id_rom16x32.ngc ./../../../netlist/
 
 #
 #################################################################
@@ -259,14 +278,24 @@ simclean:
 	rm -rf ../test/nf10
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
-	rm -f ../test/system.mhs
+	rm -f ../test/*.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
+	rm -f ../test/*.make
+	rm -f ../test/*.opt
+	rm -f ../test/*.log
+	rm -rf ../test/bootloops
+	rm -rf ../test/etc
+	rm -rf ../test/simulation
+	rm -rf ../test/__xps
+	rm -f ../test/*.axi
+	rm -f ../test/seed
+	rm -f ../test/*.sim
 
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
-	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
-	rm -rf ../lib/Python/reg_defines_*.*
+	rm -f $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -f ../lib/Python/reg_defines_*.*
 
 
 #######m#########################################################
@@ -418,6 +447,7 @@ sim: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -tclbatch ../../nf10/noninteractive_sim.tcl
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
@@ -427,6 +457,7 @@ simgui: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf10/system_axisim_tb.v simulation/behavioral
 	cp nf10/system_axisim_fuse.sh simulation/behavioral
+	cp ../../../lib/hw/std/pcores/nf10_identifier_v1_00_a/hdl/verilog/id_rom16x32.mif simulation/behavioral
 	cd simulation/behavioral && $(AXISIM_FUSE)
 	cd simulation/behavioral && $(AXISIM_CMD) -gui -tclbatch system_axisim_setup.tcl
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py

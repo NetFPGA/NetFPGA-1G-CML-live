@@ -39,5 +39,6 @@
 
 all:
 	gcc -march=core2 -o router_regs router_regs.c
+	gcc -march=core2 -o pipeline_regs pipeline_regs.c
 clean:
-	rm router_regs
+	rm router_regs pipeline_regs

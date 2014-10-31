@@ -66,15 +66,6 @@
  PORT bpi_data = axi_gpio_0_GPIO2_IO, DIR = IO, VEC = [15:0]
 
 
-BEGIN version_id
- PARAMETER INSTANCE = version_id_0
- PARAMETER HW_VER = 1.00.a
- PARAMETER C_BASEADDR = 0x78218000
- PARAMETER C_HIGHADDR = 0x78218fff
- BUS_INTERFACE S_AXI = axi_interconnect_0
- PORT S_AXI_ACLK = clk_100_0000MHz
-END
-
 BEGIN proc_sys_reset
  PARAMETER INSTANCE = proc_sys_reset_0
  PARAMETER HW_VER = 3.00.a
@@ -379,30 +370,36 @@ END
 
 BEGIN nf10_bram_output_queues
  PARAMETER INSTANCE = nf10_bram_output_queues_0
- PARAMETER HW_VER = 1.00.a
+ PARAMETER HW_VER = 1.10.a
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_BASEADDR = 0x76600000
+ PARAMETER C_HIGHADDR = 0x7660ffff
  BUS_INTERFACE M_AXIS_0 = nf10_bram_output_queues_0_M_AXIS_0
  BUS_INTERFACE M_AXIS_1 = nf10_bram_output_queues_0_M_AXIS_1
  BUS_INTERFACE M_AXIS_2 = nf10_bram_output_queues_0_M_AXIS_2
  BUS_INTERFACE M_AXIS_3 = nf10_bram_output_queues_0_M_AXIS_3
  BUS_INTERFACE M_AXIS_4 = nf10_bram_output_queues_0_M_AXIS_4
  BUS_INTERFACE S_AXIS = nf10_switch_output_port_lookup_0_M_AXIS
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT axi_aclk = clk_125_0000MHz
  PORT axi_resetn = proc_sys_reset_0_Peripheral_aresetn
 END
 
 BEGIN nf10_input_arbiter
  PARAMETER INSTANCE = nf10_input_arbiter_0
- PARAMETER HW_VER = 1.00.a
+ PARAMETER HW_VER = 1.10.a
  PARAMETER C_M_AXIS_DATA_WIDTH = 256
  PARAMETER C_S_AXIS_DATA_WIDTH = 256
+ PARAMETER C_BASEADDR = 0x77a00000
+ PARAMETER C_HIGHADDR = 0x77a0ffff
  BUS_INTERFACE S_AXIS_0 = nf1_cml_interface_1_M_AXIS
  BUS_INTERFACE S_AXIS_1 = nf1_cml_interface_2_M_AXIS
  BUS_INTERFACE S_AXIS_2 = nf1_cml_interface_3_M_AXIS
  BUS_INTERFACE S_AXIS_3 = nf1_cml_interface_4_M_AXIS
  BUS_INTERFACE S_AXIS_4 = dma_0_M_AXIS
  BUS_INTERFACE M_AXIS = nf10_input_arbiter_0_M_AXIS
+ BUS_INTERFACE S_AXI = axi_interconnect_0
  PORT axi_aclk = clk_125_0000MHz
  PORT axi_resetn = proc_sys_reset_0_Peripheral_aresetn
 END
@@ -509,3 +506,13 @@ BEGIN axi_hwicap
  PORT ICAP_Clk = clk_100_0000MHz
 END
 
+BEGIN nf10_identifier
+ PARAMETER INSTANCE = nf10_identifier_0
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_BASEADDR = 0x6a000000
+ PARAMETER C_HIGHADDR = 0x6a00ffff
+ PARAMETER C_INFO_FILE = ../rom_data.txt
+ BUS_INTERFACE S_AXI = axi_interconnect_0
+ PORT S_AXI_ACLK = clk_100_0000MHz
+ PORT S_AXI_ARESETN = proc_sys_reset_0_Peripheral_aresetn
+END

@@ -6,10 +6,13 @@
 #        xflow.opt
 #
 #  Project:
-#        reference_switch
+#        reference switch
 #
 #  Author:
 #        Muhammad Shahbaz
+#
+#  Modified by:
+#  	 Neelakandan Manihatty Bojan
 #
 #  Description:
 #        Xflow option file that utilizes multi-core CPU
@@ -67,7 +70,7 @@ Program map
 -xe n;
 -ol high;
 #-cm speed;
--t 92;
+-t 19;
 -register_duplication on;
 -logic_opt on;
 -timing;
@@ -118,4 +121,5 @@ Program post_par_trce
 <inputdir><design>.ncd;   # Input placed and routed ncd
 <inputdir><design>.pcf;   # Physical constraints file
 END Program post_par_trce
+
 

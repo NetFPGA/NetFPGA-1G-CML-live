@@ -87,8 +87,28 @@ simgui: axi_model regs
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
-system.make system_incl.make:
+system.make system_incl.make: rom_data.txt
 	echo exit|xps -nw system.xmp
+
+#################################################################
+# Identification information added. 
+##################################################################
+rom_data.txt:
+	sh ../../../tools/scripts/epoch.sh
+	echo 16028003 >> rom_data.txt
+	echo `../../../run_tag.sh` >> rom_data.txt
+	echo 0000030f >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
 
 clean: hwclean regsclean simclean
 	rm -f _impact.cmd
@@ -136,15 +156,25 @@ simclean:
 	rm -rf ../test/nf1_cml
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
-	rm -f ../test/system.mhs
+	rm -f ../test/*.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
+	rm -rf ../test/bootloops
+	rm -f ../test/*.axi
+	rm -f ../test/*.log
+	rm -rf ../test/etc
+	rm -f ../test/*.sim
+	rm -rf ../test/__xps
+	rm -f ../test/*.make
+	rm -f ../test/seed
+	rm -rf ../test/simulation
+	rm -rf ../test/*.opt
 
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
 	rm -rf ../lib/Python/reg_defines_*.*
-
+	rm -rf ../lib/Python/*.pyc
 
 smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit

@@ -13,7 +13,7 @@ import __main__
 
 sys.path.append(os.path.abspath(os.environ['NF_DESIGN_DIR']+'/lib/Python'))
 project = os.path.basename(os.path.abspath(os.environ['NF_DESIGN_DIR']))
-reg_defines = __import__('reg_defines_'+project)
+#reg_defines = __import__('reg_defines_'+project)
 
 badReads = {}
 

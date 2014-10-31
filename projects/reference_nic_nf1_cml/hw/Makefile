@@ -74,7 +74,25 @@ axi_model: system.make $(BRAMINIT_ELF_SIM_FILES)
 	$(NF_ROOT)/tools/scripts/nf1_cml_sim_autosubst.py -i $(MHSFILE) -o $(AXISIM_MHS)
 	simgen $(SIMGEN_OPTIONS) -m behavioral $(AXISIM_MHS)
 
-sim: axi_model
+test:
+	echo $(PROJECT_SEARCHPATHOPT)
+
+regs:
+	psf2Edward -inp $(SYSTEM).xmp -exit_on_error -edwver 1.2 -xml $(SDK_EXPORT_DIR)/$(SYSTEM).xml $(GLOBAL_SEARCHPATHOPT)
+	appguru -hw $(SDK_EXPORT_DIR)/$(SYSTEM).xml -app empty_application $(PROJECT_SEARCHPATHOPT)../sw/ -od $(SDK_EXPORT_DIR)/../empty_application
+	@mkdir -p $(SDK_EXPORT_DIR)/../libs
+	libgen -mhs $(MHSFILE) -p $(DEVICE) $(PROJECT_SEARCHPATHOPT) $(PROJECT_SEARCHPATHOPT)../sw/ -lib -od $(SDK_EXPORT_DIR)/../libs $(SDK_EXPORT_DIR)/../empty_application/$(SYSTEM).mss
+	@mkdir -p $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/include/* $(SDK_EXPORT_DIR)/../../../host/include/
+	@cp -rf $(SDK_EXPORT_DIR)/../libs/microblaze_0/libsrc $(SDK_EXPORT_DIR)/../../../host/include/
+	@rm -rf $(SDK_EXPORT_DIR)/../empty_application
+	@rm -rf $(SDK_EXPORT_DIR)/../libs
+	cd ../sw/host/include/  && cp ../../../../../tools/scripts/xparam2regdefines.py . && python xparam2regdefines.py
+	cd ../sw/host/include/  && rm -f xparam2regdefines.py && mv reg_defines.h ../
+	cd ../sw/host && cp ../../../../tools/scripts/python_parser.py . && python python_parser.py
+	cd ../sw/host && rm -f python_parser.py && mv reg_defines.py ../../lib/Python/reg_defines_reference_nic_nf1_cml.py 
+
+sim: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf1_cml/system_axisim_tb.v simulation/behavioral
 	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
@@ -83,7 +101,7 @@ sim: axi_model
 	$(NF_ROOT)/tools/scripts/nf10_sim_reconcile_axi_logs.py
 	$(NF_ROOT)/tools/scripts/nf10_sim_registers_axi_logs.py
 
-simgui: axi_model
+simgui: axi_model regs
 	./../test/$(TESTNAME)/run.py
 	cp nf1_cml/system_axisim_tb.v simulation/behavioral
 	cp nf1_cml/system_axisim_fuse.sh simulation/behavioral
@@ -152,8 +170,28 @@ checkpktlen:
 	@if [ "$(PKTLEN)" = "" ]; then echo "Please follow command line './make simrxgui PKTLEN=10 PKTLNO=2'"; fi
 	@echo "Run with default packet payload length and no! $(PKTLETN) $(PKTNO)"
 
-system.make system_incl.make:
+system.make system_incl.make: rom_data.txt
 	echo exit|xps -nw system.xmp
+
+#################################################################
+# Identification information added. 
+##################################################################
+rom_data.txt:
+	sh ../../../tools/scripts/epoch.sh
+	echo 16028001 >> rom_data.txt
+	echo `../../../run_tag.sh` >> rom_data.txt
+	echo 0000030f >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
+	echo 00000000 >> rom_data.txt
 
 clean: hwclean regsclean simclean
 	rm -f _impact.cmd
@@ -187,6 +225,8 @@ bitsclean:
 
 regsclean:
 	rm -rf $(SDK_EXPORT_DIR)/../../../host/include/
+	rm -f $(SDK_EXPORT_DIR)/../../../host/reg_defines.h
+	rm -f ../lib/Python/reg_defines_*.*
 
 simclean:
 	rm -rf simulation
@@ -204,9 +244,19 @@ simclean:
 	rm -rf ../test/nf1_cml
 	rm -rf ../test/pcores
 	rm -f ../test/Makefile
-	rm -f ../test/system.mhs
+	rm -f ../test/*.mhs
 	rm -f ../test/system.xmp
 	rm -rf ../test/data
+	rm -rf ../test/etc
+	rm -rf ../test/*.log
+	rm -rf ../test/simulation
+	rm -rf ../test/*.make
+	rm -rf ../test/__xps
+	rm -rf ../test/*.opt
+	rm -rf ../test/bootloops
+	rm -rf ../test/*.axi
+	rm -rf ../test/seed
+	rm -rf ../test/*.sim
 
 smallbits.mcs: implementation/system.ncd
 	cd implementation/ && bitgen -w -g USR_ACCESS:$(GIT_COMMIT) -g UserID:$(GIT_COMMIT) -g StartupClk:Cclk -g Compress -g ConfigRate:3 -g BPI_sync_mode:Type2 -g ExtMasterCclk_en:div-1 -g BPI_1st_read_cycle:1 -g BPI_page_size:1 system.ncd smallbits.bit

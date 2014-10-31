@@ -77,31 +77,31 @@ PARAMETER C_S_AXI_DATA_WIDTH = 32, DT = INTEGER, BUS = S_AXI, ASSIGNMENT = CONST
 PARAMETER C_BASEADDR = 0xffffffff, DT = std_logic_vector, ADDRESS = BASE, PAIR = C_HIGHADDR, BUS = S_AXI, MIN_SIZE = 0x02000 
 PARAMETER C_HIGHADDR = 0x00000000, DT = std_logic_vector, ADDRESS = HIGH, PAIR = C_BASEADDR, BUS = S_AXI
 
-PARAMETER C_TX_VLAN_EN = 0, DT = integer
-PARAMETER C_TX_FCS_EN = 0, DT = integer
-PARAMETER C_TX_JUMBO_EN = 0, DT = integer
-PARAMETER C_TX_FC_EN = 0, DT = integer
-PARAMETER C_TX_HD_EN = 0, DT = integer
-PARAMETER C_TX_IFG_ADJUST_EN = 0, DT = integer
-PARAMETER C_TX_MAX_FRAME_EN = 0, DT = integer
-PARAMETER C_TX_MAX_FRAME_SIZE = 1518, DT = integer
-PARAMETER C_TX_PAUSE_MAC_ADDR = 0x0, DT = integer
-PARAMETER C_TX_EN = 1, DT = integer, DESC = Should TX come up enabled by default?, VALUES = (1=Yes, 0=No)
-PARAMETER C_TX_RESET = 0, DT = integer, DESC = Should TX come up held in reset by default?, VALUES = (1=Yes, 0=No)
+PARAMETER C_TX_VLAN_EN = 0, DT = integer, DESC = "Enable TX VLAN packets by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_TX_FCS_EN = 0, DT = integer, DESC = "Disable automatic padding and checksum generation by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0 || C_MAC_SEL ==2 )
+PARAMETER C_TX_JUMBO_EN = 0, DT = integer, DESC = "Enable TX jumbo packets by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0 || C_MAC_SEL ==2 )
+PARAMETER C_TX_FC_EN = 0, DT = integer, DESC = "Enable TX flow control by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_TX_HD_EN = 0, DT = integer, DESC = "Enable TX half duplex by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_TX_IFG_ADJUST_EN = 0, DT = integer, DESC = "Enable interframe gap alternate value by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_TX_MAX_FRAME_EN = 0, DT = integer, DESC = "Enable maximum transmittable frame size specified by TX Max Frame Size register by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_TX_MAX_FRAME_SIZE = 1518, DT = integer, DESC = "Default TX Max Frame Size register value", RANGE = (1518, 65535), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_TX_PAUSE_MAC_ADDR = 0x0, DT = integer, DESC = "Transmitter pause frame source address", ISVALID = (C_MAC_SEL==0)
+PARAMETER C_TX_EN = 1, DT = integer, DESC = "Enable TX by default?", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0 || C_MAC_SEL ==2 )
+PARAMETER C_TX_RESET = 0, DT = integer, DESC = "Hold TX in reset by default?", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
 
-PARAMETER C_RX_VLAN_EN = 0, DT = integer
-PARAMETER C_RX_FCS_EN = 0, DT = integer
-PARAMETER C_RX_JUMBO_EN = 0, DT = integer
-PARAMETER C_RX_FC_EN = 0, DT = integer
-PARAMETER C_RX_HD_EN = 0, DT = integer
-PARAMETER C_RX_PROMISCUOUS_EN = 0, DT = integer
-PARAMETER C_RX_LEN_TYPE_CHK_DIS = 0, DT = integer
-PARAMETER C_RX_CONTROL_LEN_CHK_DIS = 0, DT = integer
-PARAMETER C_RX_MAX_FRAME_EN = 0, DT = integer
-PARAMETER C_RX_MAX_FRAME_SIZE = 1518, DT = integer
-PARAMETER C_RX_PAUSE_MAC_ADDR = 0x0, DT = integer
-PARAMETER C_RX_EN = 1, DT = integer, DESC = Should RX come up enabled by default?, VALUES = (1=Yes, 0=No)
-PARAMETER C_RX_RESET = 0, DT = integer, DESC = Should RX come up held in reset by default?, VALUES = (1=Yes, 0=No)
+PARAMETER C_RX_VLAN_EN = 0, DT = integer, DESC = "Enable RX VLAN packets by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_FCS_EN = 0, DT = integer, DESC = "Pass on the RX frame checksum by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0 || C_MAC_SEL ==2 )
+PARAMETER C_RX_JUMBO_EN = 0, DT = integer, DESC = "Enable RX jumbo packets by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0 || C_MAC_SEL ==2 )
+PARAMETER C_RX_FC_EN = 0, DT = integer, DESC = "Enable RX flow control by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_HD_EN = 0, DT = integer, DESC = "Enable RX half duplex by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_PROMISCUOUS_EN = 0, DT = integer, DESC = "Enable RX promiscous mode by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_LEN_TYPE_CHK_DIS = 0, DT = integer, DESC = "Disable length/type error check by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_CONTROL_LEN_CHK_DIS = 0, DT = integer, DESC = "Disable checks on control frame lengths by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_MAX_FRAME_EN = 0, DT = integer, DESC = "Enable maximum receivable frame size specified by the RX Max Frame Size register by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_MAX_FRAME_SIZE = 1518, DT = integer, DESC = "Default RX Max Frame Size register value", RANGE = (1518, 65535), ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_PAUSE_MAC_ADDR = 0x0, DT = integer, DESC = "Receiver pause frame source address", ISVALID = (C_MAC_SEL==0)
+PARAMETER C_RX_EN = 1, DT = integer, DESC = "Enable RX by default", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0 || C_MAC_SEL ==2 )
+PARAMETER C_RX_RESET = 0, DT = integer, DESC = "Hold RX in reset by default?", VALUES = (1=Yes, 0=No), ISVALID = (C_MAC_SEL==0)
 
 ## Ports
 PORT glbl_rstn = "", DIR = I, SIGIS = RST, ASSIGNMENT = REQUIRE
