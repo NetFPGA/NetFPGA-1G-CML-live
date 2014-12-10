@@ -1,0 +1,6 @@
+*.o
+*.elf
+*.log
+/microblaze_0/
+cscope.out
+tags

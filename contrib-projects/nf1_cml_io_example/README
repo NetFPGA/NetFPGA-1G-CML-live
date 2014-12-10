@@ -1,0 +1,75 @@
+--------------------------------------------------------------------------------
+>
+>  NetFPGA-1G-CML http://www.netfpga.org
+>
+>  Project:
+>        nf1_cml_io_example
+>
+>  Author:
+>        Jay Hirata
+>
+>  Copyright notice:
+>        Copyright (C) 2014 Computer Measurement Laboratory
+>
+>  Licence:
+>        This file is part of the NetFPGA-1G-CML development base package.
+>
+>        This file is free code: you can redistribute it and/or modify it under
+>        the terms of the GNU Lesser General Public License version 2.1 as
+>        published by the Free Software Foundation.
+>
+>        This package is distributed in the hope that it will be useful, but
+>        WITHOUT ANY WARRANTY; without even the implied warranty of
+>        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+>        Lesser General Public License for more details.
+>
+>        You should have received a copy of the GNU Lesser General Public
+>        License along with the NetFPGA source package.  If not, see
+>        http://www.gnu.org/licenses/.
+>
+--------------------------------------------------------------------------------
+
+NetFPGA-1G-CML IO Example Design
+================================
+
+This design includes demonstrates use of the onboard LEDs, buttons, SD card,
+PMODs, and DDR memory. It uses only the IP found in the Xilinx ISE/EDK
+distribution and none of the NetFPGA IP. The code executes out of DDR memory.
+
+## Overview
+
+There are essentially two modes of operation for the IO example design: a
+button and LED test mode and an SD card test mode.
+
+The LED test mode drives a series of patterns to the Pmod8LD on the JA Pmod
+connector. The onboard buttons (BTN0 - BTN3) are used to drive the onboard LEDs
+(LD0 - LD3). The Pmod8LD pattern runs continuously while depressing the onboard
+buttons causes the corresponding onboard LED to illuminate.
+
+The SD card test mode allows the user to view the contents of a FAT32 formatted
+SD card and read and write files to the card.
+
+
+## Board Setup
+
+Connect the PmodUSBUART to the top row of the JB Pmod connector. The Microblaze
+processor provides an interactive text interface that can be viewed using
+minicom or another terminal program.
+
+This particular design is best used with a Pmod8LD attached to JA Pmod
+connector. GPIO is connected to the signals and the software running on the
+Microblaze processor drives out a sequence of LED patterns. A Pmod8LD is not
+required to run the IO example design, but it provides a simple way of
+visualizing the Pmod signals.
+
+A FAT32 formatted SD card is required for the SD card test example. If an SD
+card is not present the application will acknowledge that the SD card is
+missing and will return to the LED test mode. The SD card detects the position
+of the write protect switch on SD cards, however, write protection is ignored.
+
+## Building and Running
+
+Run the `make` command in this directory to see the make help documentation. To
+build everything from scratch, program the FPGA, and download the firmware, run
+the `make all` command.
+
