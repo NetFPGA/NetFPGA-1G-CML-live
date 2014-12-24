@@ -29,5 +29,5 @@
 #
 ################################################################################
 
-fpga -f ./hw/implementation/system.bit
+fpga -f ./hw/implementation/system.bit -cable type xilinx_plugin modulename digilent_plugin
 exit

@@ -29,7 +29,7 @@
 #
 ################################################################################
 
-connect mb mdm
+connect mb mdm -cable type xilinx_plugin modulename digilent_plugin
 rst
 stop
 dow ./sw/embedded/executable.elf
