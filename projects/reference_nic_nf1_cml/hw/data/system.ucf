@@ -181,6 +181,8 @@ NET bpi_data[13]              LOC = E22     | IOSTANDARD = LVCMOS33;
 NET bpi_data[14]              LOC = C21     | IOSTANDARD = LVCMOS33;
 NET bpi_data[15]              LOC = B21     | IOSTANDARD = LVCMOS33;
 
+NET "bpi_data[16]"  LOC = W18   | IOSTANDARD = LVCMOS18;
+NET "bpi_data[17]"  LOC = V17   | IOSTANDARD = LVCMOS18;
 #
 # additional constraints
 #
@@ -308,7 +310,6 @@ NET "clk_100_0000MHz" TNM = "100mhz_clk_grp";
 NET "clk_100_0000MHz" TNM = "HWICAP_clk_grp";
 TIMESPEC TS_TIG0 = FROM "100mhz_clk_grp" to "HWICAP_clk_grp" TIG;
 TIMESPEC TS_TIG1 = FROM "HWICAP_clk_grp" to "100mhz_clk_grp" TIG;
-
 
 
 

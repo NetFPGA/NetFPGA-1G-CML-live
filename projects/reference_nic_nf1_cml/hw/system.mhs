@@ -66,7 +66,8 @@
  PORT phy_rstn_3 = phy_rstn_3, DIR = O, RST_POLARITY = 0
  PORT phy_rstn_4 = phy_rstn_4, DIR = O, RST_POLARITY = 0
  PORT bpi_addr_cmd = axi_gpio_0_GPIO_IO, DIR = IO, VEC = [29:0]
- PORT bpi_data = axi_gpio_0_GPIO2_IO, DIR = IO, VEC = [15:0]
+ PORT bpi_data = axi_gpio_0_GPIO2_IO, DIR = IO, VEC = [17:0]
+
 
 BEGIN proc_sys_reset
  PARAMETER INSTANCE = proc_sys_reset_0
@@ -488,7 +489,7 @@ BEGIN axi_gpio
  PARAMETER C_GPIO_WIDTH = 30
  PARAMETER C_DOUT_DEFAULT = 0xffffffff
  PARAMETER C_TRI_DEFAULT = 0x00000000
- PARAMETER C_GPIO2_WIDTH = 16
+ PARAMETER C_GPIO2_WIDTH = 18
  PARAMETER C_BASEADDR = 0x40000000
  PARAMETER C_HIGHADDR = 0x4000ffff
  BUS_INTERFACE S_AXI = axi_interconnect_0
@@ -518,3 +519,4 @@ BEGIN nf10_identifier
  PORT S_AXI_ACLK = clk_100_0000MHz
  PORT S_AXI_ARESETN = proc_sys_reset_0_Peripheral_aresetn
 END
+
