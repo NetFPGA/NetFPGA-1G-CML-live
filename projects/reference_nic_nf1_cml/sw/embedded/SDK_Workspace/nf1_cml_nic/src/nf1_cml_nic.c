@@ -38,6 +38,7 @@
 
 void print(char *str);
 
+// Multiboot commands
 static unsigned int rcfg_cmds[8] = {
     0xFFFFFFFF,
     0xAA995566,
@@ -51,8 +52,8 @@ static unsigned int rcfg_cmds[8] = {
 
 int main()
 {
-    unsigned int *gpio_data = (unsigned int *)(XPAR_AXI_GPIO_BPI_IF_BASEADDR + 0x08);
-    unsigned int *gpio_tris = (unsigned int *)(XPAR_AXI_GPIO_BPI_IF_BASEADDR + 0x0c);
+    volatile unsigned int *gpio_data = (volatile unsigned int *)(XPAR_AXI_GPIO_BPI_IF_BASEADDR + 0x08);
+    volatile unsigned int *gpio_tris = (volatile unsigned int *)(XPAR_AXI_GPIO_BPI_IF_BASEADDR + 0x0c);
     unsigned int hwicap_base_addr = XPAR_AXI_HWICAP_0_BASEADDR;
     int i;
 
@@ -63,7 +64,10 @@ int main()
     while (1) {
         if ((*gpio_data & 0x00030000) == 0x00020000) {
             // check that BPI data 16-17 is 01
-            xil_printf("PIC signal detected, loading the manufacturing test...\r\n");
+            xil_printf("PIC signal detected, loading the NetFPGA-1G-CML self test...\r\n");
+
+            for (i = 0; i < 10000; i++);
+
             // write commands to HWICAP FIFO
             for (i = 0; i < 8; i++) {
                 XHwIcap_WriteReg(hwicap_base_addr, XHI_WF_OFFSET, rcfg_cmds[i]);
