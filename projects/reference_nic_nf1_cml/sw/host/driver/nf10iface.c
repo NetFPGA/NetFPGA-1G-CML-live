@@ -158,7 +158,7 @@ int nf10iface_probe(struct pci_dev *pdev, struct nf10_card *card){
     // Set up the network device...
     for (i = 0; i < 4; i++){
         netdev = card->ndev[i] = alloc_netdev(sizeof(struct nf10_ndev_priv),
-                                              devname, nf10iface_init);
+                                              NET_NAME_UNKNOWN, devname, nf10iface_init);
         if(netdev == NULL){
             printk(KERN_ERR "nf10: Could not allocate ethernet device.\n");
             ret = -ENOMEM;
