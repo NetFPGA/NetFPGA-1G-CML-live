@@ -133,7 +133,7 @@ public abstract class AbstractRouterQuickstartFrame extends JInternalFrame {
                 routingTableModel.updateTable();
                 arpTableModel.updateTable();
                 ifaceTableModel.updateTable();
-                //statsRegTableModel.updateTable();
+                statsRegTableModel.updateTable();
             }
 
         });
@@ -146,8 +146,8 @@ public abstract class AbstractRouterQuickstartFrame extends JInternalFrame {
      */
     private void setupStatsTable(NFDevice nf2) {
         /* add the addresses to monitor through statsRegTableModel */
-//        long[] aAddresses = new long[STATS_NUM_REGS_USED];
-//        /* get the difference between two MAC blocks of addresses */
+        long[] aAddresses = new long[STATS_NUM_REGS_USED];
+        /* get the difference between two MAC blocks of addresses */
 //        aAddresses[0] = NFDeviceConsts.MAC_GRP_0_RX_QUEUE_NUM_PKTS_STORED_REG;
 //        aAddresses[1] = NFDeviceConsts.MAC_GRP_1_RX_QUEUE_NUM_PKTS_STORED_REG;
 //        aAddresses[2] = NFDeviceConsts.MAC_GRP_2_RX_QUEUE_NUM_PKTS_STORED_REG;
@@ -179,10 +179,44 @@ public abstract class AbstractRouterQuickstartFrame extends JInternalFrame {
 //        statsRegTableModel.setGraph(9, (GraphPanel)this.pktsDroppedChart1);
 //        statsRegTableModel.setGraph(10, (GraphPanel)this.pktsDroppedChart2);
 //        statsRegTableModel.setGraph(11, (GraphPanel)this.pktsDroppedChart3);
-//
-//        for(int i=0; i<STATS_NUM_REGS_USED; i++){
-//            statsRegTableModel.setDifferentialGraph(i, true);
-//        }
+
+        aAddresses[0] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_STORED_PORT_0;
+        aAddresses[1] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_STORED_PORT_1;
+        aAddresses[2] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_STORED_PORT_2;
+        aAddresses[3] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_STORED_PORT_3;
+
+        aAddresses[4] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_IN_QUEUE_PORT_0;
+        aAddresses[5] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_IN_QUEUE_PORT_1;
+        aAddresses[6] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_IN_QUEUE_PORT_2;
+        aAddresses[7] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_IN_QUEUE_PORT_3;
+
+        /* the MAC output queues are the even numbered queues */
+        aAddresses[8] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_DROPPED_PORT_0;
+        aAddresses[9] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_DROPPED_PORT_1;
+        aAddresses[10] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_DROPPED_PORT_2;
+        aAddresses[11] = NFDeviceConsts.XPAR_NF10_BRAM_OUTPUT_QUEUES_0_PKT_DROPPED_PORT_3;
+
+        /* create the register table model which we want to monitor */
+        statsRegTableModel = new StatsRegTableModel(nf2, aAddresses);
+
+        statsRegTableModel.setGraph(0, (GraphPanel)this.pktsRcvdChart0);
+        statsRegTableModel.setGraph(1, (GraphPanel)this.pktsRcvdChart1);
+        statsRegTableModel.setGraph(2, (GraphPanel)this.pktsRcvdChart2);
+        statsRegTableModel.setGraph(3, (GraphPanel)this.pktsRcvdChart3);
+        statsRegTableModel.setGraph(4, (GraphPanel)this.pktsSentChart0);
+        statsRegTableModel.setGraph(5, (GraphPanel)this.pktsSentChart1);
+        statsRegTableModel.setGraph(6, (GraphPanel)this.pktsSentChart2);
+        statsRegTableModel.setGraph(7, (GraphPanel)this.pktsSentChart3);
+        statsRegTableModel.setGraph(8, (GraphPanel)this.pktsDroppedChart0);
+        statsRegTableModel.setGraph(9, (GraphPanel)this.pktsDroppedChart1);
+        statsRegTableModel.setGraph(10, (GraphPanel)this.pktsDroppedChart2);
+        statsRegTableModel.setGraph(11, (GraphPanel)this.pktsDroppedChart3);
+
+
+
+        for(int i=0; i<STATS_NUM_REGS_USED; i++){
+            statsRegTableModel.setDifferentialGraph(i, true);
+        }
     }
 
     /**
@@ -210,14 +244,14 @@ public abstract class AbstractRouterQuickstartFrame extends JInternalFrame {
         pageTitleLabel = new javax.swing.JLabel();
         routerStatsScrollPane = new javax.swing.JScrollPane();
         quickStartPanel = new javax.swing.JPanel();
-        pktsRcvdChart0 = new BarGraphPanel("Port 0 Pkts Rcvd", "Pkts Rcvd", "time", "Number of Packets", 2000);
-        pktsRcvdChart1 = new BarGraphPanel("Port 1 Pkts Rcvd", "Pkts Rcvd", "time", "Number of Packets", 2000);
-        pktsRcvdChart2 = new BarGraphPanel("Port 2 Pkts Rcvd", "Pkts Rcvd", "time", "Number of Packets", 2000);
-        pktsRcvdChart3 = new BarGraphPanel("Port 3 Pkts Rcvd", "Pkts Rcvd", "time", "Number of Packets", 2000);
-        pktsSentChart0 = new BarGraphPanel("Port 0 Pkts Sent", "Pkts Sent", "time", "Number of Packets", 2000);
-        pktsSentChart1 = new BarGraphPanel("Port 1 Pkts Sent", "Pkts Sent", "time", "Number of Packets", 2000);
-        pktsSentChart2 = new BarGraphPanel("Port 2 Pkts Sent", "Pkts Sent", "time", "Number of Packets", 2000);
-        pktsSentChart3 = new BarGraphPanel("Port 3 Pkts Sent", "Pkts Sent", "time", "Number of Packets", 2000);
+        pktsRcvdChart0 = new BarGraphPanel("Port 0 Pkts Stored", "Pkts Rcvd", "time", "Number of Packets", 2000);
+        pktsRcvdChart1 = new BarGraphPanel("Port 1 Pkts Stored", "Pkts Rcvd", "time", "Number of Packets", 2000);
+        pktsRcvdChart2 = new BarGraphPanel("Port 2 Pkts Stored", "Pkts Rcvd", "time", "Number of Packets", 2000);
+        pktsRcvdChart3 = new BarGraphPanel("Port 3 Pkts Stored", "Pkts Rcvd", "time", "Number of Packets", 2000);
+        pktsSentChart0 = new BarGraphPanel("Port 0 Pkts In Queue", "Pkts Sent", "time", "Number of Packets", 2000);
+        pktsSentChart1 = new BarGraphPanel("Port 1 Pkts In Queue", "Pkts Sent", "time", "Number of Packets", 2000);
+        pktsSentChart2 = new BarGraphPanel("Port 2 Pkts In Queue", "Pkts Sent", "time", "Number of Packets", 2000);
+        pktsSentChart3 = new BarGraphPanel("Port 3 Pkts In Queue", "Pkts Sent", "time", "Number of Packets", 2000);
         pktsDroppedChart0 = new BarGraphPanel("Port 0 Pkts Dropped", "Pkts Sent", "time", "Number of Packets", 2000);
         pktsDroppedChart0.setName("first chart");
         pktsDroppedChart1 = new BarGraphPanel("Port 1 Pkts Dropped", "Pkts Sent", "time", "Number of Packets", 2000);
