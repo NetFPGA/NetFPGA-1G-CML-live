@@ -1,0 +1,6 @@
+*.log
+*.elf
+*.out
+*.o
+
+microblaze_0

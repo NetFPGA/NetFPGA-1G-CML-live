@@ -1,0 +1,109 @@
+--------------------------------------------------------------------------------
+>
+>  NetFPGA-1G-CML http://www.netfpga.org
+>
+>  Project:
+>        nf1_cml_crypto_example
+>
+>  Author:
+>        Computer Measurement Laboratory
+>
+>  Copyright notice:
+>        Copyright (C) 2015 Computer Measurement Laboratory
+>
+>  Licence:
+>        This file is part of the NetFPGA-1G-CML development base package.
+>
+>        This file is free code: you can redistribute it and/or modify it under
+>        the terms of the GNU Lesser General Public License version 2.1 as
+>        published by the Free Software Foundation.
+>
+>        This package is distributed in the hope that it will be useful, but
+>        WITHOUT ANY WARRANTY; without even the implied warranty of
+>        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+>        Lesser General Public License for more details.
+>
+>        You should have received a copy of the GNU Lesser General Public
+>        License along with the NetFPGA source package.  If not, see
+>        http://www.gnu.org/licenses/.
+>
+--------------------------------------------------------------------------------
+
+NetFPGA-1G-CML Crypto Example Design
+====================================
+
+This design demonstrates how to access the Real-Time Clock and ATSHA204 Crypto-
+Authentication chip with the FPGA.  Both the Real-Time Clock and ATSHA204 are
+connected to the PIC's I2C2 interface, so a software API was created to communicate
+over SPI with the PIC and instruct it to do various commands with the RTC and
+ATSHA204.  This project includes the FPGA hardware design and embedded Microblaze
+and PIC code to accomplish these tasks.
+
+
+## Overview
+
+The ATSHA204 and RTC are connected to the I2C2 hardware module on the PIC.  To
+perform cryptographic and authentication operations, the FPGA sends commands
+and data via SPI to the PIC.  The PIC recieves the commands and data (if
+applicable), preforms the commands, and sends responses back to the FPGA via
+SPI.
+
+This project demostrates how to perform the following operations:
+    - read and write the RTC
+    - read the ATSHA204 configuration zone (zone was locked during manufacturing
+      so only reads are possible)
+    - get a number used once (NONCE) from the ATSHA204's NONCE command
+    - read and write the data slots ("keys") on the ATSHA204
+    - generate a SHA256 Message Authentication Code (MAC) using the ATSHA204's
+      MAC command
+    - authenticate a SHA256 hash using the ATSHA204's NONCE and CheckMAC commands
+
+For more information on the RTC:
+    http://www.st.com/web/en/resource/technical/document/datasheet/CD00019860.pdf
+
+For more information on the ATSHA204:
+    http://www.atmel.com/Images/Atmel-8740-CryptoAuth-ATSHA204-Datasheet.pdf
+
+
+## Board Setup
+
+Connect one PmodUSBUART to the top row of JA, and a second to the top row of JB.
+Open both UARTs in minicom windows with 115200 baud.  Connect the FPGA's USB
+PROG (J12) port to your development machine, and a PICkit 3 to the PIC PROG
+CABLE (J14) zig-zag connector using a 6-pin Pmod extension cable.  Power the card
+from the PCIe power connector.
+
+NOTE: at this time the PICkit 3 is required to program the PIC.
+
+
+## Building and Running
+
+First, install Microchip's MPLAB X IDE, IPE, and XC32 compiler from:
+
+    http://www.microchip.com/pagehandler/en-us/family/mplabx
+
+The PIC application was developed using MPLAB X v2.35 and XC32 v1.32.  It 
+should be possible to use the project with any version of MPLAB X, but the XC32
+compiler should be v1.32, which can be found by clicking on MPLABXC Compilers->
+Downloads Archive, and then navigating to Language Tools Archive->MPLAB XC32->
+v1.32 (Linux) (05/30/2014).  The compiler can be run in "free" mode, which does
+not require a license.
+
+Once these are installed, add the XC32 compiler to your environment PATH with:
+
+    $ export PATH=/opt/microchip/xc32/v1.32/bin:$PATH
+
+This command assumes the compiler was installed in its default location, modify
+the path to the compiler as necessary.
+
+Then, run the "make" command in this directory to view the available make
+options.  To get started initially, run "make pic", program the PIC with the
+hexfile generated at sw/embedded/pic/dist/default/production/pic.production.hex
+using MPLAB IPE.  Alternately, the sw/embedded/pic folder can be opened as a
+project in MPLAB X and built and loaded from there.  Finally, run "make fpga"
+to build the FPGA design and software and automatically download and run the
+application.
+
+As the application runs, output will be generated on the UART windows that 
+provides information about the commands being run and the sequence of events
+that the firmware performs to complete the commands.
