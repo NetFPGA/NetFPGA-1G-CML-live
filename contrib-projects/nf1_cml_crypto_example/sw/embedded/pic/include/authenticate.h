@@ -43,6 +43,7 @@
 #include <GenericTypeDefs.h>
 
 void getNonceSeed(UINT8 *nonce_seed);
+UINT8 getSystemNonce(UINT8 *sys_nonce);
 void hashKeyNonceAndSalt(UINT8 *key, UINT8 *nonce, UINT8 *key_nonce_hash);
 BOOL checkHash(UINT8 *hash, UINT16 slot_id);
 
