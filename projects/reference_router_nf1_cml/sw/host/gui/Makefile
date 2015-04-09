@@ -91,7 +91,7 @@ $(CONSTANTS_JAVA): ../reg_defines.h
 	@echo "   public static final int ROUTER_OP_LUT_RESET_CNTRS = $(BAR0_NAME)_RESET_CNTRS;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_ARP_NUM_MISSES_REG = $(BAR0_NAME)_PKT_SENT_CPU_ARP_MISS;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_LPM_NUM_MISSES_REG = $(BAR0_NAME)_PKT_SENT_CPU_LPM_MISS;" >> $@
-	@echo "   public static final int ROUTER_OP_LUT_NUM_CPU_PKTS_SENT_REG = $(BAR0_NAME)_PKT_SENT_CPU_NON_IP;" >> $@
+	@echo "   public static final int ROUTER_OP_LUT_NUM_CPU_PKTS_SENT_REG = $(BAR0_NAME)_PKT_SENT_FROM_CPU;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_NUM_BAD_OPTS_VER_REG = $(BAR0_NAME)_PKT_SENT_CPU_OPTION_VER;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_NUM_BAD_CHKSUMS_REG = $(BAR0_NAME)_PKT_DROPPED_CHECKSUM;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_NUM_BAD_TTLS_REG = $(BAR0_NAME)_PKT_SENT_TO_CPU_BAD_TTL;" >> $@
@@ -110,7 +110,7 @@ $(CONSTANTS_JAVA): ../reg_defines.h
 	@echo "   public static final int ROUTER_OP_LUT_ARP_TABLE_ENTRY_MAC_HI_REG = $(BAR1_NAME)_ARP_MAC_HIGH;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_ARP_TABLE_ENTRY_MAC_LO_REG = $(BAR1_NAME)_ARP_MAC_LOW;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_ARP_TABLE_ENTRY_NEXT_HOP_IP_REG = $(BAR1_NAME)_ARP_IP;" >> $@
-	@echo "   public static final int ROUTER_OP_LUT_ARP_TABLE_RD_ADDR_REG = $(BAR1_NAME)_LPM_RD_ADDR;" >> $@
+	@echo "   public static final int ROUTER_OP_LUT_ARP_TABLE_RD_ADDR_REG = $(BAR1_NAME)_ARP_RD_ADDR;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_ARP_TABLE_WR_ADDR_REG = $(BAR1_NAME)_ARP_WR_ADDR;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_ROUTE_TABLE_ENTRY_IP_REG = $(BAR1_NAME)_LPM_IP;" >> $@
 	@echo "   public static final int ROUTER_OP_LUT_ROUTE_TABLE_ENTRY_MASK_REG = $(BAR1_NAME)_LPM_IP_MASK;" >> $@
