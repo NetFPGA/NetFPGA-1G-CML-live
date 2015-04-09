@@ -32,7 +32,7 @@
 /*!
  * \file sha204_helper.c
  *
- * \brief This file contains helper functions for performing certain actions on
+ * \brief This file contains helper functions for performing certain commands on
  * the ATSHA204.
  *
  * \author Computer Measurement Laboratory
@@ -198,7 +198,10 @@ UINT8 SHA204_ReadConfig(UINT8 *config_rd_val, UINT16 word_addr)
 }
 
 /*!
- * \brief Reads a data slot.
+ * \brief Reads a 32 byte value from one of the 16 data slots.
+ *
+ * This function assumes the data slot's configuration byte was set to allow
+ * unencrypted reads.
  *
  * \param data_rd_val buffer to store the values read
  * \param the word address of the slot to read
@@ -230,12 +233,11 @@ UINT8 SHA204_ReadData(UINT8 *data_rd_val, UINT16 word_addr)
 /*!
  * \brief Writes a 32 byte value to one of the 16 data slots.
  *
- * If the data zone is unlocked, writes can be done freely.  Each slot should be
- * written before the data zone is locked.  Once the data zone is locked, it is
- * necessary to use SHA204_EncryptedSlotWrite() to update the value in the slot.
+ * This function assumes the data slot's configuration byte was set to allow
+ * unencrypted writes.
  *
  * \param slot_wr_val[in] a pointer to a 32 byte array to write to a slot
- * \param slot_num[in] the slot number to write to
+ * \param word_addr[in] the word address of the slot to write to (see datasheet)
  *
  * \return a code indicating the status of the operation
  */

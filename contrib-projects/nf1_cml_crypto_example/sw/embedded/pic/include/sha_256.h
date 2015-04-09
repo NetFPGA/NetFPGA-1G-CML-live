@@ -37,8 +37,8 @@
  * \author Computer Measurement Laboratory
  */
 
-#ifndef HSC_SHA_256_H
-#define HSC_SHA_256_H
+#ifndef SHA_256_H
+#define SHA_256_H
 
 #include <GenericTypeDefs.h>
 
@@ -48,4 +48,4 @@ void SHA256_InitHashes(UINT32 *H);
 void SHA256_ClearHashes(UINT32 *H);
 void SHA256_HashMessage(UINT8 *message, UINT32 msg_length_bytes, UINT8 *hash);
 
-#endif
+#endif /* SHA_256_H */

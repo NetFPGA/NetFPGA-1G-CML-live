@@ -55,28 +55,31 @@ UINT8 fx2_rev_code;  // expected by utility.c
 void handle_microblaze(void);
 
 
-/*
+/*!
+ * \brief Sets up the PIC and handles requests from the Microblaze.
  * 
  */
 int main(int argc, char** argv)
 { 
-  InitMCU();
-  InitApp(); 
+    InitMCU();
+    InitApp();
  
-  printf("\r\nbuilt %s at %s\r\n", __DATE__, __TIME__);
-  printf("\r\n**\r\n** PIC initialized, waiting for request from FPGA\r\n**\r\n\r\n");
+    printf("\r\nbuilt %s at %s\r\n", __DATE__, __TIME__);
+    printf("\r\n**\r\n** PIC initialized, waiting for request from FPGA\r\n**\r\n\r\n");
 
-  while(1)  // forever handle requests from the FPGA...
-  {
-    handle_microblaze();
-  }
+    // forever handle requests from the FPGA
+    while (1) {
+         handle_microblaze();
+    }
  
-  return (EXIT_SUCCESS);
+    return (EXIT_SUCCESS);
 }
 
-
+/*!
+ * \brief Handle a command from the Microblaze.
+ */
 void handle_microblaze(void)
 {
-
-  check_FPGA_SPI(SPI_CHANNEL4);
+    // SPI channel 4 receives bytes from the FPGA
+    check_FPGA_SPI(SPI_CHANNEL4);
 }

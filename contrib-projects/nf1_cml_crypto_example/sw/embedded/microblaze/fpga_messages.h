@@ -37,12 +37,6 @@
  * the FPGA to request action and information from the PIC
  * using SPI. 
  *
- * These are separate from the FPGA helper include so that 
- * this file can also be included by the FPGA source code to
- * help prevent problems caused by having a define file for
- * each system and then have them get out of synch for
- * defined values.
- *
  * \author Computer Measurement Laboratory
  */
 

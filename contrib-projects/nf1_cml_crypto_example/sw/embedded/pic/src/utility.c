@@ -65,7 +65,6 @@ void _mon_putc(char c)
  */
 void InitApp(void)
 {
-//    InitPicTimer1();
     // timer for real-time delays
     InitPicTimer2();
     // UART for terminal communication
@@ -116,8 +115,7 @@ void __ISR(_TIMER_2_VECTOR, IPL3AUTO) Timer2Handler(void)
 }
 
 /*!
- * \brief This function returns after a specified delay. in
- * milliseconds.
+ * \brief This function returns after a specified delay in milliseconds.
  *
  * It uses PIC Timer 2, configured to interrupt every 1 ms, to generate fairly
  * accurate real-time delays.
@@ -155,8 +153,6 @@ void InitUART1(void)
 
 /*!
  * \brief Initialize the I2C2 port for communication.
- *
- * I2C2 is set for 100 KHz mode since that is the max speed for the ADM1177.
  */
 void InitI2C2(void)
 {
@@ -175,7 +171,7 @@ void InitI2C2(void)
 /*!
  * \brief Initializes the SPI2 interface.
  *
- * SPI2 acts as a master to the FPGA on the NetFPGA-7 and is initialized in
+ * SPI2 acts as a master to the FPGA on the NetFPGA-1G-CML and is initialized in
  * master mode with slave select and 1 byte data width.
  */
 void InitSPI2(void)
@@ -187,7 +183,7 @@ void InitSPI2(void)
 /*!
  * \brief Initializes the SPI4 interface.
  *
- * SPI4 acts as a slave to the FPGA on the NetFPGA-7 and is initialized in
+ * SPI4 acts as a slave to the FPGA on the NetFPGA-1G-CML and is initialized in
  * slave mode with slave select and 1 byte data width.
  */
 void InitSPI4(void)

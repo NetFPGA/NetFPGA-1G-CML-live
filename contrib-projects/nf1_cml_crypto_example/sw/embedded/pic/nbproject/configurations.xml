@@ -66,6 +66,7 @@
   <sourceRootList>
     <Elem>src</Elem>
     <Elem>include</Elem>
+    <Elem>../microblaze</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

@@ -78,17 +78,8 @@ I2C_RESULT M41T62_WriteTime(RTC_TIME *time) {
     int num_data_bytes;
     I2C_RESULT result = I2C_SUCCESS;
     UINT8 m41t62_reg = M41T62_SSEC;
-    int i;
 
-    // Initialize the data buffer
-//    i2cData[0] = M41T62_ADDRESS;
-//    i2cData[1] = M41T62_SSEC;
     FormatTimeForRTC(time, &i2c_data[0]);
-#ifdef VERBOSE
-    for (i = 0; i < 8; i++) {
-        printf("RTC[%d] : 0x%02x\r\n", i, i2c_data[i]);
-    }
-#endif
     num_data_bytes = 8;
 
     result = I2CSendBytes(M41T62_ADDRESS, &m41t62_reg, 1, &i2c_data[0], num_data_bytes, M41T62_I2C_BUS);

@@ -144,7 +144,7 @@ I2C_RESULT I2CSendOneByte(UINT8 data, I2C_MODULE bus)
  * available on the I<sup>2</sup>C bus, or until acknowledgement of the byte
  * received has completed.
  *
- * \param[in] ack tells whether to acknowledge (ACK) or not acknowledge (NACK)
+ * \param[in] ack tells whether to acknowledge (TRUE) or not acknowledge (FALSE)
  * the byte received
  * \param[in] bus the I2C_MODULE to use (i.e. I<sup>2</sup>C bus)
  * \param[out] byte a pointer to where to store the byte received
@@ -273,7 +273,7 @@ I2C_RESULT I2CSendBytes(UINT8 slave_addr, UINT8 *reg_addr_buf, int num_reg_addr_
  * \param[in] slave_addr the I2C slave address of the device
  * \param[in] reg_addr_buf a pointer to a buffer storing optional register addresses
  * \param[in] num_address_bytes the number of bytes in reg_adder_buf
- * \param[in] bus the I<sup>2</sup>C module to use (e.g. I<sup>2</sup>C2)
+ * \param[in] bus the I2C_MODULE to use (e.g. I<sup>2</sup>C)
  * \param[out] data_buf a pointer to a buffer to store the bytes read
  * \param[in] num_data_bytes the number of data bytes to read
  *
@@ -366,7 +366,7 @@ I2C_RESULT I2CGetBytes(UINT8 slave_addr, UINT8 *reg_addr_buf,
  * operation is complete.
  *
  * \param slave_addr the I2C slave address of the device to poll
- * \param bus the I2C_MODULE the slave device is on (i.e. I2C bus)
+ * \param bus the I2C_MODULE the slave device is on (i.e. I<sup>2</sup>C bus)
  *
  * \return TRUE if the device acknowledges, FALSE if not
  */

@@ -42,15 +42,17 @@
 #include "sha_256.h"
 
 
+/* Combines 4 bytes into an integer */
 #define MAKE_UINT(o,m,i) ( \
 	(o) = 	((u32)(m)[i] << 24)  | \
 		    ((u32)(m)[i+1] << 16)| \
 		    ((u32)(m)[i+2] << 8) | \
-		    ((u32)(m)[i+3])) /*!< Macro to combine 4 characters into an
-								   * u32. */
+		    ((u32)(m)[i+3]))
+
+/* Working Variables structure.  Variables are temporary hash values. */
 struct working_vars {
 	u32 a, b, c, d, e, f, g, h;
-}; /*!< Working Variables structure.  Variables are temporary hash values. */
+};
 
 /* Function prototypes */
 static u32 Ch(u32 x, u32 y, u32 z);
@@ -63,6 +65,7 @@ static void InitWordSchedule(u32 *W, u8 *padded);
 static void PerformStep(u32 K, u32 W, struct working_vars *vars);
 static void UpdateHashes(struct working_vars *vars, u32 *H);
 
+/* Algorithm constants array, as specified in FIPS 180-2, section 4.2.2 */
 static const u32 K[64] = {
 	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
 	0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
@@ -75,11 +78,7 @@ static const u32 K[64] = {
 	0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a,
 	0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
 	0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
-}; /*!< Algorithm constants array, as specified in FIPS 180-2, section 4.2.2 */
-
-
-//static u32 H[8]; /*!< Hash value array.  Message digest is the
-//						   * concatenation of these. */
+};
 
 /*!
  * \brief Equation 4.2 as described in FIPS 180-2, section 4.1.2.

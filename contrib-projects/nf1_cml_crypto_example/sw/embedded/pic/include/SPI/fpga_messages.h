@@ -1,13 +1,43 @@
-/*
- * This file is used to hold defines for messages used by
+/*******************************************************************************
+ *
+ * NetFPGA-1G-CML http://www.netfpga.org
+ *
+ * Project:
+ *       nf1_cml_crypto_example
+ *
+ * Author:
+ *       Computer Measurement Laboratory
+ *
+ * Copyright notice:
+ *       Copyright (C) 2015 Computer Measurement Laboratory
+ *
+ * Licence:
+ *       This file is part of the NetFPGA-1G-CML development base package.
+ *
+ *       This file is free code: you can redistribute it and/or modify it under
+ *       the terms of the GNU Lesser General Public License version 2.1 as
+ *       published by the Free Software Foundation.
+ *
+ *       This package is distributed in the hope that it will be useful, but
+ *       WITHOUT ANY WARRANTY; without even the implied warranty of
+ *       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *       Lesser General Public License for more details.
+ *
+ *       You should have received a copy of the GNU Lesser General Public
+ *       License along with the NetFPGA source package.  If not, see
+ *       http://www.gnu.org/licenses/.
+ *
+ ******************************************************************************/
+
+
+/*!
+ * \file fpga_messages.h
+ *
+ * \brief This file is used to hold defines for messages used by
  * the FPGA to request action and information from the PIC
  * using SPI. 
  *
- * These are separate from the FPGA helper include so that 
- * this file can also be included by the FPGA source code to
- * help prevent problems caused by having a define file for
- * each system and then have them get out of synch for
- * defined values.
+ * \author Computer Measurement Laboratory
  */
 
 #ifndef FPGA_MESSAGES_H

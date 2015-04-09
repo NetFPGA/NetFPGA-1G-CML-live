@@ -63,6 +63,10 @@ void rtc_test(void);
 void debug_info(void);
 void display_rtc_time(u8 *);
 
+/*!
+ * \brief Main function that calls a number of tests that demonstrate how to
+ * communicate with the PIC to perform commands on the RTC and ATSHA204.
+ */
 int main()
 {
     init_platform();
@@ -111,6 +115,10 @@ int main()
     while(1);
 }
 
+/*!
+ * \brief Commands the PIC to read a config zone from the ATSHA204 and return 
+ * the result.
+ */
 void atsha_config_test(void)
 {
     u8 rcv_data[32];
@@ -176,6 +184,10 @@ void atsha_config_test(void)
     return;
 }
 
+/*!
+ * \brief Commands the PIC to write a data slot in the ATSHA204 and then
+ * read and return its contents for verification.
+ */
 void atsha_rd_wr_test(void)
 {
     u8 i;
@@ -251,6 +263,10 @@ void atsha_rd_wr_test(void)
     return;
 }
 
+/*!
+ * \brief Commands the PIC to write time values to the RTC and then read them
+ * back and return them for verification.
+ */
 void rtc_test(void)
 {
     u8 rcv_data[9];
@@ -303,6 +319,13 @@ void rtc_test(void)
     }
 }
 
+/*!
+ * \brief Takes the RTC data array and parses it to print in human-readable
+ * format.
+ *
+ * \param[in] buf a pointer to the buffer containing time values read from
+ * the RTC.
+ */
 void display_rtc_time(u8 *buf)
 {
     switch(buf[4]) {
@@ -391,6 +414,10 @@ void display_rtc_time(u8 *buf)
     xil_printf("\r\n");
 }
 
+/*!
+ * \brief Commands the PIC to perform a NONCE command on the ATSHA204 and 
+ * return the resulting NONCE.
+ */
 void atsha_nonce_test(void)
 {
     u8 nonce[32];
@@ -412,6 +439,10 @@ void atsha_nonce_test(void)
     }
 }
 
+/*!
+ * \brief Commands the PIC to perform a MAC command on the ATSHA204 and
+ * return the resulting MAC.
+ */
 void atsha_mac_test(void)
 {
     u8 challenge[MAC_CHALLENGE_SIZE];
@@ -446,6 +477,10 @@ void atsha_mac_test(void)
     }
 }
 
+/*!
+ * \brief Commands the PIC to perform an authentication of a hash using the
+ * ATSHA204's CheckMAC command.
+ */
 void atsha_auth_test(void)
 {
     u32 i;

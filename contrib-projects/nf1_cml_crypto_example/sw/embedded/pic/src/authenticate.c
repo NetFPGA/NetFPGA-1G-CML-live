@@ -46,6 +46,7 @@
 #include "sha_256.h"
 #include "authenticate.h"
 
+/* User-defined data used by the ATSHA204 in hash calculations */
 static UINT8 other_data[13] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
                                 'j', 'k', 'l', 'm' };
 
@@ -64,10 +65,11 @@ void getNonceSeed(UINT8 *nonce_seed)
 }
 
 /*!
- * \brief Generates the same NONCE stored in TempKey on the ATSHA204 by performing
- * the same hash.
+ * \brief Performs the NONCE command on the ATSHA204 and generates the same
+ * NONCE without the ATSHA204 using the random number returned by the NONCE
+ * command.
  *
- * \param[out] sys_nonce a pointer to where to store the system nonce (32 bytes)
+ * \param[out] sys_nonce a pointer to a 32-byte array to store the system nonce
  *
  * \return a byte indicating the success of the Nonce command on the ATSHA204
  */
@@ -109,7 +111,7 @@ UINT8 getSystemNonce(UINT8 *sys_nonce)
 
 /*!
  * \brief Hashes together a key and NONCE (from getSystemNonce) to form part of
- * the message for CheckMAC.
+ * the message for the ATSHA204's CheckMAC command.
  *
  * \param[in] key the key value to compare to a slot value
  * \param[in] nonce a NONCE from getSystemNonce()
@@ -173,7 +175,7 @@ void hashKeyNonceAndSalt(UINT8 *key, UINT8 *nonce, UINT8 *key_nonce_salt_hash)
  *
  * \param[in] key_nonce_salt_hash a hash of the key, NONCE from the ATSHA204, and
  * the salt needed for the CheckMAC command
- * \param[in] slot_id the slot storing the key hashed in key_nonce_salt_hash (range 0x0000 - 0x000f)
+ * \param[in] slot_id the slot storing the key hashed in key_nonce_salt_hash
  *
  * \return TRUE if match, FALSE if mismatch
  */
@@ -191,10 +193,6 @@ BOOL checkHash(UINT8 *key_nonce_salt_hash, UINT16 slot_id)
     sha204_res = SHA204_CheckMAC(0x01, slot_id, &cmac_client_chal[0],
         &key_nonce_salt_hash[0], &other_data[0], &checkmac_rsp);
     if (sha204_res != SHA204_SUCCESS) {
-        #ifdef VERBOSE
-        printf("[checkHash]: CheckMAC failed.\r\n");
-        printf("result: 0x%02x\r\n", sha204_res);
-        #endif
         success = FALSE;
     }
 
@@ -202,16 +200,10 @@ BOOL checkHash(UINT8 *key_nonce_salt_hash, UINT16 slot_id)
     if (success) {
         if (checkmac_rsp == 0) {
             success = TRUE;
-            #ifdef VERBOSE
-            printf("[checkHash]: Authentication succeeded\r\n");
-            #endif
         } else {
             success = FALSE;
-            #ifdef VERBOSE
-            printf("[checkHash]: Authentication failed\r\n");
-            #endif
         }
     }
-    (void) sha204p_sleep();
+    sha204p_sleep();
     return success;
 }

@@ -41,8 +41,7 @@
 #define M41T62_H
 
 #include <GenericTypeDefs.h>
-#include "plib.h"
-
+#include <peripheral/i2c.h>
 /*!
  * \brief Structure containing the time fields used by the M41T62 RTC.
  *
@@ -52,15 +51,15 @@
  * M41T62.
  */
 typedef struct rtc_time {
-    UINT8 century;  /*!< Century byte       */
-    UINT8 year;     /*!< Year byte          */
-    UINT8 month;    /*!< Month byte         */
-    UINT8 date;     /*!< Day byte           */
-    UINT8 dow;      /*!< Day of week byte   */
-    UINT8 hour;     /*!< Hours byte         */
-    UINT8 min;      /*!< Minutes byte       */
-    UINT8 sec;      /*!< Seconds byte       */
-    UINT8 tenths;   /*!< Tenths byte        */
+    UINT8 century;
+    UINT8 year;
+    UINT8 month;
+    UINT8 date;
+    UINT8 dow;
+    UINT8 hour;
+    UINT8 min;
+    UINT8 sec;
+    UINT8 tenths;
 } RTC_TIME;
 
 /*! \brief M41T62 fractional seconds register address */
