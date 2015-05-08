@@ -42,6 +42,7 @@
 #include "nf10driver.h"
 #include "nf10priv.h"
 
+#include <linux/version.h>
 #include <linux/interrupt.h>
 #include <linux/pci.h>
 
@@ -157,8 +158,13 @@ int nf10iface_probe(struct pci_dev *pdev, struct nf10_card *card){
 
     // Set up the network device...
     for (i = 0; i < 4; i++){
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 17, 0))
         netdev = card->ndev[i] = alloc_netdev(sizeof(struct nf10_ndev_priv),
                                               devname, nf10iface_init);
+#else
+        netdev = card->ndev[i] = alloc_netdev(sizeof(struct nf10_ndev_priv),
+                                              devname, NET_NAME_UNKNOWN, nf10iface_init);
+#endif
         if(netdev == NULL){
             printk(KERN_ERR "nf10: Could not allocate ethernet device.\n");
             ret = -ENOMEM;
