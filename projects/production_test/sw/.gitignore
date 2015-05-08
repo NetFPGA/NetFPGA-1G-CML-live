@@ -1,6 +1,0 @@
-bin/*
-!.gitignore
-output/minicom/*
-!.gitignore
-output/reports/*
-!.gitignore
