@@ -43,12 +43,14 @@
 
 SYSTEM = system
 HW = hw
+SW = sw/embedded
 PROJECT_NAME = reference_nic_nf1_cml
 
 all:
-	$(MAKE) -C $(HW)
+	$(MAKE) -C $(HW) exporttosdk
+	$(MAKE) -C $(SW)
 	mkdir -p bitfiles
-	cp $(HW)/implementation/download.bit bitfiles/$(PROJECT_NAME).bit
+	cp $(SW)/result/download.bit bitfiles/$(PROJECT_NAME).bit
 
 download: bitfiles/$(PROJECT_NAME).bit
 	cp bitfiles/$(PROJECT_NAME).bit bitfiles/download.bit
@@ -57,3 +59,4 @@ download: bitfiles/$(PROJECT_NAME).bit
 
 clean:
 	$(MAKE) -C $(HW) clean
+	$(MAKE) -C $(SW) clean

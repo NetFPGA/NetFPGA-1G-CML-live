@@ -1,0 +1,82 @@
+################################################################################
+#
+#  NetFPGA-1G-CML http://www.netfpga.org
+#
+#  Project:
+#        nf1_cml_io_example
+#
+#  Author:
+#        Jay Hirata
+#
+#  Copyright notice:
+#        Copyright (C) 2014 Computer Measurement Laboratory
+#
+#  Licence:
+#        This file is part of the NetFPGA-1G-CML development base package.
+#
+#        This file is free code: you can redistribute it and/or modify it under
+#        the terms of the GNU Lesser General Public License version 2.1 as
+#        published by the Free Software Foundation.
+#
+#        This package is distributed in the hope that it will be useful, but
+#        WITHOUT ANY WARRANTY; without even the implied warranty of
+#        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#        Lesser General Public License for more details.
+#
+#        You should have received a copy of the GNU Lesser General Public
+#        License along with the NetFPGA source package.  If not, see
+#        http://www.gnu.org/licenses/.
+#
+################################################################################
+
+#
+# pin constraints
+#
+#
+# additional constraints
+#
+
+NET "CLK" TNM_NET = sys_clk_pin;
+TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 200000 kHz;
+
+Net "sys_clk_p"             LOC = AA3       | IOSTANDARD = LVDS;
+Net "sys_clk_n"             LOC = AA2       | IOSTANDARD = LVDS;
+
+NET "sys_rst_n"             LOC = AA8       | IOSTANDARD = LVCMOS18;
+
+# Pmod JA: Pmod8LD
+NET "pmod_leds[0]"          LOC = D19       | IOSTANDARD = LVCMOS33;
+NET "pmod_leds[1]"          LOC = E23       | IOSTANDARD = LVCMOS33;
+NET "pmod_leds[2]"          LOC = D25       | IOSTANDARD = LVCMOS33;
+NET "pmod_leds[3]"          LOC = F23       | IOSTANDARD = LVCMOS33;
+NET "pmod_leds[4]"          LOC = F19       | IOSTANDARD = LVCMOS33;
+NET "pmod_leds[5]"          LOC = G22       | IOSTANDARD = LVCMOS33;
+NET "pmod_leds[6]"          LOC = D24       | IOSTANDARD = LVCMOS33;
+NET "pmod_leds[7]"          LOC = E21       | IOSTANDARD = LVCMOS33;
+
+# Pmod JB: PmodUSBUART: Top Row
+NET   "uart_in"             LOC = H18       | IOSTANDARD = LVCMOS33;
+NET   "uart_out"            LOC = E15       | IOSTANDARD = LVCMOS33;
+
+# SD Card
+NET "sd_bitbanged<0>"       LOC = AE15      | IOSTANDARD = LVCMOS18 | PULLUP;    # SD-CD
+NET "sd_bitbanged<1>"       LOC = AF15      | IOSTANDARD = LVCMOS18 | PULLUP;    # SD-WP
+NET "sd_bitbanged<2>"       LOC = AA18      | IOSTANDARD = LVCMOS18;    # SD-CCLK
+NET "sd_bitbanged<3>"       LOC = AF18      | IOSTANDARD = LVCMOS18;    # SD-CMD
+NET "sd_bitbanged<4>"       LOC = AE17      | IOSTANDARD = LVCMOS18;    # SD-D0
+NET "sd_bitbanged<5>"       LOC = AF17      | IOSTANDARD = LVCMOS18;    # SD-D1
+NET "sd_bitbanged<6>"       LOC = AD15      | IOSTANDARD = LVCMOS18;    # SD-D2
+NET "sd_bitbanged<7>"       LOC = AE18      | IOSTANDARD = LVCMOS18;    # SD-D3
+
+# onboard LEDs
+NET "leds[3]"               LOC = "W19"     | IOSTANDARD = LVCMOS18;
+NET "leds[2]"               LOC = "F17"     | IOSTANDARD = LVCMOS33;
+NET "leds[1]"               LOC = "AF14"    | IOSTANDARD = LVCMOS18;
+NET "leds[0]"               LOC = "E17"     | IOSTANDARD = LVCMOS33;
+
+# onboard buttons
+NET "push_buttons[3]"       LOC = "AB6"     | IOSTANDARD = LVCMOS15;
+NET "push_buttons[2]"       LOC = "AC6"     | IOSTANDARD = LVCMOS15;
+NET "push_buttons[1]"       LOC = "E18"     | IOSTANDARD = LVCMOS33;
+NET "push_buttons[0]"       LOC = "W6"      | IOSTANDARD = LVCMOS15;
+

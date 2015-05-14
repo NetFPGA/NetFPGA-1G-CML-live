@@ -1,0 +1,31 @@
+#
+# pin constraints
+#
+#
+# additional constraints
+#
+
+NET "CLK" TNM_NET = sys_clk_pin;
+TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 200000 kHz;
+
+NET CLK_P	                LOC = AA3	| IOSTANDARD = LVDS;
+NET CLK_N	                LOC = AA2	| IOSTANDARD = LVDS;
+NET RESET	                LOC = AA8	| IOSTANDARD = LVCMOS18;
+
+# RS232 PMOD Pmod B, top row.
+NET "RS232_Uart_1_sout"       LOC = E15     | IOSTANDARD = LVCMOS33;  #    F23 -> JA4   JB4 -> G19
+NET "RS232_Uart_1_sin"        LOC = H18     | IOSTANDARD = LVCMOS33;  #    D25 -> JA3   JB3 -> H18
+
+
+# FPGA to PIC communication via SPI
+NET "SPI_FLASH_MISO"            LOC = "V19" | IOSTANDARD = LVCMOS18;    # FPGA2PIC_SDO
+NET "SPI_FLASH_MOSI"            LOC = "V14" | IOSTANDARD = LVCMOS18;    # FPGA2PIC_SDI
+NET "SPI_FLASH_SCLK"            LOC = "W14" | IOSTANDARD = LVCMOS18;    # FPGA2PIC_SCK
+NET "SPI_FLASH_SS"              LOC = "V18" | IOSTANDARD = LVCMOS18;    # FPGA2PIC_SS
+
+
+# PIC to FPGA communication via SPI
+NET "PIC_FPGA_SPI_MISO_pin"     LOC = "W15"  | IOSTANDARD = LVCMOS18;    # PIC2FPGA_SDO
+NET "PIC_FPGA_SPI_MOSI_pin"     LOC = "V16"  | IOSTANDARD = LVCMOS18;    # PIC2FPGA_SDI
+NET "PIC_FPGA_SPI_SCK_pin"      LOC = "AA17" | IOSTANDARD = LVCMOS18;    # PIC2FPGA_SCK
+NET "PIC_FPGA_SPI_SPISEL_pin"   LOC = "W16"  | IOSTANDARD = LVCMOS18;    # PIC2FPGA_SPISEL
