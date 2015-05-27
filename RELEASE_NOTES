@@ -1,6 +1,6 @@
 ################################################################################
 #
-#  NetFPGA-10G http://www.netfpga.org
+#  NetFPGA-1G-CML http://www.netfpga.org
 #
 #  File:
 #        RELEASE_NOTES
@@ -9,29 +9,35 @@
 #        Copyright (C) 2010,2011 The Board of Trustees of The Leland Stanford
 #                                Junior University
 #
-GIT VERSION 5.0.4
+GIT VERSION 5.0.5
 
-Before using this code, please check the release notes for 5.0.4rc below
-
-1. Project related information stored in the bitfile.
-
-We have updated the nf10_identifier module to store information related to date and time the synthesis started, 
-board id, release tag, project identification, project features and misc details. So that once the bitfile is 
-loaded in the FPGA, the driver can parse these registers and give some useful information to the users.
-
-
-Wikipage: https://github.com/NetFPGA/NetFPGA-public/wiki/Project-related-information-in-bitfiles
-
-
+Before using this code, please check the release notes for NetFPGA-1G-CML version 5.0.5 below
 
 NetFPGA-1G-CML
 ==============
 
-This release includes the 5.0.4 updates.
+This release includes the 5.0.5 updates.
 
-It updates the nf10_identifier with a device independent implementation that
-provides greater reusability between boards (fpga devices).
+This release includes the following changes and additions.
 
-It also adds flash programability hardware to the reference projects.
+All reference projects in the ./projects directory that do not
+specifically target the NetFPGA-1G-CML PCB have been removed. 
+This has been done to help reduce any confusion that may exist
+regarding which projects to use with which card.
 
+projects/reference_nic_nf1_cml
+  This project was modified to support automatic out-of-the-box 
+  configuration when it is installed in the on-board BPI during manufacturing.
 
+projects/reference_nic_nf1_cml/sw/host/driver
+  The nf10 driver has been updated to support Linux Kernels 3.17.0 and later.
+
+contrib-projects/nf1_cml_io_example
+  This project demonstrates the use of the onboard LEDs, buttons, 
+  SD card, PMODs and DDR memory using standard ISE/EDK IP modules.
+
+contrib-projects/nf1_cml_crypto_example
+  This project demonstrates how to access the on-board ATSHA204
+  CryptoAuthentication chip and on-board Real Time Clock. This project
+  requires the ability to program the on-board PIC MCU. Please see the
+  project README for more details.
