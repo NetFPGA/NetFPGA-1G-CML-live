@@ -1,7 +1,0 @@
-result/
-*/.metadata/
-SDK_Workspace/nf1_cml_nic/Debug
-
-SDK_Workspace/bsp/microblaze_0/
-*.log
-*.html
