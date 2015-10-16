@@ -40,26 +40,21 @@
 #
 #
 
-COREGEN_DIR = coregen
 SV_DIR = hdl/SystemVerilog
+
 SV_SRCS = $(SV_DIR)/axi.v $(SV_DIR)/lib.v $(SV_DIR)/pcie_rd_q.v $(SV_DIR)/pcie_rx.v $(SV_DIR)/pcie_tx_q.v $(SV_DIR)/pcie_tx_wr.v $(SV_DIR)/rx_ctrl.v $(SV_DIR)/tx_ctrl.v $(SV_DIR)/cfg.v $(SV_DIR)/dma.v $(SV_DIR)/mem.v $(SV_DIR)/pcie_rx_cm.v $(SV_DIR)/pcie_rx_wr.v $(SV_DIR)/pcie_tx_rd.v $(SV_DIR)/pcie_wr_q.v $(SV_DIR)/small_async_fifo.v $(SV_DIR)/dma_defs.vh $(SV_DIR)/iface.v $(SV_DIR)/pcie_cm_q.v $(SV_DIR)/pcie_rx_rd.v $(SV_DIR)/pcie_tx_cm.v $(SV_DIR)/pcie_tx.v $(SV_DIR)/stats.v
 
-all: netlist/dma_engine.edf hdl/verilog/xilinx/pcie_7x_v1_7.v
+all: dma_engine pcie
 
-hdl/verilog/xilinx/pcie_7x_v1_7.v: xco/pcie_7x_v1_7.xco
-	@mkdir -p $(COREGEN_DIR)
-	@cd $(COREGEN_DIR) && coregen -b ../xco/pcie_7x_v1_7.xco
-	@cp $(COREGEN_DIR)/pcie_7x_v1_7/source/*.v hdl/verilog/xilinx/
-	@echo "/////////////////////////////////////////";
-	@echo "//Xilinx PCIe core installed.";
-	@echo "/////////////////////////////////////////";
-	@rm -rf $(COREGEN_DIR);
+pcie: data/pcie_generate.tcl
+	@vivado -mode tcl -source data/pcie_generate.tcl
+	@mkdir -p hdl/verilog/xilinx
+	@cp vivado_work/pcie_7x.srcs/sources_1/ip/pcie_7x/source/* hdl/verilog/xilinx
+	@cp vivado_work/pcie_7x.srcs/sources_1/ip/pcie_7x/synth/*.v hdl/verilog/xilinx
 
-netlist/dma_engine.edf: $(SV_SRCS)
+dma_engine: $(SV_SRCS) data/dma_sv_compile.tcl
 	@vivado -mode tcl -source data/dma_sv_compile.tcl
 
 clean:
-	rm -rf hdl/verilog/xilinx/*.v $(COREGEN_DIR) vivado_work vivado*.jou vivado*.log
+	rm -rf vivado_work .Xil fsm_encoding.os vivado*.jou vivado*.log hdl/verilog/xilinx
 
-cleanall: clean
-	rm -rf netlist/dma_engine.edf

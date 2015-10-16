@@ -476,10 +476,7 @@ module dma
 
     assign trn_tbuf_av_c    = (tx_buf_av != 0) ? 4'b1111 : 4'b0000;
 
-    pcie_7x_v1_7 # (
-        .PCIE_EXT_CLK ("FALSE")
-    )
-     pcie_7x_v1_7_i (
+    pcie_7x  pcie_7x_i (
       //----------------------------------------------------------------------------------------------------------------//
       // 1. PCI Express (pci_exp) Interface                                                                             //
       //----------------------------------------------------------------------------------------------------------------//
@@ -492,17 +489,6 @@ module dma
       //----------------------------------------------------------------------------------------------------------------//
       // 2. Clocking Interface - For Partial Reconfig Support                                                           //
       //----------------------------------------------------------------------------------------------------------------//
-      .PIPE_PCLK_IN                               ( 1'b0 ),
-      .PIPE_RXUSRCLK_IN                           ( 1'b0 ),
-      .PIPE_RXOUTCLK_IN                           ( 4'b0000 ),
-      .PIPE_DCLK_IN                               ( 1'b0 ),
-      .PIPE_USERCLK1_IN                           ( 1'b0 ),
-      .PIPE_USERCLK2_IN                           ( 1'b0 ),
-      .PIPE_MMCM_LOCK_IN                          ( 1'b0 ),
-      .PIPE_TXOUTCLK_OUT                          ( ),
-      .PIPE_RXOUTCLK_OUT                          ( ),
-      .PIPE_PCLK_SEL_OUT                          ( ),
-      .PIPE_GEN3_OUT                              ( ),
       //----------------------------------------------------------------------------------------------------------------//
       // 3. AXI-S Interface                                                                                             //
       //----------------------------------------------------------------------------------------------------------------//
@@ -510,6 +496,7 @@ module dma
       .user_clk_out                               ( trn_clk_c ),
       .user_reset_out                             ( trn_reset_c ),
       .user_lnk_up                                ( trn_lnk_up_c ),
+      .user_app_rdy                               ( ),
       // TX
       .tx_buf_av                                  ( tx_buf_av ),
       .tx_err_drop                                ( ),
@@ -636,6 +623,7 @@ module dma
       .cfg_msg_received_err_non_fatal             ( ),
       .cfg_msg_received_err_fatal                 ( ),
       .cfg_msg_received_pm_as_nak                 ( ),
+      .cfg_msg_received_pm_pme                    ( ),
       .cfg_msg_received_pme_to_ack                ( ),
       .cfg_msg_received_assert_int_a              ( ),
       .cfg_msg_received_assert_int_b              ( ),
@@ -645,6 +633,7 @@ module dma
       .cfg_msg_received_deassert_int_b            ( ),
       .cfg_msg_received_deassert_int_c            ( ),
       .cfg_msg_received_deassert_int_d            ( ),
+      .cfg_msg_received_setslotpowerlimit         ( ),
       //----------------------------------------------------------------------------------------------------------------//
       // 5. Physical Layer Control and Status (PL) Interface                                                            //
       //----------------------------------------------------------------------------------------------------------------//
