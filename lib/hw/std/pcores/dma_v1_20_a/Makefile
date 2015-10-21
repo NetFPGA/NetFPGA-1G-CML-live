@@ -44,15 +44,17 @@ SV_DIR = hdl/SystemVerilog
 
 SV_SRCS = $(SV_DIR)/axi.v $(SV_DIR)/lib.v $(SV_DIR)/pcie_rd_q.v $(SV_DIR)/pcie_rx.v $(SV_DIR)/pcie_tx_q.v $(SV_DIR)/pcie_tx_wr.v $(SV_DIR)/rx_ctrl.v $(SV_DIR)/tx_ctrl.v $(SV_DIR)/cfg.v $(SV_DIR)/dma.v $(SV_DIR)/mem.v $(SV_DIR)/pcie_rx_cm.v $(SV_DIR)/pcie_rx_wr.v $(SV_DIR)/pcie_tx_rd.v $(SV_DIR)/pcie_wr_q.v $(SV_DIR)/small_async_fifo.v $(SV_DIR)/dma_defs.vh $(SV_DIR)/iface.v $(SV_DIR)/pcie_cm_q.v $(SV_DIR)/pcie_rx_rd.v $(SV_DIR)/pcie_tx_cm.v $(SV_DIR)/pcie_tx.v $(SV_DIR)/stats.v
 
-all: dma_engine pcie
+.PHONY: all clean
 
-pcie: data/pcie_generate.tcl
+all: hdl/verilog/xilinx/pcie_7x.v netlist/dma_engine.edf
+
+hdl/verilog/xilinx/pcie_7x.v: data/pcie_generate.tcl
 	@vivado -mode tcl -source data/pcie_generate.tcl
 	@mkdir -p hdl/verilog/xilinx
 	@cp vivado_work/pcie_7x.srcs/sources_1/ip/pcie_7x/source/* hdl/verilog/xilinx
 	@cp vivado_work/pcie_7x.srcs/sources_1/ip/pcie_7x/synth/*.v hdl/verilog/xilinx
 
-dma_engine: $(SV_SRCS) data/dma_sv_compile.tcl
+netlist/dma_engine.edf: $(SV_SRCS) data/dma_sv_compile.tcl
 	@vivado -mode tcl -source data/dma_sv_compile.tcl
 
 clean:
