@@ -1,4 +1,4 @@
-export NF_ROOT=${HOME}/NetFPGA-10G-live
+export NF_ROOT=${HOME}/NetFPGA-1G-CML-live
 export NF_DESIGN_DIR=${NF_ROOT}/projects/reference_nic
 export NF_WORK_DIR=/tmp/${USER}
 export PYTHONPATH=${NF_ROOT}/lib/python:${NF_DESIGN_DIR}/lib/Python:${NF_ROOT}/tools/scripts:
