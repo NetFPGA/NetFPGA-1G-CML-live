@@ -19,4 +19,4 @@
 #  3. Launch the simulator using the following command:
 #     isim_system_axisim -gui -tclbatch system_axisim_setup.tcl
 #
-fuse -incremental work.system_axisim_tb work.glbl -prj system_axisim.prj -L nf10_axis_conferter_v1_00_a -L nf10_proc_common_v1_00_a -L xilinxcorelib_ver -L secureip -L unisims_ver -L unimacro_ver  -o isim_system_axisim
+fuse -incremental work.system_axisim_tb work.glbl -prj system_axisim.prj -L nf10_axis_converter_v1_00_a -L nf10_proc_common_v1_00_a -L xilinxcorelib_ver -L secureip -L unisims_ver -L unimacro_ver  -o isim_system_axisim

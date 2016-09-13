@@ -99,6 +99,74 @@ def XPAR_UARTLITE_1_SIO_CHAN():
 
 # *****************************************************************/
 
+#  Definitions for driver GPIO */
+def XPAR_XGPIO_NUM_INSTANCES():
+    return 1
+
+#  Definitions for peripheral AXI_GPIO_BPI_IF */
+def XPAR_AXI_GPIO_BPI_IF_BASEADDR():
+    return 0x40000000
+def XPAR_AXI_GPIO_BPI_IF_HIGHADDR():
+    return 0x4000FFFF
+def XPAR_AXI_GPIO_BPI_IF_DEVICE_ID():
+    return 0
+def XPAR_AXI_GPIO_BPI_IF_INTERRUPT_PRESENT():
+    return 0
+def XPAR_AXI_GPIO_BPI_IF_IS_DUAL():
+    return 1
+
+
+# *****************************************************************/
+
+#  Canonical definitions for peripheral AXI_GPIO_BPI_IF */
+def XPAR_GPIO_0_BASEADDR():
+    return 0x40000000
+def XPAR_GPIO_0_HIGHADDR():
+    return 0x4000FFFF
+def XPAR_GPIO_0_DEVICE_ID():
+    return XPAR_AXI_GPIO_BPI_IF_DEVICE_ID
+def XPAR_GPIO_0_INTERRUPT_PRESENT():
+    return 0
+def XPAR_GPIO_0_IS_DUAL():
+    return 1
+
+
+# *****************************************************************/
+
+#  Definitions for driver HWICAP */
+def XPAR_XHWICAP_NUM_INSTANCES():
+    return 1
+
+#  Definitions for peripheral AXI_HWICAP_0 */
+def XPAR_AXI_HWICAP_0_BASEADDR():
+    return 0x40200000
+def XPAR_AXI_HWICAP_0_HIGHADDR():
+    return 0x4020FFFF
+def XPAR_AXI_HWICAP_0_DEVICE_ID():
+    return 0
+def XPAR_AXI_HWICAP_0_ICAP_DWIDTH():
+    return 32
+def XPAR_AXI_HWICAP_0_MODE():
+    return 0
+
+
+# *****************************************************************/
+
+#  Canonical definitions for peripheral AXI_HWICAP_0 */
+def XPAR_HWICAP_0_DEVICE_ID():
+    return XPAR_AXI_HWICAP_0_DEVICE_ID
+def XPAR_HWICAP_0_BASEADDR():
+    return 0x40200000
+def XPAR_HWICAP_0_HIGHADDR():
+    return 0x4020FFFF
+def XPAR_HWICAP_0_ICAP_DWIDTH():
+    return 32
+def XPAR_HWICAP_0_MODE():
+    return 0
+
+
+# *****************************************************************/
+
 #  Definitions for driver WDTTB */
 def XPAR_XWDTTB_NUM_INSTANCES():
     return 1
