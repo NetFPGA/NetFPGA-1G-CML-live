@@ -101,7 +101,7 @@ cml_cores: scripts
 		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_switch_output_port_lookup_v1_00_a; \
 	fi; \
 	if test -f $(NF10_HW_LIB_DIR_STD)/nf10_switch_output_port_lookup_v1_10_a/Makefile; \
-		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_switch_output_prot_lookup_v1_10_a; \
+		then $(MAKE) -C $(NF10_HW_LIB_DIR_STD)/nf10_switch_output_port_lookup_v1_10_a; \
 	fi;
 
 xilinx: check-env
