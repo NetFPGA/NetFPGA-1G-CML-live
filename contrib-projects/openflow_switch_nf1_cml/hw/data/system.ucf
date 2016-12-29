@@ -1,0 +1,454 @@
+################################################################################
+#
+#  NetFPGA-1G-CML http://www.netfpga.org
+#
+#  File:
+#        system.ucf
+#
+#  Project:
+#        reference_switch_lite_nf1_cml
+#
+#  Author:
+#        Jack Meador
+#        Jay Hirata
+#        David Van Arnem
+#
+#  Description:
+#        UCF for reference_switch_lite_nf1_cml.
+#
+#  Copyright notice:
+#        Copyright (C) 2013 Computer Measurement Laboratory
+#
+#  Licence:
+#        This file is part of the NetFPGA 10G development base package.
+#
+#        This file is free code: you can redistribute it and/or modify it under
+#        the terms of the GNU Lesser General Public License version 2.1 as
+#        published by the Free Software Foundation.
+#
+#        This package is distributed in the hope that it will be useful, but
+#        WITHOUT ANY WARRANTY; without even the implied warranty of
+#        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#        Lesser General Public License for more details.
+#
+#        You should have received a copy of the GNU Lesser General Public
+#        License along with the NetFPGA source package.  If not, see
+#        http://www.gnu.org/licenses/.
+#
+#
+
+# LOC Constraints
+
+# reset button (BTN4)
+#NET reset_n      LOC = AA8  | IOSTANDARD=LVCMOS18;
+NET clk_in_p        LOC = AA3  | IOSTANDARD=LVDS | VCCAUX_IO=DONTCARE;
+NET clk_in_n        LOC = AA2  | IOSTANDARD=LVDS | VCCAUX_IO=DONTCARE;
+
+INST "*/clock_generator_0/MMCM1_INST/MMCM_ADV_inst"  LOC = MMCME2_ADV_X0Y4;
+NET "proc_sys_reset_0/proc_sys_reset_0/Peripheral_aresetn_0" TIG;
+
+
+# PMOD UART
+# For PMOD-RS232
+# Pmob B - Top Row
+# PMOD B 3 - RX
+# PMOD B 4 - TX
+NET uart_rx         LOC = H18 | IOSTANDARD = LVCMOS33;
+NET uart_tx         LOC = E15 | IOSTANDARD = LVCMOS33;
+
+# PHY resets
+NET phy_rstn[0]     LOC = D18 | IOSTANDARD = LVCMOS33;
+NET phy_rstn[1]     LOC = E25 | IOSTANDARD = LVCMOS33;
+NET phy_rstn[2]     LOC = K21 | IOSTANDARD = LVCMOS33;
+NET phy_rstn[3]     LOC = L23 | IOSTANDARD = LVCMOS33;
+
+NET mdc             LOC = V13 | IOSTANDARD = LVCMOS18;
+NET mdio            LOC = W13 | IOSTANDARD = LVCMOS18;
+
+# RGMII to PHY 1
+NET rgmii_rxd_1[0] LOC = B11 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_1[1] LOC = A10 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_1[2] LOC = B10 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_1[3] LOC = A9  | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_1[0] LOC = A8  | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_1[1] LOC = D8  | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_1[2] LOC = G9  | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_1[3] LOC = H9  | IOSTANDARD = LVCMOS18;
+NET rgmii_rx_ctl_1 LOC = B12 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxc_1    LOC = E10 | IOSTANDARD = LVCMOS18;
+NET rgmii_tx_ctl_1 LOC = H8  | IOSTANDARD = LVCMOS18;
+NET rgmii_txc_1    LOC = B9  | IOSTANDARD = LVCMOS18;
+
+# RGMII to PHY 2
+NET rgmii_rxd_2[0] LOC = A13 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_2[1] LOC = C9  | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_2[2] LOC = D11 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_2[3] LOC = C11 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_2[0] LOC = D10 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_2[1] LOC = G10 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_2[2] LOC = D9  | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_2[3] LOC = F9  | IOSTANDARD = LVCMOS18;
+NET rgmii_rx_ctl_2 LOC = A12 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxc_2    LOC = C12 | IOSTANDARD = LVCMOS18;
+NET rgmii_tx_ctl_2 LOC = F8  | IOSTANDARD = LVCMOS18;
+NET rgmii_txc_2    LOC = J10 | IOSTANDARD = LVCMOS18;
+
+# RGMII to PHY 3
+NET rgmii_rxd_3[0] LOC = A14 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_3[1] LOC = B14 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_3[2] LOC = E12 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_3[3] LOC = D13 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_3[0] LOC = G12 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_3[1] LOC = F13 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_3[2] LOC = F12 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_3[3] LOC = H11 | IOSTANDARD = LVCMOS18;
+NET rgmii_rx_ctl_3 LOC = C13 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxc_3    LOC = E11 | IOSTANDARD = LVCMOS18;
+NET rgmii_tx_ctl_3 LOC = F10 | IOSTANDARD = LVCMOS18;
+NET rgmii_txc_3    LOC = E13 | IOSTANDARD = LVCMOS18;
+
+# RGMII to PHY 4
+NET rgmii_rxd_4[0] LOC = B15 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_4[1] LOC = F14 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_4[2] LOC = C14 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxd_4[3] LOC = H12 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_4[0] LOC = J13 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_4[1] LOC = G14 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_4[2] LOC = H14 | IOSTANDARD = LVCMOS18;
+NET rgmii_txd_4[3] LOC = H13 | IOSTANDARD = LVCMOS18;
+NET rgmii_rx_ctl_4 LOC = A15 | IOSTANDARD = LVCMOS18;
+NET rgmii_rxc_4    LOC = G11 | IOSTANDARD = LVCMOS18;
+NET rgmii_tx_ctl_4 LOC = J11 | IOSTANDARD = LVCMOS18;
+NET rgmii_txc_4    LOC = D14 | IOSTANDARD = LVCMOS18;
+
+# BPI Flash
+NET bpi_addr_cmd[0]           LOC = J23     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[1]           LOC = K23     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[2]           LOC = K22     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[3]           LOC = L22     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[4]           LOC = J25     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[5]           LOC = J24     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[6]           LOC = H22     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[7]           LOC = H24     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[8]           LOC = H23     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[9]           LOC = G21     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[10]          LOC = H21     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[11]          LOC = H26     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[12]          LOC = J26     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[13]          LOC = E26     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[14]          LOC = F25     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[15]          LOC = G26     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[16]          LOC = K17     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[17]          LOC = K16     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[18]          LOC = L20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[19]          LOC = J19     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[20]          LOC = J18     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[21]          LOC = J20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[22]          LOC = K20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[23]          LOC = G20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[24]          LOC = H19     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[25]          LOC = E20     | IOSTANDARD = LVCMOS33;
+NET bpi_addr_cmd[26]          LOC = D20     | IOSTANDARD = LVCMOS33;   # ADV
+NET bpi_addr_cmd[27]          LOC = C23     | IOSTANDARD = LVCMOS33;   # CE_N
+NET bpi_addr_cmd[28]          LOC = M17     | IOSTANDARD = LVCMOS33;   # OE_N
+NET bpi_addr_cmd[29]          LOC = L18     | IOSTANDARD = LVCMOS33;   # WE_N
+
+NET bpi_data[0]               LOC = B24     | IOSTANDARD = LVCMOS33;
+NET bpi_data[1]               LOC = A25     | IOSTANDARD = LVCMOS33;
+NET bpi_data[2]               LOC = B22     | IOSTANDARD = LVCMOS33;
+NET bpi_data[3]               LOC = A22     | IOSTANDARD = LVCMOS33;
+NET bpi_data[4]               LOC = A23     | IOSTANDARD = LVCMOS33;
+NET bpi_data[5]               LOC = A24     | IOSTANDARD = LVCMOS33;
+NET bpi_data[6]               LOC = D26     | IOSTANDARD = LVCMOS33;
+NET bpi_data[7]               LOC = C26     | IOSTANDARD = LVCMOS33;
+NET bpi_data[8]               LOC = C24     | IOSTANDARD = LVCMOS33;
+NET bpi_data[9]               LOC = D21     | IOSTANDARD = LVCMOS33;
+NET bpi_data[10]              LOC = C22     | IOSTANDARD = LVCMOS33;
+NET bpi_data[11]              LOC = B20     | IOSTANDARD = LVCMOS33;
+NET bpi_data[12]              LOC = A20     | IOSTANDARD = LVCMOS33;
+NET bpi_data[13]              LOC = E22     | IOSTANDARD = LVCMOS33;
+NET bpi_data[14]              LOC = C21     | IOSTANDARD = LVCMOS33;
+NET bpi_data[15]              LOC = B21     | IOSTANDARD = LVCMOS33;
+
+#
+# additional constraints
+#
+
+NET CLK    TNM_NET = clk_in;
+TIMESPEC TS_clk_in = PERIOD clk_in 5000 ps HIGH 50%;
+
+#NET "proc_sys_reset_0_Peripheral_aresetn" TIG;
+
+#
+# TEMAC Clocks 
+#
+
+NET "rgmii_rxc_*"                  TNM_NET  = "clk_rx";
+TIMESPEC "TS_clk_rx"       = PERIOD "clk_rx" 8000 ps HIGH 50 %;
+
+#NET "ref_clk"                  TNM_NET  = "ref_clk";
+#TIMESPEC "TS_ref_clk"       = PERIOD "ref_clk" 5000 ps HIGH 50 %;
+
+#NET "gtx_clk"                  TNM_NET  = "gtx_clk";
+#TIMESPEC "TS_gtx_clk"       = PERIOD "gtx_clk" 8000 ps HIGH 50 %;
+#
+#NET "gtx_clk90"                TNM_NET  = "gtx_clk90";
+#TIMESPEC "TS_gtx_clk90"       = PERIOD "gtx_clk90" 8000 ps HIGH 50 %;
+
+#
+# High drive for RGMII outputs
+#
+INST "rgmii_txd*"                                               SLEW = FAST;
+INST "rgmii_tx_ctl*"                                            SLEW = FAST;
+INST "rgmii_txc*"                                               SLEW = FAST;
+
+## Commented out for UCSD MAC
+
+## RGMII IODELAY 
+##
+INST "*rgmii_interface*delay_rgmii_rx_ctl"           IDELAY_VALUE = 0;
+INST "*rgmii_interface*delay_rgmii_rxd"              IDELAY_VALUE = 0;
+#
+### Group IODELAY and IDELAYCTRL components to aid placement
+INST "*rgmii_interface*delay_rgmii_rx_ctl"           IODELAY_GROUP = "DLYGRP1";
+INST "*rgmii_interface*delay_rgmii_rxd"              IODELAY_GROUP = "DLYGRP1";
+INST "*dlyctrl"                                      IODELAY_GROUP = "DLYGRP1";
+## End commented out for UCSD MAC
+
+# Identify RGMII Rx Pads.  
+INST "rgmii_rxd_1*"    TNM = IN_RGMII_1; 
+INST "rgmii_rx_ctl_1" TNM = IN_RGMII_1;
+INST "rgmii_rxd_2*"    TNM = IN_RGMII_2; 
+INST "rgmii_rx_ctl_2" TNM = IN_RGMII_2;
+INST "rgmii_rxd_3*"    TNM = IN_RGMII_3; 
+INST "rgmii_rx_ctl_3" TNM = IN_RGMII_3;
+INST "rgmii_rxd_4*"    TNM = IN_RGMII_4; 
+INST "rgmii_rx_ctl_4" TNM = IN_RGMII_4;
+
+# The following constraints work in conjunction with IDELAY_VALUE settings to
+# check that the RGMII receive bus remains in alignment with the rising and
+# falling edges of RGMII_RXC, to within 1.1ns setup time and 1.1ns hold time.
+# In addition to adjusting  IDELAY_VALUE settings for your system's timing
+# characteristics, you may wish to refine these constraints to match the RGMII
+# specification.
+ 
+
+# The following constraints should be derived from the Spec for the RTL PHY as
+# well as information about the board trace delays. The nf7 has RX delay
+# enabled, so data should arrive 2ns before the clock and have a hold time of
+# 2ns. This assumes that board traces for clock and data are equal. I haven't
+# looked at the board trace length, but I'll assume they're equal for now.
+TIMEGRP "IN_RGMII_1" OFFSET = IN 2 ns VALID 4 ns BEFORE "rgmii_rxc_1" RISING;
+TIMEGRP "IN_RGMII_1" OFFSET = IN 2 ns VALID 4 ns BEFORE "rgmii_rxc_1" FALLING;
+TIMEGRP "IN_RGMII_2" OFFSET = IN 2 ns VALID 4 ns BEFORE "rgmii_rxc_2" RISING;
+TIMEGRP "IN_RGMII_2" OFFSET = IN 2 ns VALID 4 ns BEFORE "rgmii_rxc_2" FALLING;
+TIMEGRP "IN_RGMII_3" OFFSET = IN 2 ns VALID 4 ns BEFORE "rgmii_rxc_3" RISING;
+TIMEGRP "IN_RGMII_3" OFFSET = IN 2 ns VALID 4 ns BEFORE "rgmii_rxc_3" FALLING;
+TIMEGRP "IN_RGMII_4" OFFSET = IN 2 ns VALID 4 ns BEFORE "rgmii_rxc_4" RISING;
+TIMEGRP "IN_RGMII_4" OFFSET = IN 2 ns VALID 4 ns BEFORE "rgmii_rxc_4" FALLING;
+
+# Clock Domain Crossing Constraints: please do not edit #
+
+# Clock Domain Crossing Constraints #
+
+# UCSD MAC constraints
+INST    "*/Peripheral_aresetn_0"       TNM = "PReset";
+INST    "*gig_eth_mac_block*"   TNM = FFS "UCSD_FFs";
+
+TIMESPEC "TS_PReset_to_UCSD_FFs" = FROM "PReset" TO "UCSD_FFs" TIG;
+# END UCSD MAC constraints
+
+## Xilinx TRIMAC constraints
+## Flow Control logic reclocking - control signal is synchronised
+#INST "*trimac_core*FLOW*PAUSE_REQ_TO_TX*"                        TNM="flow_rx_to_tx";
+#INST "*trimac_core*FLOW*PAUSE_VALUE_TO_TX*"                      TNM="flow_rx_to_tx";
+#TIMESPEC "TS_flow_rx_to_tx"      = FROM "flow_rx_to_tx" TO gtx_clk 7800 ps DATAPATHONLY;
+## END Xilinx TRIMAC constraints
+
+# Ignore paths to sync flops
+INST "*/data_sync"                                                TNM = "resync_reg";
+INST "*/reset_sync*"                                              TNM = "resync_reg";
+TIMESPEC "ts_resync_flops"       = TO "resync_reg" TIG;
+
+# FIFO clock domain crossing
+
+## TX Client FIFO
+INST "*user_side_FIFO/tx_fifo_i/rd_tran_frame_tog"              TNM = "tx_fifo_rd_to_wr";
+INST "*user_side_FIFO/tx_fifo_i/rd_addr_txfer*"                 TNM = "tx_fifo_rd_to_wr";
+INST "*user_side_FIFO/tx_fifo_i/rd_txfer_tog"                   TNM = "tx_fifo_rd_to_wr";
+
+INST "*user_side_FIFO/tx_fifo_i/wr_frame_in_fifo"               TNM = "tx_fifo_wr_to_rd";
+
+TIMESPEC "TS_tx_fifo_rd_to_wr"   = FROM "tx_fifo_rd_to_wr" TO "gtx_clk" 7800 ps DATAPATHONLY;
+TIMESPEC "TS_tx_fifo_wr_to_rd"   = FROM "tx_fifo_wr_to_rd" TO "gtx_clk" 7800 ps DATAPATHONLY;
+
+# Reduce clock period to allow for metastability settling time
+# this is a multicycle path due to the resync of the control
+INST "*user_side_FIFO/tx_fifo_i/rd_addr_txfer*"                 TNM = "tx_addr_rd";
+INST "*user_side_FIFO/tx_fifo_i/wr_rd_addr*"                    TNM = "tx_addr_wr";
+TIMESPEC "TS_tx_fifo_addr"       = FROM "tx_addr_rd" TO "tx_addr_wr" 10ns;
+
+## RX Client FIFO
+INST "*user_side_FIFO/rx_fifo_i/wr_store_frame_tog"             TNM = "rx_fifo_wr_to_rd";
+INST "*user_side_FIFO/rx_fifo_i/rd_addr*"                       TNM = "rx_fifo_rd_to_wr";
+
+TIMESPEC "TS_rx_fifo_wr_to_rd"   = FROM "rx_fifo_wr_to_rd" TO "gtx_clk" 7800 ps DATAPATHONLY;
+TIMESPEC "TS_rx_fifo_rd_to_wr"   = FROM "rx_fifo_rd_to_wr" TO "gtx_clk" 7800 ps DATAPATHONLY;
+
+# Ignore stats serialiser clock crossing as handled by toggle sync
+#INST "*x_stats_shift*"                                           TNM="sync_ok";
+#TIMESPEC "TS_rxstats_sync" = FROM "clk_rx" TO "sync_ok"          TIG;
+
+# Ignore pause deserialiser as only present to prevent logic stripping
+#INST "pause_val*"                                                TNM="pause_dsr";
+#INST "pause_req*"                                                TNM="pause_dsr";
+#TIMESPEC "TS_pause_dsr" = FROM "pause_dsr"                       TIG;
+
+INST "*temac_reg_i/cfg_core_i/tx_cfg*"  TNM = "tx_cfg";
+# Ignore timing on paths from the TX configuration register
+TIMESPEC "ts_from_tx_cfg" = FROM "tx_cfg" TIG;
+
+NET "clk_100_0000MHz" TNM = "100mhz_clk_grp";
+NET "clk_100_0000MHz" TNM = "HWICAP_clk_grp";
+TIMESPEC TS_TIG0 = FROM "100mhz_clk_grp" to "HWICAP_clk_grp" TIG;
+TIMESPEC TS_TIG1 = FROM "HWICAP_clk_grp" to "100mhz_clk_grp" TIG;
+
+
+
+
+
+
+
+
+###############################################################################
+# Pinout and Related I/O Constraints
+###############################################################################
+
+#
+# SYS reset (input) signal.  The sys_reset_n signal should be
+# obtained from the PCI Express interface if possible.  For
+# slot based form factors, a system reset signal is usually
+# present on the connector.  For cable based form factors, a
+# system reset signal may not be available.  In this case, the
+# system reset signal must be generated locally by some form of
+# supervisory circuit.  You may change the IOSTANDARD and LOC
+# to suit your requirements and VCCO voltage banking rules.
+# Some 7 series devices do not have 3.3 V I/Os available.
+# Therefore the appropriate level shift is required to operate
+# with these devices that contain only 1.8 V banks.
+#
+
+NET "reset_n" TIG;
+NET "reset_n" LOC = L17 | IOSTANDARD = LVCMOS33 | PULLUP | NODELAY ;
+
+#
+# SYS clock 100 MHz (input) signal. The sys_clk_p and sys_clk_n
+# signals are the PCI Express reference clock. Virtex-7 GT
+# Transceiver architecture requires the use of a dedicated clock
+# resources (FPGA input pins) associated with each GT Transceiver.
+# To use these pins an IBUFDS primitive (refclk_ibuf) is
+# instantiated in user's design.
+# Please refer to the Virtex-7 GT Transceiver User Guide
+# (UG) for guidelines regarding clock resource selection.
+#
+
+INST "*/refclk_ibuf" LOC = IBUFDS_GTE2_X0Y0;
+
+#
+# Transceiver instance placement.  This constraint selects the
+# transceivers to be used, which also dictates the pinout for the
+# transmit and receive differential pairs.  Please refer to the
+# Virtex-7 GT Transceiver User Guide (UG) for more information.
+#
+## PCIe Lane 0
+#INST "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_lane[0].gt_wrapper_i/gtx_channel.gtxe2_channel_i" LOC = GTXE2_CHANNEL_X0Y3;
+## PCIe Lane 1
+#INST "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_lane[1].gt_wrapper_i/gtx_channel.gtxe2_channel_i" LOC = GTXE2_CHANNEL_X0Y2;
+### PCIe Lane 2
+#INST "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_lane[2].gt_wrapper_i/gtx_channel.gtxe2_channel_i" LOC = GTXE2_CHANNEL_X0Y1;
+### PCIe Lane 3
+#INST "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_lane[3].gt_wrapper_i/gtx_channel.gtxe2_channel_i" LOC = GTXE2_CHANNEL_X0Y0;
+# PCIe Lane 0
+INST "*/gt_top_i/pipe_wrapper_i/pipe_lane[0].gt_wrapper_i/gtx_channel.gtxe2_channel_i" LOC = GTXE2_CHANNEL_X0Y3;
+# PCIe Lane 1
+INST "*/gt_top_i/pipe_wrapper_i/pipe_lane[1].gt_wrapper_i/gtx_channel.gtxe2_channel_i" LOC = GTXE2_CHANNEL_X0Y2;
+## PCIe Lane 2
+INST "*/gt_top_i/pipe_wrapper_i/pipe_lane[2].gt_wrapper_i/gtx_channel.gtxe2_channel_i" LOC = GTXE2_CHANNEL_X0Y1;
+## PCIe Lane 3
+INST "*/gt_top_i/pipe_wrapper_i/pipe_lane[3].gt_wrapper_i/gtx_channel.gtxe2_channel_i" LOC = GTXE2_CHANNEL_X0Y0;
+
+
+
+#
+# PCI Express Block placement. This constraint selects the PCI Express
+# Block to be used.
+#
+
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_block_i" LOC = PCIE_X0Y0;
+INST "*/pcie_top_i/pcie_7x_i/pcie_block_i" LOC = PCIE_X0Y0;
+
+#
+# BlockRAM placement
+#
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_rx/brams[3].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X5Y35 ;
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_rx/brams[2].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y36 ;
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_rx/brams[1].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y35 ;
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_rx/brams[0].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y34 ;
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_tx/brams[0].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y33 ;
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_tx/brams[1].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y32 ;
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_tx/brams[2].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y31 ;
+#INST "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_tx/brams[3].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y30 ;
+INST "*/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_rx/brams[3].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X5Y35 ;
+INST "*/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_rx/brams[2].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y36 ;
+INST "*/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_rx/brams[1].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y35 ;
+INST "*/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_rx/brams[0].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y34 ;
+INST "*/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_tx/brams[0].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y33 ;
+INST "*/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_tx/brams[1].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y32 ;
+INST "*/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_tx/brams[2].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y31 ;
+INST "*/pcie_top_i/pcie_7x_i/pcie_bram_top/pcie_brams_tx/brams[3].ram/use_tdp.ramb36/bram36_tdp_bl.bram36_tdp_bl" LOC = RAMB36_X4Y30 ;
+
+
+NET "*/dma_0/pcie_clk" TNM_NET = "SYSCLK" ;
+#NET "ext_clk.pipe_clock_i/clk_125mhz" TNM_NET = "CLK_125" ;
+#NET "ext_clk.pipe_clock_i/clk_250mhz" TNM_NET = "CLK_250" ;
+#NET "ext_clk.pipe_clock_i/userclk1" TNM_NET = "CLK_USERCLK" ;
+#NET "ext_clk.pipe_clock_i/userclk2" TNM_NET = "CLK_USERCLK2" ;
+#INST "ext_clk.pipe_clock_i/mmcm_i"  LOC = MMCME2_ADV_X0Y2;
+#PIN "ext_clk.pipe_clock_i/mmcm_i.RST" TIG ;
+#NET "ext_clk.pipe_clock_i/pclk_sel" TIG;
+
+
+TIMESPEC "TS_SYSCLK"  = PERIOD "SYSCLK" 100 MHz HIGH 50 % ;
+#TIMESPEC "TS_CLK_125"  = PERIOD "CLK_125" TS_SYSCLK*1.25 HIGH 50 % PRIORITY 1;
+#TIMESPEC "TS_CLK_250" = PERIOD "CLK_250" TS_SYSCLK*2.5 HIGH 50 % PRIORITY 2;
+#TIMESPEC "TS_CLK_USERCLK" = PERIOD "CLK_USERCLK" TS_SYSCLK*1.25 HIGH 50 %;
+#TIMESPEC "TS_CLK_USERCLK2" = PERIOD "CLK_USERCLK2" TS_SYSCLK*1.25 HIGH 50 %;
+
+
+
+
+#PIN "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_block_i.PLPHYLNKUPN" TIG;
+#PIN "*/pcie_7x_v1_7_i/pcie_top_i/pcie_7x_i/pcie_block_i.PLRECEIVEDHOTRST" TIG;
+PIN "*/pcie_top_i/pcie_7x_i/pcie_block_i.PLPHYLNKUPN" TIG;
+PIN "*/pcie_top_i/pcie_7x_i/pcie_block_i.PLRECEIVEDHOTRST" TIG;
+
+#NET "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/user_resetdone*" TIG;
+#NET "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_lane[0].pipe_rate.pipe_rate_i/*" TNM_NET = FFS "MC_PIPE";
+#NET "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_lane[1].pipe_rate.pipe_rate_i/*" TNM_NET = FFS "MC_PIPE";
+#NET "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_lane[2].pipe_rate.pipe_rate_i/*" TNM_NET = FFS "MC_PIPE";
+#NET "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_lane[3].pipe_rate.pipe_rate_i/*" TNM_NET = FFS "MC_PIPE";
+#
+#TIMESPEC "TS_PIPE_RATE" = FROM "MC_PIPE" TS_CLK_USERCLK*0.5;
+#
+#
+#NET "*/pcie_7x_v1_7_i/gt_top_i/pipe_wrapper_i/pipe_reset.pipe_reset_i/cpllreset" TIG;
+NET "*/gt_top_i/pipe_wrapper_i/user_resetdone*" TIG;
+
+###############################################################################
+# Physical Constraints
+###############################################################################
+#########################################################################################################################
+# End PCIe Core Constraints
+#########################################################################################################################
+
+

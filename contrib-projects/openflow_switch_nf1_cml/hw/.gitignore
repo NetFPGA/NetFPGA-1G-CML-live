@@ -1,0 +1,16 @@
+*.log
+*.make
+platgen.opt
+bootloops/
+__xps/
+_xmsgs
+simgen.opt
+etc/
+simulation/
+genmakes.tcl
+hdl/
+implementation/
+synthesis/
+xst/
+smallbits.mcs
+rom_data.txt
