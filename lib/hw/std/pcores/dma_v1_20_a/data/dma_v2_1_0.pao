@@ -44,6 +44,8 @@ lib dma_v1_20_a dma/axi4_lite_regs.v verilog
 lib nf10_axis_converter_v1_00_a all
 lib axi_master_lite_v2_00_a all vhdl
 
+lib dma_v1_20_a pcie/pseudo_xpm_cdc_single.v
+
 lib dma_v1_20_a xilinx/pcie_7x_axi_basic_rx_null_gen.v verilog
 lib dma_v1_20_a xilinx/pcie_7x_axi_basic_rx_pipeline.v verilog
 lib dma_v1_20_a xilinx/pcie_7x_axi_basic_rx.v verilog
