@@ -12,7 +12,7 @@ create_project -force $ip_name $project_name
 set_property part xc7k325tffg676-1 [current_project]
 
 # add PCIe IP
-set pcie_7x_xci [create_ip -name pcie_7x -vendor xilinx.com -library ip -version 3.1 -module_name pcie_7x]
+set pcie_7x_xci [create_ip -name pcie_7x -vendor xilinx.com -library ip -version 3.3 -module_name pcie_7x]
 
 # set desired PCIe properties
 # allow remaining properties to default
