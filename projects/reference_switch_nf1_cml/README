@@ -71,12 +71,12 @@ Please note that Xilinx ISE must be installed to generate the core. Tested ISE v
 In a directory you prefer, run:
 unzip xapp1151_Param_CAM.zip
 
-Copy the patches/ directory from the reference_switch_nf1_cml project directory
+Copy the patches from the reference_switch_nf1_cml project directory
 (the same location as this README) to the unzipped directory:
 
 cp -r patches/* <path>/xapp1151_cam_v1_1/
 
-Then, enter the patches/ directory at the location you just copied to and run
+Then, enter the directory at the location you just copied to and run
 the shell script to patch the files:
 
 cd <path>/xapp1151_cam_v1_1/
