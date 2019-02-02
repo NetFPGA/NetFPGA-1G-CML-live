@@ -10,6 +10,7 @@
 #
 #  Author:
 #        Tatsuya Yabe
+#        Nathan Gober
 #
 #  Copyright notice:
 #        Copyright (C) 2010, 2011, 2012 The Board of Trustees of The Leland
@@ -44,6 +45,138 @@ https://github.com/NetFPGA/NetFPGA-10G-live/wiki/Projects
 and select the correspondent project.
 
 Note: OpenFlow Switch has a slightly different synthesis flow from other projects.
-Please make sure you read through the description on 
+Please make sure you read through the description on
 
 https://github.com/NetFPGA/NetFPGA-10G-live/wiki/NetFPGA-10G-OpenFlow-Switch
+
+In order to build this project, you must first download the CAM IP blocks from Xilinx.
+
+BUILD INSTRUCTIONS:
+
+1. Generate HDL for openflow_datapath IP
+
+    $ cd hw/pcores/openflow_datapath_v1_00_a
+    $ make
+
+2. Get and patch Xilinx's CAM generator for use with Kintex 7
+
+    - Download xapp1151_Param_CAM.zip from Xilinx's website
+        $ wget http://www.xilinx.com/support/documentation/application_notes/xapp1151_Param_CAM.zip
+
+    - Extract the xapp1151_Param_CAM.zip archive
+        $ unzip xapp1151_Param_cam.zip
+
+    - Copy the contents of the patches/ directory to the extracted archive location
+        $ cp patches/* xapp1151_cam_v1_1
+
+    - Patch the generator files for use with the Kintex 7
+        $ cd xapp1151_cam_v1_1
+        $ sh cam_patch.sh
+        $ rm *.patch cam_patch.sh
+
+3. Generate CAM for openflow_datapath IP
+
+    $ cd xapp1151_cam_v1_1/implement
+    $ xilperl CustomizeWrapper.pl
+
+    - Enter the following parameters:
+        Architecture:           kintex7
+        CAM data width:         32
+        CAM depth:              32
+        CAM type:               0 (SRL-based)
+        Ternary mode:           2 (Enhanced Ternary Mode)
+        MATCH_ADDR encoding:    2 (Multi-match encoded)
+        Simultaneous R/W:       y
+        Enable (EN):            n
+        MULTIPLE_MATCH:         n
+        SINGLE_MATCH:           n
+        READ_WARNING:           n
+
+    - The parameter summary should look like this:
+        VHDL parameters were generated as follows:
+        ===============================================
+        C_FAMILY                  : string  := kintex7;
+        C_MEM_TYPE                : integer := 0;
+        C_WIDTH                   : integer := 32;
+        C_DEPTH                   : integer := 32;
+        C_ADDR_TYPE               : integer := 2;
+        C_MATCH_RESOLUTION_TYPE   : integer := 0;
+        C_TERNARY_MODE            : integer := 2;
+        C_HAS_WE                  : integer := 1;
+        C_MEM_INIT                : integer := 0;
+        C_HAS_CMP_DIN             : integer := 1;
+        C_REG_OUTPUTS             : integer := 0;
+        C_HAS_EN                  : integer := 0;
+        C_HAS_MULTIPLE_MATCH      : integer := 0;
+        C_HAS_SINGLE_MATCH        : integer := 0;
+        C_HAS_READ_WARNING        : integer := 0;
+
+        ===============================================
+
+    - Verify vhdl_xst.scr has the following contents:
+        run
+        -ifmt VHDL
+        -work_lib cam
+        -p  xc7k325tffg676-1
+        -write_timing_constraints No
+        -ifn vhdl_xst.prj
+        -iobuf NO
+        -max_fanout 100
+        -ofn ./results/cam.ngc
+        -ofmt NGC
+        -bufg 1
+        -bus_delimiter ()
+        -hierarchy_separator /
+        -case Maintain
+        -opt_mode Speed
+        -opt_level 1
+        -loop_iteration_limit 5000
+        -use_new_parser yes
+
+    - Run XST:
+        $ xilperl RunXST.pl
+
+4. Generate CAM HDL
+
+    $ cd results
+    $ netgen -sim -ofmt verilog cam.ngc
+
+5. Edit cam.v
+
+    - Change module name from "cam_wrapper" to "cam"
+    - After port declaration, put a line:
+        // synthesis translate_off
+
+    - before endmodule of "cam_wrapper" (now called "cam"), put a line:
+        // synthesis translate_on
+
+6. Copy netlist (cam.ngc) and HDL (cam.v) to openflow_datapath IP directory
+
+    $ cp cam.ngc hw/pcores/openflow_datapath_v1_00_a/netlist
+    $ cp cam.v hw/pcores/openflow_datapath_v1_00_a/hdl/verilog
+
+7. Build the IP needed for the NetFPGA-1G-CML projects
+
+    $ cd <path>/NetFPGA-1G-CML-live
+    $ make cml_cores
+
+8. Build the openflow_switch_nf1_cml design
+
+    $ cd src
+    $ make
+
+    - This step will take some time.
+
+9. (Optional) Program the BPI flash with the OpenFlow design
+
+    $ cd hw
+    $ make progflash
+
+10. (Untested, not working) Use openflow and oftest software to test the switch
+
+    - Follow the instructions in the 10G OpenFlow Design Document:
+        https://docs.google.com/document/d/1ZwHXQZocKwQls6Ted8VZO8h9MjBtu9WxV2fAY44eOgE/edit
+
+    NOTE: The NetFPGA-1G-CML driver (at reference_nic_nf1_cml/sw/host/driver)
+          is the driver that should be used here.
+

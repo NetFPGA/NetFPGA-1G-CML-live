@@ -74,13 +74,14 @@ unzip xapp1151_Param_CAM.zip
 Copy the patches/ directory from the reference_switch_nf1_cml project directory
 (the same location as this README) to the unzipped directory:
 
-cp -r patches <path>/xapp1151_cam_v1_1/
+cp -r patches/* <path>/xapp1151_cam_v1_1/
 
 Then, enter the patches/ directory at the location you just copied to and run
 the shell script to patch the files:
 
-cd <path>/xapp1151_cam_v1_1/patches/
+cd <path>/xapp1151_cam_v1_1/
 sh cam_patch.sh
+rm *.patch cam_patch.sh
 
 This will patch the necessary files in the design to target the Kintex-7 FPGA
 (only devices up to 6-series are supported by the default design files).
