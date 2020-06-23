@@ -142,24 +142,6 @@ void atsha_config_test(void)
         xil_printf("       Success reading ATSHA204 Config word 0\r\n");
         xil_printf("           received: 0x0123\r\n");
     }
-    // checks to verify a manufacturer hard coded value is read correctly
-    if(FALSE == read_config(&rcv_data[0], 3)) {
-        xil_printf("       Failure reading ATSHA204 Config word 3\r\n");
-        xil_printf("\r\n!! Read ATSHA204 Config Test FAILED !!\r\n\n");
-        return;
-    }
-
-    if((rcv_data[0] != 0xEE) || (rcv_data[1] != 0x55) || (rcv_data[3] != 0x00))
-    {
-        xil_printf("       Failure reading ATSHA204 Config word 3\r\n");
-        xil_printf("       Read was successful, but data did not match:\r\n");
-        xil_printf("           expected: 0xEE55xx00, received 0x%02X%02Xxx%02X\r\n", rcv_data[0], rcv_data[1], rcv_data[3]);
-        xil_printf("\r\n!! Read ATSHA204 Config Test FAILED !!\r\n\n");
-        return;
-    } else {
-        xil_printf("       Success reading ATSHA204 Config word 3\r\n");
-        xil_printf("           received: 0xEE55xx00\r\n");
-    }
 
     // check to see if the slot configuration was cleared during our
     // manufacturing test...
